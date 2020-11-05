@@ -16,4 +16,15 @@ import "animate.css";
 export default {};
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+}
+</style>
