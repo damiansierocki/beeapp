@@ -166,7 +166,7 @@ export default {
 
 // min-width: 768 px - ipad width, each elements multiplied by 1.2
 @media (min-width: 768px) {
-    .loginpage {
+    .login {
         .header {
             h1 {
                 font-size: 3.6rem;
@@ -203,6 +203,13 @@ export default {
                         line-height: 2.4rem;
 
                         a {
+                            &:hover {
+                                color: blue;
+                                font-weight: bold;
+                            }
+                        }
+
+                        .link {
                             &:hover {
                                 color: blue;
                                 font-weight: bold;
