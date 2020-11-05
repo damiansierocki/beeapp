@@ -28,4 +28,12 @@ export default {};
     box-sizing: border-box;
     font-family: "Roboto", sans-serif;
 }
+
+.login,
+.register {
+    background-image: url("./assets/background.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: auto;
+}
 </style>

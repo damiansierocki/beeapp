@@ -1,6 +1,9 @@
 <template>
     <div class="login">
-        <PasswordReset v-if="showPasswordReset" @close="togglePasswordReset()"></PasswordReset>
+        <PasswordReset
+            v-if="showPasswordReset"
+            @close="togglePasswordReset()"
+        ></PasswordReset>
         <div class="header">
             <h1>🐝</h1>
         </div>
@@ -8,14 +11,30 @@
             <form @submit.prevent>
                 <h2>Logowanie</h2>
                 <label for="email">Email 📧</label>
-                <input type="text" placeholder="jan@kowalski.pl" id="email" v-model.trim="email" />
+                <input
+                    type="text"
+                    placeholder="jan@kowalski.pl"
+                    id="email"
+                    v-model.trim="email"
+                />
                 <label for="password">Hasło 🔑</label>
-                <input type="password" id="password" placeholder="******" v-model.trim="password" />
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="******"
+                    v-model.trim="password"
+                />
                 <div class="extras">
                     <ul>
-                        <li><a @click="togglePasswordReset()">Zapomniałeś hasła ? 😰</a></li>
                         <li>
-                            <router-link class="link" to="/register">Stwórz konto 🦸</router-link>
+                            <a @click="togglePasswordReset()"
+                                >Zapomniałeś hasła ? 😰</a
+                            >
+                        </li>
+                        <li>
+                            <router-link class="link" to="/register"
+                                >Stwórz konto 🦸</router-link
+                            >
                         </li>
                     </ul>
                 </div>
@@ -60,10 +79,6 @@ export default {
 .login {
     height: 100vh;
     width: 100vw;
-    background-image: url("../assets/background.jpg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: auto;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -98,7 +113,7 @@ export default {
             input {
                 padding: 15px;
                 border-radius: 50px;
-                border-bottom: 0.5px solid black;
+                border: 0.5px solid black;
                 font-size: 0.9rem;
 
                 &:focus {
@@ -138,7 +153,11 @@ export default {
                 margin-top: 12px;
                 width: 50%;
                 box-shadow: 0px 1px 0px 0px #fff6af;
-                background: linear-gradient(to bottom, #ffec64 5%, #ff9d00 100%);
+                background: linear-gradient(
+                    to bottom,
+                    #ffec64 5%,
+                    #ff9d00 100%
+                );
                 background-color: #ffec64;
                 border-radius: 6px;
                 border: 1px solid #ffaa22;
@@ -151,7 +170,11 @@ export default {
                 text-shadow: 0px 1px 0px #ffee66;
 
                 &:hover {
-                    background: linear-gradient(to bottom, #ff9d00 5%, #ffec64 100%);
+                    background: linear-gradient(
+                        to bottom,
+                        #ff9d00 5%,
+                        #ffec64 100%
+                    );
                     background-color: #ff9d00;
                 }
 

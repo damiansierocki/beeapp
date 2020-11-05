@@ -1,46 +1,46 @@
 <template>
-    <div id="register">
-        <section>
-            <div class="content">
-                <h1>beeapp 🐝</h1>
-                <form @submit.prevent>
-                    <h2>Rejestracja</h2>
-                    <div class="row">
-                        <label for="name">Imię i nazwisko 📛</label>
-                        <input
-                            type="text"
-                            placeholder="Jan Kowalski"
-                            id="name"
-                            v-model.trim="name"
-                        />
-                    </div>
-                    <div class="row">
-                        <label for="email">Email 📧</label>
-                        <input
-                            type="text"
-                            id="email"
-                            placeholder="jan@kowalski.pl"
-                            v-model.trim="email"
-                        />
-                    </div>
-                    <div class="row">
-                        <label for="password">Hasło 🔑</label>
-                        <input
-                            type="password"
-                            id="password"
-                            placeholder="******"
-                            v-model.trim="password"
-                        />
-                    </div>
-                    <button class="button" @click="signup()">
-                        Zarejestruj się
-                    </button>
-                    <div class="extras">
-                        <router-link class="link" to="/login">Cofnij do logowania 🔙</router-link>
-                    </div>
-                </form>
-            </div>
-        </section>
+    <div class="register">
+        <div class="header">
+            <h1>🐝</h1>
+        </div>
+        <div class="form">
+            <form @submit.prevent>
+                <h2>Rejestracja</h2>
+                <label for="name">Imię i nazwisko 📛</label>
+                <input
+                    type="text"
+                    placeholder="Jan Kowalski"
+                    id="name"
+                    v-model.trim="name"
+                />
+                <label for="email">Email 📧</label>
+                <input
+                    type="text"
+                    placeholder="jan@kowalski.pl"
+                    id="email"
+                    v-model.trim="email"
+                />
+                <label for="password">Hasło 🔑</label>
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="******"
+                    v-model.trim="password"
+                />
+                <div class="extras">
+                    <ul>
+                        <li>
+                            <router-link class="link" to="/login"
+                                >Cofnij do logowania 🔙</router-link
+                            >
+                        </li>
+                    </ul>
+                </div>
+                <button class="button" @click="signup()">
+                    Zarejestruj się
+                </button>
+            </form>
+        </div>
     </div>
 </template>
 
@@ -66,126 +66,186 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
-        "Open Sans", "Helvetica Neue", sans-serif;
-}
-
-#register {
-    padding-top: 50px;
-    background: #f9faff;
-    color: #3a3c47;
-    line-height: 1.6;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100vw;
+.register {
     height: 100vh;
-}
-
-.content {
+    width: 100vw;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-
-    h1 {
-        color: rgb(255, 198, 9);
-    }
-}
-
-form {
-    background: #fff;
-    max-width: 360px;
-    width: 100%;
-    padding: 58px 45px;
-    border: 1px solid "##e1e2f0;";
-    border-radius: 4px;
-    box-shadow: 0 0 5px 0 rgba(42, 45, 48, 0.12);
-    transition: all 0.3s ease;
-
-    h2 {
-        margin-bottom: 10px;
-    }
-}
-
-.row {
-    display: flex;
     flex-direction: column;
-    margin-bottom: 20px;
 
-    input {
-        flex: 1;
-        padding: 13px;
-        border: 1px solid #d6d8e6;
-        border-radius: 4px;
-        font-size: 16px;
-        transition: all 0.2s ease-out;
+    .header {
+        h1 {
+            font-size: 3rem;
+        }
+    }
 
-        &:focus {
-            outline: none;
-            box-shadow: inset 2px 2px 5px 0 rgba(42, 45, 48, 0.12);
+    .form {
+        padding: 0 1.5rem 0 1.5rem;
+
+        h2 {
+            font-size: 2rem;
         }
 
-        &::placeholder {
-            color: #c8cddf;
+        form {
+            background: #f9faff;
+            padding: 1rem 2rem 2rem 2rem;
+            display: flex;
+            flex-direction: column;
+            border-radius: 30px;
+            box-shadow: 10px 10px 64px 22px rgba(0, 0, 0, 0.5);
+
+            label {
+                margin: 10px 0 10px 0;
+                font-size: 1.3rem;
+            }
+
+            input {
+                padding: 15px;
+                border-radius: 50px;
+                border: 0.5px solid black;
+                font-size: 0.9rem;
+
+                &:focus {
+                    outline: none;
+                }
+            }
+
+            .extras {
+                margin-top: 10px;
+                text-align: left;
+
+                ul {
+                    list-style: none;
+                    display: flex;
+                    flex-direction: column;
+
+                    li {
+                        line-height: 2rem;
+
+                        a {
+                            text-decoration: none;
+                            cursor: pointer;
+                            color: black;
+                        }
+
+                        .link {
+                            text-decoration: none;
+                            cursor: pointer;
+                            color: black;
+                        }
+                    }
+                }
+            }
+
+            .button {
+                margin: 0 auto;
+                margin-top: 12px;
+                width: 80%;
+                box-shadow: 0px 1px 0px 0px #fff6af;
+                background: linear-gradient(
+                    to bottom,
+                    #ffec64 5%,
+                    #ff9d00 100%
+                );
+                background-color: #ffec64;
+                border-radius: 6px;
+                border: 1px solid #ffaa22;
+                display: inline-block;
+                cursor: pointer;
+                color: #333333;
+                font-size: 15px;
+                font-weight: bold;
+                padding: 6px 24px;
+                text-shadow: 0px 1px 0px #ffee66;
+
+                &:hover {
+                    background: linear-gradient(
+                        to bottom,
+                        #ff9d00 5%,
+                        #ffec64 100%
+                    );
+                    background-color: #ff9d00;
+                }
+
+                &:active {
+                    position: relative;
+                    top: 1px;
+                }
+            }
         }
     }
 }
 
-button {
-    width: 100%;
-    padding: 12px;
-    font-size: 18px;
-    background: #2b5af5;
-    color: #fff;
-    border: none;
-    border-radius: 100px;
-    cursor: pointer;
-    transition: background 0.2s ease-out;
-
-    &:hover {
-        background: #6fa1ff;
-    }
-}
-
-.extras {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top: 10px;
-    cursor: pointer;
-
-    a {
-        opacity: 0.5;
-        transition: opacity 0.5s ease;
-
-        &:hover {
-            opacity: 1;
+// min-width: 768 px - ipad width, each elements multiplied by 1.2
+@media (min-width: 768px) {
+    .register {
+        .header {
+            h1 {
+                font-size: 3.6rem;
+            }
         }
-    }
 
-    .link {
-        text-decoration: none;
-        color: black;
-    }
-}
+        .form {
+            h2 {
+                font-size: 2.4rem;
+            }
 
-// media queries
-@media (max-width: 458px) {
-    #form {
-        margin: 0;
-    }
+            form {
+                padding: 1.2rem 2.4rem 2.4rem 2.4rem;
 
-    form {
-        background: #f9faff;
-        border: none;
-        box-shadow: none;
-        padding: 20px 15px;
+                label {
+                    margin: 12px 0 12px 0;
+                }
+
+                input {
+                    padding: 18px;
+                    font-size: 1.08rem;
+
+                    &:hover {
+                        box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.5);
+                    }
+                }
+            }
+
+            .extras {
+                margin-top: 12px;
+
+                ul {
+                    li {
+                        line-height: 2.4rem;
+
+                        a {
+                            &:hover {
+                                color: blue;
+                                font-weight: bold;
+                            }
+                        }
+
+                        .link {
+                            &:hover {
+                                color: blue;
+                                font-weight: bold;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .button {
+                margin-top: 12px;
+                font-size: 18px;
+                padding: 7.2px 28.8px;
+
+                &:hover {
+                    background: none;
+                }
+
+                &:active {
+                    top: 1.2px;
+                }
+            }
+        }
     }
 }
 </style>
