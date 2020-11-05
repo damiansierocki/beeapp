@@ -1,25 +1,16 @@
 <template>
-    <div id="register">
+    <div id="login">
         <section>
             <div class="content">
                 <h1>beeapp 🐝</h1>
                 <form @submit.prevent>
-                    <h2>Rejestracja</h2>
-                    <div class="row">
-                        <label for="name">Imię i nazwisko 📛</label>
-                        <input
-                            type="text"
-                            placeholder="Jan Kowalski"
-                            id="name"
-                            v-model.trim="name"
-                        />
-                    </div>
+                    <h2>Logowanie</h2>
                     <div class="row">
                         <label for="email">Email 📧</label>
                         <input
                             type="text"
-                            id="email"
                             placeholder="jan@kowalski.pl"
+                            id="email"
                             v-model.trim="email"
                         />
                     </div>
@@ -32,11 +23,10 @@
                             v-model.trim="password"
                         />
                     </div>
-                    <button class="button" @click="signup()">
-                        Zarejestruj się
-                    </button>
+                    <button class="button" @click="login()">Login</button>
                     <div class="extras">
-                        <router-link class="link" to="/login">Cofnij do logowania 🔙</router-link>
+                        <a @click="togglePasswordReset()">Zapomnniałeś hasła? 😰</a>
+                        <router-link class="link" to="/register">Stwórz konto 🦸</router-link>
                     </div>
                 </form>
             </div>
@@ -48,18 +38,21 @@
 export default {
     data() {
         return {
-            name: "",
             email: "",
-            password: ""
+            password: "",
+            showLoginForm: true,
+            showPasswordReset: false
         };
     },
     methods: {
-        signup() {
-            this.$store.dispatch("signup", {
-                name: this.name,
+        login() {
+            this.$store.dispatch("login", {
                 email: this.email,
                 password: this.password
             });
+        },
+        togglePasswordReset() {
+            this.showPasswordReset = !this.showPasswordReset;
         }
     }
 };
@@ -74,7 +67,7 @@ export default {
         "Open Sans", "Helvetica Neue", sans-serif;
 }
 
-#register {
+#login {
     padding-top: 50px;
     background: #f9faff;
     color: #3a3c47;
