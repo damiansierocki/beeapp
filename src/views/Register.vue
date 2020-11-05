@@ -106,8 +106,15 @@ export default {
                 border: 0.5px solid black;
                 font-size: 0.9rem;
 
+                transition: all 0.2s ease-out;
+
                 &:focus {
                     outline: none;
+                    box-shadow: inset 2px 2px 5px 0 rgba(42, 45, 48, 0.12);
+                }
+
+                &::placeholder {
+                    color: #c8cddf;
                 }
             }
 
@@ -151,7 +158,7 @@ export default {
                 background-color: #ffec64;
                 border-radius: 6px;
                 border: 1px solid #ffaa22;
-                display: inline-block;
+                display: block;
                 cursor: pointer;
                 color: #333333;
                 font-size: 15px;

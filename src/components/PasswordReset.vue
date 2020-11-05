@@ -1,12 +1,16 @@
 <template>
     <div class="modal">
         <div class="modal-content">
-            <div @click="$emit('close')" class="close">zamknij</div>
+            <div class="close" @click="$emit('close')">zamknij</div>
             <div v-if="!showSuccess" class="modal-content-inside">
                 <h3>Reset Password 🔄</h3>
                 <p>Wpisz swój email aby zresetować hasło</p>
                 <form @submit.prevent>
-                    <input type="email" placeholder="jan@kowalski.pl" v-model.trim="email" />
+                    <input
+                        type="email"
+                        placeholder="jan@kowalski.pl"
+                        v-model.trim="email"
+                    />
                 </form>
                 <p v-if="errorMsg !== ''" class="error">{{ errorMsg }}</p>
                 <button @click="resetPassword()" class="button">Reset</button>
@@ -48,14 +52,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
-        "Open Sans", "Helvetica Neue", sans-serif;
-}
-
 .modal {
     display: flex;
     position: fixed;
@@ -68,10 +64,10 @@ export default {
     .modal-content {
         position: relative;
         margin: auto;
-        width: 100%;
+        width: 90%;
         max-width: 400px;
         background: #fff;
-        padding: 40px;
+        padding: 30px;
         border-radius: 5px;
         box-shadow: 0 0 5px 0 rgba(#333, 0.5);
         z-index: 999;
@@ -82,10 +78,10 @@ export default {
             right: 10px;
             padding: 5px;
             cursor: pointer;
-            transition: 0.15s;
 
             &:hover {
                 color: #000;
+                font-weight: bold;
             }
         }
 
@@ -103,13 +99,11 @@ export default {
         }
 
         input {
+            padding: 15px;
+            border-radius: 50px;
+            border: 0.5px solid black;
+            font-size: 0.9rem;
             width: 100%;
-            flex: 1;
-            padding: 13px;
-            border: 1px solid #d6d8e6;
-            border-radius: 4px;
-            font-size: 16px;
-            transition: all 0.2s ease-out;
 
             &:focus {
                 outline: none;
@@ -122,19 +116,34 @@ export default {
         }
 
         button {
-            margin-top: 20px;
-            width: 100%;
-            padding: 12px;
-            font-size: 18px;
-            background: #2b5af5;
-            color: #fff;
-            border: none;
-            border-radius: 100px;
+            margin: 0 auto;
+            margin-top: 12px;
+            width: 50%;
+            box-shadow: 0px 1px 0px 0px #fff6af;
+            background: linear-gradient(to bottom, #ffec64 5%, #ff9d00 100%);
+            background-color: #ffec64;
+            border-radius: 6px;
+            border: 1px solid #ffaa22;
+            display: block;
             cursor: pointer;
-            transition: background 0.2s ease-out;
+            color: #333333;
+            font-size: 15px;
+            font-weight: bold;
+            padding: 6px 24px;
+            text-shadow: 0px 1px 0px #ffee66;
 
             &:hover {
-                background: #6fa1ff;
+                background: linear-gradient(
+                    to bottom,
+                    #ff9d00 5%,
+                    #ffec64 100%
+                );
+                background-color: #ff9d00;
+            }
+
+            &:active {
+                position: relative;
+                top: 1px;
             }
         }
 
