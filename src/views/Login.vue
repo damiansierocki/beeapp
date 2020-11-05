@@ -1,5 +1,6 @@
 <template>
     <div id="login">
+        <PasswordReset v-if="showPasswordReset" @close="togglePasswordReset()"></PasswordReset>
         <section>
             <div class="content">
                 <h1>beeapp 🐝</h1>
@@ -35,12 +36,16 @@
 </template>
 
 <script>
+import PasswordReset from "@/components/PasswordReset";
+
 export default {
+    components: {
+        PasswordReset
+    },
     data() {
         return {
             email: "",
             password: "",
-            showLoginForm: true,
             showPasswordReset: false
         };
     },
@@ -51,6 +56,7 @@ export default {
                 password: this.password
             });
         },
+
         togglePasswordReset() {
             this.showPasswordReset = !this.showPasswordReset;
         }
