@@ -25,11 +25,12 @@
 export default {
     methods: {
         openAndHideMenu() {
-            let x = document.querySelector(".dropmenu");
-            if (x.style.display === "none") {
-                x.style.display = "flex";
+            let dropMenu = document.querySelector(".dropmenu");
+
+            if (window.getComputedStyle(dropMenu).display === "none") {
+                dropMenu.style.display = "flex";
             } else {
-                x.style.display = "none";
+                dropMenu.style.display = "none";
             }
         }
     }
@@ -141,7 +142,10 @@ export default {
                     margin: 12px 0 6px 0;
                     text-decoration: none;
                     color: black;
-                    // background-color: red;
+
+                    &:hover {
+                        font-weight: bold;
+                    }
                 }
             }
         }
