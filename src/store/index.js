@@ -24,8 +24,9 @@ export default new Vuex.Store({
 
             // create user profile object in userCollection
             await fb.usersCollection.doc(user.uid).set({
-                name: form.name,
-                email: form.email
+                username: form.username,
+                email: form.email,
+                password: form.password
             });
 
             // fetch user profile and set in state
@@ -36,7 +37,10 @@ export default new Vuex.Store({
 
         async login({ dispatch }, form) {
             // sign user in
-            const { user } = await fb.auth.signInWithEmailAndPassword(form.email, form.password);
+            const { user } = await fb.auth.signInWithEmailAndPassword(
+                form.email,
+                form.password
+            );
 
             // fetch user profile and set in state
             dispatch("fetchUserProfile", user);

@@ -3,12 +3,12 @@
         <div class="form">
             <form @submit.prevent>
                 <h2>Rejestracja 🐝</h2>
-                <label for="name">Imię i nazwisko</label>
+                <label for="username">Nazwa użytkownika</label>
                 <input
                     type="text"
-                    placeholder="Jan Kowalski"
-                    id="name"
-                    v-model.trim="name"
+                    placeholder="janek123"
+                    id="username"
+                    v-model.trim="username"
                 />
                 <label for="email">Email</label>
                 <input
@@ -45,7 +45,7 @@
 export default {
     data() {
         return {
-            name: "",
+            username: "",
             email: "",
             password: ""
         };
@@ -53,7 +53,7 @@ export default {
     methods: {
         signup() {
             this.$store.dispatch("signup", {
-                name: this.name,
+                username: this.username,
                 email: this.email,
                 password: this.password
             });
