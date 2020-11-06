@@ -1,29 +1,20 @@
 <template>
     <div class="login">
-        <transition
-            enter-active-class="animate__animated animate__rotateIn"
-            leave-active-class="animate__animated animate__rotateOutDownRight"
-            appear
-        >
-            <PasswordReset
-                v-if="showPasswordReset"
-                @close="togglePasswordReset()"
-            ></PasswordReset>
-        </transition>
-        <div class="header">
-            <h1>🐝</h1>
-        </div>
+        <PasswordReset
+            v-if="showPasswordReset"
+            @close="togglePasswordReset()"
+        ></PasswordReset>
         <div class="form">
             <form @submit.prevent>
-                <h2>Logowanie</h2>
-                <label for="email">Email 📧</label>
+                <h2>Logowanie 🐝</h2>
+                <label for="email">Email</label>
                 <input
                     type="text"
                     placeholder="jan@kowalski.pl"
                     id="email"
                     v-model.trim="email"
                 />
-                <label for="password">Hasło 🔑</label>
+                <label for="password">Hasło</label>
                 <input
                     type="password"
                     id="password"
@@ -34,12 +25,12 @@
                     <ul>
                         <li>
                             <a @click="togglePasswordReset()"
-                                >Zapomniałeś hasła ? 😰</a
+                                >Zapomniałeś hasła ?</a
                             >
                         </li>
                         <li>
                             <router-link class="link" to="/register"
-                                >Stwórz konto 🦸</router-link
+                                >Stwórz konto</router-link
                             >
                         </li>
                     </ul>
@@ -90,12 +81,6 @@ export default {
     align-items: center;
     flex-direction: column;
 
-    .header {
-        h1 {
-            font-size: 3rem;
-        }
-    }
-
     .form {
         padding: 0 1.5rem 0 1.5rem;
 
@@ -118,9 +103,8 @@ export default {
 
             input {
                 padding: 15px;
-                border-radius: 50px;
                 border: 0.5px solid black;
-                font-size: 0.9rem;
+                font-size: 1rem;
 
                 transition: all 0.2s ease-out;
 
@@ -203,12 +187,6 @@ export default {
 // min-width: 768 px - ipad width, each elements multiplied by 1.2
 @media (min-width: 768px) {
     .login {
-        .header {
-            h1 {
-                font-size: 3.6rem;
-            }
-        }
-
         .form {
             h2 {
                 font-size: 2.4rem;
@@ -223,7 +201,7 @@ export default {
 
                 input {
                     padding: 18px;
-                    font-size: 1.08rem;
+                    font-size: 1.2rem;
 
                     &:hover {
                         box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.5);
@@ -240,14 +218,14 @@ export default {
 
                         a {
                             &:hover {
-                                color: blue;
+                                // color: blue;
                                 font-weight: bold;
                             }
                         }
 
                         .link {
                             &:hover {
-                                color: blue;
+                                // color: blue;
                                 font-weight: bold;
                             }
                         }

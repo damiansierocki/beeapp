@@ -1,26 +1,23 @@
 <template>
     <div class="register">
-        <div class="header">
-            <h1>🐝</h1>
-        </div>
         <div class="form">
             <form @submit.prevent>
-                <h2>Rejestracja</h2>
-                <label for="name">Imię i nazwisko 📛</label>
+                <h2>Rejestracja 🐝</h2>
+                <label for="name">Imię i nazwisko</label>
                 <input
                     type="text"
                     placeholder="Jan Kowalski"
                     id="name"
                     v-model.trim="name"
                 />
-                <label for="email">Email 📧</label>
+                <label for="email">Email</label>
                 <input
                     type="text"
                     placeholder="jan@kowalski.pl"
                     id="email"
                     v-model.trim="email"
                 />
-                <label for="password">Hasło 🔑</label>
+                <label for="password">Hasło</label>
                 <input
                     type="password"
                     id="password"
@@ -31,7 +28,7 @@
                     <ul>
                         <li>
                             <router-link class="link" to="/login"
-                                >Cofnij do logowania 🔙</router-link
+                                >Cofnij do logowania</router-link
                             >
                         </li>
                     </ul>
@@ -224,14 +221,12 @@ export default {
 
                         a {
                             &:hover {
-                                color: blue;
                                 font-weight: bold;
                             }
                         }
 
                         .link {
                             &:hover {
-                                color: blue;
                                 font-weight: bold;
                             }
                         }

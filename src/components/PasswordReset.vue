@@ -3,7 +3,7 @@
         <div class="modal-content">
             <div class="close" @click="$emit('close')">zamknij</div>
             <div v-if="!showSuccess" class="modal-content-inside">
-                <h3>Reset Password 🔄</h3>
+                <h3>Zresetuj hasło 🐝</h3>
                 <p>Wpisz swój email aby zresetować hasło</p>
                 <form @submit.prevent>
                     <input
