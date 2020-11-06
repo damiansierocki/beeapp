@@ -32,7 +32,7 @@ export default new Vuex.Store({
             // fetch user profile and set in state
             dispatch("fetchUserProfile", user);
 
-            // router.push("/login");
+            router.push("/login");
         },
 
         async login({ dispatch }, form) {
@@ -46,6 +46,14 @@ export default new Vuex.Store({
             dispatch("fetchUserProfile", user);
         },
 
+        async logout({ commit }) {
+            await fb.auth.signOut();
+
+            // clear userProfile and redirect to /login
+            commit("setUserProfile", {});
+            router.push("/login");
+        },
+
         async fetchUserProfile({ commit }, user) {
             // fetch user profile
             const userProfile = await fb.usersCollection.doc(user.uid).get();
@@ -54,7 +62,9 @@ export default new Vuex.Store({
             commit("setUserProfile", userProfile.data());
 
             // change router to dashboard
-            router.push("/");
+            if (router.currentRoute.path === "/login") {
+                router.push("/");
+            }
         }
     },
     modules: {}

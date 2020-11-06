@@ -1,17 +1,25 @@
 <template>
     <div id="app">
-        <Header></Header>
+        <Nav v-if="showNav"></Nav>
         <router-view />
     </div>
 </template>
 
 <script>
-import Header from "@/components/Header";
+import Nav from "@/components/Nav";
+import { mapState } from "vuex";
 import "animate.css";
 
 export default {
     components: {
-        Header
+        Nav
+    },
+    computed: {
+        ...mapState(["userProfile"]),
+
+        showNav() {
+            return Object.keys(this.userProfile).length > 1;
+        }
     }
 };
 </script>
@@ -33,6 +41,6 @@ export default {
     background-image: url("./assets/background.jpg");
     background-position: center;
     background-repeat: no-repeat;
-    background-size: auto;
+    background-size: cover;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-    <div class="header">
+    <div class="nav">
         <div class="left">
             <span class="icon_hamburger">
                 <i class="fas fa-bars"></i>
@@ -13,32 +13,46 @@
                 <i class="fas fa-caret-down"> </i>
             </span>
             <div class="dropmenu">
-                <h2>Nazwa użytkownika</h2>
+                <h2>{{ userProfile.username }}</h2>
                 <a href="#">Moje konto</a>
-                <a href="#">Wyloguj się</a>
+                <router-link class="link" to="/settings"
+                    >Ustawienia</router-link
+                >
+                <a @click="logout()">Wyloguj się</a>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
+    data() {
+        return {};
+    },
+    computed: {
+        ...mapState(["userProfile"])
+    },
     methods: {
         openAndHideMenu() {
-            let dropMenu = document.querySelector(".dropmenu");
+            const dropMenu = document.querySelector(".dropmenu");
 
             if (window.getComputedStyle(dropMenu).display === "none") {
                 dropMenu.style.display = "flex";
             } else {
                 dropMenu.style.display = "none";
             }
+        },
+        logout() {
+            this.$store.dispatch("logout");
         }
     }
 };
 </script>
 
 <style lang="scss" scoped>
-.header {
+.nav {
     background-color: #ffa500;
     display: flex;
     justify-content: space-between;
@@ -98,7 +112,7 @@ export default {
 
 // @media query above 768px - 1.2x
 @media (min-width: 768px) {
-    .header {
+    .nav {
         padding: 18px;
 
         .left {
@@ -142,6 +156,19 @@ export default {
                     margin: 12px 0 6px 0;
                     text-decoration: none;
                     color: black;
+                    cursor: pointer;
+
+                    &:hover {
+                        font-weight: bold;
+                    }
+                }
+
+                .link {
+                    font-size: 19.2px;
+                    margin: 12px 0 6px 0;
+                    text-decoration: none;
+                    color: black;
+                    cursor: pointer;
 
                     &:hover {
                         font-weight: bold;
