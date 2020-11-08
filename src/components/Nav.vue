@@ -9,14 +9,13 @@
             <h1 class="activefield">Strona główna</h1>
         </div>
         <div class="right">
-            <span class="icon_menu" @click="openAndHideMenu">
+            <span class="icon_menu" @click="openAndHideRightMenu">
                 <i class="fas fa-caret-down"> </i>
             </span>
             <div class="dropmenu">
                 <h2>{{ userProfile.username }}</h2>
-                <a href="#">Moje konto</a>
-                <router-link class="link" to="/settings"
-                    >Ustawienia</router-link
+                <router-link class="link" to="/myaccount"
+                    >Moje konto</router-link
                 >
                 <a @click="logout()">Wyloguj się</a>
             </div>
@@ -35,7 +34,7 @@ export default {
         ...mapState(["userProfile"])
     },
     methods: {
-        openAndHideMenu() {
+        openAndHideRightMenu() {
             const dropMenu = document.querySelector(".dropmenu");
 
             if (window.getComputedStyle(dropMenu).display === "none") {
@@ -58,6 +57,7 @@ export default {
     justify-content: space-between;
     align-items: center;
     padding: 15px;
+
     // hide text selection highlithing
     user-select: none;
 
@@ -65,6 +65,7 @@ export default {
         .icon_hamburger {
             font-size: 18px;
             cursor: pointer;
+            padding: 5px;
         }
     }
 
@@ -78,6 +79,7 @@ export default {
         .icon_menu {
             font-size: 18px;
             cursor: pointer;
+            padding: 5px;
         }
 
         position: relative;
@@ -104,13 +106,12 @@ export default {
                 margin: 10px 0 5px 0;
                 text-decoration: none;
                 color: black;
-                // background-color: red;
             }
         }
     }
 }
 
-// @media query above 768px - 1.2x
+// min-width: 768 px - ipad width, each elements multiplied by 1.2
 @media (min-width: 768px) {
     .nav {
         padding: 18px;
@@ -118,6 +119,7 @@ export default {
         .left {
             .icon_hamburger {
                 font-size: 21.6px;
+                padding: 6px;
             }
         }
 
@@ -131,6 +133,7 @@ export default {
             .icon_menu {
                 font-size: 21.6px;
                 cursor: pointer;
+                padding: 6px;
             }
 
             position: relative;

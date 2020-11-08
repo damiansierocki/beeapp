@@ -218,14 +218,12 @@ export default {
 
                         a {
                             &:hover {
-                                // color: blue;
                                 font-weight: bold;
                             }
                         }
 
                         .link {
                             &:hover {
-                                // color: blue;
                                 font-weight: bold;
                             }
                         }

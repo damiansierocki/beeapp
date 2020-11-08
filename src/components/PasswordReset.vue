@@ -1,8 +1,8 @@
 <template>
-    <div class="modal">
-        <div class="modal-content">
+    <div class="passwordreset">
+        <div class="passwordreset-content">
             <div class="close" @click="$emit('close')">zamknij</div>
-            <div v-if="!showSuccess" class="modal-content-inside">
+            <div v-if="!showSuccess" class="passwordreset-content-inside">
                 <h3>Zresetuj hasło 🐝</h3>
                 <p>Wpisz swój email aby zresetować hasło</p>
                 <form @submit.prevent>
@@ -13,7 +13,9 @@
                     />
                 </form>
                 <p v-if="errorMsg !== ''" class="error">{{ errorMsg }}</p>
-                <button @click="resetPassword()" class="button">Reset</button>
+                <button @click="resetPassword()" class="button">
+                    Zresetuj
+                </button>
             </div>
             <div v-else class="extras">
                 <p>Sukces <span>✔</span></p>
@@ -52,7 +54,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.modal {
+.passwordreset {
     display: flex;
     position: fixed;
     top: 0;
@@ -61,7 +63,7 @@ export default {
     left: 0;
     background: rgba(#333, 0.5);
 
-    .modal-content {
+    .passwordreset-content {
         position: relative;
         margin: auto;
         width: 90%;
@@ -100,7 +102,6 @@ export default {
 
         input {
             padding: 15px;
-            border-radius: 50px;
             border: 0.5px solid black;
             font-size: 0.9rem;
             width: 100%;

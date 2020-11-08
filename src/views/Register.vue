@@ -99,7 +99,6 @@ export default {
 
             input {
                 padding: 15px;
-                border-radius: 50px;
                 border: 0.5px solid black;
                 font-size: 0.9rem;
 
