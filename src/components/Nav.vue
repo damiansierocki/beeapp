@@ -7,7 +7,6 @@
             <div class="dropmenuleft">
                 <router-link class="link" to="/">Strona główna</router-link>
                 <router-link class="link" to="/apiaries">Pasieki</router-link>
-                <router-link class="link" to="/hives">Ule</router-link>
             </div>
         </div>
         <div class="center">
@@ -44,14 +43,22 @@ export default {
             const dropMenuLeft = document.querySelector(".dropmenuleft");
             const left = document.querySelector(".left");
 
-            if (window.screen.width < 768) {
-                left.classList.toggle("color-white");
+            // if (window.screen.width < 768) {
+            //     left.classList.toggle("color-white");
 
-                if (window.getComputedStyle(dropMenuLeft).display === "none") {
-                    dropMenuLeft.style.display = "flex";
-                } else {
-                    dropMenuLeft.style.display = "none";
-                }
+            //     if (window.getComputedStyle(dropMenuLeft).display === "none") {
+            //         dropMenuLeft.style.display = "flex";
+            //     } else {
+            //         dropMenuLeft.style.display = "none";
+            //     }
+            // }
+
+            left.classList.toggle("color-white");
+
+            if (window.getComputedStyle(dropMenuLeft).display === "none") {
+                dropMenuLeft.style.display = "flex";
+            } else {
+                dropMenuLeft.style.display = "none";
             }
         },
         openAndHideRightMenu() {
@@ -170,7 +177,6 @@ export default {
         padding: 18px;
 
         .left {
-            display: none;
             .icon_hamburger {
                 font-size: 21.6px;
                 padding: 6px;

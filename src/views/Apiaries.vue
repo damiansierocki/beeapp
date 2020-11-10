@@ -5,19 +5,16 @@
                 <h1 class="activefield">Pasieki</h1>
             </template>
         </Nav>
-        <SideBar v-if="showIfUserLogged"></SideBar>
     </div>
 </template>
 
 <script>
 import Nav from "@/components/Nav";
-import SideBar from "@/components/SideBar";
 import { mapState } from "vuex";
 
 export default {
     components: {
-        Nav,
-        SideBar
+        Nav
     },
     computed: {
         ...mapState(["userProfile"]),

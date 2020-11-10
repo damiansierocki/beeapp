@@ -5,7 +5,6 @@ import Register from "../views/Register.vue";
 import Login from "../views/Login.vue";
 import MyAccount from "../views/MyAccount.vue";
 import Apiaries from "../views/Apiaries";
-import Hives from "../views/Hives";
 import { auth } from "../firebase";
 
 Vue.use(VueRouter);
@@ -38,11 +37,6 @@ const routes = [
         path: "/apiaries",
         name: "Apiaries",
         component: Apiaries
-    },
-    {
-        path: "/hives",
-        name: "Hives",
-        component: Hives
     }
 ];
 
