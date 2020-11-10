@@ -1,25 +1,28 @@
 <template>
     <div class="myaccount">
-        <Nav v-if="showNav">
+        <Nav v-if="showIfUserLogged">
             <template v-slot:active-fields>
                 <h1 class="activefield">Moje konto</h1>
             </template>
         </Nav>
+        <SideBar v-if="showIfUserLogged"></SideBar>
     </div>
 </template>
 
 <script>
 import Nav from "@/components/Nav";
+import SideBar from "@/components/SideBar";
 import { mapState } from "vuex";
 
 export default {
     components: {
-        Nav
+        Nav,
+        SideBar
     },
     computed: {
         ...mapState(["userProfile"]),
 
-        showNav() {
+        showIfUserLogged() {
             return Object.keys(this.userProfile).length > 1;
         }
     }

@@ -1,8 +1,8 @@
 <template>
-    <div class="homepage">
+    <div class="hives">
         <Nav v-if="showIfUserLogged">
             <template v-slot:active-fields>
-                <h1 class="activefield">Strona główna</h1>
+                <h1 class="activefield">Ule</h1>
             </template>
         </Nav>
         <SideBar v-if="showIfUserLogged"></SideBar>

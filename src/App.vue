@@ -7,9 +7,7 @@
 <script>
 import "animate.css";
 
-export default {
-    components: {}
-};
+export default {};
 </script>
 
 <style lang="scss">
