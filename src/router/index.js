@@ -1,5 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import Homepage from "../views/Homepage";
 import Register from "../views/Register.vue";
 import Login from "../views/Login.vue";
 import MyAccount from "../views/MyAccount.vue";
@@ -10,8 +11,8 @@ Vue.use(VueRouter);
 const routes = [
     {
         path: "/",
-        name: "Dashboard",
-        // component: Dashboard,
+        name: "Homepage",
+        component: Homepage,
         meta: {
             requiresAuth: true
         }

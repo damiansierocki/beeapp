@@ -6,7 +6,7 @@
             </span>
         </div>
         <div class="center">
-            <h1 class="activefield">Strona główna</h1>
+            <slot name="active-fields"></slot>
         </div>
         <div class="right">
             <span class="icon_menu" @click="openAndHideRightMenu">

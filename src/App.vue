@@ -1,26 +1,14 @@
 <template>
     <div id="app">
-        <Nav v-if="showNav"></Nav>
         <router-view />
     </div>
 </template>
 
 <script>
-import Nav from "@/components/Nav";
-import { mapState } from "vuex";
 import "animate.css";
 
 export default {
-    components: {
-        Nav
-    },
-    computed: {
-        ...mapState(["userProfile"]),
-
-        showNav() {
-            return Object.keys(this.userProfile).length > 1;
-        }
-    }
+    components: {}
 };
 </script>
 

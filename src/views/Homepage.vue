@@ -1,8 +1,8 @@
 <template>
-    <div class="myaccount">
+    <div class="homepage">
         <Nav v-if="showNav">
             <template v-slot:active-fields>
-                <h1 class="activefield">Moje konto</h1>
+                <h1 class="activefield">Strona główna</h1>
             </template>
         </Nav>
     </div>
