@@ -90,16 +90,10 @@ export default {
             top: 10px;
             right: 10px;
             padding: 5px;
-            cursor: pointer;
-
-            &:hover {
-                color: #000;
-                font-weight: bold;
-            }
         }
 
         &__h3 {
-            margin: 0;
+            font-size: 20px;
         }
 
         &__p {
@@ -137,21 +131,11 @@ export default {
             border-radius: 6px;
             border: 1px solid #ffaa22;
             display: block;
-            cursor: pointer;
             color: #333333;
             font-size: 15px;
             font-weight: bold;
             padding: 6px 24px;
             text-shadow: 0px 1px 0px #ffee66;
-
-            &:hover {
-                background: linear-gradient(
-                    to bottom,
-                    #ff9d00 5%,
-                    #ffec64 100%
-                );
-                background-color: #ff9d00;
-            }
 
             &:active {
                 position: relative;
@@ -163,6 +147,81 @@ export default {
             font-weight: bold;
             font-size: 30px;
             color: green;
+        }
+    }
+}
+
+@media (min-width: 768px) {
+    .passwordreset {
+        .content {
+            width: 90%;
+            max-width: 480px;
+            padding: 36px;
+            z-index: 1;
+
+            &__close {
+                top: 12px;
+                right: 12px;
+                padding: 6px;
+                cursor: pointer;
+
+                &:hover {
+                    color: #000;
+                    font-weight: bold;
+                }
+            }
+
+            &__h3 {
+                font-size: 24px;
+            }
+
+            &__p {
+                margin: 18px 0;
+            }
+
+            &__input {
+                padding: 18px;
+                font-size: 1.08rem;
+
+                &:focus {
+                    outline: none;
+                    box-shadow: inset 2px 2px 5px 0 rgba(42, 45, 48, 0.12);
+                }
+
+                &::placeholder {
+                    color: #c8cddf;
+                }
+            }
+
+            &__p--error {
+                font-size: 12px;
+            }
+
+            .btn {
+                margin-top: 14.4px;
+                width: 60%;
+                cursor: pointer;
+                font-size: 18px;
+                padding: 7.2px 28.8px;
+
+                &:hover {
+                    background: linear-gradient(
+                        to bottom,
+                        #ff9d00 5%,
+                        #ffec64 100%
+                    );
+                    background-color: #ff9d00;
+                }
+
+                &:active {
+                    position: relative;
+                    top: 1.2px;
+                }
+            }
+
+            &__p--success {
+                font-size: 36px;
+            }
         }
     }
 }

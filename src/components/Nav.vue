@@ -107,7 +107,6 @@ export default {
 
         &__icon {
             font-size: 18px;
-            cursor: pointer;
             padding: 5px;
         }
 
@@ -143,7 +142,6 @@ export default {
 
         &__icon {
             font-size: 18px;
-            cursor: pointer;
             padding: 5px;
         }
 
@@ -184,24 +182,27 @@ export default {
     .nav {
         padding: 18px;
 
+        // hide text selection highlithing
+        user-select: none;
+
         &-left {
             &__icon {
                 font-size: 21.6px;
+                cursor: pointer;
                 padding: 6px;
             }
 
             &__menu {
-                display: flex;
                 padding: 18px;
-                width: 15vw;
+                top: 45.6px;
+                left: -24px;
+                width: 60vw;
+                height: calc(100vh - 53px);
             }
 
             &__link {
                 font-size: 19.2px;
                 margin: 12px 0 6px 0;
-                text-decoration: none;
-                color: black;
-                cursor: pointer;
 
                 &:hover {
                     font-weight: bold;
@@ -216,8 +217,6 @@ export default {
         }
 
         &-right {
-            position: relative;
-
             &__icon {
                 font-size: 21.6px;
                 cursor: pointer;
@@ -225,27 +224,19 @@ export default {
             }
 
             &__menu {
-                display: none;
-                flex-direction: column;
-                position: absolute;
+                top: 31.2px;
                 left: -156px;
-                border: 1px solid black;
-                box-shadow: 1px 1px 10px 1px #000000;
-                background-color: #eee;
                 padding: 18px;
                 width: 180px;
 
                 &-username {
                     font-size: 19.2px;
-                    border-bottom: 1px solid black;
                 }
             }
 
             &__link {
                 font-size: 19.2px;
                 margin: 12px 0 6px 0;
-                text-decoration: none;
-                color: black;
                 cursor: pointer;
 
                 &:hover {
