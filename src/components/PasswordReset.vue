@@ -1,25 +1,36 @@
 <template>
     <div class="passwordreset">
-        <div class="passwordreset-content">
-            <div class="close" @click="$emit('close')">zamknij</div>
-            <div v-if="!showSuccess" class="passwordreset-content-inside">
-                <h3>Zresetuj hasło 🐝</h3>
-                <p>Wpisz swój email aby zresetować hasło</p>
-                <form @submit.prevent>
+        <div class="content">
+            <div class="content__close" @click="$emit('close')">
+                zamknij
+            </div>
+
+            <div v-if="!showSuccess" class="content__inside">
+                <h3 class="content__h3">
+                    Zresetuj hasło 🐝
+                </h3>
+                <p class="content__p">
+                    Wpisz swój email aby zresetować hasło
+                </p>
+                <form class="content__form" @submit.prevent>
                     <input
+                        class="content__input"
                         type="email"
                         placeholder="jan@kowalski.pl"
                         v-model.trim="email"
                     />
                 </form>
-                <p v-if="errorMsg !== ''" class="error">{{ errorMsg }}</p>
-                <button @click="resetPassword()" class="button">
+                <p v-if="errorMsg !== ''" class="content__p content__p--error">
+                    {{ errorMsg }}
+                </p>
+                <button @click="resetPassword()" class="btn">
                     Zresetuj
                 </button>
             </div>
-            <div v-else class="extras">
-                <p>Sukces <span>✔</span></p>
-                <p>
+
+            <div v-else class="content__extras">
+                <p class="content__p--success">Sukces 👍</p>
+                <p class="content__p">
                     Sprawdź email w celu odnalezienia linka do resetowania hasła
                 </p>
             </div>
@@ -63,7 +74,7 @@ export default {
     left: 0;
     background: rgba(#333, 0.5);
 
-    .passwordreset-content {
+    .content {
         position: relative;
         margin: auto;
         width: 90%;
@@ -74,7 +85,7 @@ export default {
         box-shadow: 0 0 5px 0 rgba(#333, 0.5);
         z-index: 999;
 
-        .close {
+        &__close {
             position: absolute;
             top: 10px;
             right: 10px;
@@ -87,20 +98,15 @@ export default {
             }
         }
 
-        h3 {
+        &__h3 {
             margin: 0;
         }
 
-        p {
+        &__p {
             margin: 15px 0;
         }
 
-        .error {
-            color: tomato;
-            font-size: 12px;
-        }
-
-        input {
+        &__input {
             padding: 15px;
             border: 0.5px solid black;
             font-size: 0.9rem;
@@ -116,7 +122,12 @@ export default {
             }
         }
 
-        button {
+        &__p--error {
+            color: tomato;
+            font-size: 12px;
+        }
+
+        .btn {
             margin: 0 auto;
             margin-top: 12px;
             width: 50%;
@@ -148,15 +159,10 @@ export default {
             }
         }
 
-        .extras {
-            p:first-child {
-                font-weight: bold;
-                font-size: 30px;
-            }
-            span {
-                color: green;
-                font-size: 30px;
-            }
+        &__p--success {
+            font-weight: bold;
+            font-size: 30px;
+            color: green;
         }
     }
 }

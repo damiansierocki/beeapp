@@ -1,8 +1,8 @@
 <template>
     <div class="homepage">
         <Nav v-if="showIfUserLogged">
-            <template v-slot:active-fields>
-                <h1 class="activefield">Strona główna</h1>
+            <template v-slot:nav-center__slot>
+                <h1 class="nav-center__slot">Strona główna</h1>
             </template>
         </Nav>
     </div>

@@ -22,11 +22,11 @@ export default {};
     font-family: "Roboto", sans-serif;
 }
 
-.login,
-.register {
-    background-image: url("./assets/background.jpg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
+// .login,
+// .register {
+//     background-image: url("./assets/background.jpg");
+//     background-position: center;
+//     background-repeat: no-repeat;
+//     background-size: cover;
+// }
 </style>

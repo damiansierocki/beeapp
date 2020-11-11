@@ -1,27 +1,35 @@
 <template>
     <div class="nav">
-        <div class="left">
-            <span class="icon_hamburger" @click="openAndHideLeftMenu">
+        <div class="nav-left">
+            <span class="nav-left__icon" @click="openAndHideLeftMenu">
                 <i class="fas fa-bars"></i>
             </span>
-            <div class="dropmenuleft">
-                <router-link class="link" to="/">Strona główna</router-link>
-                <router-link class="link" to="/apiaries">Pasieki</router-link>
+            <div class="nav-left__menu">
+                <router-link class="nav-left__link" to="/"
+                    >Strona główna</router-link
+                >
+                <router-link class="nav-left__link" to="/apiaries"
+                    >Pasieki</router-link
+                >
             </div>
         </div>
-        <div class="center">
-            <slot name="active-fields"></slot>
+
+        <div class="nav-center">
+            <slot class="nav-center__slot" name="nav-center__slot"></slot>
         </div>
-        <div class="right">
-            <span class="icon_menu" @click="openAndHideRightMenu">
+
+        <div class="nav-right">
+            <span class="nav-right__icon" @click="openAndHideRightMenu">
                 <i class="fas fa-caret-down fa-rotate-270"> </i>
             </span>
-            <div class="dropmenu">
-                <h2>{{ userProfile.username }}</h2>
-                <router-link class="link" to="/myaccount"
+            <div class="nav-right__menu">
+                <h2 class="nav-right__menu-username">
+                    {{ userProfile.username }}
+                </h2>
+                <router-link class="nav-right__link" to="/myaccount"
                     >Moje konto</router-link
                 >
-                <a @click="logout()">Wyloguj się</a>
+                <a class="nav-right__link" @click="logout()">Wyloguj się</a>
             </div>
         </div>
     </div>
@@ -40,38 +48,38 @@ export default {
     },
     methods: {
         openAndHideLeftMenu() {
-            const dropMenuLeft = document.querySelector(".dropmenuleft");
-            const left = document.querySelector(".left");
+            const navLeft = document.querySelector(".nav-left");
+            const navLeft__menu = document.querySelector(".nav-left__menu");
 
             // if (window.screen.width < 768) {
-            //     left.classList.toggle("color-white");
+            //     navLeft.classList.toggle("--color-white");
 
-            //     if (window.getComputedStyle(dropMenuLeft).display === "none") {
-            //         dropMenuLeft.style.display = "flex";
+            //     if (window.getComputedStyle(navLeft__menu).display === "none") {
+            //         navLeft__menu.style.display = "flex";
             //     } else {
-            //         dropMenuLeft.style.display = "none";
+            //         navLeft__menu.style.display = "none";
             //     }
             // }
 
-            left.classList.toggle("color-white");
+            navLeft.classList.toggle("--color-white");
 
-            if (window.getComputedStyle(dropMenuLeft).display === "none") {
-                dropMenuLeft.style.display = "flex";
+            if (window.getComputedStyle(navLeft__menu).display === "none") {
+                navLeft__menu.style.display = "flex";
             } else {
-                dropMenuLeft.style.display = "none";
+                navLeft__menu.style.display = "none";
             }
         },
         openAndHideRightMenu() {
-            const dropMenu = document.querySelector(".dropmenu");
+            const navRight__menu = document.querySelector(".nav-right__menu");
             const faCaretDown = document.querySelector(".fa-caret-down");
 
             faCaretDown.classList.toggle("fa-rotate-270");
-            faCaretDown.classList.toggle("color-white");
+            faCaretDown.classList.toggle("--color-white");
 
-            if (window.getComputedStyle(dropMenu).display === "none") {
-                dropMenu.style.display = "flex";
+            if (window.getComputedStyle(navRight__menu).display === "none") {
+                navRight__menu.style.display = "flex";
             } else {
-                dropMenu.style.display = "none";
+                navRight__menu.style.display = "none";
             }
         },
         logout() {
@@ -94,16 +102,16 @@ export default {
     // hide text selection highlithing
     user-select: none;
 
-    .left {
-        .icon_hamburger {
+    &-left {
+        position: relative;
+
+        &__icon {
             font-size: 18px;
             cursor: pointer;
             padding: 5px;
         }
 
-        position: relative;
-
-        .dropmenuleft {
+        &__menu {
             display: none;
             flex-direction: column;
             position: absolute;
@@ -114,32 +122,32 @@ export default {
             left: -20px;
             width: 50vw;
             height: calc(100vh - 53px);
+        }
 
-            .link {
-                font-size: 16px;
-                margin: 10px 0 5px 0;
-                text-decoration: none;
-                color: black;
-            }
+        &__link {
+            font-size: 16px;
+            margin: 10px 0 5px 0;
+            text-decoration: none;
+            color: black;
         }
     }
 
-    .center {
-        .activefield {
+    &-center {
+        &__slot {
             font-size: 18px;
         }
     }
 
-    .right {
-        .icon_menu {
+    &-right {
+        position: relative;
+
+        &__icon {
             font-size: 18px;
             cursor: pointer;
             padding: 5px;
         }
 
-        position: relative;
-
-        .dropmenu {
+        &__menu {
             display: none;
             flex-direction: column;
             position: absolute;
@@ -152,22 +160,22 @@ export default {
             width: 150px;
             text-align: center;
 
-            h2 {
+            &-username {
                 font-size: 16px;
                 border-bottom: 1px solid black;
             }
+        }
 
-            a {
-                font-size: 16px;
-                margin: 10px 0 5px 0;
-                text-decoration: none;
-                color: black;
-            }
+        &__link {
+            font-size: 16px;
+            margin: 10px 0 5px 0;
+            text-decoration: none;
+            color: black;
         }
     }
 }
 
-.color-white {
+.--color-white {
     color: #fff;
 }
 
@@ -176,47 +184,47 @@ export default {
     .nav {
         padding: 18px;
 
-        .left {
-            .icon_hamburger {
+        &-left {
+            &__icon {
                 font-size: 21.6px;
                 padding: 6px;
             }
 
-            .dropmenuleft {
+            &__menu {
                 display: flex;
                 padding: 18px;
                 width: 15vw;
+            }
 
-                .link {
-                    font-size: 19.2px;
-                    margin: 12px 0 6px 0;
-                    text-decoration: none;
-                    color: black;
-                    cursor: pointer;
+            &__link {
+                font-size: 19.2px;
+                margin: 12px 0 6px 0;
+                text-decoration: none;
+                color: black;
+                cursor: pointer;
 
-                    &:hover {
-                        font-weight: bold;
-                    }
+                &:hover {
+                    font-weight: bold;
                 }
             }
         }
 
-        .center {
-            .activefield {
+        &-center {
+            &__slot {
                 font-size: 21.6px;
             }
         }
 
-        .right {
-            .icon_menu {
+        &-right {
+            position: relative;
+
+            &__icon {
                 font-size: 21.6px;
                 cursor: pointer;
                 padding: 6px;
             }
 
-            position: relative;
-
-            .dropmenu {
+            &__menu {
                 display: none;
                 flex-direction: column;
                 position: absolute;
@@ -227,33 +235,21 @@ export default {
                 padding: 18px;
                 width: 180px;
 
-                h2 {
+                &-username {
                     font-size: 19.2px;
                     border-bottom: 1px solid black;
                 }
+            }
 
-                a {
-                    font-size: 19.2px;
-                    margin: 12px 0 6px 0;
-                    text-decoration: none;
-                    color: black;
-                    cursor: pointer;
+            &__link {
+                font-size: 19.2px;
+                margin: 12px 0 6px 0;
+                text-decoration: none;
+                color: black;
+                cursor: pointer;
 
-                    &:hover {
-                        font-weight: bold;
-                    }
-                }
-
-                .link {
-                    font-size: 19.2px;
-                    margin: 12px 0 6px 0;
-                    text-decoration: none;
-                    color: black;
-                    cursor: pointer;
-
-                    &:hover {
-                        font-weight: bold;
-                    }
+                &:hover {
+                    font-weight: bold;
                 }
             }
         }
