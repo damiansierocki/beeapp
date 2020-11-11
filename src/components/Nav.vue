@@ -1,10 +1,13 @@
 <template>
     <div class="nav">
         <div class="nav-left">
-            <span class="nav-left__icon" @click="openAndHideLeftMenu">
+            <span class="nav-left__icon" @click="openNavLeft">
                 <i class="fas fa-bars"></i>
             </span>
             <div class="nav-left__menu">
+                <span class="nav-left__close" @click="closeNavLeft">
+                    <i class="fas fa-times"></i>
+                </span>
                 <router-link class="nav-left__link" to="/"
                     >Strona główna</router-link
                 >
@@ -19,7 +22,7 @@
         </div>
 
         <div class="nav-right">
-            <span class="nav-right__icon" @click="openAndHideRightMenu">
+            <span class="nav-right__icon" @click="toggleRightMenu">
                 <i class="fas fa-caret-down fa-rotate-270"> </i>
             </span>
             <div class="nav-right__menu">
@@ -47,29 +50,50 @@ export default {
         ...mapState(["userProfile"])
     },
     methods: {
-        openAndHideLeftMenu() {
-            const navLeft = document.querySelector(".nav-left");
+        openNavLeft() {
+            const navLeftMenu = document.querySelector(".nav-left__menu");
+
+            navLeftMenu.style.display = "flex";
+            navLeftMenu.style.width = "100vw";
+            navLeftMenu.style.height = "100vh";
+        },
+
+        closeNavLeft() {
+            const navLeftMenu = document.querySelector(".nav-left__menu");
+
+            navLeftMenu.style.display = "none";
+            navLeftMenu.style.width = "0";
+            navLeftMenu.style.height = "0";
+        },
+
+        toggleLeftMenu() {
+            /* const navLeftMenu = document.querySelector(".nav-left__menu");
+
+            if (window.getComputedStyle(navLeftMenu).display === "none") {
+                navLeftMenu.style.display = "flex";
+                navLeftMenu.style.width = "100vw";
+            } else {
+                navLeftMenu.style.display = "none";
+                navLeftMenu.style.width = "0";
+            } */
+            /* const navLeft = document.querySelector(".nav-left");
             const navLeft__menu = document.querySelector(".nav-left__menu");
-
-            // if (window.screen.width < 768) {
-            //     navLeft.classList.toggle("--color-white");
-
-            //     if (window.getComputedStyle(navLeft__menu).display === "none") {
-            //         navLeft__menu.style.display = "flex";
-            //     } else {
-            //         navLeft__menu.style.display = "none";
-            //     }
-            // }
-
+            if (window.screen.width < 768) {
+                navLeft.classList.toggle("--color-white");
+                if (window.getComputedStyle(navLeft__menu).display === "none") {
+                    navLeft__menu.style.display = "flex";
+                } else {
+                    navLeft__menu.style.display = "none";
+                }
+            }
             navLeft.classList.toggle("--color-white");
-
             if (window.getComputedStyle(navLeft__menu).display === "none") {
                 navLeft__menu.style.display = "flex";
             } else {
                 navLeft__menu.style.display = "none";
-            }
+            } */
         },
-        openAndHideRightMenu() {
+        toggleRightMenu() {
             const navRight__menu = document.querySelector(".nav-right__menu");
             const faCaretDown = document.querySelector(".fa-caret-down");
 
@@ -110,7 +134,7 @@ export default {
             padding: 5px;
         }
 
-        &__menu {
+        /* &__menu {
             display: none;
             flex-direction: column;
             position: absolute;
@@ -128,6 +152,49 @@ export default {
             margin: 10px 0 5px 0;
             text-decoration: none;
             color: black;
+        } */
+
+        &__menu {
+            flex-direction: column;
+            height: 0;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: rgb(219, 165, 82);
+            overflow-x: hidden;
+            text-align: center;
+            transition: 0.5s;
+        }
+
+        &__close {
+            cursor: pointer;
+            padding: 5px;
+            width: 30px;
+            text-align: center;
+            position: absolute;
+            top: 5px;
+            right: 10px;
+
+            &:hover {
+                font-weight: bold;
+            }
+        }
+
+        &__link {
+            padding: 5px;
+            text-decoration: none;
+            font-size: 19.2px;
+            color: black;
+            display: block;
+            width: 50vw;
+            margin: 0 auto;
+            margin-top: 10px;
+
+            &:hover {
+                font-weight: bold;
+            }
         }
     }
 
@@ -193,16 +260,41 @@ export default {
             }
 
             &__menu {
-                padding: 18px;
-                top: 45.6px;
-                left: -24px;
-                width: 60vw;
-                height: calc(100vh - 53px);
+                height: 0;
+                width: 0;
+                position: fixed;
+                z-index: 1;
+                top: 0;
+                left: 0;
+                background-color: rgb(219, 165, 82);
+                overflow-x: hidden;
+                text-align: center;
+                transition: 0.5s;
+            }
+
+            &__close {
+                cursor: pointer;
+                padding: 5px;
+                width: 30px;
+                text-align: center;
+                position: absolute;
+                right: 20px;
+
+                &:hover {
+                    font-weight: bold;
+                }
             }
 
             &__link {
-                font-size: 19.2px;
-                margin: 12px 0 6px 0;
+                padding: 8px;
+                text-decoration: none;
+                font-size: 21.6px;
+                color: black;
+                display: block;
+                cursor: pointer;
+                width: 20vw;
+                margin: 0 auto;
+                margin-top: 10px;
 
                 &:hover {
                     font-weight: bold;
