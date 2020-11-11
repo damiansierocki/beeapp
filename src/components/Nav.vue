@@ -134,26 +134,6 @@ export default {
             padding: 5px;
         }
 
-        /* &__menu {
-            display: none;
-            flex-direction: column;
-            position: absolute;
-            box-shadow: 1px 1px 10px 1px #000000;
-            background-color: #eee;
-            padding: 15px;
-            top: 38px;
-            left: -20px;
-            width: 50vw;
-            height: calc(100vh - 53px);
-        }
-
-        &__link {
-            font-size: 16px;
-            margin: 10px 0 5px 0;
-            text-decoration: none;
-            color: black;
-        } */
-
         &__menu {
             flex-direction: column;
             height: 0;
@@ -165,36 +145,26 @@ export default {
             background-color: rgb(219, 165, 82);
             overflow-x: hidden;
             text-align: center;
-            transition: 0.5s;
+            padding-top: 40px;
         }
 
         &__close {
-            cursor: pointer;
             padding: 5px;
             width: 30px;
             text-align: center;
             position: absolute;
-            top: 5px;
+            top: 10px;
             right: 10px;
-
-            &:hover {
-                font-weight: bold;
-            }
         }
 
         &__link {
             padding: 5px;
             text-decoration: none;
-            font-size: 19.2px;
+            font-size: 18px;
             color: black;
             display: block;
             width: 50vw;
             margin: 0 auto;
-            margin-top: 10px;
-
-            &:hover {
-                font-weight: bold;
-            }
         }
     }
 
@@ -260,25 +230,15 @@ export default {
             }
 
             &__menu {
-                height: 0;
-                width: 0;
-                position: fixed;
-                z-index: 1;
-                top: 0;
-                left: 0;
-                background-color: rgb(219, 165, 82);
-                overflow-x: hidden;
-                text-align: center;
-                transition: 0.5s;
+                padding-top: 48px;
             }
 
             &__close {
                 cursor: pointer;
-                padding: 5px;
-                width: 30px;
-                text-align: center;
-                position: absolute;
-                right: 20px;
+                padding: 6px;
+                width: 36px;
+                top: 12px;
+                right: 12px;
 
                 &:hover {
                     font-weight: bold;
@@ -286,15 +246,11 @@ export default {
             }
 
             &__link {
-                padding: 8px;
-                text-decoration: none;
+                padding: 6px;
                 font-size: 21.6px;
-                color: black;
-                display: block;
                 cursor: pointer;
                 width: 20vw;
                 margin: 0 auto;
-                margin-top: 10px;
 
                 &:hover {
                     font-weight: bold;
