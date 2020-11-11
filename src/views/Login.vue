@@ -6,7 +6,7 @@
         ></PasswordReset>
         <div class="content">
             <form class="form" @submit.prevent>
-                <h2 class="form__title">Logowanie 🐝</h2>
+                <h2 class="form__header">Logowanie 🐝</h2>
                 <label class="form__label" for="email">Email</label>
                 <input
                     class="form__input"
@@ -94,7 +94,7 @@ export default {
             border-radius: 30px;
             box-shadow: 10px 10px 64px 22px rgba(0, 0, 0, 0.5);
 
-            &__title {
+            &__header {
                 font-size: 2rem;
             }
 
@@ -176,7 +176,7 @@ export default {
             .form {
                 padding: 1.2rem 2.4rem 2.4rem 2.4rem;
 
-                &__title {
+                &__header {
                     font-size: 2.4rem;
                 }
 

@@ -66,39 +66,11 @@ export default {
             navLeftMenu.style.height = "0";
         },
 
-        toggleLeftMenu() {
-            /* const navLeftMenu = document.querySelector(".nav-left__menu");
-
-            if (window.getComputedStyle(navLeftMenu).display === "none") {
-                navLeftMenu.style.display = "flex";
-                navLeftMenu.style.width = "100vw";
-            } else {
-                navLeftMenu.style.display = "none";
-                navLeftMenu.style.width = "0";
-            } */
-            /* const navLeft = document.querySelector(".nav-left");
-            const navLeft__menu = document.querySelector(".nav-left__menu");
-            if (window.screen.width < 768) {
-                navLeft.classList.toggle("--color-white");
-                if (window.getComputedStyle(navLeft__menu).display === "none") {
-                    navLeft__menu.style.display = "flex";
-                } else {
-                    navLeft__menu.style.display = "none";
-                }
-            }
-            navLeft.classList.toggle("--color-white");
-            if (window.getComputedStyle(navLeft__menu).display === "none") {
-                navLeft__menu.style.display = "flex";
-            } else {
-                navLeft__menu.style.display = "none";
-            } */
-        },
         toggleRightMenu() {
             const navRight__menu = document.querySelector(".nav-right__menu");
             const faCaretDown = document.querySelector(".fa-caret-down");
 
             faCaretDown.classList.toggle("fa-rotate-270");
-            faCaretDown.classList.toggle("--color-white");
 
             if (window.getComputedStyle(navRight__menu).display === "none") {
                 navRight__menu.style.display = "flex";
@@ -145,7 +117,7 @@ export default {
             background-color: rgb(219, 165, 82);
             overflow-x: hidden;
             text-align: center;
-            padding-top: 40px;
+            padding-top: 100px;
         }
 
         &__close {
@@ -154,17 +126,18 @@ export default {
             text-align: center;
             position: absolute;
             top: 10px;
-            right: 10px;
+            left: 10px;
         }
 
         &__link {
-            padding: 5px;
             text-decoration: none;
             font-size: 18px;
-            color: black;
+            color: white;
             display: block;
             width: 50vw;
             margin: 0 auto;
+            margin-top: 10px;
+            padding: 10px;
         }
     }
 
@@ -210,10 +183,6 @@ export default {
     }
 }
 
-.--color-white {
-    color: #fff;
-}
-
 // min-width: 768 px - ipad width, each elements multiplied by 1.2
 @media (min-width: 768px) {
     .nav {
@@ -230,7 +199,7 @@ export default {
             }
 
             &__menu {
-                padding-top: 48px;
+                padding-top: 120px;
             }
 
             &__close {
@@ -251,6 +220,8 @@ export default {
                 cursor: pointer;
                 width: 20vw;
                 margin: 0 auto;
+                margin-top: 12px;
+                padding: 12px;
 
                 &:hover {
                     font-weight: bold;
