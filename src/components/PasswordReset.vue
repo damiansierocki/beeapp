@@ -2,7 +2,9 @@
     <div class="passwordreset">
         <div class="content">
             <div class="content__close" @click="$emit('close')">
-                zamknij
+                <span>
+                    <i class="fas fa-times"></i>
+                </span>
             </div>
 
             <div v-if="!showSuccess" class="content__inside">

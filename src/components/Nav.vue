@@ -1,5 +1,6 @@
 <template>
     <div class="nav">
+        <About v-if="showAbout" @close="toggleAbout"></About>
         <div class="nav-left">
             <span class="nav-left__icon" @click="openNavLeft">
                 <i class="fas fa-bars"></i>
@@ -33,7 +34,7 @@
                     ><i class="fas fa-user-circle right-icon"></i>Moje
                     konto</router-link
                 >
-                <a class="nav-right__link"
+                <a class="nav-right__link" @click="toggleAbout()"
                     ><i class="fas fa-info-circle right-icon"></i>O mnie</a
                 >
                 <a class="nav-right__link" @click="logout()"
@@ -47,13 +48,16 @@
 
 <script>
 import { mapState } from "vuex";
+import About from "@/components/About";
 
 export default {
     components: {
-        // ! ADD COMPONENT ABOUT ME
+        About
     },
     data() {
-        return {};
+        return {
+            showAbout: false
+        };
     },
     computed: {
         ...mapState(["userProfile"])
@@ -87,6 +91,11 @@ export default {
                 navRight__menu.style.display = "none";
             }
         },
+
+        toggleAbout() {
+            this.showAbout = !this.showAbout;
+        },
+
         logout() {
             this.$store.dispatch("logout");
         }
@@ -115,8 +124,14 @@ export default {
 
         &__icon {
             font-size: 1.2rem;
-            padding: 0.36rem;
-            cursor: pointer;
+            padding: 0.4rem;
+
+            display: block;
+            transition: all 0.2s;
+
+            &:active {
+                transform: scale(1.3);
+            }
         }
 
         &__menu {
@@ -137,9 +152,14 @@ export default {
             padding: 0.6rem;
             font-size: 1.2rem;
             position: absolute;
-            top: 0.7rem;
-            right: 1.1rem;
-            cursor: pointer;
+            top: 0.9rem;
+            right: 1rem;
+
+            transition: all 0.2s;
+
+            &:active {
+                transform: scale(1.3);
+            }
         }
 
         &__link {
@@ -148,9 +168,15 @@ export default {
             display: block;
             width: 60vw;
             margin: 0 auto;
-            margin-top: 0.48rem;
-            padding: 0.84rem;
+            margin-top: 0.5rem;
+            padding: 0.8rem;
             color: #eee;
+
+            transition: all 0.2s;
+
+            &:active {
+                transform: scale(1.3);
+            }
         }
     }
 
@@ -165,8 +191,14 @@ export default {
 
         &__icon {
             font-size: 1.2rem;
-            padding: 0.36rem;
-            cursor: pointer;
+            padding: 0.4rem;
+
+            display: block;
+            transition: all 0.2s;
+
+            &:active {
+                transform: scale(1.3);
+            }
         }
 
         &__menu {
@@ -184,24 +216,29 @@ export default {
             text-align: center;
 
             &-username {
-                font-size: 1.32rem;
+                font-size: 1.3rem;
                 border: 1px dashed black;
                 border-radius: 2rem;
-                padding: 0.24rem;
+                padding: 0.2rem;
             }
         }
 
         &__link {
             font-size: 1.2rem;
-            margin: 0.6rem 0 0.48rem 0;
-            padding: 0.24rem;
+            margin: 0.6rem 0 0.5rem 0;
+            padding: 0.2rem;
             text-decoration: none;
             color: black;
-            cursor: pointer;
+
+            transition: all 0.2s;
+
+            &:active {
+                transform: scale(1.3);
+            }
         }
 
         .right-icon {
-            margin-right: 0.72rem;
+            margin-right: 0.7rem;
         }
     }
 }
@@ -220,7 +257,7 @@ export default {
             &__close {
                 padding: 0.7rem;
                 font-size: 1.3rem;
-                top: 0.7rem;
+                top: 1rem;
                 right: 1rem;
             }
 
@@ -267,62 +304,62 @@ export default {
     }
 }
 
-// each elements multiplied by ~ 1.2 - 480px elements
+// each elements divided by ~ 1.2 - 480px elements
 @media (min-width: 768px) {
     .nav {
-        padding: 1.6rem;
+        padding: 1.3rem;
 
         &-left {
             &__icon {
-                font-size: 1.6rem;
-                padding: 0.5rem;
+                font-size: 1.1rem;
+                padding: 0.4rem;
             }
 
             &__close {
-                padding: 0.8rem;
-                font-size: 1.6rem;
-                top: 0.8rem;
-                right: 1.2rem;
+                padding: 0.7rem;
+                font-size: 1.1rem;
+                top: 1rem;
+                right: 0.95rem;
             }
 
             &__link {
-                font-size: 2rem;
-                margin-top: 0.7rem;
-                padding: 1.1rem;
+                font-size: 1.1rem;
+                margin-top: 0.6rem;
+                padding: 0.3rem;
             }
         }
 
         &-center {
             &__slot {
-                font-size: 1.6rem;
+                font-size: 1.1rem;
             }
         }
 
         &-right {
             &__icon {
-                font-size: 1.6rem;
-                padding: 0.5rem;
+                font-size: 1.1rem;
+                padding: 0.4rem;
             }
 
             &__menu {
-                padding: 1.6rem;
-                width: 17rem;
-                left: -14.5rem;
+                padding: 1.1rem;
+                width: 16rem;
+                left: -14rem;
 
                 &-username {
-                    font-size: 1.7rem;
+                    font-size: 1.4rem;
                     padding: 0.3rem;
                 }
             }
 
             &__link {
-                font-size: 1.6rem;
-                margin: 0.8rem 0 0.6rem 0;
+                font-size: 1.1rem;
+                margin: 0.6rem 0 0.5rem 0;
                 padding: 0.3rem;
             }
 
             .right-icon {
-                margin-right: 1rem;
+                margin-right: 0.8rem;
             }
         }
     }
@@ -337,19 +374,40 @@ export default {
             &__icon {
                 font-size: 1.1rem;
                 padding: 0.4rem;
+
+                cursor: pointer;
+                transition: all 0.2s;
+
+                &:hover {
+                    transform: scale(1.3);
+                }
             }
 
             &__close {
                 padding: 0.6rem;
                 font-size: 1.1rem;
-                top: 0.6rem;
-                right: 1rem;
+                top: 0.9rem;
+                right: 0.9rem;
+
+                cursor: pointer;
+                transition: all 0.2s;
+
+                &:hover {
+                    transform: scale(1.3);
+                }
             }
 
             &__link {
                 font-size: 1.4rem;
                 margin-top: 0.5rem;
                 padding: 0.8rem;
+
+                cursor: pointer;
+                transition: all 0.2s;
+
+                &:hover {
+                    transform: scale(1.3);
+                }
             }
         }
 
@@ -363,6 +421,13 @@ export default {
             &__icon {
                 font-size: 1.1rem;
                 padding: 0.4rem;
+
+                cursor: pointer;
+                transition: all 0.2s;
+
+                &:hover {
+                    transform: scale(1.3);
+                }
             }
 
             &__menu {
@@ -380,6 +445,13 @@ export default {
                 font-size: 1.1rem;
                 margin: 0.6rem 0 0.4rem 0;
                 padding: 0.2rem;
+
+                cursor: pointer;
+                transition: all 0.2s;
+
+                &:hover {
+                    transform: scale(1.3);
+                }
             }
 
             .right-icon {
