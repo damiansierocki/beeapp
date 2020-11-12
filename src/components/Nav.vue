@@ -30,9 +30,13 @@
                     {{ userProfile.username }}
                 </h2>
                 <router-link class="nav-right__link" to="/myaccount"
-                    >Moje konto</router-link
+                    ><i class="fas fa-user-circle right-icon"></i>Moje
+                    konto</router-link
                 >
-                <a class="nav-right__link" @click="logout()">Wyloguj się</a>
+                <a class="nav-right__link" @click="logout()"
+                    ><i class="fas fa-sign-out-alt right-icon"></i>Wyloguj
+                    się</a
+                >
             </div>
         </div>
     </div>
@@ -125,8 +129,8 @@ export default {
             width: 30px;
             text-align: center;
             position: absolute;
-            top: 10px;
-            left: 10px;
+            top: 11px;
+            left: 11.5px;
         }
 
         &__link {
@@ -180,6 +184,10 @@ export default {
             text-decoration: none;
             color: black;
         }
+
+        .right-icon {
+            margin-right: 5px;
+        }
     }
 }
 
@@ -206,8 +214,8 @@ export default {
                 cursor: pointer;
                 padding: 6px;
                 width: 36px;
-                top: 12px;
-                right: 12px;
+                top: 15px;
+                left: 15px;
 
                 &:hover {
                     font-weight: bold;

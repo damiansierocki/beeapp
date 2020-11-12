@@ -8,12 +8,7 @@
 
         <div class="content">
             <div class="content__header">
-                <h1 class="content__welcome">
-                    Witaj użytkowniku !
-                </h1>
-                <p class="content__paragraph">
-                    {{ userProfile.username }}
-                </p>
+                Border with actual Weather..
             </div>
 
             <div class="content__inside">
@@ -45,6 +40,9 @@ import Nav from "@/components/Nav";
 import { mapState } from "vuex";
 
 export default {
+    data() {
+        return {};
+    },
     components: {
         Nav
     },
@@ -54,7 +52,8 @@ export default {
         showIfUserLogged() {
             return Object.keys(this.userProfile).length > 1;
         }
-    }
+    },
+    methods: {}
 };
 </script>
 
