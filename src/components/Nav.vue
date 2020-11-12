@@ -227,7 +227,7 @@ export default {
                 padding: 6px;
                 font-size: 21.6px;
                 cursor: pointer;
-                width: 20vw;
+                width: 30vw;
                 margin: 0 auto;
                 margin-top: 12px;
                 padding: 12px;
