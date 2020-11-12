@@ -171,9 +171,9 @@ export default {
 .content {
     width: 100vw;
     height: calc(100vh - 51.6px);
-    display: flex;
     flex-direction: column;
     align-items: center;
+    display: none;
 
     .weather {
         background-color: #045de9;

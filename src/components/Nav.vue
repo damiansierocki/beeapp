@@ -33,6 +33,9 @@
                     ><i class="fas fa-user-circle right-icon"></i>Moje
                     konto</router-link
                 >
+                <a class="nav-right__link"
+                    ><i class="fas fa-info-circle right-icon"></i>O mnie</a
+                >
                 <a class="nav-right__link" @click="logout()"
                     ><i class="fas fa-sign-out-alt right-icon"></i>Wyloguj
                     się</a
@@ -46,7 +49,9 @@
 import { mapState } from "vuex";
 
 export default {
-    components: {},
+    components: {
+        // ! ADD COMPONENT ABOUT ME
+    },
     data() {
         return {};
     },
@@ -90,6 +95,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+// resolution above width 480px
 .nav {
     background-color: #2d3436;
     background-image: linear-gradient(315deg, #2d3436 0%, #000000 74%);
@@ -97,7 +103,7 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px;
+    padding: 1.2rem;
     width: 100vw;
     box-shadow: 1px 1px 10px 1px #000000;
 
@@ -108,8 +114,9 @@ export default {
         position: relative;
 
         &__icon {
-            font-size: 18px;
-            padding: 5px;
+            font-size: 1.2rem;
+            padding: 0.36rem;
+            cursor: pointer;
         }
 
         &__menu {
@@ -120,38 +127,36 @@ export default {
             z-index: 1;
             top: 0;
             left: 0;
-            background: #ffb75e;
-            background: linear-gradient(to right, #ed8f03, #ffb75e);
-
+            background: black;
             overflow-x: hidden;
             text-align: center;
-            padding-top: 100px;
+            padding-top: 6rem;
         }
 
         &__close {
-            padding: 5px;
-            font-size: 18px;
-            text-align: center;
+            padding: 0.6rem;
+            font-size: 1.2rem;
             position: absolute;
-            top: 10px;
-            left: 16px;
+            top: 0.7rem;
+            right: 1.1rem;
+            cursor: pointer;
         }
 
         &__link {
             text-decoration: none;
-            font-size: 18px;
+            font-size: 1.8rem;
             display: block;
-            width: 50vw;
+            width: 60vw;
             margin: 0 auto;
-            margin-top: 10px;
-            padding: 10px;
+            margin-top: 0.48rem;
+            padding: 0.84rem;
             color: #eee;
         }
     }
 
     &-center {
         &__slot {
-            font-size: 18px;
+            font-size: 1.2rem;
         }
     }
 
@@ -159,118 +164,226 @@ export default {
         position: relative;
 
         &__icon {
-            font-size: 18px;
-            padding: 5px;
+            font-size: 1.2rem;
+            padding: 0.36rem;
+            cursor: pointer;
         }
 
         &__menu {
             display: none;
             flex-direction: column;
             position: absolute;
-            top: 26px;
-            left: -130px;
+            top: 2rem;
+            left: -11rem;
             border: 1px solid black;
             box-shadow: 1px 1px 10px 1px #000000;
             background-color: #eee;
             color: black;
-            padding: 15px;
-            width: 150px;
+            padding: 1.2rem;
+            width: 13.2rem;
             text-align: center;
 
             &-username {
-                font-size: 16px;
-                border-bottom: 1px solid black;
+                font-size: 1.32rem;
+                border: 1px dashed black;
+                border-radius: 2rem;
+                padding: 0.24rem;
             }
         }
 
         &__link {
-            font-size: 16px;
-            margin: 10px 0 5px 0;
+            font-size: 1.2rem;
+            margin: 0.6rem 0 0.48rem 0;
+            padding: 0.24rem;
             text-decoration: none;
             color: black;
+            cursor: pointer;
         }
 
         .right-icon {
-            margin-right: 5px;
+            margin-right: 0.72rem;
         }
     }
 }
 
-// min-width: 768 px - ipad width, each elements multiplied by 1.2
-@media (min-width: 768px) {
+// each elements multiplied by ~ 1.1
+@media (min-width: 480px) {
     .nav {
-        padding: 18px;
-
-        // hide text selection highlithing
-        user-select: none;
+        padding: 1.3rem;
 
         &-left {
             &__icon {
-                font-size: 21.6px;
-                cursor: pointer;
-                padding: 6px;
-            }
-
-            &__menu {
-                padding-top: 120px;
+                font-size: 1.3rem;
+                padding: 0.4rem;
             }
 
             &__close {
-                cursor: pointer;
-                padding: 6px;
-                font-size: 21.6px;
-                top: 12px;
-                left: 20px;
+                padding: 0.7rem;
+                font-size: 1.3rem;
+                top: 0.7rem;
+                right: 1rem;
             }
 
             &__link {
-                padding: 6px;
-                font-size: 21.6px;
-                cursor: pointer;
-                width: 30vw;
-                margin: 0 auto;
-                margin-top: 12px;
-                padding: 12px;
-
-                &:hover {
-                    font-weight: bold;
-                }
+                font-size: 2rem;
+                margin-top: 0.5rem;
+                padding: 0.9rem;
             }
         }
 
         &-center {
             &__slot {
-                font-size: 21.6px;
+                font-size: 1.3rem;
             }
         }
 
         &-right {
             &__icon {
-                font-size: 21.6px;
-                cursor: pointer;
-                padding: 6px;
+                font-size: 1.3rem;
+                padding: 0.4rem;
             }
 
             &__menu {
-                top: 31.2px;
-                left: -156px;
-                padding: 18px;
-                width: 180px;
+                padding: 1.3rem;
+                width: 15rem;
+                left: -12.5rem;
 
                 &-username {
-                    font-size: 19.2px;
-                    color: black;
+                    font-size: 1.5rem;
+                    padding: 0.3rem;
                 }
             }
 
             &__link {
-                font-size: 19.2px;
-                margin: 12px 0 6px 0;
-                cursor: pointer;
+                font-size: 1.3rem;
+                margin: 0.7rem 0 0.5rem 0;
+                padding: 0.3rem;
+            }
 
-                &:hover {
-                    font-weight: bold;
+            .right-icon {
+                margin-right: 0.8rem;
+            }
+        }
+    }
+}
+
+// each elements multiplied by ~ 1.2 - 480px elements
+@media (min-width: 768px) {
+    .nav {
+        padding: 1.6rem;
+
+        &-left {
+            &__icon {
+                font-size: 1.6rem;
+                padding: 0.5rem;
+            }
+
+            &__close {
+                padding: 0.8rem;
+                font-size: 1.6rem;
+                top: 0.8rem;
+                right: 1.2rem;
+            }
+
+            &__link {
+                font-size: 2rem;
+                margin-top: 0.7rem;
+                padding: 1.1rem;
+            }
+        }
+
+        &-center {
+            &__slot {
+                font-size: 1.6rem;
+            }
+        }
+
+        &-right {
+            &__icon {
+                font-size: 1.6rem;
+                padding: 0.5rem;
+            }
+
+            &__menu {
+                padding: 1.6rem;
+                width: 17rem;
+                left: -14.5rem;
+
+                &-username {
+                    font-size: 1.7rem;
+                    padding: 0.3rem;
                 }
+            }
+
+            &__link {
+                font-size: 1.6rem;
+                margin: 0.8rem 0 0.6rem 0;
+                padding: 0.3rem;
+            }
+
+            .right-icon {
+                margin-right: 1rem;
+            }
+        }
+    }
+}
+
+// each elements divided by 1.4
+@media (min-width: 1024px) {
+    .nav {
+        padding: 1.1rem;
+
+        &-left {
+            &__icon {
+                font-size: 1.1rem;
+                padding: 0.4rem;
+            }
+
+            &__close {
+                padding: 0.6rem;
+                font-size: 1.1rem;
+                top: 0.6rem;
+                right: 1rem;
+            }
+
+            &__link {
+                font-size: 1.4rem;
+                margin-top: 0.5rem;
+                padding: 0.8rem;
+            }
+        }
+
+        &-center {
+            &__slot {
+                font-size: 1.1rem;
+            }
+        }
+
+        &-right {
+            &__icon {
+                font-size: 1.1rem;
+                padding: 0.4rem;
+            }
+
+            &__menu {
+                padding: 1.1rem;
+                width: 17rem;
+                left: -15.5rem;
+
+                &-username {
+                    font-size: 1.2rem;
+                    padding: 0.2rem;
+                }
+            }
+
+            &__link {
+                font-size: 1.1rem;
+                margin: 0.6rem 0 0.4rem 0;
+                padding: 0.2rem;
+            }
+
+            .right-icon {
+                margin-right: 0.7rem;
             }
         }
     }
