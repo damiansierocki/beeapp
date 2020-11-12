@@ -91,7 +91,9 @@ export default {
 
 <style lang="scss" scoped>
 .nav {
-    background-color: #ffa500;
+    background-color: #2d3436;
+    background-image: linear-gradient(315deg, #2d3436 0%, #000000 74%);
+    color: #eee;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -118,7 +120,9 @@ export default {
             z-index: 1;
             top: 0;
             left: 0;
-            background-color: rgb(219, 165, 82);
+            background: #ffb75e;
+            background: linear-gradient(to right, #ed8f03, #ffb75e);
+
             overflow-x: hidden;
             text-align: center;
             padding-top: 100px;
@@ -126,22 +130,22 @@ export default {
 
         &__close {
             padding: 5px;
-            width: 30px;
+            font-size: 18px;
             text-align: center;
             position: absolute;
-            top: 11px;
-            left: 11.5px;
+            top: 10px;
+            left: 16px;
         }
 
         &__link {
             text-decoration: none;
             font-size: 18px;
-            color: white;
             display: block;
             width: 50vw;
             margin: 0 auto;
             margin-top: 10px;
             padding: 10px;
+            color: #eee;
         }
     }
 
@@ -168,6 +172,7 @@ export default {
             border: 1px solid black;
             box-shadow: 1px 1px 10px 1px #000000;
             background-color: #eee;
+            color: black;
             padding: 15px;
             width: 150px;
             text-align: center;
@@ -213,13 +218,9 @@ export default {
             &__close {
                 cursor: pointer;
                 padding: 6px;
-                width: 36px;
-                top: 15px;
-                left: 15px;
-
-                &:hover {
-                    font-weight: bold;
-                }
+                font-size: 21.6px;
+                top: 12px;
+                left: 20px;
             }
 
             &__link {
@@ -258,6 +259,7 @@ export default {
 
                 &-username {
                     font-size: 19.2px;
+                    color: black;
                 }
             }
 
