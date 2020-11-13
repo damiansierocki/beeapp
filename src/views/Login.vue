@@ -1,9 +1,16 @@
 <template>
     <div class="login">
-        <PasswordReset
-            v-if="showPasswordReset"
-            @close="togglePasswordReset()"
-        ></PasswordReset>
+        <transition
+            enter-active-class="animate__animated animate__fadeInLeftBig animate__faster"
+            leave-active-class="animate__animated animate__fadeOutRightBig animate__faster"
+            mode="out-in"
+            appear
+        >
+            <PasswordReset
+                v-if="showPasswordReset"
+                @close="togglePasswordReset()"
+            ></PasswordReset>
+        </transition>
         <div class="content">
             <form class="form" @submit.prevent>
                 <h2 class="form__header">Logowanie 🐝</h2>
@@ -90,22 +97,23 @@ export default {
             padding: 3rem;
             display: flex;
             flex-direction: column;
-            border-radius: 5px;
+            border-radius: 1rem;
             box-shadow: 10px 10px 64px 22px rgba(0, 0, 0, 0.5);
+            width: 90vw;
 
             &__header {
-                font-size: 2rem;
+                font-size: 2.2rem;
                 border-bottom: 1px dashed black;
                 margin-bottom: 1rem;
             }
 
             &__label {
                 margin: 0.7rem 0 0.7rem 0;
-                font-size: 1.4rem;
+                font-size: 1.6rem;
             }
 
             &__input {
-                padding: 0.8rem;
+                padding: 1rem;
                 border: 0.5px solid black;
                 font-size: 1rem;
 
@@ -123,7 +131,7 @@ export default {
 
             &__extras {
                 margin-top: 10px;
-                font-size: 1rem;
+                font-size: 1.1rem;
             }
 
             &__list {
@@ -134,17 +142,19 @@ export default {
 
             &__item {
                 line-height: 2rem;
+                padding: 0.4rem;
             }
 
             &__link {
                 text-decoration: none;
                 color: black;
+                padding: 0.4rem;
             }
 
             .btn {
                 margin: 0 auto;
                 margin-top: 1rem;
-                width: 70%;
+                width: 50%;
                 box-shadow: 0px 1px 0px 0px #fff6af;
                 background: linear-gradient(
                     to bottom,
@@ -157,7 +167,7 @@ export default {
                 display: block;
                 color: #333333;
                 font-size: 1.3rem;
-                padding: 7px 25px;
+                padding: 0.5rem;
                 text-shadow: 0px 1px 0px #ffee66;
 
                 &:active {
@@ -169,10 +179,84 @@ export default {
     }
 }
 
+@media (min-width: 480px) {
+    .login {
+        .content {
+            .form {
+                width: 70vw;
+
+                &__header {
+                    font-size: 2.1rem;
+                }
+
+                &__label {
+                    font-size: 1.5rem;
+                }
+
+                &__input {
+                    padding: 0.9rem;
+                }
+
+                &__extras {
+                    font-size: 1.05rem;
+                }
+
+                .btn {
+                    font-size: 1.2rem;
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: 768px) {
+    .login {
+        .content {
+            .form {
+                width: 50vw;
+
+                &__header {
+                    font-size: 2rem;
+                }
+
+                &__label {
+                    font-size: 1.4rem;
+                }
+
+                &__input {
+                    padding: 0.9rem;
+                }
+
+                &__extras {
+                    font-size: 1rem;
+                }
+
+                .btn {
+                    font-size: 1.1rem;
+                }
+            }
+        }
+    }
+}
+
 @media (min-width: 1024px) {
     .login {
         .content {
             .form {
+                width: 25vw;
+
+                &__header {
+                    font-size: 1.8rem;
+                }
+
+                &__label {
+                    font-size: 1.3rem;
+                }
+
+                &__input {
+                    padding: 0.9rem;
+                }
+
                 &__link {
                     cursor: pointer;
                     transition: all 0.2s;
@@ -185,11 +269,22 @@ export default {
                 .btn {
                     cursor: pointer;
                     transition: all 0.2s;
+                    font-size: 1rem;
 
                     &:hover {
                         font-weight: bold;
                     }
                 }
+            }
+        }
+    }
+}
+
+@media (min-width: 1200px) {
+    .login {
+        .content {
+            .form {
+                width: 20vw;
             }
         }
     }

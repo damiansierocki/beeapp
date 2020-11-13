@@ -1,12 +1,17 @@
 <template>
     <div id="app">
-        <router-view />
+        <transition
+            enter-active-class="animate__animated animate__lightSpeedInLeft animate__faster"
+            leave-active-class="animate__animated animate__lightSpeedOutRight animate__faster"
+            mode="out-in"
+            appear
+        >
+            <router-view />
+        </transition>
     </div>
 </template>
 
 <script>
-import "animate.css";
-
 export default {};
 </script>
 
@@ -25,12 +30,4 @@ html {
     box-sizing: border-box;
     font-family: "Roboto", sans-serif;
 }
-
-// .login,
-// .register {
-//     background-image: url("./assets/background.jpg");
-//     background-position: center;
-//     background-repeat: no-repeat;
-//     background-size: cover;
-// }
 </style>

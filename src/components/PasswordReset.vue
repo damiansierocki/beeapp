@@ -22,20 +22,37 @@
                         v-model.trim="email"
                     />
                 </form>
-                <p v-if="errorMsg !== ''" class="content__p content__p--error">
-                    {{ errorMsg }}
-                </p>
+                <transition
+                    enter-active-class="animate__animated animate__shakeX animate__faster"
+                    mode="out-in"
+                    appear
+                >
+                    <p
+                        v-if="errorMsg !== ''"
+                        class="content__p content__p--error"
+                    >
+                        {{ errorMsg }}
+                    </p></transition
+                >
                 <button @click="resetPassword()" class="btn">
                     Zresetuj
                 </button>
             </div>
 
-            <div v-else class="content__extras">
-                <p class="content__p--success">Sukces 👍</p>
-                <p class="content__p">
-                    Sprawdź email w celu odnalezienia linka do resetowania hasła
-                </p>
-            </div>
+            <transition
+                v-else
+                enter-active-class="animate__animated animate__bounceIn animate__fast"
+                mode="out-in"
+                appear
+            >
+                <div class="content__extras">
+                    <p class="content__p--success">Sukces 👍</p>
+                    <p class="content__p">
+                        Sprawdź email w celu odnalezienia linka do resetowania
+                        hasła
+                    </p>
+                </div>
+            </transition>
         </div>
     </div>
 </template>
@@ -161,7 +178,7 @@ export default {
                 transition: all 0.2s;
 
                 &:hover {
-                    transform: scale(1.3);
+                    transform: scale(1.2);
                 }
             }
 

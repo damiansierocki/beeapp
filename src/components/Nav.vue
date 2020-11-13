@@ -1,10 +1,19 @@
 <template>
     <div class="nav">
-        <About v-if="showAbout" @close="toggleAbout"></About>
+        <transition
+            enter-active-class="animate__animated animate__backInDown animate__faster"
+            leave-active-class="animate__animated animate__backOutUp animate__faster"
+            mode="out-in"
+            appear
+        >
+            <About v-if="showAbout" @close="toggleAbout"></About>
+        </transition>
+
         <div class="nav-left">
             <span class="nav-left__icon" @click="openNavLeft">
                 <i class="fas fa-bars"></i>
             </span>
+
             <div class="nav-left__menu">
                 <span class="nav-left__close" @click="closeNavLeft">
                     <i class="fas fa-times"></i>
@@ -26,6 +35,7 @@
             <span class="nav-right__icon" @click="toggleRightMenu">
                 <i class="fas fa-caret-down fa-rotate-270"> </i>
             </span>
+
             <div class="nav-right__menu">
                 <h2 class="nav-right__menu-username">
                     {{ userProfile.username }}
@@ -64,6 +74,7 @@ export default {
     },
     methods: {
         openNavLeft() {
+            // const navLeft = document.querySelector(".nav-left");
             const navLeftMenu = document.querySelector(".nav-left__menu");
 
             navLeftMenu.style.display = "flex";
@@ -130,7 +141,7 @@ export default {
             transition: all 0.2s;
 
             &:active {
-                transform: scale(1.3);
+                transform: scale(1.2);
             }
         }
 
@@ -158,7 +169,7 @@ export default {
             transition: all 0.2s;
 
             &:active {
-                transform: scale(1.3);
+                transform: scale(1.2);
             }
         }
 
@@ -175,7 +186,7 @@ export default {
             transition: all 0.2s;
 
             &:active {
-                transform: scale(1.3);
+                transform: scale(1.2);
             }
         }
     }
@@ -198,7 +209,7 @@ export default {
             transition: all 0.2s;
 
             &:active {
-                transform: scale(1.3);
+                transform: scale(1.2);
             }
         }
 
@@ -233,7 +244,7 @@ export default {
             transition: all 0.2s;
 
             &:active {
-                transform: scale(1.3);
+                transform: scale(1.2);
             }
         }
 
@@ -379,7 +390,7 @@ export default {
                 transition: all 0.2s;
 
                 &:hover {
-                    transform: scale(1.3);
+                    transform: scale(1.2);
                 }
 
                 &:active {
@@ -397,7 +408,7 @@ export default {
                 transition: all 0.2s;
 
                 &:hover {
-                    transform: scale(1.3);
+                    transform: scale(1.2);
                 }
             }
 
@@ -410,7 +421,7 @@ export default {
                 transition: all 0.2s;
 
                 &:hover {
-                    transform: scale(1.3);
+                    transform: scale(1.2);
                 }
             }
         }
@@ -430,7 +441,7 @@ export default {
                 transition: all 0.2s;
 
                 &:hover {
-                    transform: scale(1.3);
+                    transform: scale(1.2);
                 }
 
                 &:active {
@@ -458,7 +469,7 @@ export default {
                 transition: all 0.2s;
 
                 &:hover {
-                    transform: scale(1.3);
+                    transform: scale(1.2);
                 }
             }
 
