@@ -44,7 +44,7 @@
                     ><i class="fas fa-user-circle right-icon"></i>Moje
                     konto</router-link
                 >
-                <a class="nav-right__link" @click="toggleAbout()"
+                <a class="nav-right__link" @click="toggleAbout"
                     ><i class="fas fa-info-circle right-icon"></i>O mnie</a
                 >
                 <a class="nav-right__link" @click="logout()"
@@ -80,22 +80,36 @@ export default {
         },
 
         toggleRightMenu() {
-            const icon = document.querySelector(".fa-caret-down");
-
             this.showRightMenu = !this.showRightMenu;
 
+            const icon = document.querySelector(".fa-caret-down");
+
             if (this.showRightMenu) {
-                icon.classList.add("fa-rotate-270");
+                icon.style.transform = "rotate(180deg)";
             } else {
-                icon.classList.remove("fa-rotate-270");
+                icon.style.transform = "rotate(0deg)";
             }
         },
 
         toggleAbout() {
             this.showAbout = !this.showAbout;
 
+            const navLeft = document.querySelector(".nav-left");
+            const navRight = document.querySelector(".nav-right");
+
+            const icon = document.querySelector(".fa-caret-down");
+
             if (this.showRightMenu) {
                 this.showRightMenu = !this.showRightMenu;
+                icon.style.transform = "rotate(0deg)";
+            }
+
+            if (this.showAbout) {
+                navLeft.classList.add("disabled");
+                navRight.classList.add("disabled");
+            } else {
+                navLeft.classList.remove("disabled");
+                navRight.classList.remove("disabled");
             }
         },
 
@@ -108,6 +122,7 @@ export default {
 
 <style lang="scss" scoped>
 // resolution above width 480px
+
 .nav {
     background-color: #2d3436;
     background-image: linear-gradient(315deg, #2d3436 0%, #000000 74%);
@@ -245,6 +260,11 @@ export default {
             margin-right: 0.6rem;
         }
     }
+}
+
+.disabled {
+    opacity: 0.2;
+    pointer-events: none;
 }
 
 // each elements multiplied by ~ 1.1
