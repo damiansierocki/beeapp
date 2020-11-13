@@ -10,12 +10,12 @@
         </transition>
 
         <div class="nav-left">
-            <span class="nav-left__icon" @click="openNavLeft">
+            <span class="nav-left__icon" @click="toggleLeftMenu">
                 <i class="fas fa-bars"></i>
             </span>
 
-            <div class="nav-left__menu">
-                <span class="nav-left__close" @click="closeNavLeft">
+            <div class="nav-left__menu" v-if="showLeftMenu">
+                <span class="nav-left__close" @click="toggleLeftMenu">
                     <i class="fas fa-times"></i>
                 </span>
                 <router-link class="nav-left__link" to="/"
@@ -33,10 +33,10 @@
 
         <div class="nav-right">
             <span class="nav-right__icon" @click="toggleRightMenu">
-                <i class="fas fa-caret-down fa-rotate-270"> </i>
+                <i class="fas fa-caret-down"> </i>
             </span>
 
-            <div class="nav-right__menu">
+            <div class="nav-right__menu" v-if="showRightMenu">
                 <h2 class="nav-right__menu-username">
                     {{ userProfile.username }}
                 </h2>
@@ -66,45 +66,37 @@ export default {
     },
     data() {
         return {
-            showAbout: false
+            showAbout: false,
+            showLeftMenu: false,
+            showRightMenu: false
         };
     },
     computed: {
         ...mapState(["userProfile"])
     },
     methods: {
-        openNavLeft() {
-            // const navLeft = document.querySelector(".nav-left");
-            const navLeftMenu = document.querySelector(".nav-left__menu");
-
-            navLeftMenu.style.display = "flex";
-            navLeftMenu.style.width = "100vw";
-            navLeftMenu.style.height = "100vh";
-        },
-
-        closeNavLeft() {
-            const navLeftMenu = document.querySelector(".nav-left__menu");
-
-            navLeftMenu.style.display = "none";
-            navLeftMenu.style.width = "0";
-            navLeftMenu.style.height = "0";
+        toggleLeftMenu() {
+            this.showLeftMenu = !this.showLeftMenu;
         },
 
         toggleRightMenu() {
-            const navRight__menu = document.querySelector(".nav-right__menu");
-            const faCaretDown = document.querySelector(".fa-caret-down");
+            const icon = document.querySelector(".fa-caret-down");
 
-            faCaretDown.classList.toggle("fa-rotate-270");
+            this.showRightMenu = !this.showRightMenu;
 
-            if (window.getComputedStyle(navRight__menu).display === "none") {
-                navRight__menu.style.display = "flex";
+            if (this.showRightMenu) {
+                icon.classList.add("fa-rotate-270");
             } else {
-                navRight__menu.style.display = "none";
+                icon.classList.remove("fa-rotate-270");
             }
         },
 
         toggleAbout() {
             this.showAbout = !this.showAbout;
+
+            if (this.showRightMenu) {
+                this.showRightMenu = !this.showRightMenu;
+            }
         },
 
         logout() {
@@ -146,9 +138,10 @@ export default {
         }
 
         &__menu {
+            display: flex;
             flex-direction: column;
-            height: 0;
-            width: 0;
+            height: 100vh;
+            width: 100vw;
             position: fixed;
             z-index: 1;
             top: 0;
@@ -214,7 +207,7 @@ export default {
         }
 
         &__menu {
-            display: none;
+            display: flex;
             flex-direction: column;
             position: absolute;
             top: 2rem;
