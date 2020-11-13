@@ -118,6 +118,14 @@ export default {};
         .content {
             width: 30%;
 
+            .email {
+                display: block;
+                transition: all 0.2s;
+                &:hover {
+                    transform: scale(1.3);
+                }
+            }
+
             &__close {
                 &:hover {
                     cursor: pointer;

@@ -112,7 +112,7 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.2rem;
+    padding: 1.4rem;
     width: 100vw;
     box-shadow: 1px 1px 10px 1px #000000;
 
@@ -123,8 +123,8 @@ export default {
         position: relative;
 
         &__icon {
-            font-size: 1.2rem;
-            padding: 0.4rem;
+            font-size: 1.4rem;
+            padding: 0.5rem;
 
             display: block;
             transition: all 0.2s;
@@ -145,15 +145,15 @@ export default {
             background: black;
             overflow-x: hidden;
             text-align: center;
-            padding-top: 6rem;
+            padding-top: 5rem;
         }
 
         &__close {
-            padding: 0.6rem;
-            font-size: 1.2rem;
+            padding: 0.5rem;
+            font-size: 1.4rem;
             position: absolute;
-            top: 0.9rem;
-            right: 1rem;
+            top: 1.3rem;
+            right: 1.3rem;
 
             transition: all 0.2s;
 
@@ -164,7 +164,7 @@ export default {
 
         &__link {
             text-decoration: none;
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             display: block;
             width: 60vw;
             margin: 0 auto;
@@ -182,7 +182,8 @@ export default {
 
     &-center {
         &__slot {
-            font-size: 1.2rem;
+            font-size: 1.4rem;
+            padding: 0.5rem;
         }
     }
 
@@ -190,8 +191,8 @@ export default {
         position: relative;
 
         &__icon {
-            font-size: 1.2rem;
-            padding: 0.4rem;
+            font-size: 1.4rem;
+            padding: 0.5rem;
 
             display: block;
             transition: all 0.2s;
@@ -211,21 +212,20 @@ export default {
             box-shadow: 1px 1px 10px 1px #000000;
             background-color: #eee;
             color: black;
-            padding: 1.2rem;
+            padding: 1rem;
             width: 13.2rem;
             text-align: center;
 
             &-username {
-                font-size: 1.3rem;
-                border: 1px dashed black;
-                border-radius: 2rem;
+                font-size: 1.4rem;
+                border-bottom: 1px dashed black;
                 padding: 0.2rem;
             }
         }
 
         &__link {
             font-size: 1.2rem;
-            margin: 0.6rem 0 0.5rem 0;
+            margin: 0.7rem 0 0.6rem 0;
             padding: 0.2rem;
             text-decoration: none;
             color: black;
@@ -238,7 +238,7 @@ export default {
         }
 
         .right-icon {
-            margin-right: 0.7rem;
+            margin-right: 0.6rem;
         }
     }
 }
@@ -251,20 +251,20 @@ export default {
         &-left {
             &__icon {
                 font-size: 1.3rem;
-                padding: 0.4rem;
+                padding: 0.5rem;
             }
 
             &__close {
-                padding: 0.7rem;
+                padding: 0.5rem;
                 font-size: 1.3rem;
-                top: 1rem;
+                top: 1.1rem;
                 right: 1rem;
             }
 
             &__link {
-                font-size: 2rem;
+                font-size: 1.4rem;
                 margin-top: 0.5rem;
-                padding: 0.9rem;
+                padding: 0.7rem;
             }
         }
 
@@ -277,28 +277,28 @@ export default {
         &-right {
             &__icon {
                 font-size: 1.3rem;
-                padding: 0.4rem;
+                padding: 0.5rem;
             }
 
             &__menu {
-                padding: 1.3rem;
+                padding: 1rem;
                 width: 15rem;
-                left: -12.5rem;
+                left: -13rem;
 
                 &-username {
-                    font-size: 1.5rem;
-                    padding: 0.3rem;
+                    font-size: 1.3rem;
+                    padding: 0.2rem;
                 }
             }
 
             &__link {
-                font-size: 1.3rem;
-                margin: 0.7rem 0 0.5rem 0;
-                padding: 0.3rem;
+                font-size: 1.1rem;
+                margin: 0.6rem 0 0.4rem 0;
+                padding: 0.2rem;
             }
 
             .right-icon {
-                margin-right: 0.8rem;
+                margin-right: 0.6rem;
             }
         }
     }
@@ -307,59 +307,59 @@ export default {
 // each elements divided by ~ 1.2 - 480px elements
 @media (min-width: 768px) {
     .nav {
-        padding: 1.3rem;
+        padding: 1.2rem;
 
         &-left {
             &__icon {
-                font-size: 1.1rem;
-                padding: 0.4rem;
+                font-size: 1.2rem;
+                padding: 0.5rem;
             }
 
             &__close {
-                padding: 0.7rem;
-                font-size: 1.1rem;
-                top: 1rem;
-                right: 0.95rem;
+                padding: 0.5rem;
+                font-size: 1.2rem;
+                top: 1.1rem;
+                right: 1.1rem;
             }
 
             &__link {
-                font-size: 1.1rem;
-                margin-top: 0.6rem;
-                padding: 0.3rem;
+                font-size: 1.3rem;
+                margin-top: 0.5rem;
+                padding: 0.6rem;
             }
         }
 
         &-center {
             &__slot {
-                font-size: 1.1rem;
+                font-size: 1.2rem;
             }
         }
 
         &-right {
             &__icon {
-                font-size: 1.1rem;
-                padding: 0.4rem;
+                font-size: 1.2rem;
+                padding: 0.5rem;
             }
 
             &__menu {
-                padding: 1.1rem;
+                padding: 1rem;
                 width: 16rem;
                 left: -14rem;
 
                 &-username {
-                    font-size: 1.4rem;
-                    padding: 0.3rem;
+                    font-size: 1.2rem;
+                    padding: 0.2rem;
                 }
             }
 
             &__link {
-                font-size: 1.1rem;
+                font-size: 1rem;
                 margin: 0.6rem 0 0.5rem 0;
-                padding: 0.3rem;
+                padding: 0.2rem;
             }
 
             .right-icon {
-                margin-right: 0.8rem;
+                margin-right: 0.6rem;
             }
         }
     }
@@ -373,7 +373,7 @@ export default {
         &-left {
             &__icon {
                 font-size: 1.1rem;
-                padding: 0.4rem;
+                padding: 0.5rem;
 
                 cursor: pointer;
                 transition: all 0.2s;
@@ -381,13 +381,17 @@ export default {
                 &:hover {
                     transform: scale(1.3);
                 }
+
+                &:active {
+                    transform: none;
+                }
             }
 
             &__close {
-                padding: 0.6rem;
+                padding: 0.5rem;
                 font-size: 1.1rem;
-                top: 0.9rem;
-                right: 0.9rem;
+                top: 1rem;
+                right: 1rem;
 
                 cursor: pointer;
                 transition: all 0.2s;
@@ -398,9 +402,9 @@ export default {
             }
 
             &__link {
-                font-size: 1.4rem;
+                font-size: 1.2rem;
                 margin-top: 0.5rem;
-                padding: 0.8rem;
+                padding: 0.6rem;
 
                 cursor: pointer;
                 transition: all 0.2s;
@@ -420,7 +424,7 @@ export default {
         &-right {
             &__icon {
                 font-size: 1.1rem;
-                padding: 0.4rem;
+                padding: 0.5rem;
 
                 cursor: pointer;
                 transition: all 0.2s;
@@ -428,21 +432,25 @@ export default {
                 &:hover {
                     transform: scale(1.3);
                 }
+
+                &:active {
+                    transform: none;
+                }
             }
 
             &__menu {
-                padding: 1.1rem;
+                padding: 1rem;
                 width: 17rem;
-                left: -15.5rem;
+                left: -15rem;
 
                 &-username {
-                    font-size: 1.2rem;
+                    font-size: 1.1rem;
                     padding: 0.2rem;
                 }
             }
 
             &__link {
-                font-size: 1.1rem;
+                font-size: 1rem;
                 margin: 0.6rem 0 0.4rem 0;
                 padding: 0.2rem;
 
@@ -455,7 +463,7 @@ export default {
             }
 
             .right-icon {
-                margin-right: 0.7rem;
+                margin-right: 0.6rem;
             }
         }
     }

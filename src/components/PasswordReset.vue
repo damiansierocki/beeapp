@@ -82,31 +82,31 @@ export default {
         width: 90%;
         max-width: 400px;
         background: #fff;
-        padding: 30px;
+        padding: 2rem;
         border-radius: 5px;
         box-shadow: 0 0 5px 0 rgba(#333, 0.5);
-        z-index: 999;
+        z-index: 1;
 
         &__close {
             position: absolute;
-            top: 10px;
-            right: 10px;
-            padding: 5px;
+            top: 0.7rem;
+            right: 0.7rem;
+            padding: 0.5rem;
         }
 
         &__h3 {
-            font-size: 20px;
+            font-size: 1.6rem;
         }
 
         &__p {
-            margin: 15px 0;
+            margin: 1rem 0;
         }
 
         &__input {
-            padding: 15px;
+            padding: 0.8rem;
             border: 0.5px solid black;
-            font-size: 0.9rem;
-            width: 100%;
+            font-size: 1rem;
+            width: 90%;
 
             &:focus {
                 outline: none;
@@ -120,7 +120,7 @@ export default {
 
         &__p--error {
             color: tomato;
-            font-size: 12px;
+            font-size: 0.8rem;
         }
 
         .btn {
@@ -135,7 +135,6 @@ export default {
             display: block;
             color: #333333;
             font-size: 15px;
-            font-weight: bold;
             padding: 6px 24px;
             text-shadow: 0px 1px 0px #ffee66;
 
@@ -147,82 +146,34 @@ export default {
 
         &__p--success {
             font-weight: bold;
-            font-size: 30px;
+            font-size: 2rem;
             color: green;
         }
     }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
     .passwordreset {
         .content {
-            width: 90%;
-            max-width: 480px;
-            padding: 36px;
-            z-index: 1;
-
             &__close {
-                top: 12px;
-                right: 12px;
-                padding: 6px;
                 cursor: pointer;
+                display: block;
+                transition: all 0.2s;
 
                 &:hover {
-                    color: #000;
-                    font-weight: bold;
+                    transform: scale(1.3);
                 }
-            }
-
-            &__h3 {
-                font-size: 24px;
-            }
-
-            &__p {
-                margin: 18px 0;
-            }
-
-            &__input {
-                padding: 18px;
-                font-size: 1.08rem;
-
-                &:focus {
-                    outline: none;
-                    box-shadow: inset 2px 2px 5px 0 rgba(42, 45, 48, 0.12);
-                }
-
-                &::placeholder {
-                    color: #c8cddf;
-                }
-            }
-
-            &__p--error {
-                font-size: 12px;
             }
 
             .btn {
-                margin-top: 14.4px;
-                width: 60%;
                 cursor: pointer;
-                font-size: 18px;
-                padding: 7.2px 28.8px;
+                display: block;
+
+                transition: all 0.2s;
 
                 &:hover {
-                    background: linear-gradient(
-                        to bottom,
-                        #ff9d00 5%,
-                        #ffec64 100%
-                    );
-                    background-color: #ff9d00;
+                    font-weight: bold;
                 }
-
-                &:active {
-                    position: relative;
-                    top: 1.2px;
-                }
-            }
-
-            &__p--success {
-                font-size: 36px;
             }
         }
     }

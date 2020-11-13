@@ -82,29 +82,30 @@ export default {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    text-align: center;
 
     .content {
-        padding: 0 1.5rem 0 1.5rem;
-
         .form {
             background: #f9faff;
-            padding: 1rem 2rem 2rem 2rem;
+            padding: 3rem;
             display: flex;
             flex-direction: column;
-            border-radius: 30px;
+            border-radius: 5px;
             box-shadow: 10px 10px 64px 22px rgba(0, 0, 0, 0.5);
 
             &__header {
                 font-size: 2rem;
+                border-bottom: 1px dashed black;
+                margin-bottom: 1rem;
             }
 
             &__label {
-                margin: 10px 0 10px 0;
-                font-size: 1.3rem;
+                margin: 0.7rem 0 0.7rem 0;
+                font-size: 1.4rem;
             }
 
             &__input {
-                padding: 15px;
+                padding: 0.8rem;
                 border: 0.5px solid black;
                 font-size: 1rem;
 
@@ -122,7 +123,7 @@ export default {
 
             &__extras {
                 margin-top: 10px;
-                text-align: left;
+                font-size: 1rem;
             }
 
             &__list {
@@ -142,8 +143,8 @@ export default {
 
             .btn {
                 margin: 0 auto;
-                margin-top: 12px;
-                width: 50%;
+                margin-top: 1rem;
+                width: 70%;
                 box-shadow: 0px 1px 0px 0px #fff6af;
                 background: linear-gradient(
                     to bottom,
@@ -155,76 +156,38 @@ export default {
                 border: 1px solid #ffaa22;
                 display: block;
                 color: #333333;
-                font-size: 15px;
-                font-weight: bold;
-                padding: 6px 24px;
+                font-size: 1.3rem;
+                padding: 7px 25px;
                 text-shadow: 0px 1px 0px #ffee66;
 
                 &:active {
                     position: relative;
-                    top: 1px;
+                    top: 0.2rem;
                 }
             }
         }
     }
 }
 
-// min-width: 768 px - ipad width, each elements multiplied by 1.2
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
     .login {
         .content {
             .form {
-                padding: 1.2rem 2.4rem 2.4rem 2.4rem;
-
-                &__header {
-                    font-size: 2.4rem;
-                }
-
-                &__label {
-                    margin: 12px 0 12px 0;
-                    font-size: 1.56rem;
-                }
-
-                &__input {
-                    padding: 18px;
-                    font-size: 1.2rem;
-                }
-
-                &__extras {
-                    margin-top: 12px;
-                    text-align: left;
-                }
-
-                &__item {
-                    line-height: 2rem;
-                }
-
                 &__link {
                     cursor: pointer;
+                    transition: all 0.2s;
+
                     &:hover {
                         font-weight: bold;
                     }
                 }
 
                 .btn {
-                    margin-top: 14.4px;
-                    width: 60%;
-                    font-size: 18px;
-                    padding: 7.2px 28.8px;
                     cursor: pointer;
+                    transition: all 0.2s;
 
                     &:hover {
-                        background: linear-gradient(
-                            to bottom,
-                            #ff9d00 5%,
-                            #ffec64 100%
-                        );
-                        background-color: #ff9d00;
-                    }
-
-                    &:active {
-                        position: relative;
-                        top: 1px;
+                        font-weight: bold;
                     }
                 }
             }
