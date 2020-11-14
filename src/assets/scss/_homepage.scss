@@ -1,0 +1,220 @@
+@import "colors";
+
+.homepage {
+    .content {
+        color: black;
+        .weather {
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            width: 100vw;
+            border-bottom: 1px dashed $black;
+            user-select: none;
+            background-image: url("../assets/images/background-weather.jpg");
+            background-position: center;
+            background-size: cover;
+
+            span {
+                font-weight: bold;
+            }
+
+            &__content {
+                display: flex;
+                justify-content: space-around;
+            }
+
+            &__left-div {
+                width: 10rem;
+                height: 10rem;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
+
+            .current-date {
+                font-size: 1rem;
+                color: $white;
+            }
+
+            &__pressure {
+                margin-top: 1rem;
+            }
+
+            &__current-temp {
+                display: flex;
+            }
+
+            &__temp {
+                font-size: 4rem;
+            }
+
+            &__celcius {
+                font-size: 2rem;
+                margin-top: 0.4rem;
+            }
+
+            &__feels-like {
+                font-size: 1.1rem;
+            }
+
+            &__right-div {
+                width: 10rem;
+                height: 10rem;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            &__location {
+                font-size: 1.5rem;
+            }
+
+            &__icon {
+                width: 7rem;
+            }
+
+            &__description {
+                font-size: 0.9rem;
+            }
+        }
+    }
+}
+
+@media (min-width: 480px) {
+    .homepage {
+        .content {
+            .weather {
+                .current-date {
+                    font-size: 0.95rem;
+                }
+
+                &__content {
+                    justify-content: space-evenly;
+                }
+
+                & &__pressure {
+                    font-size: 1.05rem;
+                }
+
+                &__temp {
+                    font-size: 3.8rem;
+                }
+
+                &__celcius {
+                    font-size: 1.9rem;
+                }
+
+                &__feels-like {
+                    font-size: 1.05rem;
+                }
+
+                &__icon {
+                    width: 6.5rem;
+                }
+
+                &__description {
+                    font-size: 0.9rem;
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: 768px) {
+    .homepage {
+        .content {
+            .weather {
+                position: relative;
+                padding-top: 3rem;
+
+                .current-date {
+                    font-size: 1.1rem;
+                    position: absolute;
+                    top: 0;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    border-bottom: 1px dashed $base-white;
+                    border-left: 1px dashed $base-white;
+                    border-right: 1px dashed $base-white;
+                    padding: 0.5rem;
+                    color: $base-white;
+                }
+
+                &__left-div {
+                    width: 12rem;
+                    height: 12rem;
+                }
+
+                &__temp-min {
+                    font-size: 1rem;
+                }
+
+                &__temp-max {
+                    font-size: 1rem;
+                }
+
+                &__center-div {
+                    width: 12rem;
+                    height: 12rem;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    align-items: center;
+                    text-align: center;
+                }
+
+                &__right-div {
+                    width: 12rem;
+                    height: 12rem;
+                    justify-content: space-between;
+                    align-items: center;
+                }
+
+                &__pressure {
+                    font-size: 1rem;
+                    margin: 0;
+                }
+
+                &__wind {
+                    font-size: 1rem;
+                }
+
+                &__humidity {
+                    font-size: 1rem;
+                }
+
+                &__sunrise {
+                    font-size: 1rem;
+                }
+
+                &__sunset {
+                    font-size: 1rem;
+                }
+
+                &__temp {
+                    font-size: 3.5rem;
+                }
+
+                &__celcius {
+                    font-size: 1.8rem;
+                }
+
+                &__feels-like {
+                    font-size: 1rem;
+                }
+
+                &__icon {
+                    width: 10.5rem;
+                }
+
+                &__description {
+                    font-size: 1rem;
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: 1024px) {
+}
