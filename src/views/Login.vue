@@ -22,7 +22,8 @@
                     id="email"
                     v-model.trim="email"
                 />
-                <label class="form__label" for="password">Hasło</label>
+                <label class="form__label" for="password">Hasło </label>
+
                 <input
                     class="form__input"
                     type="password"

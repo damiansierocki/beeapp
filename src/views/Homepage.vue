@@ -10,7 +10,9 @@
             <div class="weather" v-if="showDesktop">
                 <div class="weather__content">
                     <div class="weather__left-div">
-                        <p class="current-date">{{ currentDateDesktop }}</p>
+                        <p class="current-date">
+                            <span>{{ currentDateDesktop }}</span>
+                        </p>
                         <p class="weather__location">
                             <span>{{ this.weather.location }}</span>
                         </p>
@@ -66,10 +68,8 @@
             <div class="weather" v-else>
                 <div class="weather__content">
                     <div class="weather__left-div">
-                        <p class="current-date">{{ currentDateMobile }}</p>
-
-                        <p class="weather__pressure">
-                            Ciśnienie: <span>{{ this.weather.pressure }}</span>
+                        <p class="current-date">
+                            <span>{{ currentDateMobile }}</span>
                         </p>
                         <div class="weather__current-temp">
                             <p class="weather__temp">
@@ -87,12 +87,75 @@
                         <p class="weather__location">
                             <span>{{ this.weather.location }}</span>
                         </p>
-                        <img class="weather__icon" :src="this.weather.icon" />
+                        <div class="weather__icon">
+                            <img :src="this.weather.icon" />
+                        </div>
                         <p class="weather__description">
                             <span>{{ this.weather.description }}</span>
                         </p>
                     </div>
                 </div>
+            </div>
+
+            <div class="info">
+                <h3 class="info__title">Informacje</h3>
+                <div class="info__all">
+                    <div class="info__apiaries">
+                        <img
+                            class="info__img"
+                            src="./../assets/images/apiary.svg"
+                            alt="apiary"
+                        />
+                        <p class="info__number">0</p>
+                        <p class="info__description info__description--red">
+                            Pasieki
+                        </p>
+                    </div>
+                    <div class="info__hives">
+                        <img
+                            class="info__img"
+                            src="./../assets/images/hives.svg"
+                            alt="hives"
+                        />
+                        <p class="info__number">0</p>
+                        <p class="info__description info__description--green">
+                            Ule
+                        </p>
+                    </div>
+                    <div class="info__inspections">
+                        <img
+                            class="info__img"
+                            src="./../assets/images/inspections.svg"
+                            alt="inspections"
+                        />
+                        <p class="info__number">0</p>
+                        <p class="info__description info__description--blue">
+                            Inspekcje
+                        </p>
+                    </div>
+                    <div class="info__notes">
+                        <img
+                            class="info__img"
+                            src="./../assets/images/notes.svg"
+                            alt="notes"
+                        />
+                        <p class="info__number">0</p>
+                        <p class="info__description info__description--orange">
+                            Notatki
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="notes">
+                <h3 class="notes__title">Notatki</h3>
+                <ul class="notes__list">
+                    <li>Notatka 1</li>
+                    <li class="notes__item">Notatka 2</li>
+                    <li class="notes__item">Notatka 3</li>
+                    <li class="notes__item">Notatka 4</li>
+                    <li class="notes__item">Notatka 5</li>
+                </ul>
             </div>
         </div>
     </div>
