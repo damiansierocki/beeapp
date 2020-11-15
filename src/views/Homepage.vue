@@ -164,23 +164,13 @@
                     </span>
                 </div>
 
-                <ul class="notes__list" v-if="notes.length">
-                    <li
-                        class="notes__item"
-                        v-for="note in notes"
-                        :key="note.id"
-                    >
-                        {{ note.content }}
-                        <br />
-                        <span class="notes__createdOn">{{
-                            getCurrentDate(note.createdOn)
-                        }}</span>
-
-                        {{ note.userId + "---" + note.userName }}
+                <ul class="notes__list">
+                    <li class="notes__item">
+                        Pierwsza notatka 1
                     </li>
                 </ul>
 
-                <ul class="notes__list" style="list-style-type: none" v-else>
+                <ul class="notes__list" style="list-style-type: none">
                     <li class="notes__item">
                         Nie ma żadnej notatki 😢
                     </li>
@@ -298,9 +288,9 @@ export default {
 
                     this.weather.country = response.data.sys.country;
                     this.weather.icon =
-                        "http://openweathermap.org/img/wn/" +
+                        "http://openweathermap.org/img/w/" +
                         response.data.weather[0].icon +
-                        "@4x.png";
+                        ".png";
                     this.weather.feels_like =
                         Math.round(response.data.main.feels_like) + " °C";
                     this.weather.temp_min =

@@ -7,17 +7,12 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
     state: {
-        userProfile: {},
-        notes: []
+        userProfile: {}
     },
 
     mutations: {
         setUserProfile(state, val) {
             state.userProfile = val;
-        },
-
-        setNotes(state, val) {
-            state.notes = val;
         }
     },
 

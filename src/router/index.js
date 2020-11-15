@@ -31,12 +31,18 @@ const routes = [
     {
         path: "/myaccount/",
         name: "MyAccount",
-        component: MyAccount
+        component: MyAccount,
+        meta: {
+            requiresAuth: true
+        }
     },
     {
         path: "/apiaries",
         name: "Apiaries",
-        component: Apiaries
+        component: Apiaries,
+        meta: {
+            requiresAuth: true
+        }
     }
 ];
 
