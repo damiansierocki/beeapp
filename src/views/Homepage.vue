@@ -1,5 +1,5 @@
 <template>
-    <div class="homepage">
+    <div class="homepage" v-if="showIfUserLogged">
         <Nav v-if="showIfUserLogged">
             <template v-slot:nav-center__slot>
                 <h1 class="nav-center__slot">Strona główna</h1>
@@ -147,14 +147,41 @@
                 </div>
             </div>
 
+            <transition
+                enter-active-class="animate__animated animate__backInUp animate__faster"
+                leave-active-class="animate__animated animate__backOutDown animate__faster"
+                mode="out-in"
+                appear
+            >
+                <AddNotes v-if="showAddNotes" @close="toggleNotes"></AddNotes>
+            </transition>
+
             <div class="notes">
-                <h3 class="notes__title">Notatki</h3>
-                <ul class="notes__list">
-                    <li>Notatka 1</li>
-                    <li class="notes__item">Notatka 2</li>
-                    <li class="notes__item">Notatka 3</li>
-                    <li class="notes__item">Notatka 4</li>
-                    <li class="notes__item">Notatka 5</li>
+                <div class="notes__container-title-icon" @click="toggleNotes">
+                    <h3 class="notes__title">Notatki</h3>
+                    <span class="notes__plus-icon">
+                        <i class="fas fa-plus"></i>
+                    </span>
+                </div>
+
+                <ul class="notes__list" v-if="notes.length">
+                    <li
+                        class="notes__item"
+                        v-for="note in notes"
+                        :key="note.id"
+                    >
+                        {{ note.content }}
+                        <br />
+                        <span class="notes__createdOn">{{
+                            getCurrentDate(note.createdOn)
+                        }}</span>
+                    </li>
+                </ul>
+
+                <ul class="notes__list" style="list-style-type: none" v-else>
+                    <li class="notes__item">
+                        Nie ma żadnej notatki 😢
+                    </li>
                 </ul>
             </div>
         </div>
@@ -162,6 +189,7 @@
 </template>
 
 <script>
+import AddNotes from "@/components/AddNotes";
 import Nav from "@/components/Nav";
 import { mapState } from "vuex";
 import moment from "moment";
@@ -174,6 +202,7 @@ export default {
     data() {
         return {
             showDesktop: false,
+            showAddNotes: false,
             windowWidth: 0,
             currentDateMobile: "",
             currentDateDesktop: "",
@@ -196,11 +225,12 @@ export default {
     },
 
     components: {
-        Nav
+        Nav,
+        AddNotes
     },
 
     computed: {
-        ...mapState(["userProfile"]),
+        ...mapState(["userProfile", "notes"]),
 
         showIfUserLogged() {
             return Object.keys(this.userProfile).length > 1;
@@ -208,6 +238,14 @@ export default {
     },
 
     methods: {
+        toggleNotes() {
+            this.showAddNotes = !this.showAddNotes;
+
+            console.log(this.userProfile.username);
+            console.log(this.notes.id);
+            console.log(Object(this.userProfile));
+        },
+
         handleResize() {
             this.windowWidth = window.innerWidth;
 
@@ -218,7 +256,7 @@ export default {
             }
         },
 
-        getCurrentDate: function() {
+        getCurrentDate: function(val) {
             const newDate = new Date();
 
             const currentDateMobile = moment(newDate)
@@ -231,6 +269,15 @@ export default {
 
             this.currentDateMobile = currentDateMobile;
             this.currentDateDesktop = currentDateDesktop;
+
+            if (!val) {
+                return "-";
+            }
+
+            let date = val.toDate();
+            return moment(date)
+                .locale("pl")
+                .fromNow();
         },
 
         getCurrentWeather(url) {
