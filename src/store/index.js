@@ -7,16 +7,79 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
     state: {
-        userProfile: {}
+        userProfile: {},
+        notes: []
     },
 
     mutations: {
         setUserProfile(state, val) {
             state.userProfile = val;
+        },
+
+        setNotes(state, val) {
+            state.notes = val;
         }
     },
 
     actions: {
+        async addNote({}, note) {
+            await fb.usersCollection
+                .doc(fb.auth.currentUser.uid)
+                .collection("notes")
+                .add({
+                    createdOn: new Date(),
+                    content: note.content,
+                    userId: fb.auth.currentUser.uid
+                });
+        },
+
+        async getNotes() {
+            fb.usersCollection
+                .doc(fb.auth.currentUser.uid)
+                .collection("notes")
+                .orderBy("createdOn", "desc")
+                .onSnapshot(snapshot => {
+                    let notesArray = [];
+
+                    snapshot.forEach(doc => {
+                        let note = doc.data();
+                        note.id = doc.id;
+
+                        notesArray.push(note);
+                    });
+
+                    store.commit("setNotes", notesArray);
+                });
+        },
+
+        async editNote({ docId }, note) {
+            await fb.usersCollection
+                .doc(fb.auth.currentUser.uid)
+                .collection("notes")
+                .doc(docId)
+                .update({
+                    content: note.content
+                });
+        },
+
+        /* async deleteNote({ docId }) {
+            await fb.usersCollection
+                .doc(fb.auth.currentUser.uid)
+                .collection("notes")
+                .doc(docId)
+                .data()
+                .get()
+                .delete();
+        }, */
+
+        async deleteNote({ docId }, note) {
+            await fb.usersCollection
+                .doc(fb.auth.currentUser.uid)
+                .collection("notes")
+                .doc(docId)
+                .delete();
+        },
+
         async signup({ dispatch }, form) {
             // sign user up
             const { user } = await fb.auth.createUserWithEmailAndPassword(

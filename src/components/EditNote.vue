@@ -1,9 +1,9 @@
 <template>
-    <div class="addnotes">
+    <div class="editnote">
         <div class="content">
             <div class="content__header">
                 <h2 class="content__title">
-                    Dodaj notatkę 🐝
+                    Edytuj notatkę 🐝
                 </h2>
                 <span class="content__close" @click="$emit('close')">
                     <i class="fas fa-times"></i>
@@ -16,13 +16,10 @@
                         v-model.trim="note.content"
                         rows="6"
                         cols="20"
-                        placeholder="Przykładowa notatka.."
+                        :placeholder="notes.content"
                     ></textarea>
 
-                    <span
-                        class="content__plus-icon"
-                        @click="addNote"
-                        :disabled="note.content === ''"
+                    <span class="content__plus-icon" @click="editNote"
                         ><i class="fas fa-plus-circle"></i
                     ></span>
                 </form>
@@ -32,6 +29,8 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
     data() {
         return {
@@ -41,9 +40,19 @@ export default {
         };
     },
 
+    computed: {
+        ...mapState(["notes"])
+    },
+
     methods: {
-        addNote() {
-            this.$store.dispatch("addNote", { content: this.note.content });
+        editNote() {
+            this.$store.dispatch("editNote", {
+                content:
+                    this.note.content !== ""
+                        ? this.note.content
+                        : this.notes.content
+            });
+
             this.note.content = "";
         }
     }
@@ -51,5 +60,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/scss/addnotes.scss";
+@import "../assets/scss/editnote.scss";
 </style>

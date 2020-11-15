@@ -139,7 +139,7 @@
                             src="./../assets/images/notes.svg"
                             alt="notes"
                         />
-                        <p class="info__number">0</p>
+                        <p class="info__number">{{ notes.length }}</p>
                         <p class="info__description info__description--orange">
                             Notatki
                         </p>
@@ -153,24 +153,62 @@
                 mode="out-in"
                 appear
             >
-                <AddNotes v-if="showAddNotes" @close="toggleNotes"></AddNotes>
+                <AddNotes
+                    v-if="showAddNotes"
+                    @close="toggleAddNotes"
+                ></AddNotes>
+            </transition>
+
+            <transition
+                enter-active-class="animate__animated animate__backInUp animate__faster"
+                leave-active-class="animate__animated animate__backOutDown animate__faster"
+                mode="out-in"
+                appear
+            >
+                <EditNote
+                    v-if="showEditNote"
+                    @close="toggleEditNote"
+                ></EditNote>
             </transition>
 
             <div class="notes">
-                <div class="notes__container-title-icon" @click="toggleNotes">
+                <div
+                    class="notes__container-title-icon"
+                    @click="toggleAddNotes"
+                >
                     <h3 class="notes__title">Notatki</h3>
                     <span class="notes__plus-icon">
                         <i class="fas fa-plus"></i>
                     </span>
                 </div>
 
-                <ul class="notes__list">
-                    <li class="notes__item">
-                        Pierwsza notatka 1
+                <ul class="notes__list" v-if="notes.length">
+                    <li
+                        class="notes__item"
+                        v-for="note in notes"
+                        :key="note.id"
+                    >
+                        {{ note.content }}
+
+                        <br />
+                        <span class="notes__createdOn">{{
+                            getCurrentDate(note.createdOn)
+                        }}</span>
+                        <br />
+                        <div class="notes__extras">
+                            <span class="notes__edit" @click="toggleEditNote"
+                                ><i class="far fa-edit"></i
+                            ></span>
+                            <span
+                                class="notes__delete"
+                                @click="deleteNote(note.id)"
+                                ><i class="far fa-trash-alt"></i
+                            ></span>
+                        </div>
                     </li>
                 </ul>
 
-                <ul class="notes__list" style="list-style-type: none">
+                <ul class="notes__list" style="list-style-type: none" v-else>
                     <li class="notes__item">
                         Nie ma żadnej notatki 😢
                     </li>
@@ -182,12 +220,11 @@
 
 <script>
 import AddNotes from "@/components/AddNotes";
+import EditNote from "@/components/EditNote";
 import Nav from "@/components/Nav";
 import { mapState } from "vuex";
 import moment from "moment";
 import axios from "axios";
-import firebase from "firebase/app";
-import { auth } from "../firebase";
 
 const API = "http://api.openweathermap.org/data/2.5/weather?units=metric";
 const KEY = "&APPID=bff05973f18c6a1a19bc66976347f831";
@@ -197,10 +234,10 @@ export default {
         return {
             showDesktop: false,
             showAddNotes: false,
+            showEditNote: false,
             windowWidth: 0,
             currentDateMobile: "",
             currentDateDesktop: "",
-            currentUserId: "",
             weather: {
                 currentTemp: "",
                 icon: "",
@@ -221,7 +258,8 @@ export default {
 
     components: {
         Nav,
-        AddNotes
+        AddNotes,
+        EditNote
     },
 
     computed: {
@@ -232,9 +270,36 @@ export default {
         }
     },
 
+    beforeMount() {
+        this.getCurrentDate();
+        this.geolocation();
+    },
+
+    created() {
+        window.addEventListener("resize", this.handleResize);
+        this.handleResize();
+        this.getNotes();
+    },
+
+    destroyed() {
+        window.removeEventListener("resize", this.handleResize);
+    },
+
     methods: {
-        toggleNotes() {
+        toggleEditNote() {
+            this.showEditNote = !this.showEditNote;
+        },
+
+        toggleAddNotes() {
             this.showAddNotes = !this.showAddNotes;
+        },
+
+        getNotes() {
+            this.$store.dispatch("getNotes");
+        },
+
+        deleteNote() {
+            this.$store.dispatch("deleteNote");
         },
 
         handleResize() {
@@ -334,20 +399,6 @@ export default {
         geoError() {
             this.getCurrentWeather(API + "&lat=0&lon=0" + KEY);
         }
-    },
-
-    beforeMount() {
-        this.getCurrentDate();
-        this.geolocation();
-    },
-
-    created() {
-        window.addEventListener("resize", this.handleResize);
-        this.handleResize();
-    },
-
-    destroyed() {
-        window.removeEventListener("resize", this.handleResize);
     }
 };
 </script>

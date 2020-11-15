@@ -1,6 +1,6 @@
 @import "colors";
 
-.addnotes {
+.editnote {
     position: absolute;
     display: flex;
     top: 60%;
@@ -64,7 +64,7 @@
 }
 
 @media (min-width: 480px) {
-    .addnotes {
+    .editnote {
         top: 50%;
 
         .content {
@@ -74,7 +74,7 @@
 }
 
 @media (min-width: 768px) {
-    .addnotes {
+    .editnote {
         top: 0;
         .content {
             width: 40%;
@@ -83,7 +83,7 @@
 }
 
 @media (min-width: 1024px) {
-    .addnotes {
+    .editnote {
         .content {
             width: 30%;
 
