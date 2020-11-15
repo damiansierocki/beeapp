@@ -5,20 +5,6 @@ import router from "../router/index";
 
 Vue.use(Vuex);
 
-// realtime firebase
-fb.notesCollection.orderBy("createdOn", "desc").onSnapshot(snapshot => {
-    let notesArray = [];
-
-    snapshot.forEach(doc => {
-        let note = doc.data();
-        note.id = doc.id;
-
-        notesArray.push(note);
-    });
-
-    store.commit("setNotes", notesArray);
-});
-
 const store = new Vuex.Store({
     state: {
         userProfile: {},
@@ -73,15 +59,6 @@ const store = new Vuex.Store({
             // clear userProfile and redirect to /login
             commit("setUserProfile", {});
             router.push("/login");
-        },
-
-        async addNote({ state, commit }, note) {
-            await fb.notesCollection.add({
-                content: note.content,
-                userId: fb.auth.currentUser.uid,
-                userName: state.userProfile.username,
-                createdOn: new Date()
-            });
         },
 
         async fetchUserProfile({ commit }, user) {
