@@ -175,6 +175,8 @@
                         <span class="notes__createdOn">{{
                             getCurrentDate(note.createdOn)
                         }}</span>
+
+                        {{ note.userId + "---" + note.userName }}
                     </li>
                 </ul>
 
@@ -194,6 +196,8 @@ import Nav from "@/components/Nav";
 import { mapState } from "vuex";
 import moment from "moment";
 import axios from "axios";
+import firebase from "firebase/app";
+import { auth } from "../firebase";
 
 const API = "http://api.openweathermap.org/data/2.5/weather?units=metric";
 const KEY = "&APPID=bff05973f18c6a1a19bc66976347f831";
@@ -206,6 +210,7 @@ export default {
             windowWidth: 0,
             currentDateMobile: "",
             currentDateDesktop: "",
+            currentUserId: "",
             weather: {
                 currentTemp: "",
                 icon: "",
@@ -240,10 +245,6 @@ export default {
     methods: {
         toggleNotes() {
             this.showAddNotes = !this.showAddNotes;
-
-            console.log(this.userProfile.username);
-            console.log(this.notes.id);
-            console.log(Object(this.userProfile));
         },
 
         handleResize() {
