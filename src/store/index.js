@@ -28,10 +28,10 @@ const store = new Vuex.Store({
                 .collection('notes')
                 .orderBy('createdOn', 'desc')
                 .onSnapshot(snapshot => {
-                    var notesArray = [];
+                    let notesArray = [];
 
                     snapshot.forEach(doc => {
-                        var note = doc.data();
+                        let note = doc.data();
                         note.id = doc.id;
 
                         notesArray.push(note);
@@ -52,18 +52,19 @@ const store = new Vuex.Store({
                 });
         },
 
-        async editNote({}, docId, note) {
+        async editNote({ commit }, docId, note) {
             await fb.usersCollection
                 .doc(fb.auth.currentUser.uid)
                 .collection('notes')
                 .doc(docId)
                 .update({
+                    createdOn: new Date(),
                     content: note.content
                 });
         },
 
         async deleteNote({}, docId) {
-            if (window.confirm('Are you sure you want to delete?')) {
+            if (window.confirm('Jesteś pewny/a, że chcesz usunąć notatkę?')) {
                 await fb.usersCollection
                     .doc(fb.auth.currentUser.uid)
                     .collection('notes')

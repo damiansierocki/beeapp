@@ -169,6 +169,7 @@
                     v-if="showEditNote"
                     @close="toggleEditNote()"
                     :docId="selectedNote"
+                    :noteContent="selectedNoteContent"
                 ></EditNote>
             </transition>
 
@@ -199,7 +200,7 @@
                         <div class="notes__extras">
                             <span
                                 class="notes__edit"
-                                @click="toggleEditNote(note.id)"
+                                @click="toggleEditNote(note.id, note.content)"
                                 ><i class="far fa-edit"></i
                             ></span>
                             <span
@@ -242,6 +243,7 @@ export default {
             currentDateMobile: '',
             currentDateDesktop: '',
             selectedNote: '',
+            selectedNoteContent: '',
             weather: {
                 currentTemp: '',
                 icon: '',
@@ -290,14 +292,15 @@ export default {
     },
 
     methods: {
-        toggleEditNote(docId) {
+        toggleEditNote(docId, noteContent) {
             this.showEditNote = !this.showEditNote;
 
             if (this.showEditNote) {
                 this.selectedNote = docId;
-                console.log(this.selectedNote);
+                this.selectedNoteContent = noteContent;
             } else {
                 this.selectedNote = {};
+                this.selectedNoteContent = {};
             }
         },
 

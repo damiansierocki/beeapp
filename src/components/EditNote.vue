@@ -17,12 +17,10 @@
                         v-model.trim="note.content"
                         rows="6"
                         cols="20"
-                        :placeholder="notes.content"
+                        :placeholder="this.noteContent"
                     ></textarea>
 
-                    <!-- :placeholder="notes.content" -->
-
-                    <span class="content__plus-icon" @click="editNote()"
+                    <span class="content__plus-icon" @click="editNote"
                         ><i class="fas fa-edit"></i
                     ></span>
                 </form>
@@ -35,7 +33,7 @@
 import { mapState } from 'vuex';
 
 export default {
-    props: ['docId'],
+    props: ['docId', 'noteContent'],
     data() {
         return {
             note: {
@@ -44,12 +42,8 @@ export default {
         };
     },
 
-    computed: {
-        ...mapState(['notes'])
-    },
-
     methods: {
-        editNote(docId) {
+        editNote() {
             this.$store.dispatch('editNote', this.docId, {
                 content: this.note.content
             });
