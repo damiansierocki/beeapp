@@ -52,13 +52,13 @@ const store = new Vuex.Store({
                 });
         },
 
-        async editNote({}, docId, content) {
+        async editNote({}, docId, note) {
             await fb.usersCollection
                 .doc(fb.auth.currentUser.uid)
                 .collection('notes')
                 .doc(docId)
                 .update({
-                    content: content
+                    content: note.content
                 });
         },
 

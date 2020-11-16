@@ -9,19 +9,20 @@
                     <i class="fas fa-times"></i>
                 </span>
             </div>
+
             <div class="content__inside">
                 <form @submit.prevent>
                     <textarea
                         class="content__textarea"
-                        v-model.trim="content"
+                        v-model.trim="note.content"
                         rows="6"
                         cols="20"
-                        :placeholder="content"
+                        :placeholder="notes.content"
                     ></textarea>
 
-                    <span
-                        class="content__plus-icon"
-                        @click="editNote(note.id, content)"
+                    <!-- :placeholder="notes.content" -->
+
+                    <span class="content__plus-icon" @click="editNote()"
                         ><i class="fas fa-edit"></i
                     ></span>
                 </form>
@@ -34,9 +35,12 @@
 import { mapState } from 'vuex';
 
 export default {
+    props: ['docId'],
     data() {
         return {
-            content: ''
+            note: {
+                content: ''
+            }
         };
     },
 
@@ -45,12 +49,12 @@ export default {
     },
 
     methods: {
-        editNote(docId, content) {
-            this.$store.dispatch('editNote', docId, {
-                content: this.content
+        editNote(docId) {
+            this.$store.dispatch('editNote', this.docId, {
+                content: this.note.content
             });
 
-            this.content = '';
+            this.note.content = '';
         }
     }
 };

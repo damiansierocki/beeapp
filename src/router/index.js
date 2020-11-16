@@ -11,6 +11,23 @@ Vue.use(VueRouter);
 
 const routes = [
     {
+        path: '*',
+        redirect: '/login'
+    },
+
+    {
+        path: '/register',
+        name: 'Register',
+        component: Register
+    },
+
+    {
+        path: '/login',
+        name: 'Login',
+        component: Login
+    },
+
+    {
         path: '/',
         name: 'Homepage',
         component: Homepage,
@@ -18,16 +35,7 @@ const routes = [
             requiresAuth: true
         }
     },
-    {
-        path: '/register',
-        name: 'Register',
-        component: Register
-    },
-    {
-        path: '/login',
-        name: 'Login',
-        component: Login
-    },
+
     {
         path: '/myaccount/',
         name: 'MyAccount',
@@ -36,6 +44,7 @@ const routes = [
             requiresAuth: true
         }
     },
+
     {
         path: '/apiaries',
         name: 'Apiaries',

@@ -167,7 +167,8 @@
             >
                 <EditNote
                     v-if="showEditNote"
-                    @close="toggleEditNote"
+                    @close="toggleEditNote()"
+                    :docId="selectedNote"
                 ></EditNote>
             </transition>
 
@@ -196,7 +197,9 @@
                         }}</span>
                         <br />
                         <div class="notes__extras">
-                            <span class="notes__edit" @click="toggleEditNote"
+                            <span
+                                class="notes__edit"
+                                @click="toggleEditNote(note.id)"
                                 ><i class="far fa-edit"></i
                             ></span>
                             <span
@@ -222,7 +225,7 @@
 import AddNotes from '@/components/AddNotes';
 import EditNote from '@/components/EditNote';
 import Nav from '@/components/Nav';
-import { mapState } from 'vuex';
+import { createLogger, mapState } from 'vuex';
 import moment from 'moment';
 import axios from 'axios';
 
@@ -238,6 +241,7 @@ export default {
             windowWidth: 0,
             currentDateMobile: '',
             currentDateDesktop: '',
+            selectedNote: '',
             weather: {
                 currentTemp: '',
                 icon: '',
@@ -286,8 +290,15 @@ export default {
     },
 
     methods: {
-        toggleEditNote() {
+        toggleEditNote(docId) {
             this.showEditNote = !this.showEditNote;
+
+            if (this.showEditNote) {
+                this.selectedNote = docId;
+                console.log(this.selectedNote);
+            } else {
+                this.selectedNote = {};
+            }
         },
 
         toggleAddNotes() {
