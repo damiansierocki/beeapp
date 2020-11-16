@@ -9,15 +9,15 @@
 </template>
 
 <script>
-import Nav from "@/components/Nav";
-import { mapState } from "vuex";
+import Nav from '@/components/Nav';
+import { mapState } from 'vuex';
 
 export default {
     components: {
         Nav
     },
     computed: {
-        ...mapState(["userProfile"]),
+        ...mapState(['userProfile']),
 
         showIfUserLogged() {
             return Object.keys(this.userProfile).length > 1;

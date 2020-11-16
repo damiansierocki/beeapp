@@ -31,31 +31,31 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState } from 'vuex';
 
 export default {
     data() {
         return {
-            content: ""
+            content: ''
         };
     },
 
     computed: {
-        ...mapState(["notes"])
+        ...mapState(['notes'])
     },
 
     methods: {
         editNote(docId, content) {
-            this.$store.dispatch("editNote", docId, {
+            this.$store.dispatch('editNote', docId, {
                 content: this.content
             });
 
-            this.content = "";
+            this.content = '';
         }
     }
 };
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/scss/editnote.scss";
+@import '../assets/scss/editnote.scss';
 </style>

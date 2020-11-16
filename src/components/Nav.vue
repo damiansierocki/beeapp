@@ -57,8 +57,8 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
-import About from "@/components/About";
+import { mapState } from 'vuex';
+import About from '@/components/About';
 
 export default {
     components: {
@@ -72,7 +72,7 @@ export default {
         };
     },
     computed: {
-        ...mapState(["userProfile"])
+        ...mapState(['userProfile'])
     },
     methods: {
         toggleLeftMenu() {
@@ -82,46 +82,46 @@ export default {
         toggleRightMenu() {
             this.showRightMenu = !this.showRightMenu;
 
-            const navLeft = document.querySelector(".nav-left");
-            const icon = document.querySelector(".fa-caret-down");
+            const navLeft = document.querySelector('.nav-left');
+            const icon = document.querySelector('.fa-caret-down');
 
             if (this.showRightMenu) {
-                icon.style.transform = "rotate(180deg)";
-                navLeft.classList.add("disabled");
+                icon.style.transform = 'rotate(180deg)';
+                navLeft.classList.add('disabled');
             } else {
-                icon.style.transform = "rotate(0deg)";
-                navLeft.classList.remove("disabled");
+                icon.style.transform = 'rotate(0deg)';
+                navLeft.classList.remove('disabled');
             }
         },
 
         toggleAbout() {
             this.showAbout = !this.showAbout;
 
-            const navLeft = document.querySelector(".nav-left");
-            const navRight = document.querySelector(".nav-right");
-            const icon = document.querySelector(".fa-caret-down");
+            const navLeft = document.querySelector('.nav-left');
+            const navRight = document.querySelector('.nav-right');
+            const icon = document.querySelector('.fa-caret-down');
 
             if (this.showRightMenu) {
                 this.showRightMenu = !this.showRightMenu;
-                icon.style.transform = "rotate(0deg)";
+                icon.style.transform = 'rotate(0deg)';
             }
 
             if (this.showAbout) {
-                navLeft.classList.add("disabled");
-                navRight.classList.add("disabled");
+                navLeft.classList.add('disabled');
+                navRight.classList.add('disabled');
             } else {
-                navLeft.classList.remove("disabled");
-                navRight.classList.remove("disabled");
+                navLeft.classList.remove('disabled');
+                navRight.classList.remove('disabled');
             }
         },
 
         logout() {
-            this.$store.dispatch("logout");
+            this.$store.dispatch('logout');
         }
     }
 };
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/scss/nav.scss";
+@import '../assets/scss/nav.scss';
 </style>

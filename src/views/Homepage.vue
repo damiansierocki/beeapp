@@ -219,15 +219,15 @@
 </template>
 
 <script>
-import AddNotes from "@/components/AddNotes";
-import EditNote from "@/components/EditNote";
-import Nav from "@/components/Nav";
-import { mapState } from "vuex";
-import moment from "moment";
-import axios from "axios";
+import AddNotes from '@/components/AddNotes';
+import EditNote from '@/components/EditNote';
+import Nav from '@/components/Nav';
+import { mapState } from 'vuex';
+import moment from 'moment';
+import axios from 'axios';
 
-const API = "http://api.openweathermap.org/data/2.5/weather?units=metric";
-const KEY = "&APPID=bff05973f18c6a1a19bc66976347f831";
+const API = 'http://api.openweathermap.org/data/2.5/weather?units=metric';
+const KEY = '&APPID=bff05973f18c6a1a19bc66976347f831';
 
 export default {
     data() {
@@ -236,22 +236,22 @@ export default {
             showAddNotes: false,
             showEditNote: false,
             windowWidth: 0,
-            currentDateMobile: "",
-            currentDateDesktop: "",
+            currentDateMobile: '',
+            currentDateDesktop: '',
             weather: {
-                currentTemp: "",
-                icon: "",
-                location: "",
-                wind: "",
-                description: "",
-                country: "",
-                feels_like: "",
-                temp_min: "",
-                temp_max: "",
-                pressure: "",
-                sunrise: "",
-                sunset: "",
-                humidity: ""
+                currentTemp: '',
+                icon: '',
+                location: '',
+                wind: '',
+                description: '',
+                country: '',
+                feels_like: '',
+                temp_min: '',
+                temp_max: '',
+                pressure: '',
+                sunrise: '',
+                sunset: '',
+                humidity: ''
             }
         };
     },
@@ -263,7 +263,7 @@ export default {
     },
 
     computed: {
-        ...mapState(["userProfile", "notes"]),
+        ...mapState(['userProfile', 'notes']),
 
         showIfUserLogged() {
             return Object.keys(this.userProfile).length > 1;
@@ -276,13 +276,13 @@ export default {
     },
 
     created() {
-        window.addEventListener("resize", this.handleResize);
+        window.addEventListener('resize', this.handleResize);
         this.handleResize();
         this.getNotes();
     },
 
     destroyed() {
-        window.removeEventListener("resize", this.handleResize);
+        window.removeEventListener('resize', this.handleResize);
     },
 
     methods: {
@@ -295,11 +295,11 @@ export default {
         },
 
         getNotes() {
-            this.$store.dispatch("getNotes");
+            this.$store.dispatch('getNotes');
         },
 
         deleteNote(docId) {
-            this.$store.dispatch("deleteNote", docId);
+            this.$store.dispatch('deleteNote', docId);
         },
 
         handleResize() {
@@ -316,23 +316,23 @@ export default {
             const newDate = new Date();
 
             const currentDateMobile = moment(newDate)
-                .locale("pl")
-                .format("DD MMMM, HH:mm");
+                .locale('pl')
+                .format('DD MMMM, HH:mm');
 
             const currentDateDesktop = moment(newDate)
-                .locale("pl")
-                .format("dddd, DD MMMM YYYY, HH:mm");
+                .locale('pl')
+                .format('dddd, DD MMMM YYYY, HH:mm');
 
             this.currentDateMobile = currentDateMobile;
             this.currentDateDesktop = currentDateDesktop;
 
             if (!val) {
-                return "-";
+                return '-';
             }
 
             let date = val.toDate();
             return moment(date)
-                .locale("pl")
+                .locale('pl')
                 .fromNow();
         },
 
@@ -343,7 +343,7 @@ export default {
                     this.weather.currentTemp = Math.round(
                         response.data.main.temp
                     );
-                    this.weather.wind = response.data.wind.speed + " m/s";
+                    this.weather.wind = response.data.wind.speed + ' m/s';
                     this.weather.location = response.data.name;
                     this.weather.description =
                         response.data.weather[0].description
@@ -353,26 +353,26 @@ export default {
 
                     this.weather.country = response.data.sys.country;
                     this.weather.icon =
-                        "http://openweathermap.org/img/w/" +
+                        'http://openweathermap.org/img/w/' +
                         response.data.weather[0].icon +
-                        ".png";
+                        '.png';
                     this.weather.feels_like =
-                        Math.round(response.data.main.feels_like) + " °C";
+                        Math.round(response.data.main.feels_like) + ' °C';
                     this.weather.temp_min =
-                        Math.round(response.data.main.temp_min) + " °C";
+                        Math.round(response.data.main.temp_min) + ' °C';
                     this.weather.temp_max =
-                        Math.round(response.data.main.temp_max) + " °C";
-                    this.weather.humidity = response.data.main.humidity + "%";
-                    this.weather.pressure = response.data.main.pressure + " Pa";
+                        Math.round(response.data.main.temp_max) + ' °C';
+                    this.weather.humidity = response.data.main.humidity + '%';
+                    this.weather.pressure = response.data.main.pressure + ' Pa';
                     this.weather.sunrise = new Date(
                         response.data.sys.sunrise * 1000
                     )
-                        .toLocaleTimeString("pl-PL")
+                        .toLocaleTimeString('pl-PL')
                         .slice(0, 5);
                     this.weather.sunset = new Date(
                         response.data.sys.sunset * 1000
                     )
-                        .toLocaleTimeString("pl-PL")
+                        .toLocaleTimeString('pl-PL')
                         .slice(0, 5);
                 })
                 .catch(error => {
@@ -392,17 +392,17 @@ export default {
             const lon = position.coords.longitude;
 
             this.getCurrentWeather(
-                API + "&lat=" + lat + "&lon=" + lon + "&lang=pl" + KEY
+                API + '&lat=' + lat + '&lon=' + lon + '&lang=pl' + KEY
             );
         },
 
         geoError() {
-            this.getCurrentWeather(API + "&lat=0&lon=0" + KEY);
+            this.getCurrentWeather(API + '&lat=0&lon=0' + KEY);
         }
     }
 };
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/scss/homepage.scss";
+@import '../assets/scss/homepage.scss';
 </style>

@@ -1,7 +1,7 @@
-import Vue from "vue";
-import Vuex from "vuex";
-import * as fb from "../firebase";
-import router from "../router/index";
+import Vue from 'vue';
+import Vuex from 'vuex';
+import * as fb from '../firebase';
+import router from '../router/index';
 
 Vue.use(Vuex);
 
@@ -25,8 +25,8 @@ const store = new Vuex.Store({
         async getNotes() {
             await fb.usersCollection
                 .doc(fb.auth.currentUser.uid)
-                .collection("notes")
-                .orderBy("createdOn", "desc")
+                .collection('notes')
+                .orderBy('createdOn', 'desc')
                 .onSnapshot(snapshot => {
                     var notesArray = [];
 
@@ -37,14 +37,14 @@ const store = new Vuex.Store({
                         notesArray.push(note);
                     });
 
-                    store.commit("setNotes", notesArray);
+                    store.commit('setNotes', notesArray);
                 });
         },
 
         async addNote({}, note) {
             await fb.usersCollection
                 .doc(fb.auth.currentUser.uid)
-                .collection("notes")
+                .collection('notes')
                 .add({
                     createdOn: new Date(),
                     content: note.content,
@@ -55,7 +55,7 @@ const store = new Vuex.Store({
         async editNote({}, docId, content) {
             await fb.usersCollection
                 .doc(fb.auth.currentUser.uid)
-                .collection("notes")
+                .collection('notes')
                 .doc(docId)
                 .update({
                     content: content
@@ -63,10 +63,10 @@ const store = new Vuex.Store({
         },
 
         async deleteNote({}, docId) {
-            if (window.confirm("Are you sure you want to delete?")) {
+            if (window.confirm('Are you sure you want to delete?')) {
                 await fb.usersCollection
                     .doc(fb.auth.currentUser.uid)
-                    .collection("notes")
+                    .collection('notes')
                     .doc(docId)
                     .delete();
             }
@@ -87,9 +87,9 @@ const store = new Vuex.Store({
             });
 
             // fetch user profile and set in state
-            dispatch("fetchUserProfile", user);
+            dispatch('fetchUserProfile', user);
 
-            router.push("/login");
+            router.push('/login');
         },
 
         async login({ dispatch }, form) {
@@ -100,15 +100,15 @@ const store = new Vuex.Store({
             );
 
             // fetch user profile and set in state
-            dispatch("fetchUserProfile", user);
+            dispatch('fetchUserProfile', user);
         },
 
         async logout({ commit }) {
             await fb.auth.signOut();
 
             // clear userProfile and redirect to /login
-            commit("setUserProfile", {});
-            router.push("/login");
+            commit('setUserProfile', {});
+            router.push('/login');
         },
 
         async fetchUserProfile({ commit }, user) {
@@ -116,11 +116,11 @@ const store = new Vuex.Store({
             const userProfile = await fb.usersCollection.doc(user.uid).get();
 
             // set user profile in state
-            commit("setUserProfile", userProfile.data());
+            commit('setUserProfile', userProfile.data());
 
             // change router to dashboard
-            if (router.currentRoute.path === "/login") {
-                router.push("/");
+            if (router.currentRoute.path === '/login') {
+                router.push('/');
             }
         }
     },

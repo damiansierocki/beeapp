@@ -54,7 +54,7 @@
 </template>
 
 <script>
-import PasswordReset from "@/components/PasswordReset";
+import PasswordReset from '@/components/PasswordReset';
 
 export default {
     components: {
@@ -62,14 +62,14 @@ export default {
     },
     data() {
         return {
-            email: "",
-            password: "",
+            email: '',
+            password: '',
             showPasswordReset: false
         };
     },
     methods: {
         login() {
-            this.$store.dispatch("login", {
+            this.$store.dispatch('login', {
                 email: this.email,
                 password: this.password
             });
@@ -83,5 +83,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/scss/login.scss";
+@import '../assets/scss/login.scss';
 </style>
