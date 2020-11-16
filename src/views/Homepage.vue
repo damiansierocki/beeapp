@@ -298,8 +298,8 @@ export default {
             this.$store.dispatch("getNotes");
         },
 
-        deleteNote() {
-            this.$store.dispatch("deleteNote");
+        deleteNote(docId) {
+            this.$store.dispatch("deleteNote", docId);
         },
 
         handleResize() {

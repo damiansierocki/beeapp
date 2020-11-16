@@ -13,14 +13,16 @@
                 <form @submit.prevent>
                     <textarea
                         class="content__textarea"
-                        v-model.trim="note.content"
+                        v-model.trim="content"
                         rows="6"
                         cols="20"
-                        :placeholder="notes.content"
+                        :placeholder="content"
                     ></textarea>
 
-                    <span class="content__plus-icon" @click="editNote"
-                        ><i class="fas fa-plus-circle"></i
+                    <span
+                        class="content__plus-icon"
+                        @click="editNote(note.id, content)"
+                        ><i class="fas fa-edit"></i
                     ></span>
                 </form>
             </div>
@@ -34,9 +36,7 @@ import { mapState } from "vuex";
 export default {
     data() {
         return {
-            note: {
-                content: ""
-            }
+            content: ""
         };
     },
 
@@ -45,15 +45,12 @@ export default {
     },
 
     methods: {
-        editNote() {
-            this.$store.dispatch("editNote", {
-                content:
-                    this.note.content !== ""
-                        ? this.note.content
-                        : this.notes.content
+        editNote(docId, content) {
+            this.$store.dispatch("editNote", docId, {
+                content: this.content
             });
 
-            this.note.content = "";
+            this.content = "";
         }
     }
 };

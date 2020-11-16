@@ -3,7 +3,7 @@
         <div class="content">
             <div class="content__header">
                 <h2 class="content__title">
-                    O mnie 🐝
+                    O aplikacji 🐝
                 </h2>
                 <span class="content__close" @click="$emit('close')">
                     <i class="fas fa-times"></i>

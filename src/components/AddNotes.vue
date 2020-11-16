@@ -43,7 +43,9 @@ export default {
 
     methods: {
         addNote() {
-            this.$store.dispatch("addNote", { content: this.note.content });
+            this.$store.dispatch("addNote", {
+                content: this.note.content
+            });
             this.note.content = "";
         }
     }

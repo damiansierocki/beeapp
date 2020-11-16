@@ -22,6 +22,25 @@ const store = new Vuex.Store({
     },
 
     actions: {
+        async getNotes() {
+            await fb.usersCollection
+                .doc(fb.auth.currentUser.uid)
+                .collection("notes")
+                .orderBy("createdOn", "desc")
+                .onSnapshot(snapshot => {
+                    var notesArray = [];
+
+                    snapshot.forEach(doc => {
+                        var note = doc.data();
+                        note.id = doc.id;
+
+                        notesArray.push(note);
+                    });
+
+                    store.commit("setNotes", notesArray);
+                });
+        },
+
         async addNote({}, note) {
             await fb.usersCollection
                 .doc(fb.auth.currentUser.uid)
@@ -33,51 +52,24 @@ const store = new Vuex.Store({
                 });
         },
 
-        async getNotes() {
-            fb.usersCollection
-                .doc(fb.auth.currentUser.uid)
-                .collection("notes")
-                .orderBy("createdOn", "desc")
-                .onSnapshot(snapshot => {
-                    let notesArray = [];
-
-                    snapshot.forEach(doc => {
-                        let note = doc.data();
-                        note.id = doc.id;
-
-                        notesArray.push(note);
-                    });
-
-                    store.commit("setNotes", notesArray);
-                });
-        },
-
-        async editNote({ docId }, note) {
+        async editNote({}, docId, content) {
             await fb.usersCollection
                 .doc(fb.auth.currentUser.uid)
                 .collection("notes")
                 .doc(docId)
                 .update({
-                    content: note.content
+                    content: content
                 });
         },
 
-        /* async deleteNote({ docId }) {
-            await fb.usersCollection
-                .doc(fb.auth.currentUser.uid)
-                .collection("notes")
-                .doc(docId)
-                .data()
-                .get()
-                .delete();
-        }, */
-
-        async deleteNote({ docId }, note) {
-            await fb.usersCollection
-                .doc(fb.auth.currentUser.uid)
-                .collection("notes")
-                .doc(docId)
-                .delete();
+        async deleteNote({}, docId) {
+            if (window.confirm("Are you sure you want to delete?")) {
+                await fb.usersCollection
+                    .doc(fb.auth.currentUser.uid)
+                    .collection("notes")
+                    .doc(docId)
+                    .delete();
+            }
         },
 
         async signup({ dispatch }, form) {

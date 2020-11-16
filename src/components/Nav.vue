@@ -45,7 +45,7 @@
                     konto</router-link
                 >
                 <a class="nav-right__link" @click="toggleAbout"
-                    ><i class="fas fa-info-circle right-icon"></i>O mnie</a
+                    ><i class="fas fa-info-circle right-icon"></i>O aplikacji</a
                 >
                 <a class="nav-right__link" @click="logout()"
                     ><i class="fas fa-sign-out-alt right-icon"></i>Wyloguj
