@@ -47,7 +47,11 @@ export default {
             const docId = this.docId;
             const note = { content: this.note.content };
 
-            this.$store.dispatch('editNote', { docId, note });
+            if (this.note.content !== '') {
+                this.$store.dispatch('editNote', { docId, note });
+            } else {
+                alert('Notatka nie może być pusta');
+            }
 
             this.note.content = '';
         }

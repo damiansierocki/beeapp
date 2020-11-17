@@ -7,7 +7,8 @@
         </Nav>
 
         <div class="content">
-            <div class="weather" v-if="showDesktop">
+            <Weather></Weather>
+            <!-- <div class="weather" v-if="showDesktop">
                 <div class="weather__content">
                     <div class="weather__left-div">
                         <p class="current-date">
@@ -95,9 +96,9 @@
                         </p>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
-            <div class="info">
+            <!-- <div class="info">
                 <h3 class="info__title">Informacje</h3>
                 <div class="info__all">
                     <div class="info__apiaries">
@@ -194,7 +195,7 @@
 
                         <br />
                         <span class="notes__createdOn">{{
-                            getCurrentDate(note.createdOn)
+                            changeFormatDate(note.createdOn)
                         }}</span>
                         <br />
                         <div class="notes__extras">
@@ -217,21 +218,18 @@
                         Nie ma żadnej notatki 😢
                     </li>
                 </ul>
-            </div>
+            </div> -->
         </div>
     </div>
 </template>
 
 <script>
-import AddNotes from '@/components/AddNotes';
-import EditNote from '@/components/EditNote';
+// import AddNotes from '@/components/AddNotes';
+// import EditNote from '@/components/EditNote';
+import Weather from '@/components/Weather';
 import Nav from '@/components/Nav';
-import { createLogger, mapState } from 'vuex';
+import { mapState } from 'vuex';
 import moment from 'moment';
-import axios from 'axios';
-
-const API = 'http://api.openweathermap.org/data/2.5/weather?units=metric';
-const KEY = '&APPID=bff05973f18c6a1a19bc66976347f831';
 
 export default {
     data() {
@@ -243,29 +241,15 @@ export default {
             currentDateMobile: '',
             currentDateDesktop: '',
             selectedNote: '',
-            selectedNoteContent: '',
-            weather: {
-                currentTemp: '',
-                icon: '',
-                location: '',
-                wind: '',
-                description: '',
-                country: '',
-                feels_like: '',
-                temp_min: '',
-                temp_max: '',
-                pressure: '',
-                sunrise: '',
-                sunset: '',
-                humidity: ''
-            }
+            selectedNoteContent: ''
         };
     },
 
     components: {
         Nav,
-        AddNotes,
-        EditNote
+        // AddNotes,
+        // EditNote,
+        Weather
     },
 
     computed: {
@@ -278,7 +262,6 @@ export default {
 
     beforeMount() {
         this.getCurrentDate();
-        this.geolocation();
     },
 
     created() {
@@ -326,7 +309,7 @@ export default {
             }
         },
 
-        getCurrentDate: function(val) {
+        getCurrentDate() {
             const newDate = new Date();
 
             const currentDateMobile = moment(newDate)
@@ -339,84 +322,23 @@ export default {
 
             this.currentDateMobile = currentDateMobile;
             this.currentDateDesktop = currentDateDesktop;
+        },
 
-            if (!val) {
+        changeFormatDate(value) {
+            if (!value) {
                 return '-';
             }
 
-            let date = val.toDate();
+            let date = value.toDate();
+
             return moment(date)
                 .locale('pl')
                 .fromNow();
-        },
-
-        getCurrentWeather(url) {
-            axios
-                .get(url)
-                .then(response => {
-                    this.weather.currentTemp = Math.round(
-                        response.data.main.temp
-                    );
-                    this.weather.wind = response.data.wind.speed + ' m/s';
-                    this.weather.location = response.data.name;
-                    this.weather.description =
-                        response.data.weather[0].description
-                            .charAt(0)
-                            .toUpperCase() +
-                        response.data.weather[0].description.slice(1);
-
-                    this.weather.country = response.data.sys.country;
-                    this.weather.icon =
-                        'http://openweathermap.org/img/w/' +
-                        response.data.weather[0].icon +
-                        '.png';
-                    this.weather.feels_like =
-                        Math.round(response.data.main.feels_like) + ' °C';
-                    this.weather.temp_min =
-                        Math.round(response.data.main.temp_min) + ' °C';
-                    this.weather.temp_max =
-                        Math.round(response.data.main.temp_max) + ' °C';
-                    this.weather.humidity = response.data.main.humidity + '%';
-                    this.weather.pressure = response.data.main.pressure + ' Pa';
-                    this.weather.sunrise = new Date(
-                        response.data.sys.sunrise * 1000
-                    )
-                        .toLocaleTimeString('pl-PL')
-                        .slice(0, 5);
-                    this.weather.sunset = new Date(
-                        response.data.sys.sunset * 1000
-                    )
-                        .toLocaleTimeString('pl-PL')
-                        .slice(0, 5);
-                })
-                .catch(error => {
-                    console.log(error);
-                });
-        },
-
-        geolocation() {
-            navigator.geolocation.getCurrentPosition(
-                this.buildUrl,
-                this.geoError
-            );
-        },
-
-        buildUrl(position) {
-            const lat = position.coords.latitude;
-            const lon = position.coords.longitude;
-
-            this.getCurrentWeather(
-                API + '&lat=' + lat + '&lon=' + lon + '&lang=pl' + KEY
-            );
-        },
-
-        geoError() {
-            this.getCurrentWeather(API + '&lat=0&lon=0' + KEY);
         }
     }
 };
 </script>
 
 <style lang="scss" scoped>
-@import '../assets/scss/homepage.scss';
+// @import '../assets/scss/homepage.scss';
 </style>

@@ -38,7 +38,7 @@
                                 >Zapomniałeś hasła ?</a
                             >
                         </li>
-                        <li>
+                        <li class="form__item">
                             <router-link class="form__link" to="/register"
                                 >Stwórz konto</router-link
                             >

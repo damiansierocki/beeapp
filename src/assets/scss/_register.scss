@@ -1,4 +1,4 @@
-@import "colors";
+@import 'colors';
 
 .register {
     height: 100vh;
@@ -7,12 +7,11 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    text-align: center;
 
     .content {
         .form {
             background: $base-background;
-            padding: 2.5rem;
+            padding: 3rem;
             display: flex;
             flex-direction: column;
             border-radius: 1rem;
@@ -20,14 +19,13 @@
             width: 90vw;
 
             &__header {
-                font-size: 2.2rem;
-                border-bottom: 1px dashed $black;
+                font-size: 1.8rem;
                 margin-bottom: 1rem;
             }
 
             &__label {
                 margin: 0.7rem 0 0.7rem 0;
-                font-size: 1.6rem;
+                font-size: 1.4rem;
             }
 
             &__input {
@@ -38,8 +36,11 @@
                 transition: all 0.2s ease-out;
 
                 &:focus {
-                    outline: none;
-                    box-shadow: inset 2px 2px 5px 0 rgba(42, 45, 48, 0.12);
+                    outline: 0;
+                    -webkit-box-shadow: 0px 10px 13px -7px #000000,
+                        5px 5px 15px 5px rgba(0, 0, 0, 0);
+                    box-shadow: 0px 10px 13px -7px #000000,
+                        5px 5px 15px 5px rgba(0, 0, 0, 0);
                 }
 
                 &::placeholder {
@@ -84,7 +85,7 @@
                 border: 1px solid #ffaa22;
                 display: block;
                 color: #333333;
-                font-size: 1.3rem;
+                font-size: 1rem;
                 padding: 0.5rem;
                 text-shadow: 0px 1px 0px #ffee66;
 
@@ -97,30 +98,79 @@
     }
 }
 
-@media (min-width: 480px) {
+@media (max-width: 319px) {
+    .register {
+        .content {
+            .form {
+                width: 90vw;
+                padding: 2rem;
+
+                &__header {
+                    font-size: 1.6rem;
+                }
+
+                &__label {
+                    font-size: 1.2rem;
+                }
+
+                &__input {
+                    padding: 0.7rem;
+                }
+
+                .btn {
+                    width: 70%;
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: 320px) {
+    .register {
+        .content {
+            .form {
+                .btn {
+                    width: 70%;
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: 360px) {
+    .register {
+        .content {
+            .form {
+                .btn {
+                    width: 65%;
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: 414px) {
+    .register {
+        .content {
+            .form {
+                width: 85vw;
+
+                .btn {
+                    width: 60%;
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: 540px) {
     .register {
         .content {
             .form {
                 width: 70vw;
 
-                &__header {
-                    font-size: 2.1rem;
-                }
-
-                &__label {
-                    font-size: 1.5rem;
-                }
-
-                &__input {
-                    padding: 0.9rem;
-                }
-
-                &__extras {
-                    font-size: 1.05rem;
-                }
-
                 .btn {
-                    font-size: 1.2rem;
+                    width: 60%;
                 }
             }
         }
@@ -131,26 +181,33 @@
     .register {
         .content {
             .form {
-                width: 50vw;
+                width: 55vw;
 
-                &__header {
-                    font-size: 2rem;
+                &__item {
+                    line-height: 1.5rem;
                 }
 
-                &__label {
-                    font-size: 1.4rem;
-                }
+                &__link {
+                    cursor: pointer;
+                    transition: 0.2s;
+                    display: block;
+                    width: 50%;
 
-                &__input {
-                    padding: 0.9rem;
-                }
-
-                &__extras {
-                    font-size: 1rem;
+                    &:hover {
+                        transform: scale(1.2);
+                        font-weight: bold;
+                    }
                 }
 
                 .btn {
-                    font-size: 1.1rem;
+                    width: 60%;
+                    cursor: pointer;
+                    transition: 0.2s;
+
+                    &:hover {
+                        transform: scale(1.1);
+                        font-weight: bold;
+                    }
                 }
             }
         }
@@ -161,48 +218,27 @@
     .register {
         .content {
             .form {
-                width: 25vw;
-
-                &__header {
-                    font-size: 1.8rem;
-                }
-
-                &__label {
-                    font-size: 1.3rem;
-                }
-
-                &__input {
-                    padding: 0.9rem;
-                }
-
-                &__link {
-                    cursor: pointer;
-                    transition: all 0.2s;
-
-                    &:hover {
-                        font-weight: bold;
-                    }
-                }
-
-                .btn {
-                    cursor: pointer;
-                    transition: all 0.2s;
-                    font-size: 1rem;
-
-                    &:hover {
-                        font-weight: bold;
-                    }
-                }
+                width: 45vw;
             }
         }
     }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1280px) {
     .register {
         .content {
             .form {
-                width: 20vw;
+                width: 35vw;
+            }
+        }
+    }
+}
+
+@media (min-width: 1440px) {
+    .register {
+        .content {
+            .form {
+                width: 30vw;
             }
         }
     }

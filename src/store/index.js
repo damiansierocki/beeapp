@@ -42,14 +42,16 @@ const store = new Vuex.Store({
         },
 
         async addNote({}, note) {
-            await fb.usersCollection
-                .doc(fb.auth.currentUser.uid)
-                .collection('notes')
-                .add({
-                    createdOn: new Date(),
-                    content: note.content,
-                    userId: fb.auth.currentUser.uid
-                });
+            if (window.confirm('Jesteś pewny/a, że chcesz dodać notatkę?')) {
+                await fb.usersCollection
+                    .doc(fb.auth.currentUser.uid)
+                    .collection('notes')
+                    .add({
+                        createdOn: new Date(),
+                        content: note.content,
+                        userId: fb.auth.currentUser.uid
+                    });
+            }
         },
 
         async editNote({}, { docId, note }) {
@@ -111,6 +113,32 @@ const store = new Vuex.Store({
             // clear userProfile and redirect to /login
             commit('setUserProfile', {});
             router.push('/login');
+        },
+
+        async updateProfile({ commit, dispatch }, user) {
+            const userId = fb.auth.currentUser.uid;
+
+            const currentEmail = await fb.usersCollection
+                .where('email', '==', user.email)
+                .get();
+
+            const currentUser = await fb.usersCollection
+                .where('username', '==', user.username)
+                .get();
+
+            if (currentEmail.empty === true) {
+                await fb.usersCollection.doc(userId).update({
+                    username: user.username,
+                    email: user.email,
+                    password: user.password
+                });
+
+                alert('Pomyślnie zmieniono email!');
+            } else {
+                alert('Email jest zajęty, wpisz inny.');
+            }
+
+            dispatch('fetchUserProfile', { uid: userId });
         },
 
         async fetchUserProfile({ commit }, user) {

@@ -1,4 +1,4 @@
-@import "colors";
+@import 'colors';
 
 .editnote {
     position: absolute;
@@ -61,6 +61,11 @@
             padding: 0.3rem;
         }
     }
+}
+
+.disabled {
+    opacity: 0.2;
+    pointer-events: none;
 }
 
 @media (min-width: 480px) {

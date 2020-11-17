@@ -7,7 +7,7 @@
                 </span>
             </div>
 
-            <div v-if="!showSuccess" class="content__inside">
+            <div class="content__inside" v-if="!showSuccess">
                 <h3 class="content__h3">
                     Zresetuj hasło 🐝
                 </h3>
@@ -40,13 +40,13 @@
             </div>
 
             <transition
-                v-else
+                v-if="showSuccess"
                 enter-active-class="animate__animated animate__bounceIn animate__fast"
                 mode="out-in"
                 appear
             >
                 <div class="content__extras">
-                    <p class="content__p--success">Sukces 👍</p>
+                    <p class="content__p content__p--success">Sukces 👍</p>
                     <p class="content__p">
                         Sprawdź email w celu odnalezienia linka do resetowania
                         hasła
@@ -75,6 +75,12 @@ export default {
             try {
                 await auth.sendPasswordResetEmail(this.email);
                 this.showSuccess = true;
+
+                setTimeout(() => {
+                    this.showSuccess = false;
+                }, 5000);
+
+                this.email = '';
             } catch (err) {
                 this.errorMsg = err.message;
             }
