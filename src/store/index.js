@@ -52,15 +52,16 @@ const store = new Vuex.Store({
                 });
         },
 
-        async editNote({ commit }, docId, note) {
-            await fb.usersCollection
-                .doc(fb.auth.currentUser.uid)
-                .collection('notes')
-                .doc(docId)
-                .update({
-                    createdOn: new Date(),
-                    content: note.content
-                });
+        async editNote({}, { docId, note }) {
+            if (window.confirm('Jesteś pewny/a, że chcesz edytować notatkę?')) {
+                await fb.usersCollection
+                    .doc(fb.auth.currentUser.uid)
+                    .collection('notes')
+                    .doc(docId)
+                    .update({
+                        content: note.content
+                    });
+            }
         },
 
         async deleteNote({}, docId) {

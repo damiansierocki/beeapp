@@ -44,9 +44,10 @@ export default {
 
     methods: {
         editNote() {
-            this.$store.dispatch('editNote', this.docId, {
-                content: this.note.content
-            });
+            const docId = this.docId;
+            const note = { content: this.note.content };
+
+            this.$store.dispatch('editNote', { docId, note });
 
             this.note.content = '';
         }
