@@ -190,27 +190,28 @@ export default {
 
                     if (weatherMain === 'Clouds') {
                         weather.style.backgroundImage =
-                            'url("https://www.treehugger.com/thmb/0YzrZoQ1XuYCdsMSG3meMO6_C58=/1000x562/smart/filters:no_upscale()/__opt__aboutcom__coeus__resources__content_migration__treehugger__images__2019__09__cloud-0693b27e05ee4a1c802182da4aa117a9.jpg")';
-                        weather.style.color = 'black';
+                            'url("https://www.popsci.com/resizer/eXGai221sRaUNXWRaw2Fs3Iy0Bk=/760x376/arc-anglerfish-arc2-prod-bonnier.s3.amazonaws.com/public/BESKPBEOLCXIMVYHKUMPY4JATI.jpg")';
+                        weather.style.backgroundPosition = 'top right';
                     } else if (weatherMain === 'Clear') {
                         weather.style.backgroundImage =
                             'url("https://media.istockphoto.com/photos/landscape-of-the-clear-sky-picture-id936912376?k=6&m=936912376&s=170667a&w=0&h=Aual4865oDTUX626nWZc9GPH6SRJXTNm_9WV2UOp62k=")';
-                        weather.style.color = 'black';
+                        weather.style.backgroundPosition = 'center';
                     } else if (weatherMain === 'Thunderstorm') {
                         weather.style.backgroundImage =
                             'url("https://s7d2.scene7.com/is/image/TWCNews/lightning_jpg-8")';
+                        weather.style.backgroundPosition = 'center';
                     } else if (weatherMain === 'Drizzle') {
                         weather.style.backgroundImage =
                             'url("https://img2.thejournal.ie/article/4668868/river?version=4668925&width=1340")';
-                        weather.style.color = 'white';
+                        weather.style.backgroundPosition = 'center';
                     } else if (weatherMain === 'Rain') {
                         weather.style.backgroundImage =
                             'url("https://www.wallpaperup.com/uploads/wallpapers/2015/11/17/838275/a6d998345ff8c9455cc43916377a2a7f-700.jpg")';
-                        weather.style.color = 'white';
+                        weather.style.backgroundPosition = 'top right';
                     } else if (weatherMain === 'Snow') {
                         weather.style.backgroundImage =
                             'url("https://s7d2.scene7.com/is/image/TWCNews/snowflake-formatted-snow-03222020jpg")';
-                        weather.style.color = 'white';
+                        weather.style.backgroundPosition = 'center';
                     }
                 })
                 .catch(error => {
