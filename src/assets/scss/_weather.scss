@@ -4,11 +4,15 @@
     display: flex;
     align-items: center;
     position: relative;
-    background: #dce35b;
-    background: -webkit-linear-gradient(to right, #45b649, #dce35b);
-    background: linear-gradient(to right, #45b649, #dce35b);
-    z-index: 0;
+    background-image: url('https://www.popsci.com/resizer/eXGai221sRaUNXWRaw2Fs3Iy0Bk=/760x376/arc-anglerfish-arc2-prod-bonnier.s3.amazonaws.com/public/BESKPBEOLCXIMVYHKUMPY4JATI.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
     width: 100%;
+    font-weight: bold;
+
+    // user can't select
+    user-select: none;
 
     &__content {
         padding: 1.5rem;
@@ -34,16 +38,19 @@
         &--temp {
             margin-top: 0.6rem;
             font-size: 3rem;
-            font-weight: bold;
+            font-weight: normal;
+        }
 
-            &::after {
+        &--location {
+            position: relative;
+
+            &::before {
                 content: '';
                 position: absolute;
-                bottom: 30%;
-                left: 33.5%;
+                bottom: 20%;
+                left: -13%;
                 height: 2rem;
                 border-right: 1px solid black;
-                z-index: -1;
             }
         }
 
@@ -56,16 +63,197 @@
         position: absolute;
         top: 0;
         right: 0;
-        z-index: -1;
-        width: 70px;
-        height: 70px;
-        transform: rotate(45deg);
-        background-color: red;
-        margin-right: 2rem;
+        width: 60px;
+        height: 60px;
 
         img {
             width: 100%;
             height: 100%;
+        }
+    }
+}
+
+@media (max-width: 319px) {
+    .weather {
+        &__p {
+            font-size: 0.8rem;
+
+            &--temp {
+                font-size: 2rem;
+            }
+
+            &--description {
+                font-size: 0.7rem;
+            }
+        }
+
+        &__icon {
+            display: none;
+        }
+    }
+}
+
+@media (min-width: 320px) {
+    .weather {
+        &__p {
+            &--description {
+                font-size: 0.8rem;
+            }
+        }
+    }
+}
+
+@media (min-width: 360px) {
+    .weather {
+        &__icon {
+            top: 15%;
+            right: 5%;
+        }
+    }
+}
+
+@media (min-width: 375px) {
+    .weather {
+        &__icon {
+            width: 65px;
+            height: 65px;
+        }
+    }
+}
+
+@media (min-width: 414px) {
+    .weather {
+        &__icon {
+            width: 70px;
+            height: 70px;
+
+            top: 8%;
+            right: 5%;
+        }
+
+        &__p {
+            &--description {
+                font-size: 1rem;
+            }
+        }
+    }
+}
+
+@media (min-width: 540px) {
+    .weather {
+        &__icon {
+            width: 80px;
+            height: 80px;
+            top: 10%;
+            right: 10%;
+        }
+    }
+}
+
+@media (min-width: 768px) {
+    .weather {
+        &__wind-humidity {
+            display: flex;
+            flex-direction: column;
+            margin-left: 2rem;
+            justify-content: flex-end;
+            padding-bottom: 0.6rem;
+        }
+
+        &__sunrise-sunset {
+            display: flex;
+            flex-direction: column;
+            margin-left: 2rem;
+            justify-content: flex-end;
+            padding-bottom: 0.6rem;
+        }
+
+        &__icon {
+            width: 90px;
+            height: 90px;
+            top: 0;
+            right: 0;
+        }
+
+        &__p {
+            &--location {
+                position: relative;
+                &::after {
+                    content: '';
+                    position: absolute;
+                    bottom: 25%;
+                    right: -7%;
+                    height: 2rem;
+                    border-right: 1px solid black;
+                }
+            }
+
+            &--humidity {
+                position: relative;
+                &::after {
+                    content: '';
+                    position: absolute;
+                    bottom: 25%;
+                    right: -7%;
+                    height: 2rem;
+                    border-right: 1px solid black;
+                }
+            }
+
+            &--wind {
+                margin-bottom: 0.6rem;
+            }
+
+            &--sunrise {
+                margin-bottom: 0.6rem;
+            }
+        }
+    }
+}
+
+@media (min-width: 1024px) {
+    .weather {
+        &__icon {
+            width: 100px;
+            height: 100px;
+            top: 7%;
+            right: 10%;
+        }
+    }
+}
+
+@media (min-width: 1280px) {
+    .weather {
+        &__temp-min-max {
+            display: flex;
+            flex-direction: column;
+            margin-left: 2rem;
+            justify-content: flex-end;
+            padding-bottom: 0.6rem;
+        }
+
+        &__p {
+            &--temp-min {
+                margin-bottom: 0.6rem;
+            }
+            &--sunset {
+                position: relative;
+                &::after {
+                    content: '';
+                    position: absolute;
+                    bottom: 25%;
+                    right: -7%;
+                    height: 2rem;
+                    border-right: 1px solid black;
+                }
+            }
+        }
+
+        &__icon {
+            width: 100px;
+            height: 100px;
+            top: 7%;
+            right: 10%;
         }
     }
 }

@@ -1,5 +1,5 @@
 <template>
-    <div class="homepage" v-if="showIfUserLogged">
+    <div class="homepage">
         <Nav v-if="showIfUserLogged">
             <template v-slot:nav-center__slot>
                 <h1 class="nav-center__slot">Strona główna</h1>
@@ -234,12 +234,8 @@ import moment from 'moment';
 export default {
     data() {
         return {
-            showDesktop: false,
             showAddNotes: false,
             showEditNote: false,
-            windowWidth: 0,
-            currentDateMobile: '',
-            currentDateDesktop: '',
             selectedNote: '',
             selectedNoteContent: ''
         };
@@ -260,18 +256,8 @@ export default {
         }
     },
 
-    beforeMount() {
-        this.getCurrentDate();
-    },
-
     created() {
-        window.addEventListener('resize', this.handleResize);
-        this.handleResize();
         this.getNotes();
-    },
-
-    destroyed() {
-        window.removeEventListener('resize', this.handleResize);
     },
 
     methods: {
@@ -297,31 +283,6 @@ export default {
 
         deleteNote(docId) {
             this.$store.dispatch('deleteNote', docId);
-        },
-
-        handleResize() {
-            this.windowWidth = window.innerWidth;
-
-            if (this.windowWidth > 768) {
-                this.showDesktop = true;
-            } else {
-                this.showDesktop = false;
-            }
-        },
-
-        getCurrentDate() {
-            const newDate = new Date();
-
-            const currentDateMobile = moment(newDate)
-                .locale('pl')
-                .format('DD MMMM, HH:mm');
-
-            const currentDateDesktop = moment(newDate)
-                .locale('pl')
-                .format('dddd, DD MMMM YYYY, HH:mm');
-
-            this.currentDateMobile = currentDateMobile;
-            this.currentDateDesktop = currentDateDesktop;
         },
 
         changeFormatDate(value) {
