@@ -212,29 +212,6 @@ export default {
 
         deleteNote(docId) {
             this.$store.dispatch('deleteNote', docId);
-        },
-
-        changeFormatDate(value) {
-            // let hey1 = new Date(value);
-            // let date = hey1.toDate();
-            // let hey2 = moment(date)
-            //     .locale('pl')
-            //     .fromNow();
-            // return hey2;
-            // return hey;
-            // let dateVar = moment(value).toDate();
-            // let newDateVar = dateVar
-            //     .utc()
-            //     .locale('pl')
-            //     .fromNow();
-            // return newDateVar;
-            /* let date = value.moment();
-
-            let date2 = date.toDate();
-
-            return date2.locale('pl').fromNow(); */
-            // let date = value.toLocaleString();
-            // return date;
         }
     }
 };

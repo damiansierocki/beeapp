@@ -1,0 +1,45 @@
+@import 'colors';
+
+.content {
+    display: flex;
+    flex-direction: center;
+    height: calc(100vh - 3.2rem);
+
+    &__list {
+        width: 100%;
+        list-style: none;
+    }
+
+    &__item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem;
+        user-select: none;
+
+        &:nth-child(even) {
+            background-color: #eee;
+        }
+
+        &--add {
+            justify-content: space-evenly;
+        }
+    }
+
+    &__apiary-name {
+        font-size: 0.9rem;
+        color: $orange;
+        font-weight: bold;
+    }
+
+    &__apiary-hives {
+        font-size: 0.9rem;
+    }
+
+    &__plus-icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 2rem;
+    }
+}
