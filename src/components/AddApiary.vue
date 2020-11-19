@@ -16,16 +16,22 @@
                     class="content__input"
                     type="text"
                     placeholder="Wpisz nazwę pasieki.."
+                    v-model.trim="apiary.name"
                 />
 
                 <label class="content__label" for="type">Typ pasieki</label>
-                <select class="content__input" name="type" id="type">
+                <select
+                    class="content__input"
+                    name="type"
+                    id="type"
+                    v-model="apiary.type"
+                >
                     <option value="1" disabled selected
                         >Wybierz typ pasieki</option
                     >
-                    <option value="2">Pasieka 2</option>
-                    <option value="3">Pasieka 3</option>
-                    <option value="4">Pasieka 4</option>
+                    <option value="Pasieka 2">Pasieka 2</option>
+                    <option value="Pasieka 3">Pasieka 3</option>
+                    <option value="Pasieka 4">Pasieka 4</option>
                 </select>
 
                 <label class="content__label" for="description">Opis</label>
@@ -34,17 +40,44 @@
                     type="text"
                     placeholder="Wpisz nazwę pasieki.."
                     rows="5"
+                    v-model.trim="apiary.description"
                 >
                 </textarea>
 
-                <button class="content__btn">Dodaj pasiekę</button>
+                <button class="content__btn" @click="addApiary()">
+                    Dodaj pasiekę
+                </button>
             </form>
         </div>
     </div>
 </template>
 
 <script>
-export default {};
+export default {
+    data() {
+        return {
+            apiary: {
+                name: '',
+                type: '',
+                description: ''
+            }
+        };
+    },
+
+    methods: {
+        addApiary() {
+            this.$store.dispatch('addApiary', {
+                name: this.apiary.name,
+                type: this.apiary.type,
+                description: this.apiary.description
+            });
+
+            this.apiary.name = '';
+            this.apiary.type = '';
+            this.apiary.description = '';
+        }
+    }
+};
 </script>
 
 <style lang="scss" scoped>

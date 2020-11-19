@@ -27,35 +27,38 @@
             <ApiaryView
                 v-if="showApiaryView"
                 @close="toggleApiaryView()"
+                :id="apiary.id"
+                :name="apiary.name"
+                :type="apiary.type"
+                :description="apiary.description"
             ></ApiaryView>
         </transition>
 
         <div class="content">
-            <ul class="content__list">
+            <div class="content__add" @click="toggleAddApiary()">
+                Kliknij aby dodać pasiekę
+                <span class="content__plus-icon"
+                    ><i class="fas fa-plus-square"></i
+                ></span>
+            </div>
+
+            <ul class="content__list" v-if="apiaries.length">
                 <li
-                    class="content__item content__item--add"
-                    @click="toggleAddApiary()"
+                    class="content__item"
+                    v-for="apiary in apiaries"
+                    :key="apiary.id"
+                    @click="
+                        toggleApiaryView(
+                            apiary.id,
+                            apiary.name,
+                            apiary.type,
+                            apiary.description
+                        )
+                    "
                 >
-                    Kliknij aby dodać pasiekę
-                    <span class="content__plus-icon"
-                        ><i class="fas fa-plus-square"></i
-                    ></span>
-                </li>
-
-                <li class="content__item" @click="toggleApiaryView()">
                     <p class="content__apiary-name">
-                        Bobrowniki
+                        {{ apiary.name }}
                     </p>
-                    <p class="content__apiary-hives">Ilość uli: 0</p>
-                </li>
-
-                <li class="content__item">
-                    <p class="content__apiary-name">Nowa Dąbrowa</p>
-                    <p class="content__apiary-hives">Ilość uli: 0</p>
-                </li>
-
-                <li class="content__item">
-                    <p class="content__apiary-name">Krzywnica</p>
                     <p class="content__apiary-hives">Ilość uli: 0</p>
                 </li>
             </ul>
@@ -73,7 +76,13 @@ export default {
     data() {
         return {
             showAddApiary: false,
-            showApiaryView: false
+            showApiaryView: false,
+            apiary: {
+                id: '',
+                name: '',
+                type: '',
+                description: ''
+            }
         };
     },
 
@@ -84,20 +93,40 @@ export default {
     },
 
     computed: {
-        ...mapState(['userProfile']),
+        ...mapState(['userProfile', 'apiaries']),
 
         showIfUserLogged() {
             return Object.keys(this.userProfile).length > 1;
         }
     },
 
+    created() {
+        this.getApiaries();
+    },
+
     methods: {
+        getApiaries() {
+            this.$store.dispatch('getApiaries');
+        },
+
         toggleAddApiary() {
             this.showAddApiary = !this.showAddApiary;
         },
 
-        toggleApiaryView() {
+        toggleApiaryView(id, name, type, description) {
             this.showApiaryView = !this.showApiaryView;
+
+            if (this.showApiaryView) {
+                this.apiary.id = id;
+                this.apiary.name = name;
+                this.apiary.type = type;
+                this.apiary.description = description;
+            } else {
+                this.apiary.id = {};
+                this.apiary.name = {};
+                this.apiary.type = {};
+                this.apiary.description = {};
+            }
         }
     }
 };

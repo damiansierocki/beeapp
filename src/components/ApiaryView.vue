@@ -17,7 +17,9 @@
                 <div class="info__center">
                     <div class="info__name">
                         <p class="info__p info__p--title">Nazwa</p>
-                        <p class="info__p info__p--description">Bobrowniki</p>
+                        <p class="info__p info__p--description">
+                            {{ this.name }}
+                        </p>
                     </div>
 
                     <div class="info__hives">
@@ -27,13 +29,15 @@
 
                     <div class="info__type">
                         <p class="info__p info__p--title">Typ</p>
-                        <p class="info__p info__p--description">Pasieka 2</p>
+                        <p class="info__p info__p--description">
+                            {{ this.type }}
+                        </p>
                     </div>
 
                     <div class="info__description">
                         <p class="info__p info__p--title">Opis</p>
                         <p class="info__p info__p--description">
-                            Ta pasieka jest fajna
+                            {{ this.description }}
                         </p>
                     </div>
                 </div>
@@ -43,7 +47,21 @@
 </template>
 
 <script>
-export default {};
+export default {
+    props: ['id', 'name', 'type', 'description'],
+    data() {
+        return {};
+    },
+
+    methods: {
+        viewApiary() {
+            const id = this.id;
+            const name = this.name;
+            const type = this.type;
+            const description = this.description;
+        }
+    }
+};
 </script>
 
 <style lang="scss" scoped>

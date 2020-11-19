@@ -18,7 +18,7 @@
                             src="./../assets/images/apiary.svg"
                             alt="apiary"
                         />
-                        <p class="info__number">0</p>
+                        <p class="info__number">{{ apiaries.length }}</p>
                         <p class="info__description info__description--red">
                             Pasieki
                         </p>
@@ -165,7 +165,7 @@ export default {
     },
 
     computed: {
-        ...mapState(['userProfile', 'notes']),
+        ...mapState(['userProfile', 'notes', 'apiaries']),
 
         showIfUserLogged() {
             return Object.keys(this.userProfile).length > 1;
@@ -208,6 +208,10 @@ export default {
 
         getNotes() {
             this.$store.dispatch('getNotes');
+        },
+
+        getApiaries() {
+            this.$store.dispatch('getApiaries');
         },
 
         deleteNote(docId) {

@@ -8,7 +8,8 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
     state: {
         userProfile: {},
-        notes: []
+        notes: [],
+        apiaries: []
     },
 
     mutations: {
@@ -18,6 +19,10 @@ const store = new Vuex.Store({
 
         setNotes(state, val) {
             state.notes = val;
+        },
+
+        setApiaries(state, val) {
+            state.apiaries = val;
         }
     },
 
@@ -38,6 +43,24 @@ const store = new Vuex.Store({
                     });
 
                     store.commit('setNotes', notesArray);
+                });
+        },
+
+        async getApiaries() {
+            await fb.usersCollection
+                .doc(fb.auth.currentUser.uid)
+                .collection('apiaries')
+                .onSnapshot(snapshot => {
+                    let apiariesArray = [];
+
+                    snapshot.forEach(doc => {
+                        let apiary = doc.data();
+                        apiary.id = doc.id;
+
+                        apiariesArray.push(apiary);
+                    });
+
+                    store.commit('setApiaries', apiariesArray);
                 });
         },
 
@@ -73,6 +96,19 @@ const store = new Vuex.Store({
                     .collection('notes')
                     .doc(docId)
                     .delete();
+            }
+        },
+
+        async addApiary({}, apiary) {
+            if (window.confirm('Jesteś pewny/a, że chcesz dodać pasiekę?')) {
+                await fb.usersCollection
+                    .doc(fb.auth.currentUser.uid)
+                    .collection('apiaries')
+                    .add({
+                        name: apiary.name,
+                        type: apiary.type,
+                        description: apiary.description
+                    });
             }
         },
 
