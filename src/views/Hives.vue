@@ -24,7 +24,29 @@
             <HivesView
                 v-if="showHivesView"
                 @close="toggleHivesView()"
+                :id="hive.id"
+                :status="hive.status"
+                :hiveId="hive.hiveId"
+                :apiary="hive.apiary"
+                :queen="hive.queen"
             ></HivesView>
+        </transition>
+
+        <transition
+            enter-active-class="animate__animated animate__backInDown animate__faster"
+            leave-active-class="animate__animated animate__backOutUp animate__faster"
+            mode="out-in"
+            appear
+        >
+            <EditHives
+                v-if="showEditHives"
+                @close="toggleEditHives()"
+                :id="hive.id"
+                :status="hive.status"
+                :hiveId="hive.hiveId"
+                :apiary="hive.apiary"
+                :queen="hive.queen"
+            ></EditHives>
         </transition>
 
         <div class="content">
@@ -49,14 +71,36 @@
                 >
                     <td
                         class="content__table-column"
-                        @click="toggleHivesView()"
+                        @click="
+                            toggleHivesView(
+                                hive.id,
+                                hive.apiary,
+                                hive.hiveId,
+                                hive.queen,
+                                hive.status
+                            )
+                        "
                     >
                         {{ hive.hiveId }}
                     </td>
-                    <td class="content__table-column">
+                    <td
+                        class="content__table-column"
+                        @click="
+                            toggleEditHives(
+                                hive.id,
+                                hive.status,
+                                hive.hiveId,
+                                hive.apiary,
+                                hive.queen
+                            )
+                        "
+                    >
                         <i class="fas fa-edit"></i>
                     </td>
-                    <td class="content__table-column">
+                    <td
+                        class="content__table-column"
+                        @click="deleteHives(hive.id)"
+                    >
                         <i class="far fa-trash-alt"></i>
                     </td>
                     <td class="content__table-column">
@@ -73,23 +117,28 @@ import Nav from "@/components/Nav";
 import { mapState } from "vuex";
 import AddHives from "@/components/AddHives";
 import HivesView from "@/components/HivesView";
+import EditHives from "@/components/EditHives";
 
 export default {
     data() {
         return {
             showAddHives: false,
+
             showHivesView: false,
+
+            showEditHives: false,
+
             hive: {
+                id: "",
                 apiary: "",
                 hiveId: "",
                 queen: "",
-                queenColor: "",
                 status: ""
             }
         };
     },
 
-    components: { Nav, AddHives, HivesView },
+    components: { Nav, AddHives, HivesView, EditHives },
 
     computed: {
         ...mapState(["userProfile", "hives"]),
@@ -104,6 +153,10 @@ export default {
     },
 
     methods: {
+        deleteHives(docId) {
+            this.$store.dispatch("deleteHives", docId);
+        },
+
         getHives() {
             this.$store.dispatch("getHives");
         },
@@ -112,8 +165,40 @@ export default {
             this.showAddHives = !this.showAddHives;
         },
 
-        toggleHivesView() {
+        toggleEditHives(id, status, hiveId, apiary, queen) {
+            this.showEditHives = !this.showEditHives;
+
+            if (this.showEditHives) {
+                this.hive.id = id;
+                this.hive.status = status;
+                this.hive.hiveId = hiveId;
+                this.hive.apiary = apiary;
+                this.hive.queen = queen;
+            } else {
+                this.hive.id = {};
+                this.hive.status = {};
+                this.hive.hiveId = {};
+                this.hive.apiary = {};
+                this.hive.queen = {};
+            }
+        },
+
+        toggleHivesView(id, status, hiveId, apiary, queen) {
             this.showHivesView = !this.showHivesView;
+
+            if (this.showHivesView) {
+                this.hive.id = id;
+                this.hive.status = status;
+                this.hive.hiveId = hiveId;
+                this.hive.apiary = apiary;
+                this.hive.queen = queen;
+            } else {
+                this.hive.id = {};
+                this.hive.status = {};
+                this.hive.hiveId = {};
+                this.hive.apiary = {};
+                this.hive.queen = {};
+            }
         }
     }
 };

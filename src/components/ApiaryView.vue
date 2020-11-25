@@ -22,11 +22,6 @@
                         </p>
                     </div>
 
-                    <div class="info__hives">
-                        <p class="info__p info__p--title">Ilość uli</p>
-                        <p class="info__p info__p--description">6</p>
-                    </div>
-
                     <div class="info__type">
                         <p class="info__p info__p--title">Typ</p>
                         <p class="info__p info__p--description">
@@ -48,19 +43,7 @@
 
 <script>
 export default {
-    props: ["id", "name", "type", "description"],
-    data() {
-        return {};
-    },
-
-    methods: {
-        viewApiary() {
-            const id = this.id;
-            const name = this.name;
-            const type = this.type;
-            const description = this.description;
-        }
-    }
+    props: ["id", "name", "type", "description"]
 };
 </script>
 

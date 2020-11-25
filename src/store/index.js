@@ -141,23 +141,7 @@ const store = new Vuex.Store({
             }
         },
 
-        // FIXME: fix this function
         async getHives() {
-            /* await fb.db
-                .collectionGroup('hives')
-                .get()
-                .onSnapshot(snapshot => {
-                    let hivesArray = [];
-
-                    snapshot.forEach(doc => {
-                        let hive = doc.data();
-                        hive.id = doc.id;
-
-                        hivesArray.push(hive);
-                    });
-
-                    store.commit('setHives', hivesArray);
-                }); */
             fb.usersCollection
                 .doc(fb.auth.currentUser.uid)
                 .collection("hives")
@@ -183,6 +167,31 @@ const store = new Vuex.Store({
                         apiary: hives.apiary,
                         queen: hives.queen
                     });
+            }
+        },
+
+        async editHives({}, { docId, hives }) {
+            if (window.confirm("Jesteś pewny/a, że chcesz edytować ul?")) {
+                await fb.usersCollection
+                    .doc(fb.auth.currentUser.uid)
+                    .collection("hives")
+                    .doc(docId)
+                    .update({
+                        status: hives.status,
+                        hiveId: hives.hiveId,
+                        apiary: hives.apiary,
+                        queen: hives.queen
+                    });
+            }
+        },
+
+        async deleteHives({}, docId) {
+            if (window.confirm("Jesteś pewny/a, że chcesz usunąć ul?")) {
+                await fb.usersCollection
+                    .doc(fb.auth.currentUser.uid)
+                    .collection("hives")
+                    .doc(docId)
+                    .delete();
             }
         },
 

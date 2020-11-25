@@ -64,7 +64,6 @@
                     <th class="content__table-column">Nazwa pasieki</th>
                     <th class="content__table-column">Edytuj</th>
                     <th class="content__table-column">Usuń</th>
-                    <th class="content__table-column">Ilość uli</th>
                 </tr>
                 <tr
                     class="content__table-row"
@@ -103,7 +102,6 @@
                     >
                         <i class="far fa-trash-alt"></i>
                     </td>
-                    <td class="content__table-column">0</td>
                 </tr>
             </table>
         </div>
@@ -131,12 +129,7 @@ export default {
                 name: "",
                 type: "",
                 description: ""
-            },
-
-            selectedApiary: "",
-            selectedApiaryName: "",
-            selectedApiaryType: "",
-            selectedApiaryDescription: ""
+            }
         };
     },
 
@@ -148,7 +141,7 @@ export default {
     },
 
     computed: {
-        ...mapState(["userProfile", "apiaries"]),
+        ...mapState(["userProfile", "apiaries", "hives"]),
 
         showIfUserLogged() {
             return Object.keys(this.userProfile).length > 1;
@@ -157,6 +150,7 @@ export default {
 
     created() {
         this.getApiaries();
+        this.getHives();
     },
 
     methods: {
@@ -168,11 +162,15 @@ export default {
             this.$store.dispatch("getApiaries");
         },
 
+        getHives() {
+            this.$store.dispatch("getHives");
+        },
+
         toggleAddApiary() {
             this.showAddApiary = !this.showAddApiary;
         },
 
-        toggleApiaryView(id, name, type, description) {
+        toggleApiaryView(id, name, type, description, hives) {
             this.showApiaryView = !this.showApiaryView;
 
             if (this.showApiaryView) {

@@ -18,33 +18,28 @@
                     <div class="info__status">
                         <p class="info__p info__p--title">Status</p>
                         <p class="info__p info__p--description">
-                            Żywy
+                            {{ this.status }}
                         </p>
                     </div>
 
                     <div class="info__hive-id">
                         <p class="info__p info__p--title">ID ula</p>
-                        <p class="info__p info__p--description">1</p>
+                        <p class="info__p info__p--description">
+                            {{ this.hiveId }}
+                        </p>
                     </div>
 
                     <div class="info__apiary">
                         <p class="info__p info__p--title">Pasieka</p>
                         <p class="info__p info__p--description">
-                            Bobrowniki
+                            {{ this.apiary }}
                         </p>
                     </div>
 
                     <div class="info__queen">
                         <p class="info__p info__p--title">Królowa</p>
                         <p class="info__p info__p--description">
-                            Tak
-                        </p>
-                    </div>
-
-                    <div class="info__queen-color">
-                        <p class="info__p info__p--title">Kolor królowej</p>
-                        <p class="info__p info__p--description">
-                            Czerwona
+                            {{ this.queen }}
                         </p>
                     </div>
                 </div>
@@ -54,7 +49,9 @@
 </template>
 
 <script>
-export default {};
+export default {
+    props: ["id", "status", "hiveId", "apiary", "queen"]
+};
 </script>
 
 <style lang="scss" scoped>

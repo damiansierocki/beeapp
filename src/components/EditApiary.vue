@@ -26,7 +26,7 @@
                     id="type"
                     v-model="apiary.type"
                 >
-                    <option value="1" disabled selected>
+                    <option disabled value="">
                         {{ this.type }}
                     </option>
                     <option value="Pasieka 2">Pasieka 2</option>
@@ -82,7 +82,7 @@ export default {
             ) {
                 this.$store.dispatch("editApiary", { docId, apiary });
             } else {
-                alert("Pasieka nie może być pusta");
+                alert("Wszystkie pola muszą być wypełnione!");
             }
 
             this.apiary.name = "";
