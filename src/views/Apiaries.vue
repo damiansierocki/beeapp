@@ -34,6 +34,23 @@
             ></ApiaryView>
         </transition>
 
+        <transition
+            enter-active-class="animate__animated animate__backInDown animate__faster"
+            leave-active-class="animate__animated animate__backOutUp animate__faster"
+            mode="out-in"
+            appear
+        >
+            <EditApiary
+                v-if="showEditApiary"
+                @close="toggleEditApiary()"
+                :id="apiary.id"
+                :name="apiary.name"
+                :type="apiary.type"
+                :description="apiary.description"
+            >
+            </EditApiary>
+        </transition>
+
         <div class="content">
             <div class="content__add" @click="toggleAddApiary()">
                 Kliknij aby dodać pasiekę
@@ -45,24 +62,44 @@
             <ul class="content__list" v-if="apiaries.length">
                 <li class="content__item">
                     <p>Nazwa pasieki</p>
+                    <p>Edytuj</p>
+                    <p>Usuń</p>
                     <p>Ilość Uli</p>
                 </li>
+
                 <li
                     class="content__item"
                     v-for="apiary in apiaries"
                     :key="apiary.id"
-                    @click="
-                        toggleApiaryView(
-                            apiary.id,
-                            apiary.name,
-                            apiary.type,
-                            apiary.description
-                        )
-                    "
                 >
-                    <p class="content__apiary-name">
+                    <p
+                        class="content__apiary-name"
+                        @click="
+                            toggleApiaryView(
+                                apiary.id,
+                                apiary.name,
+                                apiary.type,
+                                apiary.description
+                            )
+                        "
+                    >
                         {{ apiary.name }}
                     </p>
+                    <span
+                        class="content__icon"
+                        @click="
+                            toggleEditApiary(
+                                apiary.id,
+                                apiary.name,
+                                apiary.type,
+                                apiary.description
+                            )
+                        "
+                        ><i class="fas fa-edit"></i
+                    ></span>
+                    <span class="content__icon" @click="deleteApiary(apiary.id)"
+                        ><i class="far fa-trash-alt"></i
+                    ></span>
                     <p class="content__apiary-hives">0</p>
                 </li>
             </ul>
@@ -73,6 +110,7 @@
 <script>
 import AddApiary from '@/components/AddApiary';
 import ApiaryView from '@/components/ApiaryView';
+import EditApiary from '@/components/EditApiary';
 import Nav from '@/components/Nav';
 import { mapState } from 'vuex';
 
@@ -80,20 +118,30 @@ export default {
     data() {
         return {
             showAddApiary: false,
+
             showApiaryView: false,
+
+            showEditApiary: false,
+
             apiary: {
                 id: '',
                 name: '',
                 type: '',
                 description: ''
-            }
+            },
+
+            selectedApiary: '',
+            selectedApiaryName: '',
+            selectedApiaryType: '',
+            selectedApiaryDescription: ''
         };
     },
 
     components: {
         Nav,
         AddApiary,
-        ApiaryView
+        ApiaryView,
+        EditApiary
     },
 
     computed: {
@@ -109,6 +157,10 @@ export default {
     },
 
     methods: {
+        deleteApiary(docId) {
+            this.$store.dispatch('deleteApiary', docId);
+        },
+
         getApiaries() {
             this.$store.dispatch('getApiaries');
         },
@@ -121,6 +173,22 @@ export default {
             this.showApiaryView = !this.showApiaryView;
 
             if (this.showApiaryView) {
+                this.apiary.id = id;
+                this.apiary.name = name;
+                this.apiary.type = type;
+                this.apiary.description = description;
+            } else {
+                this.apiary.id = {};
+                this.apiary.name = {};
+                this.apiary.type = {};
+                this.apiary.description = {};
+            }
+        },
+
+        toggleEditApiary(id, name, type, description) {
+            this.showEditApiary = !this.showEditApiary;
+
+            if (this.showEditApiary) {
                 this.apiary.id = id;
                 this.apiary.name = name;
                 this.apiary.type = type;

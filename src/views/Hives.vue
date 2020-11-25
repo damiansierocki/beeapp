@@ -54,7 +54,7 @@
                         {{ hive.hiveId }}
                     </p>
                     <p class="content__apiary-name">
-                        {{ hive.apiary }}
+                        {{ hive.apiary.apiary }}
                     </p>
                 </li>
             </ul>

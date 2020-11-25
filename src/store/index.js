@@ -33,7 +33,7 @@ const store = new Vuex.Store({
 
     actions: {
         async getNotes() {
-            await fb.usersCollection
+            fb.usersCollection
                 .doc(fb.auth.currentUser.uid)
                 .collection('notes')
                 .orderBy('createdOn', 'desc')
@@ -87,7 +87,7 @@ const store = new Vuex.Store({
         },
 
         async getApiaries() {
-            await fb.usersCollection
+            fb.usersCollection
                 .doc(fb.auth.currentUser.uid)
                 .collection('apiaries')
                 .onSnapshot(snapshot => {
@@ -117,11 +117,35 @@ const store = new Vuex.Store({
             }
         },
 
+        async editApiary({}, { docId, apiary }) {
+            if (window.confirm('Jesteś pewny/a, że chcesz edytować notatkę?')) {
+                await fb.usersCollection
+                    .doc(fb.auth.currentUser.uid)
+                    .collection('apiaries')
+                    .doc(docId)
+                    .update({
+                        name: apiary.name,
+                        type: apiary.type,
+                        description: apiary.description
+                    });
+            }
+        },
+
+        async deleteApiary({}, docId) {
+            if (window.confirm('Jesteś pewny/a, że chcesz usunąć pasiekę?')) {
+                await fb.usersCollection
+                    .doc(fb.auth.currentUser.uid)
+                    .collection('apiaries')
+                    .doc(docId)
+                    .delete();
+            }
+        },
+
         // FIXME: fix this function
         async getHives() {
-            await fb.usersCollection
-                .doc(fb.auth.currentUser.uid)
+            /* await db
                 .collectionGroup('hives')
+                .get()
                 .onSnapshot(snapshot => {
                     let hivesArray = [];
 
@@ -133,7 +157,24 @@ const store = new Vuex.Store({
                     });
 
                     store.commit('setHives', hivesArray);
-                });
+                }); */
+            /* fb.usersCollection
+                .doc(fb.auth.currentUser.uid)
+                .collection('apiaries')
+                .doc('VdXVV93OCeSnyMzlLqMT')
+                .collection('hives')
+                .onSnapshot(snapshot => {
+                    let hivesArray = [];
+
+                    snapshot.docs.forEach(doc => {
+                        let hive = doc.data();
+                        hive.id = doc.id;
+
+                        hivesArray.push(hive);
+                    });
+
+                    store.commit('setHives', hivesArray);
+                }); */
         },
 
         async addHives({}, { docId, hives }) {
@@ -192,16 +233,16 @@ const store = new Vuex.Store({
             router.push('/login');
         },
 
-        async updateProfile({ commit, dispatch }, user) {
+        async updateProfile({ dispatch }, user) {
             const userId = fb.auth.currentUser.uid;
 
             const currentEmail = await fb.usersCollection
                 .where('email', '==', user.email)
                 .get();
 
-            const currentUser = await fb.usersCollection
+            /* const currentUser = await fb.usersCollection
                 .where('username', '==', user.username)
-                .get();
+                .get(); */
 
             if (currentEmail.empty === true) {
                 await fb.usersCollection.doc(userId).update({

@@ -30,8 +30,6 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
-
 export default {
     props: ['docId', 'noteContent'],
     data() {
