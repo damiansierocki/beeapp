@@ -58,19 +58,19 @@
 </template>
 
 <script>
-import { auth } from '@/firebase';
+import { auth } from "@/firebase";
 
 export default {
     data() {
         return {
-            email: '',
+            email: "",
             showSuccess: false,
-            errorMsg: ''
+            errorMsg: ""
         };
     },
     methods: {
         async resetPassword() {
-            this.errorMsg = '';
+            this.errorMsg = "";
 
             try {
                 await auth.sendPasswordResetEmail(this.email);
@@ -80,7 +80,7 @@ export default {
                     this.showSuccess = false;
                 }, 5000);
 
-                this.email = '';
+                this.email = "";
             } catch (err) {
                 this.errorMsg = err.message;
             }
@@ -90,5 +90,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../assets/scss/passwordReset.scss';
+@import "../assets/scss/passwordReset.scss";
 </style>

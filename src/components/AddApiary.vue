@@ -26,9 +26,7 @@
                     id="type"
                     v-model="apiary.type"
                 >
-                    <option value="1" disabled selected
-                        >Wybierz typ pasieki</option
-                    >
+                    <option value="" disabled>Wybierz typ pasieki</option>
                     <option value="Pasieka 2">Pasieka 2</option>
                     <option value="Pasieka 3">Pasieka 3</option>
                     <option value="Pasieka 4">Pasieka 4</option>
@@ -57,29 +55,29 @@ export default {
     data() {
         return {
             apiary: {
-                name: '',
-                type: '',
-                description: ''
+                name: "",
+                type: "",
+                description: ""
             }
         };
     },
 
     methods: {
         addApiary() {
-            this.$store.dispatch('addApiary', {
+            this.$store.dispatch("addApiary", {
                 name: this.apiary.name,
                 type: this.apiary.type,
                 description: this.apiary.description
             });
 
-            this.apiary.name = '';
-            this.apiary.type = '';
-            this.apiary.description = '';
+            this.apiary.name = "";
+            this.apiary.type = "";
+            this.apiary.description = "";
         }
     }
 };
 </script>
 
 <style lang="scss" scoped>
-@import '../assets/scss/addapiary.scss';
+@import "../assets/scss/addapiary.scss";
 </style>

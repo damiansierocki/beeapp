@@ -61,16 +61,16 @@
 </template>
 
 <script>
-import Nav from '@/components/Nav';
-import { mapState } from 'vuex';
+import Nav from "@/components/Nav";
+import { mapState } from "vuex";
 
 export default {
     data() {
         return {
             user: {
-                username: '',
-                email: '',
-                password: ''
+                username: "",
+                email: "",
+                password: ""
             }
         };
     },
@@ -80,7 +80,7 @@ export default {
     },
 
     computed: {
-        ...mapState(['userProfile']),
+        ...mapState(["userProfile"]),
 
         showIfUserLogged() {
             return Object.keys(this.userProfile).length > 1;
@@ -89,35 +89,35 @@ export default {
 
     methods: {
         cancel() {
-            this.user.username = '';
-            this.user.email = '';
-            this.user.password = '';
+            this.user.username = "";
+            this.user.email = "";
+            this.user.password = "";
         },
 
         updateProfile() {
-            this.$store.dispatch('updateProfile', {
+            this.$store.dispatch("updateProfile", {
                 username:
-                    this.user.username !== ''
+                    this.user.username !== ""
                         ? this.user.username
                         : this.userProfile.username,
                 email:
-                    this.user.email !== ''
+                    this.user.email !== ""
                         ? this.user.email
                         : this.userProfile.email,
                 password:
-                    this.user.password !== ''
+                    this.user.password !== ""
                         ? this.user.password
                         : this.userProfile.password
             });
 
-            this.user.username = '';
-            this.user.email = '';
-            this.user.password = '';
+            this.user.username = "";
+            this.user.email = "";
+            this.user.password = "";
         }
     }
 };
 </script>
 
 <style lang="scss" scoped>
-@import '../assets/scss/myaccount.scss';
+@import "../assets/scss/myaccount.scss";
 </style>

@@ -54,14 +54,14 @@
 
 <script>
 export default {
-    props: ['id', 'name', 'type', 'description'],
+    props: ["id", "name", "type", "description"],
 
     data() {
         return {
             apiary: {
-                name: '',
-                type: '',
-                description: ''
+                name: "",
+                type: "",
+                description: ""
             }
         };
     },
@@ -76,23 +76,23 @@ export default {
             };
 
             if (
-                this.apiary.name !== '' &&
-                this.apiary.type !== '' &&
-                this.apiary.description !== ''
+                this.apiary.name !== "" &&
+                this.apiary.type !== "" &&
+                this.apiary.description !== ""
             ) {
-                this.$store.dispatch('editApiary', { docId, apiary });
+                this.$store.dispatch("editApiary", { docId, apiary });
             } else {
-                alert('Pasieka nie może być pusta');
+                alert("Pasieka nie może być pusta");
             }
 
-            this.apiary.name = '';
-            this.apiary.type = '';
-            this.apiary.description = '';
+            this.apiary.name = "";
+            this.apiary.type = "";
+            this.apiary.description = "";
         }
     }
 };
 </script>
 
 <style lang="scss" scoped>
-@import '../assets/scss/editapiary.scss';
+@import "../assets/scss/editapiary.scss";
 </style>

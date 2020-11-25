@@ -1,5 +1,4 @@
 // .prettierrc.js
 module.exports = {
-    tabWidth: 4,
-    singleQuote: true
+    tabWidth: 4
 };

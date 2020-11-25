@@ -111,11 +111,11 @@
 </template>
 
 <script>
-import AddApiary from '@/components/AddApiary';
-import ApiaryView from '@/components/ApiaryView';
-import EditApiary from '@/components/EditApiary';
-import Nav from '@/components/Nav';
-import { mapState } from 'vuex';
+import AddApiary from "@/components/AddApiary";
+import ApiaryView from "@/components/ApiaryView";
+import EditApiary from "@/components/EditApiary";
+import Nav from "@/components/Nav";
+import { mapState } from "vuex";
 
 export default {
     data() {
@@ -127,16 +127,16 @@ export default {
             showEditApiary: false,
 
             apiary: {
-                id: '',
-                name: '',
-                type: '',
-                description: ''
+                id: "",
+                name: "",
+                type: "",
+                description: ""
             },
 
-            selectedApiary: '',
-            selectedApiaryName: '',
-            selectedApiaryType: '',
-            selectedApiaryDescription: ''
+            selectedApiary: "",
+            selectedApiaryName: "",
+            selectedApiaryType: "",
+            selectedApiaryDescription: ""
         };
     },
 
@@ -148,7 +148,7 @@ export default {
     },
 
     computed: {
-        ...mapState(['userProfile', 'apiaries']),
+        ...mapState(["userProfile", "apiaries"]),
 
         showIfUserLogged() {
             return Object.keys(this.userProfile).length > 1;
@@ -161,11 +161,11 @@ export default {
 
     methods: {
         deleteApiary(docId) {
-            this.$store.dispatch('deleteApiary', docId);
+            this.$store.dispatch("deleteApiary", docId);
         },
 
         getApiaries() {
-            this.$store.dispatch('getApiaries');
+            this.$store.dispatch("getApiaries");
         },
 
         toggleAddApiary() {
@@ -208,5 +208,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../assets/scss/apiaries.scss';
+@import "../assets/scss/apiaries.scss";
 </style>

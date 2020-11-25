@@ -1,7 +1,7 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
-import * as fb from '../firebase';
-import router from '../router/index';
+import Vue from "vue";
+import Vuex from "vuex";
+import * as fb from "../firebase";
+import router from "../router/index";
 
 Vue.use(Vuex);
 
@@ -35,8 +35,8 @@ const store = new Vuex.Store({
         async getNotes() {
             fb.usersCollection
                 .doc(fb.auth.currentUser.uid)
-                .collection('notes')
-                .orderBy('createdOn', 'desc')
+                .collection("notes")
+                .orderBy("createdOn", "desc")
                 .onSnapshot(snapshot => {
                     let notesArray = [];
 
@@ -47,15 +47,15 @@ const store = new Vuex.Store({
                         notesArray.push(note);
                     });
 
-                    store.commit('setNotes', notesArray);
+                    store.commit("setNotes", notesArray);
                 });
         },
 
         async addNote({}, note) {
-            if (window.confirm('Jesteś pewny/a, że chcesz dodać notatkę?')) {
+            if (window.confirm("Jesteś pewny/a, że chcesz dodać notatkę?")) {
                 await fb.usersCollection
                     .doc(fb.auth.currentUser.uid)
-                    .collection('notes')
+                    .collection("notes")
                     .add({
                         createdOn: new Date(),
                         content: note.content,
@@ -65,10 +65,10 @@ const store = new Vuex.Store({
         },
 
         async editNote({}, { docId, note }) {
-            if (window.confirm('Jesteś pewny/a, że chcesz edytować notatkę?')) {
+            if (window.confirm("Jesteś pewny/a, że chcesz edytować notatkę?")) {
                 await fb.usersCollection
                     .doc(fb.auth.currentUser.uid)
-                    .collection('notes')
+                    .collection("notes")
                     .doc(docId)
                     .update({
                         content: note.content
@@ -77,10 +77,10 @@ const store = new Vuex.Store({
         },
 
         async deleteNote({}, docId) {
-            if (window.confirm('Jesteś pewny/a, że chcesz usunąć notatkę?')) {
+            if (window.confirm("Jesteś pewny/a, że chcesz usunąć notatkę?")) {
                 await fb.usersCollection
                     .doc(fb.auth.currentUser.uid)
-                    .collection('notes')
+                    .collection("notes")
                     .doc(docId)
                     .delete();
             }
@@ -89,7 +89,7 @@ const store = new Vuex.Store({
         async getApiaries() {
             fb.usersCollection
                 .doc(fb.auth.currentUser.uid)
-                .collection('apiaries')
+                .collection("apiaries")
                 .onSnapshot(snapshot => {
                     let apiariesArray = [];
 
@@ -100,15 +100,15 @@ const store = new Vuex.Store({
                         apiariesArray.push(apiary);
                     });
 
-                    store.commit('setApiaries', apiariesArray);
+                    store.commit("setApiaries", apiariesArray);
                 });
         },
 
         async addApiary({}, apiary) {
-            if (window.confirm('Jesteś pewny/a, że chcesz dodać pasiekę?')) {
+            if (window.confirm("Jesteś pewny/a, że chcesz dodać pasiekę?")) {
                 await fb.usersCollection
                     .doc(fb.auth.currentUser.uid)
-                    .collection('apiaries')
+                    .collection("apiaries")
                     .add({
                         name: apiary.name,
                         type: apiary.type,
@@ -118,10 +118,10 @@ const store = new Vuex.Store({
         },
 
         async editApiary({}, { docId, apiary }) {
-            if (window.confirm('Jesteś pewny/a, że chcesz edytować notatkę?')) {
+            if (window.confirm("Jesteś pewny/a, że chcesz edytować notatkę?")) {
                 await fb.usersCollection
                     .doc(fb.auth.currentUser.uid)
-                    .collection('apiaries')
+                    .collection("apiaries")
                     .doc(docId)
                     .update({
                         name: apiary.name,
@@ -132,10 +132,10 @@ const store = new Vuex.Store({
         },
 
         async deleteApiary({}, docId) {
-            if (window.confirm('Jesteś pewny/a, że chcesz usunąć pasiekę?')) {
+            if (window.confirm("Jesteś pewny/a, że chcesz usunąć pasiekę?")) {
                 await fb.usersCollection
                     .doc(fb.auth.currentUser.uid)
-                    .collection('apiaries')
+                    .collection("apiaries")
                     .doc(docId)
                     .delete();
             }
@@ -160,9 +160,7 @@ const store = new Vuex.Store({
                 }); */
             fb.usersCollection
                 .doc(fb.auth.currentUser.uid)
-                .collection('hives')
-                .doc('VdXVV93OCeSnyMzlLqMT')
-                .collection('hives')
+                .collection("hives")
                 .onSnapshot(snapshot => {
                     let hivesArray = [];
                     snapshot.docs.forEach(doc => {
@@ -170,23 +168,20 @@ const store = new Vuex.Store({
                         hive.id = doc.id;
                         hivesArray.push(hive);
                     });
-                    store.commit('setHives', hivesArray);
+                    store.commit("setHives", hivesArray);
                 });
         },
 
-        async addHives({}, { docId, hives }) {
-            if (window.confirm('Jesteś pewny/a, że chcesz dodać ul?')) {
+        async addHives({}, hives) {
+            if (window.confirm("Jesteś pewny/a, że chcesz dodać ul?")) {
                 await fb.usersCollection
                     .doc(fb.auth.currentUser.uid)
-                    .collection('apiaries')
-                    .doc(docId)
-                    .collection('hives')
+                    .collection("hives")
                     .add({
                         status: hives.status,
                         hiveId: hives.hiveId,
                         apiary: hives.apiary,
-                        queen: hives.queen,
-                        queenColor: hives.queenColor
+                        queen: hives.queen
                     });
             }
         },
@@ -206,9 +201,9 @@ const store = new Vuex.Store({
             });
 
             // fetch user profile and set in state
-            dispatch('fetchUserProfile', user);
+            dispatch("fetchUserProfile", user);
 
-            router.push('/login');
+            router.push("/login");
         },
 
         async login({ dispatch }, form) {
@@ -219,22 +214,22 @@ const store = new Vuex.Store({
             );
 
             // fetch user profile and set in state
-            dispatch('fetchUserProfile', user);
+            dispatch("fetchUserProfile", user);
         },
 
         async logout({ commit }) {
             await fb.auth.signOut();
 
             // clear userProfile and redirect to /login
-            commit('setUserProfile', {});
-            router.push('/login');
+            commit("setUserProfile", {});
+            router.push("/login");
         },
 
         async updateProfile({ dispatch }, user) {
             const userId = fb.auth.currentUser.uid;
 
             const currentEmail = await fb.usersCollection
-                .where('email', '==', user.email)
+                .where("email", "==", user.email)
                 .get();
 
             /* const currentUser = await fb.usersCollection
@@ -248,12 +243,12 @@ const store = new Vuex.Store({
                     password: user.password
                 });
 
-                alert('Pomyślnie zmieniono email!');
+                alert("Pomyślnie zmieniono email!");
             } else {
-                alert('Email jest zajęty, wpisz inny.');
+                alert("Email jest zajęty, wpisz inny.");
             }
 
-            dispatch('fetchUserProfile', { uid: userId });
+            dispatch("fetchUserProfile", { uid: userId });
         },
 
         async fetchUserProfile({ commit }, user) {
@@ -261,11 +256,11 @@ const store = new Vuex.Store({
             const userProfile = await fb.usersCollection.doc(user.uid).get();
 
             // set user profile in state
-            commit('setUserProfile', userProfile.data());
+            commit("setUserProfile", userProfile.data());
 
             // change router to dashboard
-            if (router.currentRoute.path === '/login') {
-                router.push('/');
+            if (router.currentRoute.path === "/login") {
+                router.push("/");
             }
         }
     },

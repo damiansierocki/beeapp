@@ -42,7 +42,7 @@
                     <option
                         v-for="apiary in apiaries"
                         :key="apiary.id"
-                        :value="{ id: apiary.id, apiary: apiary.name }"
+                        :value="apiary.name"
                         >{{ apiary.name }}</option
                     >
                 </select>
@@ -61,21 +61,6 @@
                     <option value="Nie">Nie </option>
                 </select>
 
-                <label class="content__label" for="queen-color"
-                    >Kolor królowej</label
-                >
-                <select
-                    class="content__input"
-                    name="queen-color"
-                    id="queen-color"
-                    v-model="hives.queenColor"
-                >
-                    <option disabled value="">Wybierz kolor królowej</option>
-                    <option value="Czerwony">Czerwony</option>
-                    <option value="Niebieski">Niebieski </option>
-                    <option value="Zielony">Zielony </option>
-                </select>
-
                 <button class="content__btn" @click="addHives()">
                     Dodaj ul
                 </button>
@@ -85,23 +70,22 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState } from "vuex";
 
 export default {
     data() {
         return {
             hives: {
-                status: '',
-                hiveId: '',
-                apiary: '',
-                queen: '',
-                queenColor: ''
+                status: "",
+                hiveId: "",
+                apiary: "",
+                queen: ""
             }
         };
     },
 
     computed: {
-        ...mapState(['userProfile', 'apiaries'])
+        ...mapState(["userProfile", "apiaries"])
     },
 
     created() {
@@ -110,35 +94,26 @@ export default {
 
     methods: {
         getApiaries() {
-            this.$store.dispatch('getApiaries');
+            this.$store.dispatch("getApiaries");
         },
 
         addHives() {
-            const docId = this.hives.apiary.id;
-
-            const hives = {
+            this.$store.dispatch("addHives", {
                 status: this.hives.status,
                 hiveId: this.hives.hiveId,
                 apiary: this.hives.apiary,
-                queen: this.hives.queen,
-                queenColor: this.hives.queenColor
-            };
-
-            this.$store.dispatch('addHives', {
-                docId,
-                hives
+                queen: this.hives.queen
             });
 
-            this.hives.status = '';
-            this.hives.hiveId = '';
-            this.hives.apiary = '';
-            this.hives.queen = '';
-            this.hives.queenColor = '';
+            this.hives.status = "";
+            this.hives.hiveId = "";
+            this.hives.apiary = "";
+            this.hives.queen = "";
         }
     }
 };
 </script>
 
 <style lang="scss" scoped>
-@import '../assets/scss/addhives.scss';
+@import "../assets/scss/addhives.scss";
 </style>

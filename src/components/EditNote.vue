@@ -31,11 +31,11 @@
 
 <script>
 export default {
-    props: ['docId', 'noteContent'],
+    props: ["docId", "noteContent"],
     data() {
         return {
             note: {
-                content: ''
+                content: ""
             }
         };
     },
@@ -45,18 +45,18 @@ export default {
             const docId = this.docId;
             const note = { content: this.note.content };
 
-            if (this.note.content !== '') {
-                this.$store.dispatch('editNote', { docId, note });
+            if (this.note.content !== "") {
+                this.$store.dispatch("editNote", { docId, note });
             } else {
-                alert('Notatka nie może być pusta');
+                alert("Notatka nie może być pusta");
             }
 
-            this.note.content = '';
+            this.note.content = "";
         }
     }
 };
 </script>
 
 <style lang="scss" scoped>
-@import '../assets/scss/editnote.scss';
+@import "../assets/scss/editnote.scss";
 </style>

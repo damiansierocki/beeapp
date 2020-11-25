@@ -78,11 +78,11 @@
 </template>
 
 <script>
-import axios from 'axios';
-import moment from 'moment';
+import axios from "axios";
+import moment from "moment";
 
-const API = 'http://api.openweathermap.org/data/2.5/weather?units=metric';
-const KEY = '&APPID=bff05973f18c6a1a19bc66976347f831';
+const API = "http://api.openweathermap.org/data/2.5/weather?units=metric";
+const KEY = "&APPID=bff05973f18c6a1a19bc66976347f831";
 
 export default {
     data() {
@@ -90,19 +90,19 @@ export default {
             showDesktop: false,
             showDesktop1280: false,
             windowWidth: 0,
-            currentDate: '',
+            currentDate: "",
             weather: {
-                currentTemp: '',
-                icon: '',
-                location: '',
-                wind: '',
-                description: '',
-                temp_min: '',
-                temp_max: '',
-                sunrise: '',
-                sunset: '',
-                humidity: '',
-                main: ''
+                currentTemp: "",
+                icon: "",
+                location: "",
+                wind: "",
+                description: "",
+                temp_min: "",
+                temp_max: "",
+                sunrise: "",
+                sunset: "",
+                humidity: "",
+                main: ""
             }
         };
     },
@@ -113,12 +113,12 @@ export default {
     },
 
     created() {
-        window.addEventListener('resize', this.handleResize);
+        window.addEventListener("resize", this.handleResize);
         this.handleResize();
     },
 
     destroyed() {
-        window.removeEventListener('resize', this.handleResize);
+        window.removeEventListener("resize", this.handleResize);
     },
 
     methods: {
@@ -126,8 +126,8 @@ export default {
             const newDate = new Date();
 
             const currentDate = moment(newDate)
-                .locale('pl')
-                .format('dddd, DD MMMM');
+                .locale("pl")
+                .format("dddd, DD MMMM");
 
             this.currentDate = currentDate;
         },
@@ -156,7 +156,7 @@ export default {
                         response.data.main.temp
                     );
                     this.weather.wind =
-                        Math.round(response.data.wind.speed) + ' m/s';
+                        Math.round(response.data.wind.speed) + " m/s";
                     this.weather.location = response.data.name;
                     this.weather.description =
                         response.data.weather[0].description
@@ -165,53 +165,53 @@ export default {
                         response.data.weather[0].description.slice(1);
                     this.weather.main = response.data.weather[0].main;
                     this.weather.icon =
-                        'http://openweathermap.org/img/w/' +
+                        "http://openweathermap.org/img/w/" +
                         response.data.weather[0].icon +
-                        '.png';
+                        ".png";
                     this.weather.temp_min =
-                        Math.round(response.data.main.temp_min) + '°C';
+                        Math.round(response.data.main.temp_min) + "°C";
                     this.weather.temp_max =
-                        Math.round(response.data.main.temp_max) + '°C';
-                    this.weather.humidity = response.data.main.humidity + '%';
+                        Math.round(response.data.main.temp_max) + "°C";
+                    this.weather.humidity = response.data.main.humidity + "%";
                     this.weather.sunrise = new Date(
                         response.data.sys.sunrise * 1000
                     )
-                        .toLocaleTimeString('pl-PL')
+                        .toLocaleTimeString("pl-PL")
                         .slice(0, 5);
                     this.weather.sunset = new Date(
                         response.data.sys.sunset * 1000
                     )
-                        .toLocaleTimeString('pl-PL')
+                        .toLocaleTimeString("pl-PL")
                         .slice(0, 5);
 
-                    const weather = document.querySelector('.weather');
+                    const weather = document.querySelector(".weather");
 
                     let weatherMain = this.weather.main;
 
-                    if (weatherMain === 'Clouds') {
+                    if (weatherMain === "Clouds") {
                         weather.style.backgroundImage =
                             'url("https://www.popsci.com/resizer/eXGai221sRaUNXWRaw2Fs3Iy0Bk=/760x376/arc-anglerfish-arc2-prod-bonnier.s3.amazonaws.com/public/BESKPBEOLCXIMVYHKUMPY4JATI.jpg")';
-                        weather.style.backgroundPosition = 'top right';
-                    } else if (weatherMain === 'Clear') {
+                        weather.style.backgroundPosition = "top right";
+                    } else if (weatherMain === "Clear") {
                         weather.style.backgroundImage =
                             'url("https://media.istockphoto.com/photos/landscape-of-the-clear-sky-picture-id936912376?k=6&m=936912376&s=170667a&w=0&h=Aual4865oDTUX626nWZc9GPH6SRJXTNm_9WV2UOp62k=")';
-                        weather.style.backgroundPosition = 'center';
-                    } else if (weatherMain === 'Thunderstorm') {
+                        weather.style.backgroundPosition = "center";
+                    } else if (weatherMain === "Thunderstorm") {
                         weather.style.backgroundImage =
                             'url("https://s7d2.scene7.com/is/image/TWCNews/lightning_jpg-8")';
-                        weather.style.backgroundPosition = 'center';
-                    } else if (weatherMain === 'Drizzle') {
+                        weather.style.backgroundPosition = "center";
+                    } else if (weatherMain === "Drizzle") {
                         weather.style.backgroundImage =
                             'url("https://img2.thejournal.ie/article/4668868/river?version=4668925&width=1340")';
-                        weather.style.backgroundPosition = 'center';
-                    } else if (weatherMain === 'Rain') {
+                        weather.style.backgroundPosition = "center";
+                    } else if (weatherMain === "Rain") {
                         weather.style.backgroundImage =
                             'url("https://www.wallpaperup.com/uploads/wallpapers/2015/11/17/838275/a6d998345ff8c9455cc43916377a2a7f-700.jpg")';
-                        weather.style.backgroundPosition = 'top right';
-                    } else if (weatherMain === 'Snow') {
+                        weather.style.backgroundPosition = "top right";
+                    } else if (weatherMain === "Snow") {
                         weather.style.backgroundImage =
                             'url("https://s7d2.scene7.com/is/image/TWCNews/snowflake-formatted-snow-03222020jpg")';
-                        weather.style.backgroundPosition = 'center';
+                        weather.style.backgroundPosition = "center";
                     }
                 })
                 .catch(error => {
@@ -231,17 +231,17 @@ export default {
             const lon = position.coords.longitude;
 
             this.getCurrentWeather(
-                API + '&lat=' + lat + '&lon=' + lon + '&lang=pl' + KEY
+                API + "&lat=" + lat + "&lon=" + lon + "&lang=pl" + KEY
             );
         },
 
         geoError() {
-            this.getCurrentWeather(API + '&lat=0&lon=0' + KEY);
+            this.getCurrentWeather(API + "&lat=0&lon=0" + KEY);
         }
     }
 };
 </script>
 
 <style lang="scss" scoped>
-@import '../assets/scss/weather.scss';
+@import "../assets/scss/weather.scss";
 </style>

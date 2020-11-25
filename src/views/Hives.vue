@@ -60,7 +60,7 @@
                         <i class="far fa-trash-alt"></i>
                     </td>
                     <td class="content__table-column">
-                        {{ hive.apiary.apiary }}
+                        {{ hive.apiary }}
                     </td>
                 </tr>
             </table>
@@ -69,10 +69,10 @@
 </template>
 
 <script>
-import Nav from '@/components/Nav';
-import { mapState } from 'vuex';
-import AddHives from '@/components/AddHives';
-import HivesView from '@/components/HivesView';
+import Nav from "@/components/Nav";
+import { mapState } from "vuex";
+import AddHives from "@/components/AddHives";
+import HivesView from "@/components/HivesView";
 
 export default {
     data() {
@@ -80,11 +80,11 @@ export default {
             showAddHives: false,
             showHivesView: false,
             hive: {
-                apiary: '',
-                hiveId: '',
-                queen: '',
-                queenColor: '',
-                status: ''
+                apiary: "",
+                hiveId: "",
+                queen: "",
+                queenColor: "",
+                status: ""
             }
         };
     },
@@ -92,7 +92,7 @@ export default {
     components: { Nav, AddHives, HivesView },
 
     computed: {
-        ...mapState(['userProfile', 'hives']),
+        ...mapState(["userProfile", "hives"]),
 
         showIfUserLogged() {
             return Object.keys(this.userProfile).length > 1;
@@ -105,7 +105,7 @@ export default {
 
     methods: {
         getHives() {
-            this.$store.dispatch('getHives');
+            this.$store.dispatch("getHives");
         },
 
         toggleAddHives() {
@@ -120,5 +120,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../assets/scss/hives.scss';
+@import "../assets/scss/hives.scss";
 </style>

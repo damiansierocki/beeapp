@@ -48,7 +48,7 @@
 
 <script>
 export default {
-    props: ['id', 'name', 'type', 'description'],
+    props: ["id", "name", "type", "description"],
     data() {
         return {};
     },
@@ -65,5 +65,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../assets/scss/apiaryview.scss';
+@import "../assets/scss/apiaryview.scss";
 </style>
