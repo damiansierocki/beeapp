@@ -14,27 +14,6 @@
         width: 100%;
     }
 
-    &__list {
-        width: 100%;
-        list-style: none;
-    }
-
-    &__item {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 1rem;
-        user-select: none;
-
-        &:nth-child(even) {
-            background-color: #eee;
-        }
-
-        &--add {
-            justify-content: space-evenly;
-        }
-    }
-
     &__apiary-name {
         font-size: 0.9rem;
         color: $orange;
@@ -56,6 +35,22 @@
     &__icon {
         padding: 5px;
         display: flex;
+        cursor: pointer;
+    }
+
+    &__table {
+        width: 100%;
+        text-align: center;
+    }
+
+    &__table-row {
+        &:nth-child(even) {
+            background-color: #eee;
+        }
+    }
+
+    &__table-column {
+        padding: 1rem;
         cursor: pointer;
     }
 }

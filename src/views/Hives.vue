@@ -35,29 +35,35 @@
                 ></span>
             </div>
 
-            <ul class="content__list" v-if="hives.length">
-                <li class="content__item">
-                    <p>
-                        ID
-                    </p>
-                    <p>
-                        Nazwa pasieki
-                    </p>
-                </li>
-                <li
-                    class="content__item"
-                    @click="toggleHivesView()"
+            <table class="content__table" v-if="hives.length">
+                <tr class="content__table-row">
+                    <th class="content__table-column">ID Ula</th>
+                    <th class="content__table-column">Edytuj</th>
+                    <th class="content__table-column">Usuń</th>
+                    <th class="content__table-column">Nazwa Pasieki</th>
+                </tr>
+                <tr
+                    class="content__table-row"
                     v-for="hive in hives"
                     :key="hive.id"
                 >
-                    <p class="content__apiary-name">
+                    <td
+                        class="content__table-column"
+                        @click="toggleHivesView()"
+                    >
                         {{ hive.hiveId }}
-                    </p>
-                    <p class="content__apiary-name">
+                    </td>
+                    <td class="content__table-column">
+                        <i class="fas fa-edit"></i>
+                    </td>
+                    <td class="content__table-column">
+                        <i class="far fa-trash-alt"></i>
+                    </td>
+                    <td class="content__table-column">
                         {{ hive.apiary.apiary }}
-                    </p>
-                </li>
-            </ul>
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
 </template>

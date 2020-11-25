@@ -143,7 +143,7 @@ const store = new Vuex.Store({
 
         // FIXME: fix this function
         async getHives() {
-            /* await db
+            /* await fb.db
                 .collectionGroup('hives')
                 .get()
                 .onSnapshot(snapshot => {
@@ -158,23 +158,20 @@ const store = new Vuex.Store({
 
                     store.commit('setHives', hivesArray);
                 }); */
-            /* fb.usersCollection
+            fb.usersCollection
                 .doc(fb.auth.currentUser.uid)
-                .collection('apiaries')
+                .collection('hives')
                 .doc('VdXVV93OCeSnyMzlLqMT')
                 .collection('hives')
                 .onSnapshot(snapshot => {
                     let hivesArray = [];
-
                     snapshot.docs.forEach(doc => {
                         let hive = doc.data();
                         hive.id = doc.id;
-
                         hivesArray.push(hive);
                     });
-
                     store.commit('setHives', hivesArray);
-                }); */
+                });
         },
 
         async addHives({}, { docId, hives }) {

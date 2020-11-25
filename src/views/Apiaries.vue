@@ -59,21 +59,20 @@
                 ></span>
             </div>
 
-            <ul class="content__list" v-if="apiaries.length">
-                <li class="content__item">
-                    <p>Nazwa pasieki</p>
-                    <p>Edytuj</p>
-                    <p>Usuń</p>
-                    <p>Ilość Uli</p>
-                </li>
-
-                <li
-                    class="content__item"
+            <table class="content__table" v-if="apiaries.length">
+                <tr class="content__table-row">
+                    <th class="content__table-column">Nazwa pasieki</th>
+                    <th class="content__table-column">Edytuj</th>
+                    <th class="content__table-column">Usuń</th>
+                    <th class="content__table-column">Ilość uli</th>
+                </tr>
+                <tr
+                    class="content__table-row"
                     v-for="apiary in apiaries"
                     :key="apiary.id"
                 >
-                    <p
-                        class="content__apiary-name"
+                    <td
+                        class="content__table-column"
                         @click="
                             toggleApiaryView(
                                 apiary.id,
@@ -84,9 +83,9 @@
                         "
                     >
                         {{ apiary.name }}
-                    </p>
-                    <span
-                        class="content__icon"
+                    </td>
+                    <td
+                        class="content__table-column"
                         @click="
                             toggleEditApiary(
                                 apiary.id,
@@ -95,14 +94,18 @@
                                 apiary.description
                             )
                         "
-                        ><i class="fas fa-edit"></i
-                    ></span>
-                    <span class="content__icon" @click="deleteApiary(apiary.id)"
-                        ><i class="far fa-trash-alt"></i
-                    ></span>
-                    <p class="content__apiary-hives">0</p>
-                </li>
-            </ul>
+                    >
+                        <i class="fas fa-edit"></i>
+                    </td>
+                    <td
+                        class="content__table-column"
+                        @click="deleteApiary(apiary.id)"
+                    >
+                        <i class="far fa-trash-alt"></i>
+                    </td>
+                    <td class="content__table-column">0</td>
+                </tr>
+            </table>
         </div>
     </div>
 </template>
