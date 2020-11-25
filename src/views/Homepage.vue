@@ -12,7 +12,7 @@
             <div class="info">
                 <h3 class="info__title">Informacje</h3>
                 <div class="info__all">
-                    <div class="info__apiaries">
+                    <router-link to="/apiaries" class="info__apiaries">
                         <img
                             class="info__img"
                             src="./../assets/images/apiary.svg"
@@ -22,8 +22,8 @@
                         <p class="info__description info__description--red">
                             Pasieki
                         </p>
-                    </div>
-                    <div class="info__hives">
+                    </router-link>
+                    <router-link to="/hives" class="info__hives">
                         <img
                             class="info__img"
                             src="./../assets/images/hives.svg"
@@ -33,8 +33,8 @@
                         <p class="info__description info__description--green">
                             Ule
                         </p>
-                    </div>
-                    <div class="info__inspections">
+                    </router-link>
+                    <router-link to="/inspections" class="info__inspections">
                         <img
                             class="info__img"
                             src="./../assets/images/inspections.svg"
@@ -44,7 +44,7 @@
                         <p class="info__description info__description--blue">
                             Inspekcje
                         </p>
-                    </div>
+                    </router-link>
                     <div class="info__notes">
                         <img
                             class="info__img"

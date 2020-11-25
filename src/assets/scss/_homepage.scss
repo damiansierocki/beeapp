@@ -1,4 +1,4 @@
-@import 'colors';
+@import "colors";
 
 .homepage {
     .content {
@@ -36,6 +36,7 @@
                 border-bottom: 1px solid $black;
                 border-right: 1px solid $black;
                 padding: 0.4rem;
+                text-decoration: none;
             }
 
             &__hives {
@@ -46,6 +47,7 @@
                 border-top: 1px solid $black;
                 border-bottom: 1px solid $black;
                 padding: 0.4rem;
+                text-decoration: none;
             }
 
             &__inspections {
@@ -56,6 +58,7 @@
                 border-right: 1px solid $black;
                 padding: 0.4rem;
                 border-bottom: 1px solid $black;
+                text-decoration: none;
             }
 
             &__notes {
