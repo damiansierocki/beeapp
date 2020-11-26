@@ -29,8 +29,12 @@
                     v-model="inspections.apiary"
                 >
                     <option disabled value="">Wybierz pasiekę</option>
-                    <option>pasieka 1</option>
-                    <option>pasieka 2</option>
+                    <option
+                        v-for="apiary in apiaries"
+                        :key="apiary.id"
+                        :value="apiary.name"
+                        >{{ apiary.name }}</option
+                    >
                 </select>
 
                 <label class="content__label" for="hive">Ul</label>
@@ -41,8 +45,12 @@
                     v-model="inspections.hive"
                 >
                     <option disabled value="">Wybierz pasiekę</option>
-                    <option>Ul 1</option>
-                    <option>Ul 2</option>
+                    <option
+                        v-for="hive in hives"
+                        :key="hive.id"
+                        :value="hive.hiveId"
+                        >{{ hive.hiveId }}</option
+                    >
                 </select>
 
                 <h3 style="margin-top: 1rem">Data</h3>
@@ -140,7 +148,7 @@
                     placeholder="Wpisz jeśli są inne obserwację..."
                 ></textarea>
 
-                <button class="content__btn">
+                <button class="content__btn" @click="addInspections()">
                     Dodaj inspekcję
                 </button>
             </form>
@@ -171,6 +179,47 @@ export default {
 
     computed: {
         ...mapState(["apiaries", "hives"])
+    },
+
+    created() {
+        this.getApiaries();
+        this.getHives();
+    },
+
+    methods: {
+        getApiaries() {
+            this.$store.dispatch("getApiaries");
+        },
+
+        getHives() {
+            this.$store.dispatch("getHives");
+        },
+
+        addInspections() {
+            this.$store.dispatch("addInspections", {
+                name: this.inspections.name,
+                apiary: this.inspections.apiary,
+                hive: this.inspections.hive,
+                date: this.inspections.date,
+                equipment: this.inspections.equipment,
+                odor: this.inspections.odor,
+                deadBees: this.inspections.deadBees,
+                moisture: this.inspections.moisture,
+                mold: this.inspections.mold,
+                otherObservation: this.inspections.otherObservation
+            });
+
+            this.inspections.name = "";
+            this.inspections.apiary = "";
+            this.inspections.hive = "";
+            this.inspections.date = "";
+            this.inspections.equipment = "";
+            this.inspections.odor = "";
+            this.inspections.deadBees = "";
+            this.inspections.moisture = "";
+            this.inspections.mold = "";
+            this.inspections.otherObservation = "";
+        }
     }
 };
 </script>

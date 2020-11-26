@@ -17,7 +17,7 @@
                 <input
                     class="content__input"
                     type="text"
-                    placeholder="Wpisz nazwę inspekcji..."
+                    :placeholder="name"
                     v-model.trim="inspections.name"
                 />
 
@@ -28,9 +28,13 @@
                     id="apiary"
                     v-model="inspections.apiary"
                 >
-                    <option disabled value="">Wybierz pasiekę</option>
-                    <option>pasieka 1</option>
-                    <option>pasieka 2</option>
+                    <option disabled value="">{{ apiary }}</option>
+                    <option
+                        v-for="apiary in apiaries"
+                        :key="apiary.id"
+                        :value="apiary.name"
+                        >{{ apiary.name }}</option
+                    >
                 </select>
 
                 <label class="content__label" for="hive">Ul</label>
@@ -40,9 +44,13 @@
                     id="hive"
                     v-model="inspections.hive"
                 >
-                    <option disabled value="">Wybierz pasiekę</option>
-                    <option>Ul 1</option>
-                    <option>Ul 2</option>
+                    <option disabled value="">{{ hive }}</option>
+                    <option
+                        v-for="hive in hives"
+                        :key="hive.id"
+                        :value="hive.hiveId"
+                        >{{ hive.hiveId }}</option
+                    >
                 </select>
 
                 <h3 style="margin-top: 1rem">Data</h3>
@@ -67,9 +75,7 @@
                     id="equipment"
                     v-model="inspections.equipment"
                 >
-                    <option disabled value=""
-                        >Wybierz poziom wyposażenia</option
-                    >
+                    <option disabled value="">{{ equipment }}</option>
                     <option value="Zły">Zły</option>
                     <option value="Średni">Średni</option>
                     <option value="Dobry">Dobry</option>
@@ -83,7 +89,7 @@
                     id="odor"
                     v-model="inspections.odor"
                 >
-                    <option disabled value="">Wybierz poziom zapachu</option>
+                    <option disabled value="">{{ odor }}</option>
                     <option value="Zły">Zły</option>
                     <option value="Normalny">Normalny</option>
                     <option value="Dobry">Dobry</option>
@@ -99,7 +105,7 @@
                     id="deadBees"
                     v-model="inspections.deadBees"
                 >
-                    <option disabled value="">Czy są martwe pszczoły?</option>
+                    <option disabled value="">{{ deadBees }}</option>
                     <option value="Nie">Nie</option>
                     <option value="Tak">Tak</option>
                 </select>
@@ -111,7 +117,7 @@
                     id="moisture"
                     v-model="inspections.moisture"
                 >
-                    <option disabled value="">Czy jest wilgoć?</option>
+                    <option disabled value="">{{ moisture }}</option>
                     <option value="Nie">Nie</option>
                     <option value="Tak">Tak</option>
                 </select>
@@ -123,7 +129,7 @@
                     id="mold"
                     v-model="inspections.mold"
                 >
-                    <option disabled value="">Czy jest pleśń?</option>
+                    <option disabled value="">{{ mold }}</option>
                     <option value="Nie">Nie</option>
                     <option value="Tak">Tak</option>
                 </select>
@@ -137,10 +143,10 @@
                     id="otherObservation"
                     name="otherObservation"
                     v-model="inspections.otherObservation"
-                    placeholder="Wpisz jeśli są inne obserwację..."
+                    :placeholder="otherObservation"
                 ></textarea>
 
-                <button class="content__btn">
+                <button class="content__btn" @click="editInspections">
                     Edytuj inspekcję
                 </button>
             </form>
@@ -152,6 +158,20 @@
 import { mapState } from "vuex";
 
 export default {
+    props: [
+        "id",
+        "name",
+        "apiary",
+        "hive",
+        "date",
+        "equipment",
+        "odor",
+        "deadBees",
+        "moisture",
+        "mold",
+        "otherObservation"
+    ],
+
     data() {
         return {
             inspections: {
@@ -169,8 +189,73 @@ export default {
         };
     },
 
+    created() {
+        this.getHives();
+        this.getApiaries();
+        this.getInspections();
+    },
+
     computed: {
-        ...mapState(["apiaries", "hives"])
+        ...mapState(["hives", "apiaries"])
+    },
+
+    methods: {
+        getHives() {
+            this.$store.dispatch("getHives");
+        },
+
+        getApiaries() {
+            this.$store.dispatch("getApiaries");
+        },
+
+        getInspections() {
+            this.$store.dispatch("getInspections");
+        },
+
+        editInspections() {
+            const docId = this.id;
+
+            const inspections = {
+                name: this.inspections.name,
+                apiary: this.inspections.apiary,
+                hive: this.inspections.hive,
+                date: this.inspections.date,
+                equipment: this.inspections.equipment,
+                odor: this.inspections.odor,
+                deadBees: this.inspections.deadBees,
+                moisture: this.inspections.moisture,
+                mold: this.inspections.mold,
+                otherObservation: this.inspections.otherObservation
+            };
+
+            if (
+                this.inspections.name !== "" &&
+                this.inspections.apiary !== "" &&
+                this.inspections.hive !== "" &&
+                this.inspections.date !== "" &&
+                this.inspections.equipment !== "" &&
+                this.inspections.odor !== "" &&
+                this.inspections.deadBees !== "" &&
+                this.inspections.moisture !== "" &&
+                this.inspections.mold !== "" &&
+                this.inspections.otherObservation !== ""
+            ) {
+                this.$store.dispatch("editinspections", { docId, inspections });
+            } else {
+                alert("Wszystkie pola muszą być wypełnione!");
+            }
+
+            this.inspections.name = "";
+            this.inspections.apiary = "";
+            this.inspections.hive = "";
+            this.inspections.date = "";
+            this.inspections.equipment = "";
+            this.inspections.odor = "";
+            this.inspections.deadBees = "";
+            this.inspections.moisture = "";
+            this.inspections.mold = "";
+            this.inspections.otherObservation = "";
+        }
     }
 };
 </script>

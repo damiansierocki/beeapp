@@ -19,22 +19,20 @@
 
                     <div class="info__name">
                         <p class="info__p info__p--title">Nazwa inspekcji</p>
-                        <p class="info__p info__p--description">
-                            Sprawdzenie pszczółek
-                        </p>
+                        <p class="info__p info__p--description">{{ name }}</p>
                     </div>
 
                     <div class="info__apiary">
                         <p class="info__p info__p--title">Pasieka</p>
                         <p class="info__p info__p--description">
-                            Pasieka nr 1
+                            {{ apiary }}
                         </p>
                     </div>
 
                     <div class="info__hive">
                         <p class="info__p info__p--title">Ul</p>
                         <p class="info__p info__p--description">
-                            Ul o id 5
+                            {{ hive }}
                         </p>
                     </div>
 
@@ -43,7 +41,7 @@
                     <div class="info__date">
                         <p class="info__p info__p--title">Data</p>
                         <p class="info__p info__p--description">
-                            01/10/1997
+                            {{ date }}
                         </p>
                     </div>
 
@@ -52,37 +50,37 @@
                     <div class="info__equipment">
                         <p class="info__p info__p--title">Wyposażenie</p>
                         <p class="info__p info__p--description">
-                            Wyposażenie
+                            {{ equipment }}
                         </p>
                     </div>
                     <div class="info__odor">
                         <p class="info__p info__p--title">Zapach</p>
                         <p class="info__p info__p--description">
-                            Zapach
+                            {{ odor }}
                         </p>
                     </div>
                     <div class="info__deadBees">
                         <p class="info__p info__p--title">Martwe pszczoły</p>
                         <p class="info__p info__p--description">
-                            Martwe pszczoły
+                            {{ deadBees }}
                         </p>
                     </div>
                     <div class="info__moisture">
                         <p class="info__p info__p--title">Wilgoć</p>
                         <p class="info__p info__p--description">
-                            Wilgoć
+                            {{ moisture }}
                         </p>
                     </div>
                     <div class="info__mold">
                         <p class="info__p info__p--title">Pleśń</p>
                         <p class="info__p info__p--description">
-                            Pleśń
+                            {{ mold }}
                         </p>
                     </div>
                     <div class="info__otherObservation">
                         <p class="info__p info__p--title">Inne obserwację</p>
                         <p class="info__p info__p--description">
-                            Inne obserwację
+                            {{ otherObservation }}
                         </p>
                     </div>
                 </div>
@@ -92,7 +90,21 @@
 </template>
 
 <script>
-export default {};
+export default {
+    props: [
+        "id",
+        "name",
+        "apiary",
+        "hive",
+        "date",
+        "equipment",
+        "odor",
+        "deadBees",
+        "moisture",
+        "mold",
+        "otherObservation"
+    ]
+};
 </script>
 
 <style lang="scss" scoped>
