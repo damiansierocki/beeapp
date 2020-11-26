@@ -11,7 +11,7 @@
             </div>
 
             <form class="content__form" @submit.prevent>
-                <label class="content__label" for="type">Status ula</label>
+                <label class="content__label" for="type">Stan ula</label>
                 <select
                     class="content__input"
                     name="status"
@@ -19,15 +19,15 @@
                     v-model="hives.status"
                 >
                     <option disabled value="">Wybierz status ula</option>
-                    <option value="żywy">Żywy</option>
-                    <option value="martwy">Martwy</option>
+                    <option value="Żywy">Żywy</option>
+                    <option value="Martwy">Martwy</option>
                 </select>
 
-                <label class="content__label" for="name">ID ula</label>
+                <label class="content__label" for="name">Numer Ula</label>
                 <input
                     class="content__input"
                     type="text"
-                    placeholder="Wpisz id ula.."
+                    placeholder="Wpisz numer ula..."
                     v-model.trim="hives.hiveId"
                 />
 
@@ -48,7 +48,7 @@
                 </select>
 
                 <label class="content__label" for="queen"
-                    >Czy jest królowa?</label
+                    >Czy jest matka?</label
                 >
                 <select
                     class="content__input"
@@ -56,7 +56,7 @@
                     id="queen"
                     v-model="hives.queen"
                 >
-                    <option disabled value="">Wybierz czy jest królowa</option>
+                    <option disabled value="">Wybierz czy jest matka</option>
                     <option value="Tak">Tak</option>
                     <option value="Nie">Nie </option>
                 </select>

@@ -11,30 +11,52 @@
             </div>
 
             <div class="info">
-                <div class="info__header">
-                    <h2 class="info__title">Informacje o pasiece</h2>
+                <div class="info__general">
+                    <h3 class="info__title-h3">Informacje generalne</h3>
+
+                    <p class="info__p info__p--title">Nazwa</p>
+                    <p class="info__p info__p--description">
+                        {{ name }}
+                    </p>
+
+                    <p class="info__p info__p--title">Typ pożywienia</p>
+                    <p class="info__p info__p--description">
+                        {{ forages }}
+                    </p>
+
+                    <p class="info__p info__p--title">Typ pasieki</p>
+                    <p class="info__p info__p--description">
+                        {{ type }}
+                    </p>
+
+                    <p class="info__p info__p--title">Opis</p>
+                    <p class="info__p info__p--description">
+                        {{ description }}
+                    </p>
                 </div>
-                <div class="info__center">
-                    <div class="info__name">
-                        <p class="info__p info__p--title">Nazwa</p>
-                        <p class="info__p info__p--description">
-                            {{ this.name }}
-                        </p>
-                    </div>
 
-                    <div class="info__type">
-                        <p class="info__p info__p--title">Typ</p>
-                        <p class="info__p info__p--description">
-                            {{ this.type }}
-                        </p>
-                    </div>
+                <div class="info__address">
+                    <h3 class="info__title-h3">Informacje o adresie</h3>
 
-                    <div class="info__description">
-                        <p class="info__p info__p--title">Opis</p>
-                        <p class="info__p info__p--description">
-                            {{ this.description }}
-                        </p>
-                    </div>
+                    <p class="info__p info__p--title">Adres</p>
+                    <p class="info__p info__p--description">
+                        {{ address }}
+                    </p>
+
+                    <p class="info__p info__p--title">Miejscowość</p>
+                    <p class="info__p info__p--description">
+                        {{ city }}
+                    </p>
+
+                    <p class="info__p info__p--title">Zip</p>
+                    <p class="info__p info__p--description">
+                        {{ zip }}
+                    </p>
+
+                    <p class="info__p info__p--title">Województwo</p>
+                    <p class="info__p info__p--description">
+                        {{ province }}
+                    </p>
                 </div>
             </div>
         </div>
@@ -43,7 +65,17 @@
 
 <script>
 export default {
-    props: ["id", "name", "type", "description"]
+    props: [
+        "id",
+        "name",
+        "type",
+        "forages",
+        "description",
+        "address",
+        "city",
+        "zip",
+        "province"
+    ]
 };
 </script>
 
@@ -91,12 +123,30 @@ export default {
             margin-top: 3rem;
             background: $base-white;
 
-            &__center {
+            &__general {
                 display: flex;
                 flex-direction: column;
-                margin-top: 2rem;
+                width: 100%;
                 justify-content: center;
                 align-items: center;
+                border: 2px solid $black;
+                padding: 1rem;
+            }
+
+            &__address {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                justify-content: center;
+                align-items: center;
+                border: 2px solid $black;
+                padding: 1rem;
+            }
+
+            &__title-h3 {
+                font-size: 1.8rem;
+                font-weight: bold;
+                border-bottom: 5px solid $black;
             }
 
             &__name {

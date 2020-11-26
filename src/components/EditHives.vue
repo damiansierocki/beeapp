@@ -19,11 +19,11 @@
                     v-model="hives.status"
                 >
                     <option disabled value="">{{ status }}</option>
-                    <option value="żywy">Żywy</option>
-                    <option value="martwy">Martwy</option>
+                    <option value="Żywy">Żywy</option>
+                    <option value="Martwy">Martwy</option>
                 </select>
 
-                <label class="content__label" for="name">ID ula</label>
+                <label class="content__label" for="name">Numer Ula</label>
                 <input
                     class="content__input"
                     type="text"
@@ -47,9 +47,7 @@
                     >
                 </select>
 
-                <label class="content__label" for="queen"
-                    >Czy jest królowa?</label
-                >
+                <label class="content__label" for="queen">Matka</label>
                 <select
                     class="content__input"
                     name="queen"

@@ -29,8 +29,13 @@
                 @close="toggleApiaryView()"
                 :id="apiary.id"
                 :name="apiary.name"
+                :forages="apiary.forages"
                 :type="apiary.type"
                 :description="apiary.description"
+                :address="apiary.address"
+                :city="apiary.city"
+                :zip="apiary.zip"
+                :province="apiary.province"
             ></ApiaryView>
         </transition>
 
@@ -45,8 +50,13 @@
                 @close="toggleEditApiary()"
                 :id="apiary.id"
                 :name="apiary.name"
+                :forages="apiary.forages"
                 :type="apiary.type"
                 :description="apiary.description"
+                :address="apiary.address"
+                :city="apiary.city"
+                :zip="apiary.zip"
+                :province="apiary.province"
             >
             </EditApiary>
         </transition>
@@ -76,8 +86,13 @@
                             toggleApiaryView(
                                 apiary.id,
                                 apiary.name,
+                                apiary.forages,
                                 apiary.type,
-                                apiary.description
+                                apiary.description,
+                                apiary.address,
+                                apiary.city,
+                                apiary.zip,
+                                apiary.province
                             )
                         "
                     >
@@ -89,8 +104,13 @@
                             toggleEditApiary(
                                 apiary.id,
                                 apiary.name,
+                                apiary.forages,
                                 apiary.type,
-                                apiary.description
+                                apiary.description,
+                                apiary.address,
+                                apiary.city,
+                                apiary.zip,
+                                apiary.province
                             )
                         "
                     >
@@ -126,9 +146,18 @@ export default {
 
             apiary: {
                 id: "",
+
+                // general
                 name: "",
+                forages: "",
                 type: "",
-                description: ""
+                description: "",
+
+                // address
+                address: "",
+                city: "",
+                zip: "",
+                province: ""
             }
         };
     },
@@ -170,35 +199,88 @@ export default {
             this.showAddApiary = !this.showAddApiary;
         },
 
-        toggleApiaryView(id, name, type, description, hives) {
+        toggleApiaryView(
+            id,
+            name,
+            forages,
+            type,
+            description,
+            address,
+            city,
+            zip,
+            province,
+            hives
+        ) {
             this.showApiaryView = !this.showApiaryView;
 
             if (this.showApiaryView) {
+                // general
                 this.apiary.id = id;
+                this.apiary.forages = forages;
                 this.apiary.name = name;
                 this.apiary.type = type;
                 this.apiary.description = description;
+
+                // address
+                this.apiary.address = address;
+                this.apiary.city = city;
+                this.apiary.zip = zip;
+                this.apiary.province = province;
             } else {
+                // general
                 this.apiary.id = {};
+                this.apiary.forages = [];
                 this.apiary.name = {};
                 this.apiary.type = {};
                 this.apiary.description = {};
+
+                // address
+                this.apiary.address = {};
+                this.apiary.city = {};
+                this.apiary.zip = {};
+                this.apiary.province = {};
             }
         },
 
-        toggleEditApiary(id, name, type, description) {
+        toggleEditApiary(
+            id,
+            name,
+            forages,
+            type,
+            description,
+            address,
+            city,
+            zip,
+            province
+        ) {
             this.showEditApiary = !this.showEditApiary;
 
             if (this.showEditApiary) {
+                // general
                 this.apiary.id = id;
+                this.apiary.forages = forages;
                 this.apiary.name = name;
                 this.apiary.type = type;
                 this.apiary.description = description;
+
+                // address
+                this.apiary.address = address;
+                this.apiary.city = city;
+                this.apiary.zip = zip;
+                this.apiary.province = province;
             } else {
+                // general
                 this.apiary.id = {};
+                this.apiary.forages = [];
                 this.apiary.name = {};
                 this.apiary.type = {};
                 this.apiary.description = {};
+
+                // address
+                this.apiary.address = {};
+                this.apiary.city = {};
+                this.apiary.zip = {};
+                this.apiary.province = {};
             }
         }
     }

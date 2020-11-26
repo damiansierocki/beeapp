@@ -170,35 +170,35 @@ export default {
                     )
                         .toLocaleTimeString("pl-PL")
                         .slice(0, 5);
+                    this.weather.id = response.data.weather[0].id;
 
                     const weather = document.querySelector(".weather");
 
                     let weatherMain = this.weather.main;
+                    let weatherId = this.weather.id;
 
                     if (weatherMain === "Clouds") {
                         weather.style.backgroundImage =
-                            'url("https://www.popsci.com/resizer/eXGai221sRaUNXWRaw2Fs3Iy0Bk=/760x376/arc-anglerfish-arc2-prod-bonnier.s3.amazonaws.com/public/BESKPBEOLCXIMVYHKUMPY4JATI.jpg")';
-                        weather.style.backgroundPosition = "top right";
+                            'url("https://images.pexels.com/photos/2114014/pexels-photo-2114014.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")';
                     } else if (weatherMain === "Clear") {
                         weather.style.backgroundImage =
-                            'url("https://media.istockphoto.com/photos/landscape-of-the-clear-sky-picture-id936912376?k=6&m=936912376&s=170667a&w=0&h=Aual4865oDTUX626nWZc9GPH6SRJXTNm_9WV2UOp62k=")';
-                        weather.style.backgroundPosition = "center";
+                            'url("https://images.pexels.com/photos/281260/pexels-photo-281260.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")';
                     } else if (weatherMain === "Thunderstorm") {
                         weather.style.backgroundImage =
-                            'url("https://s7d2.scene7.com/is/image/TWCNews/lightning_jpg-8")';
-                        weather.style.backgroundPosition = "center";
+                            'url("https://images.pexels.com/photos/167755/pexels-photo-167755.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")';
                     } else if (weatherMain === "Drizzle") {
                         weather.style.backgroundImage =
-                            'url("https://img2.thejournal.ie/article/4668868/river?version=4668925&width=1340")';
-                        weather.style.backgroundPosition = "center";
+                            'url("https://images.pexels.com/photos/5683567/pexels-photo-5683567.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")';
                     } else if (weatherMain === "Rain") {
                         weather.style.backgroundImage =
-                            'url("https://www.wallpaperup.com/uploads/wallpapers/2015/11/17/838275/a6d998345ff8c9455cc43916377a2a7f-700.jpg")';
-                        weather.style.backgroundPosition = "top right";
+                            'url("https://images.pexels.com/photos/166360/pexels-photo-166360.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")';
                     } else if (weatherMain === "Snow") {
                         weather.style.backgroundImage =
-                            'url("https://s7d2.scene7.com/is/image/TWCNews/snowflake-formatted-snow-03222020jpg")';
-                        weather.style.backgroundPosition = "center";
+                            'url("https://images.pexels.com/photos/60561/winter-snow-nature-60561.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")';
+                        weather.style.color = "black";
+                    } else if (weatherMain === "Mist") {
+                        weather.style.backgroundImage =
+                            "url('https://images.pexels.com/photos/1367192/pexels-photo-1367192.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940')";
                     }
                 })
                 .catch(error => {
@@ -242,8 +242,6 @@ export default {
     width: 100%;
     font-weight: bold;
     color: $white;
-
-    // user can't select
 
     &__content {
         padding: 1.5rem;

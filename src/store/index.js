@@ -115,9 +115,17 @@ const store = new Vuex.Store({
                     .doc(fb.auth.currentUser.uid)
                     .collection("apiaries")
                     .add({
+                        // NOTE: apiary.general
                         name: apiary.name,
                         type: apiary.type,
-                        description: apiary.description
+                        forages: apiary.forages,
+                        description: apiary.description,
+
+                        // NOTE: apiary.address
+                        address: apiary.address,
+                        city: apiary.city,
+                        zip: apiary.zip,
+                        province: apiary.province
                     });
             }
         },

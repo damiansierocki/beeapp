@@ -75,11 +75,11 @@
             <table class="content__table" v-if="inspections.length">
                 <tr class="content__table-row">
                     <th class="content__table-column">Nazwa inspekcji</th>
-                    <th class="content__table-column">Edytuj</th>
-                    <th class="content__table-column">Usuń</th>
                     <th class="content__table-column">Data</th>
                     <th class="content__table-column">Pasieka</th>
                     <th class="content__table-column">Ul</th>
+                    <th class="content__table-column">Edytuj</th>
+                    <th class="content__table-column">Usuń</th>
                 </tr>
                 <tr
                     class="content__table-row"
@@ -106,6 +106,16 @@
                     >
                         {{ inspection.name }}
                     </td>
+
+                    <td class="content__table-column">
+                        {{ inspection.date }}
+                    </td>
+                    <td class="content__table-column">
+                        {{ inspection.apiary }}
+                    </td>
+                    <td class="content__table-column">
+                        {{ inspection.hive }}
+                    </td>
                     <td
                         class="content__table-column"
                         @click="
@@ -131,15 +141,6 @@
                         @click="deleteInspections(inspection.id)"
                     >
                         <i class="far fa-trash-alt"></i>
-                    </td>
-                    <td class="content__table-column">
-                        {{ inspection.date }}
-                    </td>
-                    <td class="content__table-column">
-                        {{ inspection.apiary }}
-                    </td>
-                    <td class="content__table-column">
-                        {{ inspection.hive }}
                     </td>
                 </tr>
             </table>

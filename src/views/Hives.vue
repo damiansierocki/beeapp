@@ -61,10 +61,10 @@
 
             <table class="content__table" v-if="hives.length">
                 <tr class="content__table-row">
-                    <th class="content__table-column">ID Ula</th>
+                    <th class="content__table-column">Numer Ula</th>
+                    <th class="content__table-column">Nazwa Pasieki</th>
                     <th class="content__table-column">Edytuj</th>
                     <th class="content__table-column">Usuń</th>
-                    <th class="content__table-column">Nazwa Pasieki</th>
                 </tr>
                 <tr
                     class="content__table-row"
@@ -76,15 +76,18 @@
                         @click="
                             toggleHivesView(
                                 hive.id,
-                                hive.apiary,
-                                hive.hiveId,
-                                hive.queen,
                                 hive.status,
+                                hive.hiveId,
+                                hive.apiary,
+                                hive.queen,
                                 hive.frames
                             )
                         "
                     >
                         {{ hive.hiveId }}
+                    </td>
+                    <td class="content__table-column">
+                        {{ hive.apiary }}
                     </td>
                     <td
                         class="content__table-column"
@@ -106,9 +109,6 @@
                         @click="deleteHives(hive.id)"
                     >
                         <i class="far fa-trash-alt"></i>
-                    </td>
-                    <td class="content__table-column">
-                        {{ hive.apiary }}
                     </td>
                 </tr>
             </table>
@@ -134,10 +134,10 @@ export default {
 
             hive: {
                 id: "",
-                apiary: "",
-                hiveId: "",
-                queen: "",
                 status: "",
+                hiveId: "",
+                apiary: "",
+                queen: "",
                 frames: ""
             }
         };

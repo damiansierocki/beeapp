@@ -15,7 +15,7 @@
                     <router-link to="/apiaries" class="info__apiaries">
                         <img
                             class="info__img"
-                            src="./../assets/images/apiary.svg"
+                            src="./../assets/images/svgs/apiary.svg"
                             alt="apiary"
                         />
                         <p class="info__number">{{ apiaries.length }}</p>
@@ -26,7 +26,7 @@
                     <router-link to="/hives" class="info__hives">
                         <img
                             class="info__img"
-                            src="./../assets/images/hives.svg"
+                            src="./../assets/images/svgs/hives.svg"
                             alt="hives"
                         />
                         <p class="info__number">{{ hives.length }}</p>
@@ -37,7 +37,7 @@
                     <router-link to="/inspections" class="info__inspections">
                         <img
                             class="info__img"
-                            src="./../assets/images/inspections.svg"
+                            src="./../assets/images/svgs/inspections.svg"
                             alt="inspections"
                         />
                         <p class="info__number">0</p>
@@ -48,7 +48,7 @@
                     <div class="info__notes">
                         <img
                             class="info__img"
-                            src="./../assets/images/notes.svg"
+                            src="./../assets/images/svgs/notes.svg"
                             alt="notes"
                         />
                         <p class="info__number">{{ notes.length }}</p>

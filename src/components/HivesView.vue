@@ -16,14 +16,14 @@
                 </div>
                 <div class="info__center">
                     <div class="info__status">
-                        <p class="info__p info__p--title">Status</p>
+                        <p class="info__p info__p--title">Stan ula</p>
                         <p class="info__p info__p--description">
                             {{ this.status }}
                         </p>
                     </div>
 
                     <div class="info__hive-id">
-                        <p class="info__p info__p--title">ID ula</p>
+                        <p class="info__p info__p--title">Numer Ula</p>
                         <p class="info__p info__p--description">
                             {{ this.hiveId }}
                         </p>
@@ -37,7 +37,7 @@
                     </div>
 
                     <div class="info__queen">
-                        <p class="info__p info__p--title">Królowa</p>
+                        <p class="info__p info__p--title">Matka</p>
                         <p class="info__p info__p--description">
                             {{ this.queen }}
                         </p>
