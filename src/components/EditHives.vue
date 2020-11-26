@@ -61,6 +61,14 @@
                     <option value="Nie">Nie </option>
                 </select>
 
+                <label class="content__label" for="frames">Ilość ramek</label>
+                <input
+                    class="content__input"
+                    type="text"
+                    :placeholder="frames"
+                    v-model.trim="hives.frames"
+                />
+
                 <button class="content__btn" @click="editHives">
                     Edytuj ul
                 </button>
@@ -73,7 +81,7 @@
 import { mapState } from "vuex";
 
 export default {
-    props: ["id", "status", "hiveId", "apiary", "queen"],
+    props: ["id", "status", "hiveId", "apiary", "queen", "frames"],
 
     data() {
         return {
@@ -81,7 +89,8 @@ export default {
                 status: "",
                 hiveId: "",
                 apiary: "",
-                queen: ""
+                queen: "",
+                frames: ""
             }
         };
     },
@@ -106,14 +115,16 @@ export default {
                 status: this.hives.status,
                 hiveId: this.hives.hiveId,
                 apiary: this.hives.apiary,
-                queen: this.hives.queen
+                queen: this.hives.queen,
+                frames: this.hives.frames
             };
 
             if (
                 this.hives.status !== "" &&
                 this.hives.hiveId !== "" &&
                 this.hives.apiary !== "" &&
-                this.hives.queen !== ""
+                this.hives.queen !== "" &&
+                this.hives.frames !== ""
             ) {
                 this.$store.dispatch("editHives", { docId, hives });
             } else {
@@ -124,6 +135,7 @@ export default {
             this.hives.hiveId = "";
             this.hives.apiary = "";
             this.hives.queen = "";
+            this.hives.frames = "";
         }
     }
 };

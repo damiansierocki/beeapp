@@ -29,6 +29,7 @@
                 :hiveId="hive.hiveId"
                 :apiary="hive.apiary"
                 :queen="hive.queen"
+                :frames="hive.frames"
             ></HivesView>
         </transition>
 
@@ -46,6 +47,7 @@
                 :hiveId="hive.hiveId"
                 :apiary="hive.apiary"
                 :queen="hive.queen"
+                :frames="hive.frames"
             ></EditHives>
         </transition>
 
@@ -77,7 +79,8 @@
                                 hive.apiary,
                                 hive.hiveId,
                                 hive.queen,
-                                hive.status
+                                hive.status,
+                                hive.frames
                             )
                         "
                     >
@@ -91,7 +94,8 @@
                                 hive.status,
                                 hive.hiveId,
                                 hive.apiary,
-                                hive.queen
+                                hive.queen,
+                                hive.frames
                             )
                         "
                     >
@@ -133,7 +137,8 @@ export default {
                 apiary: "",
                 hiveId: "",
                 queen: "",
-                status: ""
+                status: "",
+                frames: ""
             }
         };
     },
@@ -165,7 +170,7 @@ export default {
             this.showAddHives = !this.showAddHives;
         },
 
-        toggleEditHives(id, status, hiveId, apiary, queen) {
+        toggleEditHives(id, status, hiveId, apiary, queen, frames) {
             this.showEditHives = !this.showEditHives;
 
             if (this.showEditHives) {
@@ -174,16 +179,18 @@ export default {
                 this.hive.hiveId = hiveId;
                 this.hive.apiary = apiary;
                 this.hive.queen = queen;
+                this.hive.frames = frames;
             } else {
                 this.hive.id = {};
                 this.hive.status = {};
                 this.hive.hiveId = {};
                 this.hive.apiary = {};
                 this.hive.queen = {};
+                this.hive.frames = {};
             }
         },
 
-        toggleHivesView(id, status, hiveId, apiary, queen) {
+        toggleHivesView(id, status, hiveId, apiary, queen, frames) {
             this.showHivesView = !this.showHivesView;
 
             if (this.showHivesView) {
@@ -192,12 +199,14 @@ export default {
                 this.hive.hiveId = hiveId;
                 this.hive.apiary = apiary;
                 this.hive.queen = queen;
+                this.hive.frames = frames;
             } else {
                 this.hive.id = {};
                 this.hive.status = {};
                 this.hive.hiveId = {};
                 this.hive.apiary = {};
                 this.hive.queen = {};
+                this.hive.frames = {};
             }
         }
     }

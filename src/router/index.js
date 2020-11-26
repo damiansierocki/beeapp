@@ -6,6 +6,7 @@ import Login from "../views/Login.vue";
 import MyAccount from "../views/MyAccount.vue";
 import Apiaries from "../views/Apiaries";
 import Hives from "../views/Hives";
+import Inspections from "../views/Inspections";
 import { auth } from "../firebase";
 
 Vue.use(VueRouter);
@@ -59,6 +60,15 @@ const routes = [
         path: "/hives",
         name: "Hives",
         component: Hives,
+        meta: {
+            requiresAuth: true
+        }
+    },
+
+    {
+        path: "/inspections",
+        name: "Inspections",
+        component: Inspections,
         meta: {
             requiresAuth: true
         }

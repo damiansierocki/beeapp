@@ -61,6 +61,14 @@
                     <option value="Nie">Nie </option>
                 </select>
 
+                <label class="content__label" for="frames">Ilość ramek</label>
+                <input
+                    class="content__input"
+                    type="text"
+                    placeholder="Wpisz ilość ramek"
+                    v-model.trim="hives.frames"
+                />
+
                 <button class="content__btn" @click="addHives()">
                     Dodaj ul
                 </button>
@@ -79,7 +87,8 @@ export default {
                 status: "",
                 hiveId: "",
                 apiary: "",
-                queen: ""
+                queen: "",
+                frames: ""
             }
         };
     },
@@ -102,13 +111,15 @@ export default {
                 status: this.hives.status,
                 hiveId: this.hives.hiveId,
                 apiary: this.hives.apiary,
-                queen: this.hives.queen
+                queen: this.hives.queen,
+                frames: this.hives.frames
             });
 
             this.hives.status = "";
             this.hives.hiveId = "";
             this.hives.apiary = "";
             this.hives.queen = "";
+            this.hives.frames = "";
         }
     }
 };

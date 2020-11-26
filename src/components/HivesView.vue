@@ -42,6 +42,13 @@
                             {{ this.queen }}
                         </p>
                     </div>
+
+                    <div class="info__queen">
+                        <p class="info__p info__p--title">Ramki</p>
+                        <p class="info__p info__p--description">
+                            {{ this.frames }}
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -50,7 +57,7 @@
 
 <script>
 export default {
-    props: ["id", "status", "hiveId", "apiary", "queen"]
+    props: ["id", "status", "hiveId", "apiary", "queen", "frames"]
 };
 </script>
 

@@ -27,6 +27,9 @@
                 <router-link class="nav-left__link" to="/hives"
                     >Ule</router-link
                 >
+                <router-link class="nav-left__link" to="/inspections"
+                    >Inspekcje</router-link
+                >
             </div>
         </div>
 

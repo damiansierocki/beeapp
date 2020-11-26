@@ -10,7 +10,8 @@ const store = new Vuex.Store({
         userProfile: {},
         notes: [],
         apiaries: [],
-        hives: []
+        hives: [],
+        inspections: []
     },
 
     mutations: {
@@ -28,6 +29,10 @@ const store = new Vuex.Store({
 
         setHives(state, val) {
             state.hives = val;
+        },
+
+        setInspections(state, val) {
+            state.inspections = val;
         }
     },
 
@@ -165,7 +170,8 @@ const store = new Vuex.Store({
                         status: hives.status,
                         hiveId: hives.hiveId,
                         apiary: hives.apiary,
-                        queen: hives.queen
+                        queen: hives.queen,
+                        frames: hives.frames
                     });
             }
         },
@@ -180,7 +186,8 @@ const store = new Vuex.Store({
                         status: hives.status,
                         hiveId: hives.hiveId,
                         apiary: hives.apiary,
-                        queen: hives.queen
+                        queen: hives.queen,
+                        frames: hives.frames
                     });
             }
         },
@@ -190,6 +197,74 @@ const store = new Vuex.Store({
                 await fb.usersCollection
                     .doc(fb.auth.currentUser.uid)
                     .collection("hives")
+                    .doc(docId)
+                    .delete();
+            }
+        },
+
+        async getInspections() {
+            fb.usersCollection
+                .doc(fb.auth.currentUser.uid)
+                .collection("inspections")
+                .onSnapshot(snapshot => {
+                    let inspectionsArray = [];
+                    snapshot.docs.forEach(doc => {
+                        let inspection = doc.data();
+                        inspection.id = doc.id;
+                        inspectionsArray.push(inspection);
+                    });
+                    store.commit("setInspections", inspectionsArray);
+                });
+        },
+
+        async addInspections({}, inspections) {
+            if (window.confirm("Jesteś pewny/a, że chcesz dodać inspekcję?")) {
+                await fb.usersCollection
+                    .doc(fb.auth.currentUser.uid)
+                    .collection("inspections")
+                    .add({
+                        name: inspections.name,
+                        apiary: inspections.apiary,
+                        hive: inspections.hive,
+                        date: inspections.date,
+                        equipment: inspections.equipment,
+                        odor: inspections.odor,
+                        deadBees: inspections.deadBees,
+                        moisture: inspections.moisture,
+                        mold: inspections.mold,
+                        otherObservation: inspections.otherObservation
+                    });
+            }
+        },
+
+        async editInspections({}, { docId, inspections }) {
+            if (
+                window.confirm("Jesteś pewny/a, że chcesz edytować inspekcję?")
+            ) {
+                await fb.usersCollection
+                    .doc(fb.auth.currentUser.uid)
+                    .collection("inspections")
+                    .doc(docId)
+                    .update({
+                        name: inspections.name,
+                        apiary: inspections.apiary,
+                        hive: inspections.hive,
+                        date: inspections.date,
+                        equipment: inspections.equipment,
+                        odor: inspections.odor,
+                        deadBees: inspections.deadBees,
+                        moisture: inspections.moisture,
+                        mold: inspections.mold,
+                        otherObservation: inspections.otherObservation
+                    });
+            }
+        },
+
+        async deleteInspections({}, docId) {
+            if (window.confirm("Jesteś pewny/a, że chcesz usunąć inspekcję?")) {
+                await fb.usersCollection
+                    .doc(fb.auth.currentUser.uid)
+                    .collection("inspections")
                     .doc(docId)
                     .delete();
             }
