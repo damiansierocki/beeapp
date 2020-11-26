@@ -19,10 +19,6 @@
                     {{ weather.location }}
                 </p>
             </div>
-
-            <div class="weather__icon">
-                <img :src="weather.icon" />
-            </div>
         </div>
 
         <div class="weather__content" v-else>
@@ -69,10 +65,6 @@
                     Temperatura maksymalna: {{ weather.temp_max }}
                 </p>
             </div>
-
-            <div class="weather__icon">
-                <img :src="weather.icon" />
-            </div>
         </div>
     </div>
 </template>
@@ -93,7 +85,6 @@ export default {
             currentDate: "",
             weather: {
                 currentTemp: "",
-                icon: "",
                 location: "",
                 wind: "",
                 description: "",
@@ -164,10 +155,6 @@ export default {
                             .toUpperCase() +
                         response.data.weather[0].description.slice(1);
                     this.weather.main = response.data.weather[0].main;
-                    this.weather.icon =
-                        "http://openweathermap.org/img/w/" +
-                        response.data.weather[0].icon +
-                        ".png";
                     this.weather.temp_min =
                         Math.round(response.data.main.temp_min) + "°C";
                     this.weather.temp_max =
@@ -243,5 +230,254 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/scss/weather.scss";
+@import "../assets/scss/colors";
+
+.weather {
+    display: flex;
+    align-items: center;
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    width: 100%;
+    font-weight: bold;
+    color: $white;
+
+    // user can't select
+
+    &__content {
+        padding: 1.5rem;
+        display: flex;
+    }
+
+    &__left {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__right {
+        display: flex;
+        flex-direction: column;
+        margin-left: 2rem;
+        justify-content: flex-end;
+        padding-bottom: 0.6rem;
+    }
+
+    &__p {
+        font-size: 0.7rem;
+
+        &--temp {
+            margin-top: 0.6rem;
+            font-size: 2rem;
+            font-weight: normal;
+        }
+
+        &--location {
+            position: relative;
+
+            &::before {
+                content: "";
+                position: absolute;
+                bottom: 20%;
+                left: -13%;
+                height: 2rem;
+                border-right: 1px solid $white;
+            }
+        }
+
+        &--date {
+            margin-bottom: 0.6rem;
+        }
+    }
+
+    &__icon {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 60px;
+        height: 60px;
+
+        display: none;
+
+        img {
+            width: 100%;
+            height: 100%;
+        }
+    }
+}
+
+@media (min-width: 320px) {
+    .weather {
+        &__p {
+            font-size: 0.8rem;
+
+            &--temp {
+                font-size: 2rem;
+            }
+        }
+
+        &__icon {
+            display: block;
+            top: 10%;
+            right: 10%;
+
+            user-select: none;
+        }
+    }
+}
+
+@media (min-width: 360px) {
+    .weather {
+        &__icon {
+            top: 15%;
+            right: 5%;
+        }
+    }
+}
+
+@media (min-width: 375px) {
+    .weather {
+        &__icon {
+            width: 65px;
+            height: 65px;
+        }
+    }
+}
+
+@media (min-width: 414px) {
+    .weather {
+        &__icon {
+            width: 70px;
+            height: 70px;
+
+            top: 8%;
+            right: 5%;
+        }
+
+        &__p {
+            &--description {
+                font-size: 1rem;
+            }
+        }
+    }
+}
+
+@media (min-width: 540px) {
+    .weather {
+        &__icon {
+            width: 80px;
+            height: 80px;
+            top: 10%;
+            right: 10%;
+        }
+    }
+}
+
+@media (min-width: 768px) {
+    .weather {
+        &__wind-humidity {
+            display: flex;
+            flex-direction: column;
+            margin-left: 2rem;
+            justify-content: flex-end;
+            padding-bottom: 0.6rem;
+        }
+
+        &__sunrise-sunset {
+            display: flex;
+            flex-direction: column;
+            margin-left: 2rem;
+            justify-content: flex-end;
+            padding-bottom: 0.6rem;
+        }
+
+        &__icon {
+            width: 90px;
+            height: 90px;
+            top: 6%;
+            right: 10%;
+        }
+
+        &__p {
+            &--location {
+                position: relative;
+                &::after {
+                    content: "";
+                    position: absolute;
+                    bottom: 25%;
+                    right: -7%;
+                    height: 2rem;
+                    border-right: 1px solid $white;
+                }
+            }
+
+            &--humidity {
+                position: relative;
+                &::after {
+                    content: "";
+                    position: absolute;
+                    bottom: 25%;
+                    right: -7%;
+                    height: 2rem;
+                    border-right: 1px solid $white;
+                }
+            }
+
+            &--wind {
+                margin-bottom: 0.6rem;
+            }
+
+            &--sunrise {
+                margin-bottom: 0.6rem;
+            }
+        }
+    }
+}
+
+@media (min-width: 1024px) {
+    .weather {
+        &__icon {
+            width: 95px;
+            height: 95px;
+            top: 2%;
+            right: 10%;
+        }
+    }
+}
+
+@media (min-width: 1280px) {
+    .weather {
+        &__temp-min-max {
+            display: flex;
+            flex-direction: column;
+            margin-left: 2rem;
+            justify-content: flex-end;
+            padding-bottom: 0.6rem;
+        }
+
+        &__p {
+            &--temp-min {
+                margin-bottom: 0.6rem;
+            }
+            &--sunset {
+                position: relative;
+                &::after {
+                    content: "";
+                    position: absolute;
+                    bottom: 25%;
+                    right: -7%;
+                    height: 2rem;
+                    border-right: 1px solid $white;
+                }
+            }
+        }
+
+        &__icon {
+            width: 100px;
+            height: 100px;
+            top: 0;
+            right: 10%;
+        }
+    }
+}
 </style>

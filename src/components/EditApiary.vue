@@ -94,5 +94,81 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/scss/editapiary.scss";
+@import "../assets/scss/colors";
+
+.editapiary {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 999;
+    display: flex;
+
+    .content {
+        width: 100%;
+        background: $white;
+
+        &__header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-items: center;
+            margin-top: 3rem;
+        }
+
+        &__title {
+            font-size: 2rem;
+        }
+
+        &__close {
+            position: absolute;
+            top: 1%;
+            right: 5%;
+            padding: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        &__form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-items: center;
+            margin-top: 3rem;
+        }
+
+        &__label {
+            font-size: 1.3rem;
+            padding: 1rem;
+        }
+
+        &__input {
+            padding: 0.8rem;
+            width: 70%;
+        }
+
+        &__btn {
+            margin-top: 2rem;
+            padding: 0.7rem;
+            box-shadow: inset 0px 1px 0px 0px #fff6af;
+            background: linear-gradient(to bottom, #ffec64 5%, #ffab23 100%);
+            background-color: #ffec64;
+            border-radius: 6px;
+            border: 1px solid #ffaa22;
+            display: inline-block;
+            cursor: pointer;
+            color: #333333;
+            font-family: Arial;
+            font-size: 15px;
+            font-weight: bold;
+            padding: 6px 24px;
+            text-decoration: none;
+            text-shadow: 0px 1px 0px #ffee66;
+
+            &:focus {
+                outline: 0;
+            }
+        }
+    }
+}
 </style>

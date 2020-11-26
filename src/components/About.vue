@@ -34,5 +34,108 @@ export default {};
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/scss/about.scss";
+@import "../assets/scss/colors";
+
+.about {
+    position: absolute;
+    display: flex;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 999;
+
+    .content {
+        position: relative;
+        margin: auto;
+        background-color: $white;
+        color: $black;
+        width: 90%;
+        border-radius: 5px;
+        box-shadow: 0 0 5px 0 rgba($greyer, 0.5);
+        padding: 2rem;
+        text-align: center;
+        user-select: text;
+
+        &__close {
+            position: absolute;
+            top: 0.8rem;
+            right: 1rem;
+            padding: 0.4rem;
+
+            transition: all 0.2s;
+            &:active {
+                transform: scale(1.3);
+            }
+        }
+
+        &__title {
+            font-size: 1.5rem;
+        }
+
+        &__description {
+            font-size: 1rem;
+            margin-top: 1rem;
+        }
+
+        .promotor {
+            font-weight: bold;
+        }
+
+        .email {
+            font-weight: bold;
+            text-decoration: none;
+            color: $email;
+        }
+
+        &__footer {
+            margin-top: 2rem;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+    }
+}
+
+@media (min-width: 480px) {
+    .about {
+        .content {
+            width: 70%;
+        }
+    }
+}
+
+@media (min-width: 768px) {
+    .about {
+        .content {
+            width: 50%;
+        }
+    }
+}
+
+@media (min-width: 1024px) {
+    .about {
+        .content {
+            width: 30%;
+
+            .email {
+                display: block;
+                transition: all 0.2s;
+                &:hover {
+                    transform: scale(1.3);
+                }
+            }
+
+            &__close {
+                &:hover {
+                    cursor: pointer;
+
+                    transition: all 0.2s;
+                    &:hover {
+                        transform: scale(1.3);
+                    }
+                }
+            }
+        }
+    }
+}
 </style>

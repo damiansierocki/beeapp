@@ -307,5 +307,73 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/scss/inspections.scss";
+@import "../assets/scss/colors";
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: calc(100vh - 3.2rem);
+
+    &__add {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 1rem;
+        width: 100%;
+    }
+
+    &__table {
+        width: 100%;
+        text-align: center;
+    }
+
+    &__table-row {
+        &:nth-child(even) {
+            background-color: #eee;
+        }
+    }
+
+    &__table-column {
+        padding: 1rem;
+        cursor: pointer;
+    }
+
+    &__apiary-name {
+        font-size: 0.9rem;
+        color: $orange;
+        font-weight: bold;
+    }
+
+    &__apiary-hives {
+        font-size: 0.9rem;
+    }
+
+    &__plus-icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 2rem;
+        margin-left: 1rem;
+    }
+}
+
+@media (min-width: 320px) {
+    .content {
+        height: calc(100vh - 3.3rem);
+    }
+}
+
+@media (min-width: 414px) {
+    .content {
+        height: calc(100vh - 3.45rem);
+    }
+}
+
+@media (min-width: 768px) {
+    .content {
+        height: calc(100vh - 3.65rem);
+        overflow-y: auto;
+    }
+}
 </style>

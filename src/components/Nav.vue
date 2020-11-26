@@ -131,5 +131,235 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/scss/nav.scss";
+@import "../assets/scss/colors";
+
+.nav {
+    background-color: $black;
+    color: $base-white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    user-select: none;
+
+    &-left {
+        position: relative;
+
+        &__icon {
+            font-size: 1.2rem;
+            padding: 1rem;
+            margin-left: 0.5rem;
+        }
+
+        &__menu {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100vh;
+            width: 100vw;
+            position: fixed;
+            z-index: 999;
+            top: 0;
+            left: 0;
+            background: $black;
+            overflow-x: hidden;
+            text-align: center;
+        }
+
+        &__close {
+            padding: 1rem;
+            font-size: 1.2rem;
+            position: absolute;
+            right: 0.5rem;
+            top: 0;
+        }
+
+        &__link {
+            text-decoration: none;
+            font-size: 1.3rem;
+            display: block;
+            width: 60vw;
+            margin: 0 auto;
+            margin-top: 0.5rem;
+            padding: 0.8rem;
+            color: $base-white;
+        }
+    }
+
+    &-center {
+        &__slot {
+            font-size: 1rem;
+            padding: 1rem;
+        }
+    }
+
+    &-right {
+        position: relative;
+
+        &__icon {
+            font-size: 1.2rem;
+            padding: 1rem;
+            margin-right: 0.5rem;
+        }
+
+        &__menu {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            top: 2rem;
+            left: -11rem;
+            box-shadow: 1px 1px 10px 1px $black;
+            background-color: $white;
+            padding: 1rem;
+            color: $black;
+            width: 13rem;
+            text-align: center;
+            z-index: 999;
+
+            &-username {
+                font-size: 1.2rem;
+                border-bottom: 1px dashed $black;
+                padding: 0.5rem;
+            }
+        }
+
+        &__link {
+            font-size: 1rem;
+            margin: 0.7rem 0 0.6rem 0;
+            padding: 0.2rem;
+            text-decoration: none;
+            color: $black;
+        }
+
+        .right-icon {
+            margin-right: 0.6rem;
+        }
+    }
+}
+
+.disabled {
+    opacity: 0.2;
+    pointer-events: none;
+}
+
+@media (min-width: 320px) {
+    .nav {
+        &-left {
+            &__icon {
+                font-size: 1.3rem;
+            }
+
+            &__close {
+                font-size: 1.3rem;
+                top: 0.05rem;
+                right: 0.55rem;
+            }
+        }
+
+        &-center {
+            &__slot {
+                font-size: 1.1rem;
+            }
+        }
+
+        &-right {
+            &__icon {
+                font-size: 1.3rem;
+            }
+        }
+    }
+}
+
+@media (min-width: 414px) {
+    .nav {
+        &-left {
+            &__icon {
+                font-size: 1.4rem;
+            }
+
+            &__close {
+                font-size: 1.4rem;
+            }
+        }
+
+        &-center {
+            &__slot {
+                font-size: 1.2rem;
+            }
+        }
+
+        &-right {
+            &__icon {
+                font-size: 1.4rem;
+            }
+
+            &__link {
+                font-size: 1.1rem;
+            }
+        }
+    }
+}
+
+@media (min-width: 768px) {
+    .nav {
+        &-left {
+            &__icon {
+                cursor: pointer;
+                display: block;
+                transition: 0.2s;
+
+                &:hover {
+                    transform: scale(1.3);
+                }
+            }
+
+            &__close {
+                cursor: pointer;
+                display: block;
+                transition: 0.2s;
+
+                &:hover {
+                    transform: scale(1.3);
+                }
+            }
+
+            &__link {
+                font-size: 1.4rem;
+                cursor: pointer;
+                display: block;
+                transition: 0.2s;
+
+                &:hover {
+                    transform: scale(1.3);
+                }
+            }
+        }
+
+        &-right {
+            &__icon {
+                cursor: pointer;
+                display: block;
+                transition: 0.2s;
+
+                &:hover {
+                    transform: scale(1.3);
+                }
+            }
+
+            &__link {
+                cursor: pointer;
+                display: block;
+                transition: 0.2s;
+
+                &:hover {
+                    transform: scale(1.3);
+                }
+            }
+
+            &__menu {
+                top: 3rem;
+            }
+        }
+    }
+}
 </style>
