@@ -115,13 +115,13 @@ const store = new Vuex.Store({
                     .doc(fb.auth.currentUser.uid)
                     .collection("apiaries")
                     .add({
-                        // NOTE: apiary.general
+                        // general
                         name: apiary.name,
                         type: apiary.type,
                         forages: apiary.forages,
                         description: apiary.description,
 
-                        // NOTE: apiary.address
+                        // address
                         address: apiary.address,
                         city: apiary.city,
                         zip: apiary.zip,
@@ -175,11 +175,26 @@ const store = new Vuex.Store({
                     .doc(fb.auth.currentUser.uid)
                     .collection("hives")
                     .add({
-                        status: hives.status,
-                        hiveId: hives.hiveId,
+                        // general
+                        number: hives.number,
                         apiary: hives.apiary,
-                        queen: hives.queen,
-                        frames: hives.frames
+                        status: hives.status,
+                        purpose: hives.purpose,
+                        created: hives.created,
+                        generalNote: hives.generalNote,
+
+                        // bees
+                        strength: hives.strength,
+                        temperament: hives.temperament,
+                        frames: hives.frames,
+
+                        // queen
+                        isQueen: hives.isQueen,
+                        age: hives.age,
+                        installed: hives.installed,
+                        race: hives.race,
+                        queenColor: hives.queenColor,
+                        queenNote: hives.queenNote
                     });
             }
         },
@@ -191,11 +206,26 @@ const store = new Vuex.Store({
                     .collection("hives")
                     .doc(docId)
                     .update({
-                        status: hives.status,
-                        hiveId: hives.hiveId,
+                        // general
+                        number: hives.number,
                         apiary: hives.apiary,
-                        queen: hives.queen,
-                        frames: hives.frames
+                        status: hives.status,
+                        purpose: hives.purpose,
+                        created: hives.created,
+                        generalNote: hives.generalNote,
+
+                        // bees
+                        strength: hives.strength,
+                        temperament: hives.temperament,
+                        frames: hives.frames,
+
+                        // queen
+                        isQueen: hives.isQueen,
+                        age: hives.age,
+                        installed: hives.installed,
+                        race: hives.race,
+                        queenColor: hives.queenColor,
+                        queenNote: hives.queenNote
                     });
             }
         },

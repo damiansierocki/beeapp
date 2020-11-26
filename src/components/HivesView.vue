@@ -11,44 +11,103 @@
             </div>
 
             <div class="info">
-                <div class="info__header">
-                    <h2 class="info__title">Informacje o ulu</h2>
+                <div class="info__general">
+                    <h3 class="info__title-h3">Informacje generalne</h3>
+
+                    <p class="info__p info__p--title">Numer Ula</p>
+                    <p class="info__p info__p--description">
+                        {{ number }}
+                    </p>
+
+                    <p class="info__p info__p--title">Pasieka</p>
+                    <p class="info__p info__p--description">
+                        {{ apiary }}
+                    </p>
+
+                    <p class="info__p info__p--title">Stan ula</p>
+                    <p class="info__p info__p--description">
+                        {{ status }}
+                    </p>
+
+                    <p class="info__p info__p--title">Przeznaczenie</p>
+                    <p class="info__p info__p--description">
+                        {{ purpose }}
+                    </p>
+
+                    <p class="info__p info__p--title">
+                        Data dodania ula do pasieki
+                    </p>
+                    <p class="info__p info__p--description">
+                        {{ created }}
+                    </p>
+
+                    <p class="info__p info__p--title">Notatka odnośnie ula</p>
+                    <p class="info__p info__p--description">
+                        {{ generalNote }}
+                    </p>
                 </div>
-                <div class="info__center">
-                    <div class="info__status">
-                        <p class="info__p info__p--title">Stan ula</p>
-                        <p class="info__p info__p--description">
-                            {{ this.status }}
-                        </p>
-                    </div>
 
-                    <div class="info__hive-id">
-                        <p class="info__p info__p--title">Numer Ula</p>
-                        <p class="info__p info__p--description">
-                            {{ this.hiveId }}
-                        </p>
-                    </div>
+                <div class="info__bees">
+                    <h3 class="info__title-h3">Pszczoły</h3>
 
-                    <div class="info__apiary">
-                        <p class="info__p info__p--title">Pasieka</p>
-                        <p class="info__p info__p--description">
-                            {{ this.apiary }}
-                        </p>
-                    </div>
+                    <p class="info__p info__p--title">Siła pszczół</p>
+                    <p class="info__p info__p--description">
+                        {{ strength }}
+                    </p>
 
-                    <div class="info__queen">
-                        <p class="info__p info__p--title">Matka</p>
-                        <p class="info__p info__p--description">
-                            {{ this.queen }}
-                        </p>
-                    </div>
+                    <p class="info__p info__p--title">Temperament</p>
+                    <p class="info__p info__p--description">
+                        {{ temperament }}
+                    </p>
 
-                    <div class="info__queen">
-                        <p class="info__p info__p--title">Ramki</p>
-                        <p class="info__p info__p--description">
-                            {{ this.frames }}
-                        </p>
-                    </div>
+                    <p class="info__p info__p--title">Ilość ramek w ulu</p>
+                    <p class="info__p info__p--description">
+                        {{ frames }}
+                    </p>
+                </div>
+
+                <div class="info__queen">
+                    <h3 class="info__title-h3">Królowa</h3>
+
+                    <p class="info__p info__p--title">Królowa</p>
+                    <p class="info__p info__p--description">
+                        {{ isQueen }}
+                    </p>
+
+                    <p class="info__p info__p--title">
+                        Wiek Królowej (w latach)
+                    </p>
+                    <p class="info__p info__p--description">
+                        {{ age }}
+                    </p>
+
+                    <p class="info__p info__p--title">
+                        Kiedy królowa została wrzucona do ula
+                    </p>
+                    <p class="info__p info__p--description">
+                        {{ installed }}
+                    </p>
+
+                    <p class="info__p info__p--title">
+                        Rasa królowej
+                    </p>
+                    <p class="info__p info__p--description">
+                        {{ race }}
+                    </p>
+
+                    <p class="info__p info__p--title">
+                        Kolor królowej
+                    </p>
+                    <p class="info__p info__p--description">
+                        {{ queenColor }}
+                    </p>
+
+                    <p class="info__p info__p--title">
+                        Notatka dotycząca królowej
+                    </p>
+                    <p class="info__p info__p--description">
+                        {{ queenNote }}
+                    </p>
                 </div>
             </div>
         </div>
@@ -57,7 +116,24 @@
 
 <script>
 export default {
-    props: ["id", "status", "hiveId", "apiary", "queen", "frames"]
+    props: [
+        "id",
+        "number",
+        "apiary",
+        "status",
+        "purpose",
+        "created",
+        "generalNote",
+        "strength",
+        "temperament",
+        "frames",
+        "isQueen",
+        "age",
+        "installed",
+        "race",
+        "queenColor",
+        "queenNote"
+    ]
 };
 </script>
 
@@ -111,6 +187,42 @@ export default {
                 margin-top: 2rem;
                 justify-content: center;
                 align-items: center;
+            }
+
+            &__general {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                justify-content: center;
+                align-items: center;
+                border: 2px solid $black;
+                padding: 1rem;
+            }
+
+            &__bees {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                justify-content: center;
+                align-items: center;
+                border: 2px solid $black;
+                padding: 1rem;
+            }
+
+            &__queen {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                justify-content: center;
+                align-items: center;
+                border: 2px solid $black;
+                padding: 1rem;
+            }
+
+            &__title-h3 {
+                font-size: 1.8rem;
+                font-weight: bold;
+                border-bottom: 5px solid $black;
             }
 
             &__status {

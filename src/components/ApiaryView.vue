@@ -121,7 +121,6 @@ export default {
             align-items: center;
             justify-items: center;
             margin-top: 3rem;
-            background: $base-white;
 
             &__general {
                 display: flex;

@@ -25,11 +25,21 @@
                 v-if="showHivesView"
                 @close="toggleHivesView()"
                 :id="hive.id"
-                :status="hive.status"
-                :hiveId="hive.hiveId"
+                :number="hive.number"
                 :apiary="hive.apiary"
-                :queen="hive.queen"
+                :status="hive.status"
+                :purpose="hive.purpose"
+                :created="hive.created"
+                :generalNote="hive.generalNote"
+                :strength="hive.strength"
+                :temperament="hive.temperament"
                 :frames="hive.frames"
+                :isQueen="hive.isQueen"
+                :age="hive.age"
+                :installed="hive.installed"
+                :race="hive.race"
+                :queenColor="hive.queenColor"
+                :queenNote="hive.queenNote"
             ></HivesView>
         </transition>
 
@@ -43,11 +53,21 @@
                 v-if="showEditHives"
                 @close="toggleEditHives()"
                 :id="hive.id"
-                :status="hive.status"
-                :hiveId="hive.hiveId"
+                :number="hive.number"
                 :apiary="hive.apiary"
-                :queen="hive.queen"
+                :status="hive.status"
+                :purpose="hive.purpose"
+                :created="hive.created"
+                :generalNote="hive.generalNote"
+                :strength="hive.strength"
+                :temperament="hive.temperament"
                 :frames="hive.frames"
+                :isQueen="hive.isQueen"
+                :age="hive.age"
+                :installed="hive.installed"
+                :race="hive.race"
+                :queenColor="hive.queenColor"
+                :queenNote="hive.queenNote"
             ></EditHives>
         </transition>
 
@@ -76,15 +96,25 @@
                         @click="
                             toggleHivesView(
                                 hive.id,
-                                hive.status,
-                                hive.hiveId,
+                                hive.number,
                                 hive.apiary,
-                                hive.queen,
-                                hive.frames
+                                hive.status,
+                                hive.purpose,
+                                hive.created,
+                                hive.generalNote,
+                                hive.strength,
+                                hive.temperament,
+                                hive.frames,
+                                hive.isQueen,
+                                hive.age,
+                                hive.installed,
+                                hive.race,
+                                hive.queenColor,
+                                hive.queenNote
                             )
                         "
                     >
-                        {{ hive.hiveId }}
+                        {{ hive.number }}
                     </td>
                     <td class="content__table-column">
                         {{ hive.apiary }}
@@ -94,11 +124,21 @@
                         @click="
                             toggleEditHives(
                                 hive.id,
-                                hive.status,
-                                hive.hiveId,
+                                hive.number,
                                 hive.apiary,
-                                hive.queen,
-                                hive.frames
+                                hive.status,
+                                hive.purpose,
+                                hive.created,
+                                hive.generalNote,
+                                hive.strength,
+                                hive.temperament,
+                                hive.frames,
+                                hive.isQueen,
+                                hive.age,
+                                hive.installed,
+                                hive.race,
+                                hive.queenColor,
+                                hive.queenNote
                             )
                         "
                     >
@@ -133,12 +173,26 @@ export default {
             showEditHives: false,
 
             hive: {
-                id: "",
-                status: "",
-                hiveId: "",
+                // general
+                number: "",
                 apiary: "",
-                queen: "",
-                frames: ""
+                status: "",
+                purpose: "",
+                created: "",
+                generalNote: "",
+
+                // bees
+                strength: "",
+                temperament: "",
+                frames: "",
+
+                // queen
+                isQueen: "",
+                age: "",
+                installed: "",
+                race: "",
+                queenColor: "",
+                queenNote: ""
             }
         };
     },
@@ -170,43 +224,141 @@ export default {
             this.showAddHives = !this.showAddHives;
         },
 
-        toggleEditHives(id, status, hiveId, apiary, queen, frames) {
+        toggleEditHives(
+            id,
+            number,
+            apiary,
+            status,
+            purpose,
+            created,
+            generalNote,
+            strength,
+            temperament,
+            frames,
+            isQueen,
+            age,
+            installed,
+            race,
+            queenColor,
+            queenNote
+        ) {
             this.showEditHives = !this.showEditHives;
 
             if (this.showEditHives) {
                 this.hive.id = id;
-                this.hive.status = status;
-                this.hive.hiveId = hiveId;
+
+                // general
+                this.hive.number = number;
                 this.hive.apiary = apiary;
-                this.hive.queen = queen;
+                this.hive.status = status;
+                this.hive.purpose = purpose;
+                this.hive.created = created;
+                this.hive.generalNote = generalNote;
+
+                // bees
+                this.hive.strength = strength;
+                this.hive.temperament = temperament;
                 this.hive.frames = frames;
+
+                // queen
+                this.hive.isQueen = isQueen;
+                this.hive.age = age;
+                this.hive.installed = installed;
+                this.hive.race = race;
+                this.hive.queenColor = queenColor;
+                this.hive.queenNote = queenNote;
             } else {
-                this.hive.id = {};
-                this.hive.status = {};
-                this.hive.hiveId = {};
+                this.hive.id = id;
+
+                // general
+                this.hive.number = {};
                 this.hive.apiary = {};
-                this.hive.queen = {};
+                this.hive.status = {};
+                this.hive.purpose = {};
+                this.hive.created = {};
+                this.hive.generalNote = {};
+
+                // bees
+                this.hive.strength = {};
+                this.hive.temperament = {};
                 this.hive.frames = {};
+
+                // queen
+                this.hive.isQueen = {};
+                this.hive.age = {};
+                this.hive.installed = {};
+                this.hive.race = {};
+                this.hive.queenColor = {};
+                this.hive.queenNote = {};
             }
         },
 
-        toggleHivesView(id, status, hiveId, apiary, queen, frames) {
+        toggleHivesView(
+            id,
+            number,
+            apiary,
+            status,
+            purpose,
+            created,
+            generalNote,
+            strength,
+            temperament,
+            frames,
+            isQueen,
+            age,
+            installed,
+            race,
+            queenColor,
+            queenNote
+        ) {
             this.showHivesView = !this.showHivesView;
 
             if (this.showHivesView) {
                 this.hive.id = id;
-                this.hive.status = status;
-                this.hive.hiveId = hiveId;
+
+                // general
+                this.hive.number = number;
                 this.hive.apiary = apiary;
-                this.hive.queen = queen;
+                this.hive.status = status;
+                this.hive.purpose = purpose;
+                this.hive.created = created;
+                this.hive.generalNote = generalNote;
+
+                // bees
+                this.hive.strength = strength;
+                this.hive.temperament = temperament;
                 this.hive.frames = frames;
+
+                // queen
+                this.hive.isQueen = isQueen;
+                this.hive.age = age;
+                this.hive.installed = installed;
+                this.hive.race = race;
+                this.hive.queenColor = queenColor;
+                this.hive.queenNote = queenNote;
             } else {
-                this.hive.id = {};
-                this.hive.status = {};
-                this.hive.hiveId = {};
+                this.hive.id = id;
+
+                // general
+                this.hive.number = {};
                 this.hive.apiary = {};
-                this.hive.queen = {};
+                this.hive.status = {};
+                this.hive.purpose = {};
+                this.hive.created = {};
+                this.hive.generalNote = {};
+
+                // bees
+                this.hive.strength = {};
+                this.hive.temperament = {};
                 this.hive.frames = {};
+
+                // queen
+                this.hive.isQueen = {};
+                this.hive.age = {};
+                this.hive.installed = {};
+                this.hive.race = {};
+                this.hive.queenColor = {};
+                this.hive.queenNote = {};
             }
         }
     }

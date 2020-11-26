@@ -11,61 +11,262 @@
             </div>
 
             <form class="content__form" @submit.prevent>
-                <label class="content__label" for="type">Status ula</label>
-                <select
-                    class="content__input"
-                    name="status"
-                    id="status"
-                    v-model="hives.status"
-                >
-                    <option disabled value="">{{ status }}</option>
-                    <option value="Żywy">Żywy</option>
-                    <option value="Martwy">Martwy</option>
-                </select>
+                <div class="content__general">
+                    <h3 class="content__title-h3">Informacje generalne</h3>
 
-                <label class="content__label" for="name">Numer Ula</label>
-                <input
-                    class="content__input"
-                    type="text"
-                    :placeholder="hiveId"
-                    v-model.trim="hives.hiveId"
-                />
+                    <label class="content__label" for="number">Numer Ula</label>
+                    <input
+                        id="number"
+                        name="number"
+                        class="content__input"
+                        type="number"
+                        :placeholder="number"
+                        v-model.trim="hives.number"
+                    />
 
-                <label class="content__label" for="apiary">Pasieka</label>
-                <select
-                    class="content__input"
-                    name="apiary"
-                    id="apiary"
-                    v-model="hives.apiary"
-                >
-                    <option disabled value="">{{ apiary }}</option>
-                    <option
-                        v-for="apiary in apiaries"
-                        :key="apiary.id"
-                        :value="apiary.name"
-                        >{{ apiary.name }}</option
+                    <label class="content__label" for="apiary">Pasieka</label>
+                    <select
+                        class="content__input"
+                        name="apiary"
+                        id="apiary"
+                        v-model="hives.apiary"
                     >
-                </select>
+                        <option disabled value="">{{ apiary }}</option>
+                        <option
+                            v-for="apiary in apiaries"
+                            :key="apiary.id"
+                            :value="apiary.name"
+                            >{{ apiary.name }}</option
+                        >
+                    </select>
 
-                <label class="content__label" for="queen">Matka</label>
-                <select
-                    class="content__input"
-                    name="queen"
-                    id="queen"
-                    v-model="hives.queen"
-                >
-                    <option disabled value="">{{ queen }}</option>
-                    <option value="Tak">Tak</option>
-                    <option value="Nie">Nie </option>
-                </select>
+                    <label class="content__label" for="status">Stan ula</label>
+                    <select
+                        class="content__input"
+                        name="status"
+                        id="status"
+                        v-model="hives.status"
+                    >
+                        <option disabled value="">{{ status }}</option>
+                        <option value="Aktywny">Aktywny</option>
+                        <option value="Sprzedany">Sprzedany</option>
+                        <option value="Martwy (brak pszczół)"
+                            >Martwy (brak pszczół)</option
+                        >
+                        <option value="Inny">Inny</option>
+                    </select>
 
-                <label class="content__label" for="frames">Ilość ramek</label>
-                <input
-                    class="content__input"
-                    type="text"
-                    :placeholder="frames"
-                    v-model.trim="hives.frames"
-                />
+                    <label class="content__label" for="purpose"
+                        >Przeznaczenie</label
+                    >
+                    <select
+                        class="content__input"
+                        name="purpose"
+                        id="purpose"
+                        v-model="hives.purpose"
+                    >
+                        <option disabled value="">{{ purpose }}</option>
+                        <option value="Produkcja miodu">Produkcja miodu</option>
+                        <option value="Produkcja pszczół"
+                            >Produkcja pszczół</option
+                        >
+                        <option value="Produkcja matek">Produkcja matek</option>
+                        <option value="Inny">Inny</option>
+                    </select>
+
+                    <label class="content__label" for="created"
+                        >Data dodania ula do pasieki</label
+                    >
+                    <input
+                        id="created"
+                        name="created"
+                        class="content__input"
+                        type="date"
+                        :placeholder="created"
+                        v-model.trim="hives.created"
+                        onfocus="(this.type='date')"
+                        onblur="(this.type='text')"
+                    />
+
+                    <label class="content__label" for="generalNote"
+                        >Notatka odnośnie ula</label
+                    >
+                    <textarea
+                        id="generalNote"
+                        name="generalNote"
+                        class="content__input"
+                        type="text"
+                        :placeholder="generalNote"
+                        v-model.trim="hives.generalNote"
+                    ></textarea>
+                </div>
+
+                <div class="content__bees">
+                    <h3 class="content__title-h3">Pszczoły</h3>
+
+                    <label class="content__label" for="strength"
+                        >Siła pszczół</label
+                    >
+                    <select
+                        class="content__input"
+                        name="strength"
+                        id="strength"
+                        v-model="hives.strength"
+                    >
+                        <option disabled value="">{{ strength }}</option>
+                        <option value="Bardzo słaba">Bardzo słaba</option>
+                        <option value="Słaba">Słaba</option>
+                        <option value="Normalna">Normalna</option>
+                        <option value="Silna">Silna</option>
+                        <option value="Bardzo silna">Bardzo silna</option>
+                    </select>
+
+                    <label class="content__label" for="temperament"
+                        >Temperament</label
+                    >
+                    <select
+                        class="content__input"
+                        name="temperament"
+                        id="temperament"
+                        v-model="hives.temperament"
+                    >
+                        <option disabled value="">{{ temperament }}</option>
+                        <option value="Spokojna">Spokojna</option>
+                        <option value="Nerwowa">Nerwowa</option>
+                        <option value="Agresywna">Agresywna</option>
+                    </select>
+
+                    <label class="content__label" for="frames"
+                        >Ilość ramek w ulu</label
+                    >
+                    <input
+                        id="frames"
+                        name="frames"
+                        class="content__input"
+                        type="text"
+                        :placeholder="frames"
+                        v-model.trim="hives.frames"
+                    />
+                </div>
+
+                <div class="content__queen">
+                    <h3 class="content__title-h3">Królowa</h3>
+
+                    <label class="content__label" for="isQueen">Królowa</label>
+                    <select
+                        class="content__input"
+                        name="isQueen"
+                        id="isQueen"
+                        v-model="hives.isQueen"
+                    >
+                        <option disabled value="">{{ isQueen }}</option>
+                        <option value="Tak">Tak</option>
+                        <option value="Nie">Nie</option>
+                    </select>
+
+                    <label
+                        class="content__label"
+                        for="age"
+                        v-if="hives.isQueen !== 'Nie'"
+                        >Wiek Królowej (w latach)</label
+                    >
+                    <input
+                        id="age"
+                        name="age"
+                        class="content__input"
+                        type="number"
+                        :placeholder="age"
+                        v-model.trim="hives.age"
+                        v-if="hives.isQueen !== 'Nie'"
+                    />
+
+                    <label
+                        class="content__label"
+                        for="installed"
+                        v-if="hives.isQueen !== 'Nie'"
+                        >Kiedy królowa została wrzucona do ula</label
+                    >
+                    <input
+                        id="installed"
+                        name="installed"
+                        class="content__input"
+                        type="date"
+                        v-model.trim="hives.installed"
+                        v-if="hives.isQueen !== 'Nie'"
+                        :placeholder="installed"
+                        onfocus="(this.type='date')"
+                        onblur="(this.type='text')"
+                    />
+
+                    <label
+                        class="content__label"
+                        for="race"
+                        v-if="hives.isQueen !== 'Nie'"
+                        >Rasa królowej</label
+                    >
+                    <select
+                        class="content__input"
+                        name="race"
+                        id="race"
+                        v-model="hives.race"
+                        v-if="hives.isQueen !== 'Nie'"
+                    >
+                        <option disabled value="">{{ race }}</option>
+                        <option value="Pszczoła Środkowoeuropejska"
+                            >Pszczoła Środkowoeuropejska</option
+                        >
+                        <option value="Pszczoła Kaukaska"
+                            >Pszczoła Kaukaska</option
+                        >
+                        <option value="Pszczoła Kraińska"
+                            >Pszczoła Kraińska</option
+                        >
+                        <option value="Pszczoła Włoska">Pszczoła Włoska</option>
+                        <option value="Pszczoła Buckfast"
+                            >Pszczoła Buckfast</option
+                        >
+                        <option value="Heterozja (mieszane)"
+                            >Heterozja (mieszane)</option
+                        >
+                    </select>
+
+                    <label
+                        class="content__label"
+                        for="queenColor"
+                        v-if="hives.isQueen !== 'Nie'"
+                        >Kolor królowej</label
+                    >
+                    <select
+                        class="content__input"
+                        name="queenColor"
+                        id="queenColor"
+                        v-model="hives.queenColor"
+                        v-if="hives.isQueen !== 'Nie'"
+                    >
+                        <option disabled value="">{{ queenColor }}</option>
+                        <option value="Biały">Biały</option>
+                        <option value="Żółty">Żółty</option>
+                        <option value="Czerwony">Czerwony</option>
+                        <option value="Zielony">Zielony</option>
+                        <option value="Niebieski">Niebieski</option>
+                    </select>
+
+                    <label
+                        class="content__label"
+                        for="queenNote"
+                        v-if="hives.isQueen !== 'Nie'"
+                        >Notatka dotycząca królowej</label
+                    >
+                    <textarea
+                        id="queenNote"
+                        name="queenNote"
+                        class="content__input"
+                        type="text"
+                        :placeholder="queenNote"
+                        v-model.trim="hives.queenNote"
+                        v-if="hives.isQueen !== 'Nie'"
+                    ></textarea>
+                </div>
 
                 <button class="content__btn" @click="editHives">
                     Edytuj ul
@@ -79,16 +280,48 @@
 import { mapState } from "vuex";
 
 export default {
-    props: ["id", "status", "hiveId", "apiary", "queen", "frames"],
+    props: [
+        "id",
+        "number",
+        "apiary",
+        "status",
+        "purpose",
+        "created",
+        "generalNote",
+        "strength",
+        "temperament",
+        "frames",
+        "isQueen",
+        "age",
+        "installed",
+        "race",
+        "queenColor",
+        "queenNote"
+    ],
 
     data() {
         return {
             hives: {
-                status: "",
-                hiveId: "",
+                // general
+                number: "",
                 apiary: "",
-                queen: "",
-                frames: ""
+                status: "",
+                purpose: "",
+                created: "",
+                generalNote: "",
+
+                // bees
+                strength: "",
+                temperament: "",
+                frames: "",
+
+                // queen
+                isQueen: "",
+                age: "",
+                installed: "",
+                race: "",
+                queenColor: "",
+                queenNote: ""
             }
         };
     },
@@ -110,30 +343,60 @@ export default {
             const docId = this.id;
 
             const hives = {
-                status: this.hives.status,
-                hiveId: this.hives.hiveId,
+                number: this.hives.number,
                 apiary: this.hives.apiary,
-                queen: this.hives.queen,
-                frames: this.hives.frames
+                status: this.hives.status,
+                purpose: this.hives.purpose,
+                created: this.hives.created,
+                generalNote: this.hives.generalNote,
+
+                // bees
+                strength: this.hives.strength,
+                temperament: this.hives.temperament,
+                frames: this.hives.frames,
+
+                // queen
+                isQueen: this.hives.isQueen,
+                age: this.hives.age,
+                installed: this.hives.installed,
+                race: this.hives.race,
+                queenColor: this.hives.queenColor,
+                queenNote: this.hives.queenNote
             };
 
             if (
+                this.hives.number !== "" &&
                 this.hives.status !== "" &&
-                this.hives.hiveId !== "" &&
                 this.hives.apiary !== "" &&
-                this.hives.queen !== "" &&
-                this.hives.frames !== ""
+                this.hives.isQueen !== ""
             ) {
                 this.$store.dispatch("editHives", { docId, hives });
             } else {
-                alert("Wszystkie pola muszą być wypełnione!");
+                alert(
+                    'Pola ["numer ula", "stan ula", "pasieka", "czy jest królowa"] muszą być wypełnione!'
+                );
             }
 
-            this.hives.status = "";
-            this.hives.hiveId = "";
+            // general
+            this.hives.number = "";
             this.hives.apiary = "";
-            this.hives.queen = "";
+            this.hives.status = "";
+            this.hives.purpose = "";
+            this.hives.created = "";
+            this.hives.generalNote = "";
+
+            // bees
+            this.hives.strength = "";
+            this.hives.temperament = "";
             this.hives.frames = "";
+
+            // queen
+            this.hives.isQueen = "";
+            this.hives.age = "";
+            this.hives.installed = "";
+            this.hives.race = "";
+            this.hives.queenColor = "";
+            this.hives.queenNote = "";
         }
     }
 };
@@ -181,6 +444,42 @@ export default {
             align-items: center;
             justify-items: center;
             margin-top: 3rem;
+        }
+
+        &__general {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid $black;
+            padding: 1rem;
+        }
+
+        &__bees {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid $black;
+            padding: 1rem;
+        }
+
+        &__queen {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid $black;
+            padding: 1rem;
+        }
+
+        &__title-h3 {
+            font-size: 1.8rem;
+            font-weight: bold;
+            border-bottom: 5px solid $black;
         }
 
         &__label {
