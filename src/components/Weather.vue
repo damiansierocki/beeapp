@@ -199,6 +199,10 @@ export default {
                     } else if (weatherMain === "Mist") {
                         weather.style.backgroundImage =
                             "url('https://images.pexels.com/photos/1367192/pexels-photo-1367192.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940')";
+                    } else if (weatherMain === "Fog") {
+                        weather.style.backgroundImage =
+                            "url('https://images.pexels.com/photos/978844/pexels-photo-978844.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260')";
+                        weather.style.color = "black";
                     }
                 })
                 .catch(error => {

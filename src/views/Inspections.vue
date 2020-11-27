@@ -28,16 +28,31 @@
                 v-if="showInspectionsView"
                 @close="toggleInspectionsView()"
                 :id="inspection.id"
-                :name="inspection.name"
+                :purpose="inspection.purpose"
                 :apiary="inspection.apiary"
                 :hive="inspection.hive"
                 :date="inspection.date"
-                :equipment="inspection.equipment"
-                :odor="inspection.odor"
-                :deadBees="inspection.deadBees"
-                :moisture="inspection.moisture"
-                :mold="inspection.mold"
-                :otherObservation="inspection.otherObservation"
+                :strength="inspection.strength"
+                :temperament="inspection.temperament"
+                :frames="inspection.frames"
+                :isQueen="inspection.isQueen"
+                :age="inspection.age"
+                :installed="inspection.installed"
+                :race="inspection.race"
+                :queenColor="inspection.queenColor"
+                :queenNote="inspection.queenNote"
+                :framesWithBees="inspection.framesWithBees"
+                :framesWithBrood="inspection.framesWithBrood"
+                :framesWithHoney="inspection.framesWithHoney"
+                :framesWithPollen="inspection.framesWithPollen"
+                :problems="inspection.problems"
+                :note="inspection.note"
+                :includeWeather="inspection.includeWeather"
+                :conditions="inspection.conditions"
+                :temperature="inspection.temperature"
+                :humidity="inspection.humidity"
+                :pressure="inspection.pressure"
+                :wind="inspection.wind"
             ></InspectionsView>
         </transition>
 
@@ -51,16 +66,31 @@
                 v-if="showEditInspections"
                 @close="toggleEditInspections()"
                 :id="inspection.id"
-                :name="inspection.name"
+                :purpose="inspection.purpose"
                 :apiary="inspection.apiary"
                 :hive="inspection.hive"
                 :date="inspection.date"
-                :equipment="inspection.equipment"
-                :odor="inspection.odor"
-                :deadBees="inspection.deadBees"
-                :moisture="inspection.moisture"
-                :mold="inspection.mold"
-                :otherObservation="inspection.otherObservation"
+                :strength="inspection.strength"
+                :temperament="inspection.temperament"
+                :frames="inspection.frames"
+                :isQueen="inspection.isQueen"
+                :age="inspection.age"
+                :installed="inspection.installed"
+                :race="inspection.race"
+                :queenColor="inspection.queenColor"
+                :queenNote="inspection.queenNote"
+                :framesWithBees="inspection.framesWithBees"
+                :framesWithBrood="inspection.framesWithBrood"
+                :framesWithHoney="inspection.framesWithHoney"
+                :framesWithPollen="inspection.framesWithPollen"
+                :problems="inspection.problems"
+                :note="inspection.note"
+                :includeWeather="inspection.includeWeather"
+                :conditions="inspection.conditions"
+                :temperature="inspection.temperature"
+                :humidity="inspection.humidity"
+                :pressure="inspection.pressure"
+                :wind="inspection.wind"
             ></EditInspections>
         </transition>
 
@@ -74,7 +104,7 @@
 
             <table class="content__table" v-if="inspections.length">
                 <tr class="content__table-row">
-                    <th class="content__table-column">Nazwa inspekcji</th>
+                    <th class="content__table-column">Cel inspekcji</th>
                     <th class="content__table-column">Data</th>
                     <th class="content__table-column">Pasieka</th>
                     <th class="content__table-column">Ul</th>
@@ -91,20 +121,35 @@
                         @click="
                             toggleInspectionsView(
                                 inspection.id,
-                                inspection.name,
+                                inspection.purpose,
                                 inspection.apiary,
                                 inspection.hive,
                                 inspection.date,
-                                inspection.equipment,
-                                inspection.odor,
-                                inspection.deadBees,
-                                inspection.moisture,
-                                inspection.mold,
-                                inspection.otherObservation
+                                inspection.strength,
+                                inspection.temperament,
+                                inspection.frames,
+                                inspection.isQueen,
+                                inspection.age,
+                                inspection.installed,
+                                inspection.race,
+                                inspection.queenColor,
+                                inspection.queenNote,
+                                inspection.framesWithBees,
+                                inspection.framesWithBrood,
+                                inspection.framesWithHoney,
+                                inspection.framesWithPollen,
+                                inspection.problems,
+                                inspection.note,
+                                inspection.includeWeather,
+                                inspection.conditions,
+                                inspection.temperature,
+                                inspection.humidity,
+                                inspection.pressure,
+                                inspection.wind
                             )
                         "
                     >
-                        {{ inspection.name }}
+                        {{ inspection.purpose }}
                     </td>
 
                     <td class="content__table-column">
@@ -121,16 +166,31 @@
                         @click="
                             toggleEditInspections(
                                 inspection.id,
-                                inspection.name,
+                                inspection.purpose,
                                 inspection.apiary,
                                 inspection.hive,
                                 inspection.date,
-                                inspection.equipment,
-                                inspection.odor,
-                                inspection.deadBees,
-                                inspection.moisture,
-                                inspection.mold,
-                                inspection.otherObservation
+                                inspection.strength,
+                                inspection.temperament,
+                                inspection.frames,
+                                inspection.isQueen,
+                                inspection.age,
+                                inspection.installed,
+                                inspection.race,
+                                inspection.queenColor,
+                                inspection.queenNote,
+                                inspection.framesWithBees,
+                                inspection.framesWithBrood,
+                                inspection.framesWithHoney,
+                                inspection.framesWithPollen,
+                                inspection.problems,
+                                inspection.note,
+                                inspection.includeWeather,
+                                inspection.conditions,
+                                inspection.temperature,
+                                inspection.humidity,
+                                inspection.pressure,
+                                inspection.wind
                             )
                         "
                     >
@@ -247,85 +307,175 @@ export default {
 
         toggleInspectionsView(
             id,
-            name,
+            purpose,
             apiary,
             hive,
             date,
-            equipment,
-            odor,
-            deadBees,
-            moisture,
-            mold,
-            otherObservation
+            strength,
+            temperament,
+            frames,
+            isQueen,
+            age,
+            installed,
+            race,
+            queenColor,
+            queenNote,
+            framesWithBees,
+            framesWithBrood,
+            framesWithHoney,
+            framesWithPollen,
+            problems,
+            note,
+            includeWeather,
+            conditions,
+            temperature,
+            humidity,
+            pressure,
+            wind
         ) {
             this.showInspectionsView = !this.showInspectionsView;
 
             if (this.showInspectionsView) {
                 this.inspection.id = id;
-                this.inspection.name = name;
+                this.inspection.purpose = purpose;
                 this.inspection.apiary = apiary;
                 this.inspection.hive = hive;
                 this.inspection.date = date;
-                this.inspection.equipment = equipment;
-                this.inspection.odor = odor;
-                this.inspection.deadBees = deadBees;
-                this.inspection.moisture = moisture;
-                this.inspection.mold = mold;
-                this.inspection.otherObservation = otherObservation;
+                this.inspection.strength = strength;
+                this.inspection.temperament = temperament;
+                this.inspection.frames = frames;
+                this.inspection.isQueen = isQueen;
+                this.inspection.age = age;
+                this.inspection.installed = installed;
+                this.inspection.race = race;
+                this.inspection.queenColor = queenColor;
+                this.inspection.queenNote = queenNote;
+                this.inspection.framesWithBees = framesWithBees;
+                this.inspection.framesWithBrood = framesWithBrood;
+                this.inspection.framesWithHoney = framesWithHoney;
+                this.inspection.framesWithPollen = framesWithPollen;
+                this.inspection.problems = problems;
+                this.inspection.note = note;
+                this.inspection.includeWeather = includeWeather;
+                this.inspection.conditions = conditions;
+                this.inspection.temperature = temperature;
+                this.inspection.humidity = humidity;
+                this.inspection.pressure = pressure;
+                this.inspection.wind = wind;
             } else {
                 this.inspection.id = {};
-                this.inspection.name = {};
+                this.inspection.purpose = {};
                 this.inspection.apiary = {};
                 this.inspection.hive = {};
                 this.inspection.date = {};
-                this.inspection.equipment = {};
-                this.inspection.odor = {};
-                this.inspection.deadBees = {};
-                this.inspection.moisture = {};
-                this.inspection.mold = {};
-                this.inspection.otherObservation = {};
+                this.inspection.strength = {};
+                this.inspection.temperament = {};
+                this.inspection.frames = {};
+                this.inspection.isQueen = {};
+                this.inspection.age = {};
+                this.inspection.installed = {};
+                this.inspection.race = {};
+                this.inspection.queenColor = {};
+                this.inspection.queenNote = {};
+                this.inspection.framesWithBees = {};
+                this.inspection.framesWithBrood = {};
+                this.inspection.framesWithHoney = {};
+                this.inspection.framesWithPollen = {};
+                this.inspection.problems = {};
+                this.inspection.note = {};
+                this.inspection.includeWeather = {};
+                this.inspection.conditions = {};
+                this.inspection.temperature = {};
+                this.inspection.humidity = {};
+                this.inspection.pressure = {};
+                this.inspection.wind = {};
             }
         },
 
         toggleEditInspections(
             id,
-            name,
+            purpose,
             apiary,
             hive,
             date,
-            equipment,
-            odor,
-            deadBees,
-            moisture,
-            mold,
-            otherObservation
+            strength,
+            temperament,
+            frames,
+            isQueen,
+            age,
+            installed,
+            race,
+            queenColor,
+            queenNote,
+            framesWithBees,
+            framesWithBrood,
+            framesWithHoney,
+            framesWithPollen,
+            problems,
+            note,
+            includeWeather,
+            conditions,
+            temperature,
+            humidity,
+            pressure,
+            wind
         ) {
             this.showEditInspections = !this.showEditInspections;
 
             if (this.showEditInspections) {
                 this.inspection.id = id;
-                this.inspection.name = name;
+                this.inspection.purpose = purpose;
                 this.inspection.apiary = apiary;
                 this.inspection.hive = hive;
                 this.inspection.date = date;
-                this.inspection.equipment = equipment;
-                this.inspection.odor = odor;
-                this.inspection.deadBees = deadBees;
-                this.inspection.moisture = moisture;
-                this.inspection.mold = mold;
-                this.inspection.otherObservation = otherObservation;
+                this.inspection.strength = strength;
+                this.inspection.temperament = temperament;
+                this.inspection.frames = frames;
+                this.inspection.isQueen = isQueen;
+                this.inspection.age = age;
+                this.inspection.installed = installed;
+                this.inspection.race = race;
+                this.inspection.queenColor = queenColor;
+                this.inspection.queenNote = queenNote;
+                this.inspection.framesWithBees = framesWithBees;
+                this.inspection.framesWithBrood = framesWithBrood;
+                this.inspection.framesWithHoney = framesWithHoney;
+                this.inspection.framesWithPollen = framesWithPollen;
+                this.inspection.problems = problems;
+                this.inspection.note = note;
+                this.inspection.includeWeather = includeWeather;
+                this.inspection.conditions = conditions;
+                this.inspection.temperature = temperature;
+                this.inspection.humidity = humidity;
+                this.inspection.pressure = pressure;
+                this.inspection.wind = wind;
             } else {
                 this.inspection.id = {};
-                this.inspection.name = {};
+                this.inspection.purpose = {};
                 this.inspection.apiary = {};
                 this.inspection.hive = {};
                 this.inspection.date = {};
-                this.inspection.equipment = {};
-                this.inspection.odor = {};
-                this.inspection.deadBees = {};
-                this.inspection.moisture = {};
-                this.inspection.mold = {};
-                this.inspection.otherObservation = {};
+                this.inspection.strength = {};
+                this.inspection.temperament = {};
+                this.inspection.frames = {};
+                this.inspection.isQueen = {};
+                this.inspection.age = {};
+                this.inspection.installed = {};
+                this.inspection.race = {};
+                this.inspection.queenColor = {};
+                this.inspection.queenNote = {};
+                this.inspection.framesWithBees = {};
+                this.inspection.framesWithBrood = {};
+                this.inspection.framesWithHoney = {};
+                this.inspection.framesWithPollen = {};
+                this.inspection.problems = {};
+                this.inspection.note = {};
+                this.inspection.includeWeather = {};
+                this.inspection.conditions = {};
+                this.inspection.temperature = {};
+                this.inspection.humidity = {};
+                this.inspection.pressure = {};
+                this.inspection.wind = {};
             }
         }
     }

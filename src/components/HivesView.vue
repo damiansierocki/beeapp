@@ -74,38 +74,53 @@
                         {{ isQueen }}
                     </p>
 
-                    <p class="info__p info__p--title">
+                    <p class="info__p info__p--title" v-if="isQueen === 'Tak'">
                         Wiek Królowej (w latach)
                     </p>
-                    <p class="info__p info__p--description">
+                    <p
+                        class="info__p info__p--description"
+                        v-if="isQueen === 'Tak'"
+                    >
                         {{ age }}
                     </p>
 
-                    <p class="info__p info__p--title">
+                    <p class="info__p info__p--title" v-if="isQueen === 'Tak'">
                         Kiedy królowa została wrzucona do ula
                     </p>
-                    <p class="info__p info__p--description">
+                    <p
+                        class="info__p info__p--description"
+                        v-if="isQueen === 'Tak'"
+                    >
                         {{ installed }}
                     </p>
 
-                    <p class="info__p info__p--title">
+                    <p class="info__p info__p--title" v-if="isQueen === 'Tak'">
                         Rasa królowej
                     </p>
-                    <p class="info__p info__p--description">
+                    <p
+                        class="info__p info__p--description"
+                        v-if="isQueen === 'Tak'"
+                    >
                         {{ race }}
                     </p>
 
-                    <p class="info__p info__p--title">
+                    <p class="info__p info__p--title" v-if="isQueen === 'Tak'">
                         Kolor królowej
                     </p>
-                    <p class="info__p info__p--description">
+                    <p
+                        class="info__p info__p--description"
+                        v-if="isQueen === 'Tak'"
+                    >
                         {{ queenColor }}
                     </p>
 
-                    <p class="info__p info__p--title">
+                    <p class="info__p info__p--title" v-if="isQueen === 'Tak'">
                         Notatka dotycząca królowej
                     </p>
-                    <p class="info__p info__p--description">
+                    <p
+                        class="info__p info__p--description"
+                        v-if="isQueen === 'Tak'"
+                    >
                         {{ queenNote }}
                     </p>
                 </div>

@@ -369,10 +369,6 @@ const store = new Vuex.Store({
                 .where("email", "==", user.email)
                 .get();
 
-            /* const currentUser = await fb.usersCollection
-                .where('username', '==', user.username)
-                .get(); */
-
             if (currentEmail.empty === true) {
                 await fb.usersCollection.doc(userId).update({
                     username: user.username,

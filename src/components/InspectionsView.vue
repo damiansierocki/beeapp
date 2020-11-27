@@ -11,78 +11,220 @@
             </div>
 
             <div class="info">
-                <div class="info__header">
-                    <h2 class="info__title">Informacje o inspekcji</h2>
+                <div class="info__general">
+                    <h3 class="info__title-h3">Inspekcja</h3>
+
+                    <p class="info__p info__p--title">Cel inspekcji</p>
+                    <p class="info__p info__p--description">
+                        {{ purpose }}
+                    </p>
+
+                    <p class="info__p info__p--title">Pasieka</p>
+                    <p class="info__p info__p--description">
+                        {{ apiary }}
+                    </p>
+
+                    <p class="info__p info__p--title">Ul</p>
+                    <p class="info__p info__p--description">
+                        {{ hive }}
+                    </p>
+
+                    <p class="info__p info__p--title">Data</p>
+                    <p class="info__p info__p--description">
+                        {{ date }}
+                    </p>
                 </div>
-                <div class="info__center">
-                    <h3>Inspekcja</h3>
 
-                    <div class="info__name">
-                        <p class="info__p info__p--title">Nazwa inspekcji</p>
-                        <p class="info__p info__p--description">{{ name }}</p>
-                    </div>
+                <div class="info__bees">
+                    <h3 class="info__title-h3">Pszczoły</h3>
 
-                    <div class="info__apiary">
-                        <p class="info__p info__p--title">Pasieka</p>
-                        <p class="info__p info__p--description">
-                            {{ apiary }}
-                        </p>
-                    </div>
+                    <p class="info__p info__p--title">Siła pszczół</p>
+                    <p class="info__p info__p--description">
+                        {{ strength }}
+                    </p>
 
-                    <div class="info__hive">
-                        <p class="info__p info__p--title">Ul</p>
-                        <p class="info__p info__p--description">
-                            {{ hive }}
-                        </p>
-                    </div>
+                    <p class="info__p info__p--title">Temperament</p>
+                    <p class="info__p info__p--description">
+                        {{ temperament }}
+                    </p>
 
-                    <h3 style="margin-top: 1rem">Data</h3>
+                    <p class="info__p info__p--title">Ilość ramek w ulu</p>
+                    <p class="info__p info__p--description">
+                        {{ frames }}
+                    </p>
+                </div>
 
-                    <div class="info__date">
-                        <p class="info__p info__p--title">Data</p>
-                        <p class="info__p info__p--description">
-                            {{ date }}
-                        </p>
-                    </div>
+                <div class="info__queen">
+                    <h3 class="info__title-h3">Królowa</h3>
 
-                    <h3 style="margin-top: 1rem">Kondycja</h3>
+                    <p class="info__p info__p--title">Królowa</p>
+                    <p class="info__p info__p--description">
+                        {{ isQueen }}
+                    </p>
 
-                    <div class="info__equipment">
-                        <p class="info__p info__p--title">Wyposażenie</p>
-                        <p class="info__p info__p--description">
-                            {{ equipment }}
-                        </p>
-                    </div>
-                    <div class="info__odor">
-                        <p class="info__p info__p--title">Zapach</p>
-                        <p class="info__p info__p--description">
-                            {{ odor }}
-                        </p>
-                    </div>
-                    <div class="info__deadBees">
-                        <p class="info__p info__p--title">Martwe pszczoły</p>
-                        <p class="info__p info__p--description">
-                            {{ deadBees }}
-                        </p>
-                    </div>
-                    <div class="info__moisture">
-                        <p class="info__p info__p--title">Wilgoć</p>
-                        <p class="info__p info__p--description">
-                            {{ moisture }}
-                        </p>
-                    </div>
-                    <div class="info__mold">
-                        <p class="info__p info__p--title">Pleśń</p>
-                        <p class="info__p info__p--description">
-                            {{ mold }}
-                        </p>
-                    </div>
-                    <div class="info__otherObservation">
-                        <p class="info__p info__p--title">Inne obserwację</p>
-                        <p class="info__p info__p--description">
-                            {{ otherObservation }}
-                        </p>
-                    </div>
+                    <p class="info__p info__p--title" v-if="isQueen === 'Tak'">
+                        Wiek królowej (w latach)
+                    </p>
+                    <p
+                        class="info__p info__p--description"
+                        v-if="isQueen === 'Tak'"
+                    >
+                        {{ age }}
+                    </p>
+
+                    <p class="info__p info__p--title" v-if="isQueen === 'Tak'">
+                        Kiedy królowa została wrzucona do ula
+                    </p>
+                    <p
+                        class="info__p info__p--description"
+                        v-if="isQueen === 'Tak'"
+                    >
+                        {{ installed }}
+                    </p>
+
+                    <p class="info__p info__p--title" v-if="isQueen === 'Tak'">
+                        Rasa królowej
+                    </p>
+                    <p
+                        class="info__p info__p--description"
+                        v-if="isQueen === 'Tak'"
+                    >
+                        {{ race }}
+                    </p>
+
+                    <p class="info__p info__p--title" v-if="isQueen === 'Tak'">
+                        Kolor królowej
+                    </p>
+                    <p
+                        class="info__p info__p--description"
+                        v-if="isQueen === 'Tak'"
+                    >
+                        {{ queenColor }}
+                    </p>
+
+                    <p class="info__p info__p--title" v-if="isQueen === 'Tak'">
+                        Notatka dotycząca królowej
+                    </p>
+                    <p
+                        class="info__p info__p--description"
+                        v-if="isQueen === 'Tak'"
+                    >
+                        {{ queenNote }}
+                    </p>
+                </div>
+
+                <div class="info__frames-with">
+                    <h3 class="info__title-h3">Ramki</h3>
+
+                    <p class="info__p info__p--title">Z pszczołami</p>
+                    <p class="info__p info__p--description">
+                        {{ framesWithBees }}
+                    </p>
+
+                    <p class="info__p info__p--title">Z czerwiem</p>
+                    <p class="info__p info__p--description">
+                        {{ framesWithBrood }}
+                    </p>
+
+                    <p class="info__p info__p--title">Z miodem</p>
+                    <p class="info__p info__p--description">
+                        {{ framesWithHoney }}
+                    </p>
+
+                    <p class="info__p info__p--title">Z pyłkiem</p>
+                    <p class="info__p info__p--description">
+                        {{ framesWithPollen }}
+                    </p>
+                </div>
+
+                <div class="info__spotted-problems">
+                    <h3 class="info__title-h3">
+                        Problemy & Notatki
+                    </h3>
+
+                    <p class="info__p info__p--title">Napotkane problemy</p>
+                    <p class="info__p info__p--description">
+                        {{ problems }}
+                    </p>
+
+                    <p class="info__p info__p--title">Notatki</p>
+                    <p class="info__p info__p--description">
+                        {{ note }}
+                    </p>
+                </div>
+
+                <div class="info__include-weather">
+                    <h3 class="info__title-h3">Pogoda</h3>
+
+                    <p class="info__p info__p--title">Warunki pogodowe</p>
+                    <p class="info__p info__p--description">
+                        {{ includeWeather }}
+                    </p>
+
+                    <p
+                        class="info__p info__p--title"
+                        v-if="includeWeather === 'Tak'"
+                    >
+                        Warunki pogodowe
+                    </p>
+                    <p
+                        class="info__p info__p--description"
+                        v-if="includeWeather === 'Tak'"
+                    >
+                        {{ conditions }}
+                    </p>
+
+                    <p
+                        class="info__p info__p--title"
+                        v-if="includeWeather === 'Tak'"
+                    >
+                        Temperatura
+                    </p>
+                    <p
+                        class="info__p info__p--description"
+                        v-if="includeWeather === 'Tak'"
+                    >
+                        {{ temperature }}
+                    </p>
+
+                    <p
+                        class="info__p info__p--title"
+                        v-if="includeWeather === 'Tak'"
+                    >
+                        Wilgotność
+                    </p>
+                    <p
+                        class="info__p info__p--description"
+                        v-if="includeWeather === 'Tak'"
+                    >
+                        {{ humidity }}
+                    </p>
+
+                    <p
+                        class="info__p info__p--title"
+                        v-if="includeWeather === 'Tak'"
+                    >
+                        Ciśnienie
+                    </p>
+                    <p
+                        class="info__p info__p--description"
+                        v-if="includeWeather === 'Tak'"
+                    >
+                        {{ pressure }}
+                    </p>
+
+                    <p
+                        class="info__p info__p--title"
+                        v-if="includeWeather === 'Tak'"
+                    >
+                        Prędkość wiatru
+                    </p>
+                    <p
+                        class="info__p info__p--description"
+                        v-if="includeWeather === 'Tak'"
+                    >
+                        {{ wind }}
+                    </p>
                 </div>
             </div>
         </div>
@@ -93,16 +235,31 @@
 export default {
     props: [
         "id",
-        "name",
+        "purpose",
         "apiary",
         "hive",
         "date",
-        "equipment",
-        "odor",
-        "deadBees",
-        "moisture",
-        "mold",
-        "otherObservation"
+        "strength",
+        "temperament",
+        "frames",
+        "isQueen",
+        "age",
+        "installed",
+        "race",
+        "queenColor",
+        "queenNote",
+        "framesWithBees",
+        "framesWithBrood",
+        "framesWithHoney",
+        "framesWithPollen",
+        "problems",
+        "note",
+        "includeWeather",
+        "conditions",
+        "temperature",
+        "humidity",
+        "pressure",
+        "wind"
     ]
 };
 </script>
@@ -166,67 +323,70 @@ export default {
                 align-items: center;
             }
 
-            &__apiary {
+            &__general {
                 display: flex;
                 flex-direction: column;
+                width: 100%;
                 justify-content: center;
                 align-items: center;
+                border: 2px solid $black;
+                padding: 1rem;
             }
 
-            &__hive {
+            &__bees {
                 display: flex;
                 flex-direction: column;
+                width: 100%;
                 justify-content: center;
                 align-items: center;
+                border: 2px solid $black;
+                padding: 1rem;
             }
 
-            &__date {
+            &__queen {
                 display: flex;
                 flex-direction: column;
+                width: 100%;
                 justify-content: center;
                 align-items: center;
+                border: 2px solid $black;
+                padding: 1rem;
             }
 
-            &__equipment {
+            &__frames-with {
                 display: flex;
                 flex-direction: column;
+                width: 100%;
                 justify-content: center;
                 align-items: center;
+                border: 2px solid $black;
+                padding: 1rem;
             }
 
-            &__odor {
+            &__spotted-problems {
                 display: flex;
                 flex-direction: column;
+                width: 100%;
                 justify-content: center;
                 align-items: center;
+                border: 2px solid $black;
+                padding: 1rem;
             }
 
-            &__deadBees {
+            &__include-weather {
                 display: flex;
                 flex-direction: column;
+                width: 100%;
                 justify-content: center;
                 align-items: center;
+                border: 2px solid $black;
+                padding: 1rem;
             }
 
-            &__moisture {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-            }
-
-            &__mold {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-            }
-
-            &__otherObservation {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
+            &__title-h3 {
+                font-size: 1.8rem;
+                font-weight: bold;
+                border-bottom: 5px solid $black;
             }
 
             &__p {

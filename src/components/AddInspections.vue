@@ -350,7 +350,7 @@
                         type="text"
                         id="conditions"
                         name="conditions"
-                        v-model="weather.conditions"
+                        v-model="inspection.conditions"
                         v-if="inspection.includeWeather === 'Tak'"
                     />
 
@@ -365,7 +365,7 @@
                         type="text"
                         id="temperature"
                         name="temperature"
-                        v-model="weather.temperature"
+                        v-model="inspection.temperature"
                         v-if="inspection.includeWeather === 'Tak'"
                     />
 
@@ -380,7 +380,7 @@
                         type="text"
                         id="humidity"
                         name="humidity"
-                        v-model="weather.humidity"
+                        v-model="inspection.humidity"
                         v-if="inspection.includeWeather === 'Tak'"
                     />
 
@@ -395,7 +395,7 @@
                         type="text"
                         id="pressure"
                         name="pressure"
-                        v-model="weather.pressure"
+                        v-model="inspection.pressure"
                         v-if="inspection.includeWeather === 'Tak'"
                     />
 
@@ -410,13 +410,13 @@
                         type="text"
                         id="wind"
                         name="wind"
-                        v-model="weather.wind"
+                        v-model="inspection.wind"
                         v-if="inspection.includeWeather === 'Tak'"
                     />
                 </div>
 
                 <button class="content__btn" @click="addInspections()">
-                    Dodaj ul
+                    Dodaj inspekcję
                 </button>
             </form>
         </div>
@@ -464,15 +464,7 @@ export default {
                 note: "",
 
                 // weather
-                includeWeather: ""
-                // conditions: "",
-                // temperature: "",
-                // humidity: "",
-                // pressure: "",
-                // wind: ""
-            },
-
-            weather: {
+                includeWeather: "",
                 conditions: "",
                 temperature: "",
                 humidity: "",
@@ -537,11 +529,11 @@ export default {
 
                 // weather
                 includeWeather: this.inspection.includeWeather,
-                conditions: this.weather.conditions,
-                temperature: this.weather.temperature,
-                humidity: this.weather.humidity,
-                pressure: this.weather.pressure,
-                wind: this.weather.wind
+                conditions: this.inspection.conditions,
+                temperature: this.inspection.temperature,
+                humidity: this.inspection.humidity,
+                pressure: this.inspection.pressure,
+                wind: this.inspection.wind
             });
 
             // general
@@ -580,15 +572,16 @@ export default {
             axios
                 .get(url)
                 .then(response => {
-                    this.weather.temperature = Math.round(
+                    this.inspection.temperature = Math.round(
                         response.data.main.temp
                     );
-                    this.weather.humidity = response.data.main.humidity + " %";
-                    this.weather.pressure =
+                    this.inspection.humidity =
+                        response.data.main.humidity + " %";
+                    this.inspection.pressure =
                         response.data.main.pressure + " hPa";
-                    this.weather.wind =
+                    this.inspection.wind =
                         Math.round(response.data.wind.speed) + " m/s";
-                    this.weather.conditions =
+                    this.inspection.conditions =
                         response.data.weather[0].description
                             .charAt(0)
                             .toUpperCase() +
