@@ -261,16 +261,31 @@ const store = new Vuex.Store({
                     .doc(fb.auth.currentUser.uid)
                     .collection("inspections")
                     .add({
-                        name: inspections.name,
+                        purpose: inspections.purpose,
                         apiary: inspections.apiary,
                         hive: inspections.hive,
                         date: inspections.date,
-                        equipment: inspections.equipment,
-                        odor: inspections.odor,
-                        deadBees: inspections.deadBees,
-                        moisture: inspections.moisture,
-                        mold: inspections.mold,
-                        otherObservation: inspections.otherObservation
+                        strength: inspections.strength,
+                        temperament: inspections.temperament,
+                        frames: inspections.frames,
+                        isQueen: inspections.isQueen,
+                        age: inspections.age,
+                        installed: inspections.installed,
+                        race: inspections.race,
+                        queenColor: inspections.queenColor,
+                        queenNote: inspections.queenNote,
+                        framesWithBees: inspections.framesWithBees,
+                        framesWithBrood: inspections.framesWithBrood,
+                        framesWithHoney: inspections.framesWithHoney,
+                        framesWithPollen: inspections.framesWithPollen,
+                        problems: inspections.problems,
+                        note: inspections.note,
+                        includeWeather: inspections.includeWeather,
+                        conditions: inspections.conditions,
+                        temperature: inspections.temperature,
+                        humidity: inspections.humidity,
+                        pressure: inspections.pressure,
+                        wind: inspections.wind
                     });
             }
         },

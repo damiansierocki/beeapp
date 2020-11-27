@@ -163,17 +163,42 @@ export default {
             showEditInspections: false,
 
             inspection: {
-                id: "",
-                name: "",
+                // general
+                purpose: "",
                 apiary: "",
                 hive: "",
                 date: "",
-                equipment: "",
-                odor: "",
-                deadBees: "",
-                moisture: "",
-                mold: "",
-                otherObservation: ""
+
+                // bees
+                strength: "",
+                temperament: "",
+                frames: "",
+
+                // queen
+                isQueen: "",
+                age: "",
+                installed: "",
+                race: "",
+                queenColor: "",
+                queenNote: "",
+
+                // frames with
+                framesWithBees: "",
+                framesWithBrood: "",
+                framesWithHoney: "",
+                framesWithPollen: "",
+
+                // spotted problems
+                problems: "",
+                note: "",
+
+                // weather
+                includeWeather: "",
+                conditions: "",
+                temperature: "",
+                humidity: "",
+                pressure: "",
+                wind: ""
             }
         };
     },

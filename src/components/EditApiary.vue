@@ -34,7 +34,9 @@
                         v-model="apiary.forages"
                         multiple
                     >
-                        <option disabled value="">{{ forages }}</option>
+                        <option disabled value="">{{
+                            forages.join(", ")
+                        }}</option>
                         <option value="Gryka">Gryka</option>
                         <option value="Akacja">Akacja</option>
                         <option value="Lipa">Lipa</option>

@@ -145,7 +145,7 @@ export default {
             showEditApiary: false,
 
             apiary: {
-                id: "",
+                // id: "",
 
                 // general
                 name: "",

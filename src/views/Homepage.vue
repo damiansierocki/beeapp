@@ -7,7 +7,14 @@
         </Nav>
 
         <div class="content">
-            <Weather></Weather>
+            <transition
+                enter-active-class="animate__animated animate__backInUp animate__faster"
+                leave-active-class="animate__animated animate__backOutDown animate__faster"
+                mode="out-in"
+                appear
+            >
+                <Weather></Weather>
+            </transition>
 
             <div class="info">
                 <h3 class="info__title">Informacje</h3>
@@ -40,7 +47,7 @@
                             src="./../assets/images/svgs/inspections.svg"
                             alt="inspections"
                         />
-                        <p class="info__number">0</p>
+                        <p class="info__number">{{ inspections.length }}</p>
                         <p class="info__description info__description--blue">
                             Inspekcje
                         </p>
@@ -165,7 +172,13 @@ export default {
     },
 
     computed: {
-        ...mapState(["userProfile", "notes", "apiaries", "hives"]),
+        ...mapState([
+            "userProfile",
+            "notes",
+            "apiaries",
+            "hives",
+            "inspections"
+        ]),
 
         showIfUserLogged() {
             return Object.keys(this.userProfile).length > 1;
@@ -176,6 +189,7 @@ export default {
         this.getNotes();
         this.getApiaries();
         this.getHives();
+        this.getInspections();
     },
 
     filters: {
@@ -206,6 +220,10 @@ export default {
 
         toggleAddNotes() {
             this.showAddNotes = !this.showAddNotes;
+        },
+
+        getInspections() {
+            this.$store.dispatch("getInspections");
         },
 
         getNotes() {

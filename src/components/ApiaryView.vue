@@ -21,7 +21,7 @@
 
                     <p class="info__p info__p--title">Typ pożywienia</p>
                     <p class="info__p info__p--description">
-                        {{ forages }}
+                        {{ forages.join(", ") }}
                     </p>
 
                     <p class="info__p info__p--title">Typ pasieki</p>

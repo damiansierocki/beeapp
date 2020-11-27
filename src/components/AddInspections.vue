@@ -11,145 +11,412 @@
             </div>
 
             <form class="content__form" @submit.prevent>
-                <h3>Inspekcja</h3>
+                <div class="content__general">
+                    <h3 class="content__title-h3">Informacje generalne</h3>
 
-                <label class="content__label" for="name">Nazwa inspekcji</label>
-                <input
-                    class="content__input"
-                    type="text"
-                    placeholder="Wpisz nazwę inspekcji..."
-                    v-model.trim="inspections.name"
-                />
-
-                <label class="content__label" for="apiary">Pasieka</label>
-                <select
-                    class="content__input"
-                    name="apiary"
-                    id="apiary"
-                    v-model="inspections.apiary"
-                >
-                    <option disabled value="">Wybierz pasiekę</option>
-                    <option
-                        v-for="apiary in apiaries"
-                        :key="apiary.id"
-                        :value="apiary.name"
-                        >{{ apiary.name }}</option
+                    <label class="content__label" for="purpose"
+                        >Cel inspekcji</label
                     >
-                </select>
+                    <input
+                        id="purpose"
+                        name="purpose"
+                        class="content__input"
+                        type="text"
+                        placeholder="Wpisz cel inspekcji..."
+                        v-model.trim="inspection.purpose"
+                    />
 
-                <label class="content__label" for="hive">Ul</label>
-                <select
-                    class="content__input"
-                    name="hive"
-                    id="hive"
-                    v-model="inspections.hive"
-                >
-                    <option disabled value="">Wybierz pasiekę</option>
-                    <option
-                        v-for="hive in hives"
-                        :key="hive.id"
-                        :value="hive.hiveId"
-                        >{{ hive.hiveId }}</option
+                    <label class="content__label" for="apiary">Pasieka</label>
+                    <select
+                        class="content__input"
+                        name="apiary"
+                        id="apiary"
+                        v-model="inspection.apiary"
                     >
-                </select>
+                        <option disabled value="">Wybierz pasiekę</option>
+                        <option
+                            v-for="apiary in apiaries"
+                            :key="apiary.id"
+                            :value="apiary.name"
+                            >{{ apiary.name }}</option
+                        >
+                    </select>
 
-                <h3 style="margin-top: 1rem">Data</h3>
-
-                <label for="date" class="content__label">Data</label>
-                <input
-                    class="content__input"
-                    type="date"
-                    id="date"
-                    name="date"
-                    v-model="inspections.date"
-                />
-
-                <h3 style="margin-top: 1rem">Kondycja</h3>
-
-                <label for="equipment" class="content__label"
-                    >Wyposażenie</label
-                >
-                <select
-                    class="content__input"
-                    name="equipment"
-                    id="equipment"
-                    v-model="inspections.equipment"
-                >
-                    <option disabled value=""
-                        >Wybierz poziom wyposażenia</option
+                    <label class="content__label" for="hive">Ul</label>
+                    <select
+                        class="content__input"
+                        name="hive"
+                        id="hive"
+                        v-model="inspection.hive"
                     >
-                    <option value="Zły">Zły</option>
-                    <option value="Średni">Średni</option>
-                    <option value="Dobry">Dobry</option>
-                    <option value="Bardzo dobry">Bardzo dobry</option>
-                </select>
+                        <option disabled value="">Wybierz numer ula</option>
+                        <option
+                            v-for="hive in hives"
+                            :key="hive.id"
+                            :value="hive.number"
+                            >{{ hive.number }}</option
+                        >
+                    </select>
 
-                <label for="odor" class="content__label">Zapach</label>
-                <select
-                    class="content__input"
-                    name="odor"
-                    id="odor"
-                    v-model="inspections.odor"
-                >
-                    <option disabled value="">Wybierz poziom zapachu</option>
-                    <option value="Zły">Zły</option>
-                    <option value="Normalny">Normalny</option>
-                    <option value="Dobry">Dobry</option>
-                    <option value="Bardzo dobry">Bardzo dobry</option>
-                </select>
+                    <label for="date" class="content__label">Data</label>
+                    <input
+                        class="content__input"
+                        type="date"
+                        id="date"
+                        name="date"
+                        v-model="inspection.date"
+                    />
+                </div>
 
-                <label for="deadBees" class="content__label"
-                    >Martwe pszczoły</label
-                >
-                <select
-                    class="content__input"
-                    name="deadBees"
-                    id="deadBees"
-                    v-model="inspections.deadBees"
-                >
-                    <option disabled value="">Czy są martwe pszczoły?</option>
-                    <option value="Nie">Nie</option>
-                    <option value="Tak">Tak</option>
-                </select>
+                <div class="content__bees">
+                    <h3 class="content__title-h3">Pszczoły</h3>
 
-                <label for="moisture" class="content__label">Wilgoć</label>
-                <select
-                    class="content__input"
-                    name="moisture"
-                    id="moisture"
-                    v-model="inspections.moisture"
-                >
-                    <option disabled value="">Czy jest wilgoć?</option>
-                    <option value="Nie">Nie</option>
-                    <option value="Tak">Tak</option>
-                </select>
+                    <label class="content__label" for="strength"
+                        >Siła pszczół</label
+                    >
+                    <select
+                        class="content__input"
+                        name="strength"
+                        id="strength"
+                        v-model="inspection.strength"
+                    >
+                        <option disabled value=""
+                            >Wybierz siłę rodziny pszczelej</option
+                        >
+                        <option value="Bardzo słaba">Bardzo słaba</option>
+                        <option value="Słaba">Słaba</option>
+                        <option value="Normalna">Normalna</option>
+                        <option value="Silna">Silna</option>
+                        <option value="Bardzo silna">Bardzo silna</option>
+                    </select>
 
-                <label for="mold" class="content__label">Pleśń</label>
-                <select
-                    class="content__input"
-                    name="mold"
-                    id="mold"
-                    v-model="inspections.mold"
-                >
-                    <option disabled value="">Czy jest pleśń?</option>
-                    <option value="Nie">Nie</option>
-                    <option value="Tak">Tak</option>
-                </select>
+                    <label class="content__label" for="temperament"
+                        >Temperament</label
+                    >
+                    <select
+                        class="content__input"
+                        name="temperament"
+                        id="temperament"
+                        v-model="inspection.temperament"
+                    >
+                        <option disabled value=""
+                            >Wybierz temperament rodziny pszczelej</option
+                        >
+                        <option value="Spokojna">Spokojna</option>
+                        <option value="Nerwowa">Nerwowa</option>
+                        <option value="Agresywna">Agresywna</option>
+                    </select>
 
-                <label for="otherObservation" class="content__label"
-                    >Inne obserwacje</label
-                >
-                <textarea
-                    class="content__input"
-                    type="text"
-                    id="otherObservation"
-                    name="otherObservation"
-                    v-model="inspections.otherObservation"
-                    placeholder="Wpisz jeśli są inne obserwację..."
-                ></textarea>
+                    <label class="content__label" for="frames"
+                        >Ilość ramek w ulu</label
+                    >
+                    <input
+                        id="frames"
+                        name="frames"
+                        class="content__input"
+                        type="text"
+                        placeholder="Wpisz ilość ramek w ulu..."
+                        v-model.trim="inspection.frames"
+                    />
+                </div>
+
+                <div class="content__queen">
+                    <h3 class="content__title-h3">Królowa</h3>
+
+                    <label class="content__label" for="isQueen">Królowa</label>
+                    <select
+                        class="content__input"
+                        name="isQueen"
+                        id="isQueen"
+                        v-model="inspection.isQueen"
+                    >
+                        <option disabled value=""
+                            >Czy jest królowa w ulu?</option
+                        >
+                        <option value="Tak">Tak</option>
+                        <option value="Nie">Nie</option>
+                    </select>
+
+                    <label
+                        class="content__label"
+                        for="age"
+                        v-if="inspection.isQueen !== 'Nie'"
+                        >Wiek Królowej (w latach)</label
+                    >
+                    <input
+                        id="age"
+                        name="age"
+                        class="content__input"
+                        type="number"
+                        placeholder="Wpisz wiek królowej..."
+                        v-model.trim="inspection.age"
+                        v-if="inspection.isQueen !== 'Nie'"
+                    />
+
+                    <label
+                        class="content__label"
+                        for="installed"
+                        v-if="inspection.isQueen !== 'Nie'"
+                        >Kiedy królowa została wrzucona do ula</label
+                    >
+                    <input
+                        id="installed"
+                        name="installed"
+                        class="content__input"
+                        type="date"
+                        v-model.trim="inspection.installed"
+                        v-if="inspection.isQueen !== 'Nie'"
+                    />
+
+                    <label
+                        class="content__label"
+                        for="race"
+                        v-if="inspection.isQueen !== 'Nie'"
+                        >Rasa królowej</label
+                    >
+                    <select
+                        class="content__input"
+                        name="race"
+                        id="race"
+                        v-model="inspection.race"
+                        v-if="inspection.isQueen !== 'Nie'"
+                    >
+                        <option disabled value="">Wybiesz rase królowej</option>
+                        <option value="Pszczoła Środkowoeuropejska"
+                            >Pszczoła Środkowoeuropejska</option
+                        >
+                        <option value="Pszczoła Kaukaska"
+                            >Pszczoła Kaukaska</option
+                        >
+                        <option value="Pszczoła Kraińska"
+                            >Pszczoła Kraińska</option
+                        >
+                        <option value="Pszczoła Włoska">Pszczoła Włoska</option>
+                        <option value="Pszczoła Buckfast"
+                            >Pszczoła Buckfast</option
+                        >
+                        <option value="Heterozja (mieszane)"
+                            >Heterozja (mieszane)</option
+                        >
+                    </select>
+
+                    <label
+                        class="content__label"
+                        for="queenColor"
+                        v-if="inspection.isQueen !== 'Nie'"
+                        >Kolor królowej</label
+                    >
+                    <select
+                        class="content__input"
+                        name="queenColor"
+                        id="queenColor"
+                        v-model="inspection.queenColor"
+                        v-if="inspection.isQueen !== 'Nie'"
+                    >
+                        <option disabled value=""
+                            >Wybierz kolor królowej</option
+                        >
+                        <option value="Biały">Biały</option>
+                        <option value="Żółty">Żółty</option>
+                        <option value="Czerwony">Czerwony</option>
+                        <option value="Zielony">Zielony</option>
+                        <option value="Niebieski">Niebieski</option>
+                    </select>
+
+                    <label
+                        class="content__label"
+                        for="queenNote"
+                        v-if="inspection.isQueen !== 'Nie'"
+                        >Notatka dotycząca królowej</label
+                    >
+                    <textarea
+                        id="queenNote"
+                        name="queenNote"
+                        class="content__input"
+                        type="text"
+                        placeholder="Wpisz notatkę dotyczącą królowej..."
+                        v-model.trim="inspection.queenNote"
+                        v-if="inspection.isQueen !== 'Nie'"
+                    ></textarea>
+                </div>
+
+                <div class="content__frames-with">
+                    <h3 class="content__title-h3">Ramki</h3>
+
+                    <label class="content__label" for="framesWithBees"
+                        >Z pszczołami</label
+                    >
+                    <input
+                        class="content__input"
+                        type="number"
+                        id="framesWithBees"
+                        name="framesWithBees"
+                        placeholder="Wpisz ilość ramek z pszczołami..."
+                        v-model="inspection.framesWithBees"
+                    />
+
+                    <label class="content__label" for="framesWithBrood"
+                        >Z czerwiem</label
+                    >
+                    <input
+                        class="content__input"
+                        type="number"
+                        id="framesWithBrood"
+                        name="framesWithBrood"
+                        placeholder="Wpisz ilość ramek z czerwiem..."
+                        v-model="inspection.framesWithBrood"
+                    />
+
+                    <label class="content__label" for="framesWithHoney"
+                        >Z miodem</label
+                    >
+                    <input
+                        class="content__input"
+                        type="number"
+                        id="framesWithHoney"
+                        name="framesWithHoney"
+                        placeholder="Wpisz ilość ramek z miodem..."
+                        v-model="inspection.framesWithHoney"
+                    />
+
+                    <label class="content__label" for="framesWithPollen"
+                        >Z pyłkiem</label
+                    >
+                    <input
+                        class="content__input"
+                        type="number"
+                        id="framesWithPollen"
+                        name="framesWithPollen"
+                        placeholder="Wpisz ilość ramek z pyłkiem..."
+                        v-model="inspection.framesWithPollen"
+                    />
+                </div>
+
+                <div class="content__spotted-problems">
+                    <h3 class="content__title-h3">
+                        Problemy & Notatki
+                    </h3>
+
+                    <label class="content__label" for="problems"
+                        >Napotkane problemy</label
+                    >
+                    <input
+                        class="content__input"
+                        type="text"
+                        id="problems"
+                        name="problems"
+                        placeholder="Wpisz napotkane problemy podczas inspekcji..."
+                        v-model="inspection.problems"
+                    />
+
+                    <label class="content__label" for="note">Notatki</label>
+                    <textarea
+                        class="content__input"
+                        type="text"
+                        id="note"
+                        name="note"
+                        placeholder="Wpisz notatki dotyczące inspekcji..."
+                        v-model="inspection.note"
+                    ></textarea>
+                </div>
+
+                <div class="content__include-weather">
+                    <h3 class="content__title-h3">Pogoda</h3>
+
+                    <label class="content__label" for="includeWeather"
+                        >Warunki pogodowe</label
+                    >
+                    <select
+                        class="content__input"
+                        name="includeWeather"
+                        id="includeWeather"
+                        v-model="inspection.includeWeather"
+                    >
+                        <option disabled value=""
+                            >Czy chcesz uwzględnić pogodę?</option
+                        >
+                        <option value="Tak">Tak</option>
+                        <option value="Nie">Nie</option>
+                    </select>
+
+                    <label
+                        class="content__label"
+                        for="conditions"
+                        v-if="inspection.includeWeather === 'Tak'"
+                        >Warunki pogodowe</label
+                    >
+                    <input
+                        class="content__input"
+                        type="text"
+                        id="conditions"
+                        name="conditions"
+                        v-model="weather.conditions"
+                        v-if="inspection.includeWeather === 'Tak'"
+                    />
+
+                    <label
+                        class="content__label"
+                        for="temperature"
+                        v-if="inspection.includeWeather === 'Tak'"
+                        >Temperatura</label
+                    >
+                    <input
+                        class="content__input"
+                        type="text"
+                        id="temperature"
+                        name="temperature"
+                        v-model="weather.temperature"
+                        v-if="inspection.includeWeather === 'Tak'"
+                    />
+
+                    <label
+                        class="content__label"
+                        for="humidity"
+                        v-if="inspection.includeWeather === 'Tak'"
+                        >Wilgotność</label
+                    >
+                    <input
+                        class="content__input"
+                        type="text"
+                        id="humidity"
+                        name="humidity"
+                        v-model="weather.humidity"
+                        v-if="inspection.includeWeather === 'Tak'"
+                    />
+
+                    <label
+                        class="content__label"
+                        for="pressure"
+                        v-if="inspection.includeWeather === 'Tak'"
+                        >Ciśnienie</label
+                    >
+                    <input
+                        class="content__input"
+                        type="text"
+                        id="pressure"
+                        name="pressure"
+                        v-model="weather.pressure"
+                        v-if="inspection.includeWeather === 'Tak'"
+                    />
+
+                    <label
+                        class="content__label"
+                        for="wind"
+                        v-if="inspection.includeWeather === 'Tak'"
+                        >Prędkość wiatru</label
+                    >
+                    <input
+                        class="content__input"
+                        type="text"
+                        id="wind"
+                        name="wind"
+                        v-model="weather.wind"
+                        v-if="inspection.includeWeather === 'Tak'"
+                    />
+                </div>
 
                 <button class="content__btn" @click="addInspections()">
-                    Dodaj inspekcję
+                    Dodaj ul
                 </button>
             </form>
         </div>
@@ -158,27 +425,69 @@
 
 <script>
 import { mapState } from "vuex";
+import axios from "axios";
+
+const API = "http://api.openweathermap.org/data/2.5/weather?units=metric";
+const KEY = "&APPID=bff05973f18c6a1a19bc66976347f831";
 
 export default {
     data() {
         return {
-            inspections: {
-                name: "",
+            inspection: {
+                // general
+                purpose: "",
                 apiary: "",
                 hive: "",
                 date: "",
-                equipment: "",
-                odor: "",
-                deadBees: "",
-                moisture: "",
-                mold: "",
-                otherObservation: ""
+
+                // bees
+                strength: "",
+                temperament: "",
+                frames: "",
+
+                // queen
+                isQueen: "",
+                age: "",
+                installed: "",
+                race: "",
+                queenColor: "",
+                queenNote: "",
+
+                // frames with
+                framesWithBees: "",
+                framesWithBrood: "",
+                framesWithHoney: "",
+                framesWithPollen: "",
+
+                // spotted problems
+                problems: "",
+                note: "",
+
+                // weather
+                includeWeather: ""
+                // conditions: "",
+                // temperature: "",
+                // humidity: "",
+                // pressure: "",
+                // wind: ""
+            },
+
+            weather: {
+                conditions: "",
+                temperature: "",
+                humidity: "",
+                pressure: "",
+                wind: ""
             }
         };
     },
 
     computed: {
         ...mapState(["apiaries", "hives"])
+    },
+
+    beforeMount() {
+        this.geolocation();
     },
 
     created() {
@@ -197,28 +506,117 @@ export default {
 
         addInspections() {
             this.$store.dispatch("addInspections", {
-                name: this.inspections.name,
-                apiary: this.inspections.apiary,
-                hive: this.inspections.hive,
-                date: this.inspections.date,
-                equipment: this.inspections.equipment,
-                odor: this.inspections.odor,
-                deadBees: this.inspections.deadBees,
-                moisture: this.inspections.moisture,
-                mold: this.inspections.mold,
-                otherObservation: this.inspections.otherObservation
+                // general
+                purpose: this.inspection.purpose,
+                apiary: this.inspection.apiary,
+                hive: this.inspection.hive,
+                date: this.inspection.date,
+
+                // bees
+                strength: this.inspection.strength,
+                temperament: this.inspection.temperament,
+                frames: this.inspection.frames,
+
+                // queen
+                isQueen: this.inspection.isQueen,
+                age: this.inspection.age,
+                installed: this.inspection.installed,
+                race: this.inspection.race,
+                queenColor: this.inspection.queenColor,
+                queenNote: this.inspection.queenNote,
+
+                // frames with
+                framesWithBees: this.inspection.framesWithBees,
+                framesWithBrood: this.inspection.framesWithBrood,
+                framesWithHoney: this.inspection.framesWithHoney,
+                framesWithPollen: this.inspection.framesWithPollen,
+
+                // spotted problems
+                problems: this.inspection.problems,
+                note: this.inspection.note,
+
+                // weather
+                includeWeather: this.inspection.includeWeather,
+                conditions: this.weather.conditions,
+                temperature: this.weather.temperature,
+                humidity: this.weather.humidity,
+                pressure: this.weather.pressure,
+                wind: this.weather.wind
             });
 
-            this.inspections.name = "";
-            this.inspections.apiary = "";
-            this.inspections.hive = "";
-            this.inspections.date = "";
-            this.inspections.equipment = "";
-            this.inspections.odor = "";
-            this.inspections.deadBees = "";
-            this.inspections.moisture = "";
-            this.inspections.mold = "";
-            this.inspections.otherObservation = "";
+            // general
+            this.inspection.purpose = "";
+            this.inspection.apiary = "";
+            this.inspection.hive = "";
+            this.inspection.date = "";
+
+            // bees
+            this.inspection.strength = "";
+            this.inspection.temperament = "";
+            this.inspection.frames = "";
+
+            // queen
+            this.inspection.isQueen = "";
+            this.inspection.age = "";
+            this.inspection.installed = "";
+            this.inspection.race = "";
+            this.inspection.queenColor = "";
+            this.inspection.queenNote = "";
+
+            // spotted problems
+            this.inspection.problems = "";
+            this.inspection.note = "";
+
+            // weather
+            this.inspection.includeWeather = "";
+            this.inspection.conditions = "";
+            this.inspection.temperature = "";
+            this.inspection.humidity = "";
+            this.inspection.pressure = "";
+            this.inspection.wind = "";
+        },
+
+        getCurrentWeather(url) {
+            axios
+                .get(url)
+                .then(response => {
+                    this.weather.temperature = Math.round(
+                        response.data.main.temp
+                    );
+                    this.weather.humidity = response.data.main.humidity + " %";
+                    this.weather.pressure =
+                        response.data.main.pressure + " hPa";
+                    this.weather.wind =
+                        Math.round(response.data.wind.speed) + " m/s";
+                    this.weather.conditions =
+                        response.data.weather[0].description
+                            .charAt(0)
+                            .toUpperCase() +
+                        response.data.weather[0].description.slice(1);
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        },
+
+        geolocation() {
+            navigator.geolocation.getCurrentPosition(
+                this.buildUrl,
+                this.geoError
+            );
+        },
+
+        buildUrl(position) {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+
+            this.getCurrentWeather(
+                API + "&lat=" + lat + "&lon=" + lon + "&lang=pl" + KEY
+            );
+        },
+
+        geoError() {
+            this.getCurrentWeather(API + "&lat=0&lon=0" + KEY);
         }
     }
 };
@@ -266,6 +664,72 @@ export default {
             align-items: center;
             justify-items: center;
             margin-top: 3rem;
+        }
+
+        &__general {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid $black;
+            padding: 1rem;
+        }
+
+        &__bees {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid $black;
+            padding: 1rem;
+        }
+
+        &__queen {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid $black;
+            padding: 1rem;
+        }
+
+        &__frames-with {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid $black;
+            padding: 1rem;
+        }
+
+        &__spotted-problems {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid $black;
+            padding: 1rem;
+        }
+
+        &__include-weather {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid $black;
+            padding: 1rem;
+        }
+
+        &__title-h3 {
+            font-size: 1.8rem;
+            font-weight: bold;
+            border-bottom: 5px solid $black;
         }
 
         &__label {
