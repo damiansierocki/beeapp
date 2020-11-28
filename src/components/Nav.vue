@@ -30,6 +30,9 @@
                 <router-link class="nav-left__link" to="/inspections"
                     >Inspekcje</router-link
                 >
+                <router-link class="nav-left__link" to="/todos"
+                    >Zadania</router-link
+                >
             </div>
         </div>
 
