@@ -146,8 +146,9 @@ export default {
                     this.weather.currentTemp = Math.round(
                         response.data.main.temp,
                     );
-                    this.weather.wind =
-                        Math.round(response.data.wind.speed) + ' m/s';
+                    this.weather.wind = `${Math.round(
+                        response.data.wind.speed,
+                    )} m/s`;
                     this.weather.location = response.data.name;
                     this.weather.description =
                         response.data.weather[0].description
@@ -155,11 +156,13 @@ export default {
                             .toUpperCase() +
                         response.data.weather[0].description.slice(1);
                     this.weather.main = response.data.weather[0].main;
-                    this.weather.temp_min =
-                        Math.round(response.data.main.temp_min) + '°C';
-                    this.weather.temp_max =
-                        Math.round(response.data.main.temp_max) + '°C';
-                    this.weather.humidity = response.data.main.humidity + '%';
+                    this.weather.temp_min = `${Math.round(
+                        response.data.main.temp_min,
+                    )}°C`;
+                    this.weather.temp_max = `${Math.round(
+                        response.data.main.temp_max,
+                    )}°C`;
+                    this.weather.humidity = `${response.data.main.humidity}%`;
                     this.weather.sunrise = new Date(
                         response.data.sys.sunrise * 1000,
                     )
@@ -174,8 +177,7 @@ export default {
 
                     const weather = document.querySelector('.weather');
 
-                    let weatherMain = this.weather.main;
-                    let weatherId = this.weather.id;
+                    const weatherMain = this.weather.main;
 
                     if (weatherMain === 'Clouds') {
                         weather.style.backgroundImage =
@@ -222,12 +224,12 @@ export default {
             const lon = position.coords.longitude;
 
             this.getCurrentWeather(
-                API + '&lat=' + lat + '&lon=' + lon + '&lang=pl' + KEY,
+                `${API}&lat=${lat}&lon=${lon}&lang=pl${KEY}`,
             );
         },
 
         geoError() {
-            this.getCurrentWeather(API + '&lat=0&lon=0' + KEY);
+            this.getCurrentWeather(`${API}&lat=0&lon=0${KEY}`);
         },
     },
 };

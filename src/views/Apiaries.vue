@@ -209,7 +209,6 @@ export default {
             city,
             zip,
             province,
-            hives,
         ) {
             this.showApiaryView = !this.showApiaryView;
 

@@ -42,7 +42,7 @@ export default {
 
     methods: {
         editNote() {
-            const docId = this.docId;
+            const { docId } = this;
             const note = { content: this.note.content };
 
             if (this.note.content !== '') {

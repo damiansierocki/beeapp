@@ -198,7 +198,7 @@ export default {
                 return '-';
             }
 
-            let date = val.toDate();
+            const date = val.toDate();
             return moment(date)
                 .locale('pl')
                 .fromNow();

@@ -3,7 +3,7 @@ module.exports = {
     env: {
         node: true,
     },
-    extends: ['airbnb', 'prettier'],
+    extends: ['airbnb', 'prettier', 'plugin:vue/essential'],
     plugins: ['prettier'],
     parserOptions: {
         parser: 'babel-eslint',
@@ -18,5 +18,6 @@ module.exports = {
         'func-names': 'off',
         'no-param-reassign': 'off',
         'no-alert': 'off',
+        'import/no-unresolved': 'off',
     },
 };

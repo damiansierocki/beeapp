@@ -575,12 +575,11 @@ export default {
                     this.inspection.temperature = Math.round(
                         response.data.main.temp,
                     );
-                    this.inspection.humidity =
-                        response.data.main.humidity + ' %';
-                    this.inspection.pressure =
-                        response.data.main.pressure + ' hPa';
-                    this.inspection.wind =
-                        Math.round(response.data.wind.speed) + ' m/s';
+                    this.inspection.humidity = `${response.data.main.humidity} %`;
+                    this.inspection.pressure = `${response.data.main.pressure} hPa`;
+                    this.inspection.wind = `${Math.round(
+                        response.data.wind.speed,
+                    )} m/s`;
                     this.inspection.conditions =
                         response.data.weather[0].description
                             .charAt(0)
@@ -604,12 +603,12 @@ export default {
             const lon = position.coords.longitude;
 
             this.getCurrentWeather(
-                API + '&lat=' + lat + '&lon=' + lon + '&lang=pl' + KEY,
+                `${API}&lat=${lat}&lon=${lon}&lang=pl${KEY}`,
             );
         },
 
         geoError() {
-            this.getCurrentWeather(API + '&lat=0&lon=0' + KEY);
+            this.getCurrentWeather(`${API}&lat=0&lon=0${KEY}`);
         },
     },
 };

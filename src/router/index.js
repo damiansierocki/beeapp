@@ -1,13 +1,13 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Homepage from '../views/Homepage';
-import Register from '../views/Register.vue';
-import Login from '../views/Login.vue';
-import MyAccount from '../views/MyAccount.vue';
-import Apiaries from '../views/Apiaries';
-import Hives from '../views/Hives';
-import Inspections from '../views/Inspections';
-import { auth } from '../firebase';
+import Homepage from '@/views/Homepage';
+import Register from '@/views/Register.vue';
+import Login from '@/views/Login.vue';
+import MyAccount from '@/views/MyAccount.vue';
+import Apiaries from '@/views/Apiaries';
+import Hives from '@/views/Hives';
+import Inspections from '@/views/Inspections';
+import { auth } from '@/firebase';
 
 Vue.use(VueRouter);
 
