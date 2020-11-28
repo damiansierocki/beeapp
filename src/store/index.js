@@ -1,7 +1,7 @@
-import Vue from "vue";
-import Vuex from "vuex";
-import * as fb from "../firebase";
-import router from "../router/index";
+import Vue from 'vue';
+import Vuex from 'vuex';
+import * as fb from '../firebase';
+import router from '../router/index';
 
 Vue.use(Vuex);
 
@@ -11,7 +11,7 @@ const store = new Vuex.Store({
         notes: [],
         apiaries: [],
         hives: [],
-        inspections: []
+        inspections: [],
     },
 
     mutations: {
@@ -33,59 +33,59 @@ const store = new Vuex.Store({
 
         setInspections(state, val) {
             state.inspections = val;
-        }
+        },
     },
 
     actions: {
         async getNotes() {
             fb.usersCollection
                 .doc(fb.auth.currentUser.uid)
-                .collection("notes")
-                .orderBy("createdOn", "desc")
+                .collection('notes')
+                .orderBy('createdOn', 'desc')
                 .onSnapshot(snapshot => {
-                    let notesArray = [];
+                    const notesArray = [];
 
                     snapshot.forEach(doc => {
-                        let note = doc.data();
+                        const note = doc.data();
                         note.id = doc.id;
 
                         notesArray.push(note);
                     });
 
-                    store.commit("setNotes", notesArray);
+                    store.commit('setNotes', notesArray);
                 });
         },
 
         async addNote({}, note) {
-            if (window.confirm("Jesteś pewny/a, że chcesz dodać notatkę?")) {
+            if (window.confirm('Jesteś pewny/a, że chcesz dodać notatkę?')) {
                 await fb.usersCollection
                     .doc(fb.auth.currentUser.uid)
-                    .collection("notes")
+                    .collection('notes')
                     .add({
                         createdOn: new Date(),
                         content: note.content,
-                        userId: fb.auth.currentUser.uid
+                        userId: fb.auth.currentUser.uid,
                     });
             }
         },
 
         async editNote({}, { docId, note }) {
-            if (window.confirm("Jesteś pewny/a, że chcesz edytować notatkę?")) {
+            if (window.confirm('Jesteś pewny/a, że chcesz edytować notatkę?')) {
                 await fb.usersCollection
                     .doc(fb.auth.currentUser.uid)
-                    .collection("notes")
+                    .collection('notes')
                     .doc(docId)
                     .update({
-                        content: note.content
+                        content: note.content,
                     });
             }
         },
 
         async deleteNote({}, docId) {
-            if (window.confirm("Jesteś pewny/a, że chcesz usunąć notatkę?")) {
+            if (window.confirm('Jesteś pewny/a, że chcesz usunąć notatkę?')) {
                 await fb.usersCollection
                     .doc(fb.auth.currentUser.uid)
-                    .collection("notes")
+                    .collection('notes')
                     .doc(docId)
                     .delete();
             }
@@ -94,26 +94,26 @@ const store = new Vuex.Store({
         async getApiaries() {
             fb.usersCollection
                 .doc(fb.auth.currentUser.uid)
-                .collection("apiaries")
+                .collection('apiaries')
                 .onSnapshot(snapshot => {
-                    let apiariesArray = [];
+                    const apiariesArray = [];
 
                     snapshot.forEach(doc => {
-                        let apiary = doc.data();
+                        const apiary = doc.data();
                         apiary.id = doc.id;
 
                         apiariesArray.push(apiary);
                     });
 
-                    store.commit("setApiaries", apiariesArray);
+                    store.commit('setApiaries', apiariesArray);
                 });
         },
 
         async addApiary({}, apiary) {
-            if (window.confirm("Jesteś pewny/a, że chcesz dodać pasiekę?")) {
+            if (window.confirm('Jesteś pewny/a, że chcesz dodać pasiekę?')) {
                 await fb.usersCollection
                     .doc(fb.auth.currentUser.uid)
-                    .collection("apiaries")
+                    .collection('apiaries')
                     .add({
                         // general
                         name: apiary.name,
@@ -125,30 +125,30 @@ const store = new Vuex.Store({
                         address: apiary.address,
                         city: apiary.city,
                         zip: apiary.zip,
-                        province: apiary.province
+                        province: apiary.province,
                     });
             }
         },
 
         async editApiary({}, { docId, apiary }) {
-            if (window.confirm("Jesteś pewny/a, że chcesz edytować notatkę?")) {
+            if (window.confirm('Jesteś pewny/a, że chcesz edytować notatkę?')) {
                 await fb.usersCollection
                     .doc(fb.auth.currentUser.uid)
-                    .collection("apiaries")
+                    .collection('apiaries')
                     .doc(docId)
                     .update({
                         name: apiary.name,
                         type: apiary.type,
-                        description: apiary.description
+                        description: apiary.description,
                     });
             }
         },
 
         async deleteApiary({}, docId) {
-            if (window.confirm("Jesteś pewny/a, że chcesz usunąć pasiekę?")) {
+            if (window.confirm('Jesteś pewny/a, że chcesz usunąć pasiekę?')) {
                 await fb.usersCollection
                     .doc(fb.auth.currentUser.uid)
-                    .collection("apiaries")
+                    .collection('apiaries')
                     .doc(docId)
                     .delete();
             }
@@ -157,23 +157,23 @@ const store = new Vuex.Store({
         async getHives() {
             fb.usersCollection
                 .doc(fb.auth.currentUser.uid)
-                .collection("hives")
+                .collection('hives')
                 .onSnapshot(snapshot => {
-                    let hivesArray = [];
+                    const hivesArray = [];
                     snapshot.docs.forEach(doc => {
-                        let hive = doc.data();
+                        const hive = doc.data();
                         hive.id = doc.id;
                         hivesArray.push(hive);
                     });
-                    store.commit("setHives", hivesArray);
+                    store.commit('setHives', hivesArray);
                 });
         },
 
         async addHives({}, hives) {
-            if (window.confirm("Jesteś pewny/a, że chcesz dodać ul?")) {
+            if (window.confirm('Jesteś pewny/a, że chcesz dodać ul?')) {
                 await fb.usersCollection
                     .doc(fb.auth.currentUser.uid)
-                    .collection("hives")
+                    .collection('hives')
                     .add({
                         // general
                         number: hives.number,
@@ -194,16 +194,16 @@ const store = new Vuex.Store({
                         installed: hives.installed,
                         race: hives.race,
                         queenColor: hives.queenColor,
-                        queenNote: hives.queenNote
+                        queenNote: hives.queenNote,
                     });
             }
         },
 
         async editHives({}, { docId, hives }) {
-            if (window.confirm("Jesteś pewny/a, że chcesz edytować ul?")) {
+            if (window.confirm('Jesteś pewny/a, że chcesz edytować ul?')) {
                 await fb.usersCollection
                     .doc(fb.auth.currentUser.uid)
-                    .collection("hives")
+                    .collection('hives')
                     .doc(docId)
                     .update({
                         // general
@@ -225,16 +225,16 @@ const store = new Vuex.Store({
                         installed: hives.installed,
                         race: hives.race,
                         queenColor: hives.queenColor,
-                        queenNote: hives.queenNote
+                        queenNote: hives.queenNote,
                     });
             }
         },
 
         async deleteHives({}, docId) {
-            if (window.confirm("Jesteś pewny/a, że chcesz usunąć ul?")) {
+            if (window.confirm('Jesteś pewny/a, że chcesz usunąć ul?')) {
                 await fb.usersCollection
                     .doc(fb.auth.currentUser.uid)
-                    .collection("hives")
+                    .collection('hives')
                     .doc(docId)
                     .delete();
             }
@@ -243,23 +243,23 @@ const store = new Vuex.Store({
         async getInspections() {
             fb.usersCollection
                 .doc(fb.auth.currentUser.uid)
-                .collection("inspections")
+                .collection('inspections')
                 .onSnapshot(snapshot => {
-                    let inspectionsArray = [];
+                    const inspectionsArray = [];
                     snapshot.docs.forEach(doc => {
-                        let inspection = doc.data();
+                        const inspection = doc.data();
                         inspection.id = doc.id;
                         inspectionsArray.push(inspection);
                     });
-                    store.commit("setInspections", inspectionsArray);
+                    store.commit('setInspections', inspectionsArray);
                 });
         },
 
         async addInspections({}, inspections) {
-            if (window.confirm("Jesteś pewny/a, że chcesz dodać inspekcję?")) {
+            if (window.confirm('Jesteś pewny/a, że chcesz dodać inspekcję?')) {
                 await fb.usersCollection
                     .doc(fb.auth.currentUser.uid)
-                    .collection("inspections")
+                    .collection('inspections')
                     .add({
                         purpose: inspections.purpose,
                         apiary: inspections.apiary,
@@ -285,18 +285,18 @@ const store = new Vuex.Store({
                         temperature: inspections.temperature,
                         humidity: inspections.humidity,
                         pressure: inspections.pressure,
-                        wind: inspections.wind
+                        wind: inspections.wind,
                     });
             }
         },
 
         async editInspections({}, { docId, inspections }) {
             if (
-                window.confirm("Jesteś pewny/a, że chcesz edytować inspekcję?")
+                window.confirm('Jesteś pewny/a, że chcesz edytować inspekcję?')
             ) {
                 await fb.usersCollection
                     .doc(fb.auth.currentUser.uid)
-                    .collection("inspections")
+                    .collection('inspections')
                     .doc(docId)
                     .update({
                         name: inspections.name,
@@ -308,16 +308,16 @@ const store = new Vuex.Store({
                         deadBees: inspections.deadBees,
                         moisture: inspections.moisture,
                         mold: inspections.mold,
-                        otherObservation: inspections.otherObservation
+                        otherObservation: inspections.otherObservation,
                     });
             }
         },
 
         async deleteInspections({}, docId) {
-            if (window.confirm("Jesteś pewny/a, że chcesz usunąć inspekcję?")) {
+            if (window.confirm('Jesteś pewny/a, że chcesz usunąć inspekcję?')) {
                 await fb.usersCollection
                     .doc(fb.auth.currentUser.uid)
-                    .collection("inspections")
+                    .collection('inspections')
                     .doc(docId)
                     .delete();
             }
@@ -327,61 +327,61 @@ const store = new Vuex.Store({
             // sign user up
             const { user } = await fb.auth.createUserWithEmailAndPassword(
                 form.email,
-                form.password
+                form.password,
             );
 
             // create user profile object in userCollection
             await fb.usersCollection.doc(user.uid).set({
                 username: form.username,
                 email: form.email,
-                password: form.password
+                password: form.password,
             });
 
             // fetch user profile and set in state
-            dispatch("fetchUserProfile", user);
+            dispatch('fetchUserProfile', user);
 
-            router.push("/login");
+            router.push('/login');
         },
 
         async login({ dispatch }, form) {
             // sign user in
             const { user } = await fb.auth.signInWithEmailAndPassword(
                 form.email,
-                form.password
+                form.password,
             );
 
             // fetch user profile and set in state
-            dispatch("fetchUserProfile", user);
+            dispatch('fetchUserProfile', user);
         },
 
         async logout({ commit }) {
             await fb.auth.signOut();
 
             // clear userProfile and redirect to /login
-            commit("setUserProfile", {});
-            router.push("/login");
+            commit('setUserProfile', {});
+            router.push('/login');
         },
 
         async updateProfile({ dispatch }, user) {
             const userId = fb.auth.currentUser.uid;
 
             const currentEmail = await fb.usersCollection
-                .where("email", "==", user.email)
+                .where('email', '==', user.email)
                 .get();
 
             if (currentEmail.empty === true) {
                 await fb.usersCollection.doc(userId).update({
                     username: user.username,
                     email: user.email,
-                    password: user.password
+                    password: user.password,
                 });
 
-                alert("Pomyślnie zmieniono email!");
+                alert('Pomyślnie zmieniono email!');
             } else {
-                alert("Email jest zajęty, wpisz inny.");
+                alert('Email jest zajęty, wpisz inny.');
             }
 
-            dispatch("fetchUserProfile", { uid: userId });
+            dispatch('fetchUserProfile', { uid: userId });
         },
 
         async fetchUserProfile({ commit }, user) {
@@ -389,15 +389,15 @@ const store = new Vuex.Store({
             const userProfile = await fb.usersCollection.doc(user.uid).get();
 
             // set user profile in state
-            commit("setUserProfile", userProfile.data());
+            commit('setUserProfile', userProfile.data());
 
             // change router to dashboard
-            if (router.currentRoute.path === "/login") {
-                router.push("/");
+            if (router.currentRoute.path === '/login') {
+                router.push('/');
             }
-        }
+        },
     },
-    modules: {}
+    modules: {},
 });
 
 export default store;

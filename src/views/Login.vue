@@ -54,36 +54,36 @@
 </template>
 
 <script>
-import PasswordReset from "@/components/PasswordReset";
+import PasswordReset from '@/components/PasswordReset';
 
 export default {
     components: {
-        PasswordReset
+        PasswordReset,
     },
     data() {
         return {
-            email: "",
-            password: "",
-            showPasswordReset: false
+            email: '',
+            password: '',
+            showPasswordReset: false,
         };
     },
     methods: {
         login() {
-            this.$store.dispatch("login", {
+            this.$store.dispatch('login', {
                 email: this.email,
-                password: this.password
+                password: this.password,
             });
         },
 
         togglePasswordReset() {
             this.showPasswordReset = !this.showPasswordReset;
-        }
-    }
+        },
+    },
 };
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/scss/colors";
+@import '../assets/scss/colors';
 
 .login {
     height: 100vh;

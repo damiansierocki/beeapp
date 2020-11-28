@@ -132,28 +132,28 @@
 <script>
 export default {
     props: [
-        "id",
-        "number",
-        "apiary",
-        "status",
-        "purpose",
-        "created",
-        "generalNote",
-        "strength",
-        "temperament",
-        "frames",
-        "isQueen",
-        "age",
-        "installed",
-        "race",
-        "queenColor",
-        "queenNote"
-    ]
+        'id',
+        'number',
+        'apiary',
+        'status',
+        'purpose',
+        'created',
+        'generalNote',
+        'strength',
+        'temperament',
+        'frames',
+        'isQueen',
+        'age',
+        'installed',
+        'race',
+        'queenColor',
+        'queenNote',
+    ],
 };
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/scss/colors";
+@import '../assets/scss/colors';
 
 .hivesview {
     position: absolute;
@@ -255,13 +255,6 @@ export default {
             }
 
             &__apiary {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-            }
-
-            &__queen {
                 display: flex;
                 flex-direction: column;
                 justify-content: center;

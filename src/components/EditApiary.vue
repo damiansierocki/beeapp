@@ -35,7 +35,7 @@
                         multiple
                     >
                         <option disabled value="">{{
-                            forages.join(", ")
+                            forages.join(', ')
                         }}</option>
                         <option value="Gryka">Gryka</option>
                         <option value="Akacja">Akacja</option>
@@ -150,32 +150,32 @@
 <script>
 export default {
     props: [
-        "id",
-        "name",
-        "type",
-        "forages",
-        "description",
-        "address",
-        "city",
-        "zip",
-        "province"
+        'id',
+        'name',
+        'type',
+        'forages',
+        'description',
+        'address',
+        'city',
+        'zip',
+        'province',
     ],
 
     data() {
         return {
             apiary: {
                 // general
-                name: "",
+                name: '',
                 forages: [],
-                type: "",
-                description: "",
+                type: '',
+                description: '',
 
                 // address
-                address: "",
-                city: "",
-                zip: "",
-                province: ""
-            }
+                address: '',
+                city: '',
+                zip: '',
+                province: '',
+            },
         };
     },
 
@@ -193,40 +193,40 @@ export default {
                 address: this.apiary.address,
                 city: this.apiary.city,
                 zip: this.apiary.zip,
-                province: this.apiary.province
+                province: this.apiary.province,
             };
 
             if (
-                this.apiary.name !== "" &&
+                this.apiary.name !== '' &&
                 this.apiary.forages !== [] &&
-                this.apiary.type !== "" &&
-                this.apiary.description !== ""
+                this.apiary.type !== '' &&
+                this.apiary.description !== ''
             ) {
-                this.$store.dispatch("editApiary", { docId, apiary });
+                this.$store.dispatch('editApiary', { docId, apiary });
             } else {
                 alert(
-                    'Pola ["nazwa", "typ", "typ pożywienia"] muszą być wypełnione!'
+                    'Pola ["nazwa", "typ", "typ pożywienia"] muszą być wypełnione!',
                 );
             }
 
             // general
-            this.apiary.name = "";
+            this.apiary.name = '';
             this.apiary.forages = [];
-            this.apiary.type = "";
-            this.apiary.description = "";
+            this.apiary.type = '';
+            this.apiary.description = '';
 
             // address
-            this.apiary.address = "";
-            this.apiary.city = "";
-            this.apiary.zip = "";
-            this.apiary.province = "";
-        }
-    }
+            this.apiary.address = '';
+            this.apiary.city = '';
+            this.apiary.zip = '';
+            this.apiary.province = '';
+        },
+    },
 };
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/scss/colors";
+@import '../assets/scss/colors';
 
 .editapiary {
     position: absolute;
@@ -307,7 +307,6 @@ export default {
 
         &__btn {
             margin-top: 2rem;
-            padding: 0.7rem;
             box-shadow: inset 0px 1px 0px 0px #fff6af;
             background: linear-gradient(to bottom, #ffec64 5%, #ffab23 100%);
             background-color: #ffec64;
@@ -316,7 +315,6 @@ export default {
             display: inline-block;
             cursor: pointer;
             color: #333333;
-            font-family: Arial;
             font-size: 15px;
             font-weight: bold;
             padding: 6px 24px;

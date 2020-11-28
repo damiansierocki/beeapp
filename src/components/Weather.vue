@@ -70,11 +70,11 @@
 </template>
 
 <script>
-import axios from "axios";
-import moment from "moment";
+import axios from 'axios';
+import moment from 'moment';
 
-const API = "http://api.openweathermap.org/data/2.5/weather?units=metric";
-const KEY = "&APPID=bff05973f18c6a1a19bc66976347f831";
+const API = 'http://api.openweathermap.org/data/2.5/weather?units=metric';
+const KEY = '&APPID=bff05973f18c6a1a19bc66976347f831';
 
 export default {
     data() {
@@ -82,19 +82,19 @@ export default {
             showDesktop: false,
             showDesktop1280: false,
             windowWidth: 0,
-            currentDate: "",
+            currentDate: '',
             weather: {
-                currentTemp: "",
-                location: "",
-                wind: "",
-                description: "",
-                temp_min: "",
-                temp_max: "",
-                sunrise: "",
-                sunset: "",
-                humidity: "",
-                main: ""
-            }
+                currentTemp: '',
+                location: '',
+                wind: '',
+                description: '',
+                temp_min: '',
+                temp_max: '',
+                sunrise: '',
+                sunset: '',
+                humidity: '',
+                main: '',
+            },
         };
     },
 
@@ -104,12 +104,12 @@ export default {
     },
 
     created() {
-        window.addEventListener("resize", this.handleResize);
+        window.addEventListener('resize', this.handleResize);
         this.handleResize();
     },
 
     destroyed() {
-        window.removeEventListener("resize", this.handleResize);
+        window.removeEventListener('resize', this.handleResize);
     },
 
     methods: {
@@ -117,8 +117,8 @@ export default {
             const newDate = new Date();
 
             const currentDate = moment(newDate)
-                .locale("pl")
-                .format("dddd, DD MMMM");
+                .locale('pl')
+                .format('dddd, DD MMMM');
 
             this.currentDate = currentDate;
         },
@@ -144,10 +144,10 @@ export default {
                 .get(url)
                 .then(response => {
                     this.weather.currentTemp = Math.round(
-                        response.data.main.temp
+                        response.data.main.temp,
                     );
                     this.weather.wind =
-                        Math.round(response.data.wind.speed) + " m/s";
+                        Math.round(response.data.wind.speed) + ' m/s';
                     this.weather.location = response.data.name;
                     this.weather.description =
                         response.data.weather[0].description
@@ -156,53 +156,53 @@ export default {
                         response.data.weather[0].description.slice(1);
                     this.weather.main = response.data.weather[0].main;
                     this.weather.temp_min =
-                        Math.round(response.data.main.temp_min) + "°C";
+                        Math.round(response.data.main.temp_min) + '°C';
                     this.weather.temp_max =
-                        Math.round(response.data.main.temp_max) + "°C";
-                    this.weather.humidity = response.data.main.humidity + "%";
+                        Math.round(response.data.main.temp_max) + '°C';
+                    this.weather.humidity = response.data.main.humidity + '%';
                     this.weather.sunrise = new Date(
-                        response.data.sys.sunrise * 1000
+                        response.data.sys.sunrise * 1000,
                     )
-                        .toLocaleTimeString("pl-PL")
+                        .toLocaleTimeString('pl-PL')
                         .slice(0, 5);
                     this.weather.sunset = new Date(
-                        response.data.sys.sunset * 1000
+                        response.data.sys.sunset * 1000,
                     )
-                        .toLocaleTimeString("pl-PL")
+                        .toLocaleTimeString('pl-PL')
                         .slice(0, 5);
                     this.weather.id = response.data.weather[0].id;
 
-                    const weather = document.querySelector(".weather");
+                    const weather = document.querySelector('.weather');
 
                     let weatherMain = this.weather.main;
                     let weatherId = this.weather.id;
 
-                    if (weatherMain === "Clouds") {
+                    if (weatherMain === 'Clouds') {
                         weather.style.backgroundImage =
                             'url("https://images.pexels.com/photos/2114014/pexels-photo-2114014.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")';
-                    } else if (weatherMain === "Clear") {
+                    } else if (weatherMain === 'Clear') {
                         weather.style.backgroundImage =
                             'url("https://images.pexels.com/photos/281260/pexels-photo-281260.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")';
-                    } else if (weatherMain === "Thunderstorm") {
+                    } else if (weatherMain === 'Thunderstorm') {
                         weather.style.backgroundImage =
                             'url("https://images.pexels.com/photos/167755/pexels-photo-167755.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")';
-                    } else if (weatherMain === "Drizzle") {
+                    } else if (weatherMain === 'Drizzle') {
                         weather.style.backgroundImage =
                             'url("https://images.pexels.com/photos/5683567/pexels-photo-5683567.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")';
-                    } else if (weatherMain === "Rain") {
+                    } else if (weatherMain === 'Rain') {
                         weather.style.backgroundImage =
                             'url("https://images.pexels.com/photos/166360/pexels-photo-166360.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")';
-                    } else if (weatherMain === "Snow") {
+                    } else if (weatherMain === 'Snow') {
                         weather.style.backgroundImage =
                             'url("https://images.pexels.com/photos/60561/winter-snow-nature-60561.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")';
-                        weather.style.color = "black";
-                    } else if (weatherMain === "Mist") {
+                        weather.style.color = 'black';
+                    } else if (weatherMain === 'Mist') {
                         weather.style.backgroundImage =
                             "url('https://images.pexels.com/photos/1367192/pexels-photo-1367192.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940')";
-                    } else if (weatherMain === "Fog") {
+                    } else if (weatherMain === 'Fog') {
                         weather.style.backgroundImage =
                             "url('https://images.pexels.com/photos/978844/pexels-photo-978844.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260')";
-                        weather.style.color = "black";
+                        weather.style.color = 'black';
                     }
                 })
                 .catch(error => {
@@ -213,7 +213,7 @@ export default {
         geolocation() {
             navigator.geolocation.getCurrentPosition(
                 this.buildUrl,
-                this.geoError
+                this.geoError,
             );
         },
 
@@ -222,19 +222,19 @@ export default {
             const lon = position.coords.longitude;
 
             this.getCurrentWeather(
-                API + "&lat=" + lat + "&lon=" + lon + "&lang=pl" + KEY
+                API + '&lat=' + lat + '&lon=' + lon + '&lang=pl' + KEY,
             );
         },
 
         geoError() {
-            this.getCurrentWeather(API + "&lat=0&lon=0" + KEY);
-        }
-    }
+            this.getCurrentWeather(API + '&lat=0&lon=0' + KEY);
+        },
+    },
 };
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/scss/colors";
+@import '../assets/scss/colors';
 
 .weather {
     display: flex;
@@ -278,7 +278,7 @@ export default {
             position: relative;
 
             &::before {
-                content: "";
+                content: '';
                 position: absolute;
                 bottom: 20%;
                 left: -13%;
@@ -404,7 +404,7 @@ export default {
             &--location {
                 position: relative;
                 &::after {
-                    content: "";
+                    content: '';
                     position: absolute;
                     bottom: 25%;
                     right: -7%;
@@ -416,7 +416,7 @@ export default {
             &--humidity {
                 position: relative;
                 &::after {
-                    content: "";
+                    content: '';
                     position: absolute;
                     bottom: 25%;
                     right: -7%;
@@ -464,7 +464,7 @@ export default {
             &--sunset {
                 position: relative;
                 &::after {
-                    content: "";
+                    content: '';
                     position: absolute;
                     bottom: 25%;
                     right: -7%;

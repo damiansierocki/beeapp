@@ -92,7 +92,7 @@
                                 apiary.address,
                                 apiary.city,
                                 apiary.zip,
-                                apiary.province
+                                apiary.province,
                             )
                         "
                     >
@@ -110,7 +110,7 @@
                                 apiary.address,
                                 apiary.city,
                                 apiary.zip,
-                                apiary.province
+                                apiary.province,
                             )
                         "
                     >
@@ -129,11 +129,11 @@
 </template>
 
 <script>
-import AddApiary from "@/components/AddApiary";
-import ApiaryView from "@/components/ApiaryView";
-import EditApiary from "@/components/EditApiary";
-import Nav from "@/components/Nav";
-import { mapState } from "vuex";
+import AddApiary from '@/components/AddApiary';
+import ApiaryView from '@/components/ApiaryView';
+import EditApiary from '@/components/EditApiary';
+import Nav from '@/components/Nav';
+import { mapState } from 'vuex';
 
 export default {
     data() {
@@ -148,17 +148,17 @@ export default {
                 // id: "",
 
                 // general
-                name: "",
-                forages: "",
-                type: "",
-                description: "",
+                name: '',
+                forages: '',
+                type: '',
+                description: '',
 
                 // address
-                address: "",
-                city: "",
-                zip: "",
-                province: ""
-            }
+                address: '',
+                city: '',
+                zip: '',
+                province: '',
+            },
         };
     },
 
@@ -166,15 +166,15 @@ export default {
         Nav,
         AddApiary,
         ApiaryView,
-        EditApiary
+        EditApiary,
     },
 
     computed: {
-        ...mapState(["userProfile", "apiaries", "hives"]),
+        ...mapState(['userProfile', 'apiaries', 'hives']),
 
         showIfUserLogged() {
             return Object.keys(this.userProfile).length > 1;
-        }
+        },
     },
 
     created() {
@@ -184,15 +184,15 @@ export default {
 
     methods: {
         deleteApiary(docId) {
-            this.$store.dispatch("deleteApiary", docId);
+            this.$store.dispatch('deleteApiary', docId);
         },
 
         getApiaries() {
-            this.$store.dispatch("getApiaries");
+            this.$store.dispatch('getApiaries');
         },
 
         getHives() {
-            this.$store.dispatch("getHives");
+            this.$store.dispatch('getHives');
         },
 
         toggleAddApiary() {
@@ -209,7 +209,7 @@ export default {
             city,
             zip,
             province,
-            hives
+            hives,
         ) {
             this.showApiaryView = !this.showApiaryView;
 
@@ -251,7 +251,7 @@ export default {
             address,
             city,
             zip,
-            province
+            province,
         ) {
             this.showEditApiary = !this.showEditApiary;
 
@@ -282,13 +282,13 @@ export default {
                 this.apiary.zip = {};
                 this.apiary.province = {};
             }
-        }
-    }
+        },
+    },
 };
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/scss/colors";
+@import '../assets/scss/colors';
 
 .content {
     display: flex;

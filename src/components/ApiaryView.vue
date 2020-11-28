@@ -21,7 +21,7 @@
 
                     <p class="info__p info__p--title">Typ pożywienia</p>
                     <p class="info__p info__p--description">
-                        {{ forages.join(", ") }}
+                        {{ forages.join(', ') }}
                     </p>
 
                     <p class="info__p info__p--title">Typ pasieki</p>
@@ -66,21 +66,21 @@
 <script>
 export default {
     props: [
-        "id",
-        "name",
-        "type",
-        "forages",
-        "description",
-        "address",
-        "city",
-        "zip",
-        "province"
-    ]
+        'id',
+        'name',
+        'type',
+        'forages',
+        'description',
+        'address',
+        'city',
+        'zip',
+        'province',
+    ],
 };
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/scss/colors";
+@import '../assets/scss/colors';
 
 .apiaryview {
     position: absolute;

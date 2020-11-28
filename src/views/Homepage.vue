@@ -147,20 +147,20 @@
 </template>
 
 <script>
-import AddNotes from "@/components/AddNotes";
-import EditNote from "@/components/EditNote";
-import Weather from "@/components/Weather";
-import Nav from "@/components/Nav";
-import { mapState } from "vuex";
-import moment from "moment";
+import AddNotes from '@/components/AddNotes';
+import EditNote from '@/components/EditNote';
+import Weather from '@/components/Weather';
+import Nav from '@/components/Nav';
+import { mapState } from 'vuex';
+import moment from 'moment';
 
 export default {
     data() {
         return {
             showAddNotes: false,
             showEditNote: false,
-            selectedNote: "",
-            selectedNoteContent: ""
+            selectedNote: '',
+            selectedNoteContent: '',
         };
     },
 
@@ -168,21 +168,21 @@ export default {
         Nav,
         AddNotes,
         EditNote,
-        Weather
+        Weather,
     },
 
     computed: {
         ...mapState([
-            "userProfile",
-            "notes",
-            "apiaries",
-            "hives",
-            "inspections"
+            'userProfile',
+            'notes',
+            'apiaries',
+            'hives',
+            'inspections',
         ]),
 
         showIfUserLogged() {
             return Object.keys(this.userProfile).length > 1;
-        }
+        },
     },
 
     created() {
@@ -195,14 +195,14 @@ export default {
     filters: {
         formatDate(val) {
             if (!val) {
-                return "-";
+                return '-';
             }
 
             let date = val.toDate();
             return moment(date)
-                .locale("pl")
+                .locale('pl')
                 .fromNow();
-        }
+        },
     },
 
     methods: {
@@ -223,30 +223,30 @@ export default {
         },
 
         getInspections() {
-            this.$store.dispatch("getInspections");
+            this.$store.dispatch('getInspections');
         },
 
         getNotes() {
-            this.$store.dispatch("getNotes");
+            this.$store.dispatch('getNotes');
         },
 
         getHives() {
-            this.$store.dispatch("getHives");
+            this.$store.dispatch('getHives');
         },
 
         getApiaries() {
-            this.$store.dispatch("getApiaries");
+            this.$store.dispatch('getApiaries');
         },
 
         deleteNote(docId) {
-            this.$store.dispatch("deleteNote", docId);
-        }
-    }
+            this.$store.dispatch('deleteNote', docId);
+        },
+    },
 };
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/scss/colors";
+@import '../assets/scss/colors';
 
 .homepage {
     .content {
@@ -393,16 +393,6 @@ export default {
                 user-select: none;
                 border-radius: 50%;
                 background: #eee;
-            }
-
-            &__list {
-                list-style-type: disc;
-                text-align: justify;
-                padding: 0.5rem 3rem 0.5rem 3rem;
-            }
-
-            &__item {
-                margin-top: 0.6rem;
             }
 
             &__createdOn {

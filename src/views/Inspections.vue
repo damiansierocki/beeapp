@@ -145,7 +145,7 @@
                                 inspection.temperature,
                                 inspection.humidity,
                                 inspection.pressure,
-                                inspection.wind
+                                inspection.wind,
                             )
                         "
                     >
@@ -190,7 +190,7 @@
                                 inspection.temperature,
                                 inspection.humidity,
                                 inspection.pressure,
-                                inspection.wind
+                                inspection.wind,
                             )
                         "
                     >
@@ -209,11 +209,11 @@
 </template>
 
 <script>
-import Nav from "@/components/Nav";
-import AddInspections from "@/components/AddInspections";
-import InspectionsView from "@/components/InspectionsView";
-import EditInspections from "@/components/EditInspections";
-import { mapState } from "vuex";
+import Nav from '@/components/Nav';
+import AddInspections from '@/components/AddInspections';
+import InspectionsView from '@/components/InspectionsView';
+import EditInspections from '@/components/EditInspections';
+import { mapState } from 'vuex';
 
 export default {
     data() {
@@ -224,42 +224,42 @@ export default {
 
             inspection: {
                 // general
-                purpose: "",
-                apiary: "",
-                hive: "",
-                date: "",
+                purpose: '',
+                apiary: '',
+                hive: '',
+                date: '',
 
                 // bees
-                strength: "",
-                temperament: "",
-                frames: "",
+                strength: '',
+                temperament: '',
+                frames: '',
 
                 // queen
-                isQueen: "",
-                age: "",
-                installed: "",
-                race: "",
-                queenColor: "",
-                queenNote: "",
+                isQueen: '',
+                age: '',
+                installed: '',
+                race: '',
+                queenColor: '',
+                queenNote: '',
 
                 // frames with
-                framesWithBees: "",
-                framesWithBrood: "",
-                framesWithHoney: "",
-                framesWithPollen: "",
+                framesWithBees: '',
+                framesWithBrood: '',
+                framesWithHoney: '',
+                framesWithPollen: '',
 
                 // spotted problems
-                problems: "",
-                note: "",
+                problems: '',
+                note: '',
 
                 // weather
-                includeWeather: "",
-                conditions: "",
-                temperature: "",
-                humidity: "",
-                pressure: "",
-                wind: ""
-            }
+                includeWeather: '',
+                conditions: '',
+                temperature: '',
+                humidity: '',
+                pressure: '',
+                wind: '',
+            },
         };
     },
 
@@ -267,7 +267,7 @@ export default {
         Nav,
         AddInspections,
         InspectionsView,
-        EditInspections
+        EditInspections,
     },
 
     created() {
@@ -277,28 +277,28 @@ export default {
     },
 
     computed: {
-        ...mapState(["userProfile", "hives", "apiaries", "inspections"]),
+        ...mapState(['userProfile', 'hives', 'apiaries', 'inspections']),
 
         showIfUserLogged() {
             return Object.keys(this.userProfile).length > 1;
-        }
+        },
     },
 
     methods: {
         deleteInspections(docId) {
-            this.$store.dispatch("deleteInspections", docId);
+            this.$store.dispatch('deleteInspections', docId);
         },
 
         getHives() {
-            this.$store.dispatch("getHives");
+            this.$store.dispatch('getHives');
         },
 
         getApiaries() {
-            this.$store.dispatch("getApiaries");
+            this.$store.dispatch('getApiaries');
         },
 
         getInspections() {
-            this.$store.dispatch("getInspections");
+            this.$store.dispatch('getInspections');
         },
 
         toggleAddInspections() {
@@ -331,7 +331,7 @@ export default {
             temperature,
             humidity,
             pressure,
-            wind
+            wind,
         ) {
             this.showInspectionsView = !this.showInspectionsView;
 
@@ -418,7 +418,7 @@ export default {
             temperature,
             humidity,
             pressure,
-            wind
+            wind,
         ) {
             this.showEditInspections = !this.showEditInspections;
 
@@ -477,13 +477,13 @@ export default {
                 this.inspection.pressure = {};
                 this.inspection.wind = {};
             }
-        }
-    }
+        },
+    },
 };
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/scss/colors";
+@import '../assets/scss/colors';
 
 .content {
     display: flex;

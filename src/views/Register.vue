@@ -50,25 +50,25 @@
 export default {
     data() {
         return {
-            username: "",
-            email: "",
-            password: ""
+            username: '',
+            email: '',
+            password: '',
         };
     },
     methods: {
         signup() {
-            this.$store.dispatch("signup", {
+            this.$store.dispatch('signup', {
                 username: this.username,
                 email: this.email,
-                password: this.password
+                password: this.password,
             });
-        }
-    }
+        },
+    },
 };
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/scss/colors";
+@import '../assets/scss/colors';
 
 .register {
     height: 100vh;

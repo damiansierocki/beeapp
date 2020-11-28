@@ -234,38 +234,38 @@
 <script>
 export default {
     props: [
-        "id",
-        "purpose",
-        "apiary",
-        "hive",
-        "date",
-        "strength",
-        "temperament",
-        "frames",
-        "isQueen",
-        "age",
-        "installed",
-        "race",
-        "queenColor",
-        "queenNote",
-        "framesWithBees",
-        "framesWithBrood",
-        "framesWithHoney",
-        "framesWithPollen",
-        "problems",
-        "note",
-        "includeWeather",
-        "conditions",
-        "temperature",
-        "humidity",
-        "pressure",
-        "wind"
-    ]
+        'id',
+        'purpose',
+        'apiary',
+        'hive',
+        'date',
+        'strength',
+        'temperament',
+        'frames',
+        'isQueen',
+        'age',
+        'installed',
+        'race',
+        'queenColor',
+        'queenNote',
+        'framesWithBees',
+        'framesWithBrood',
+        'framesWithHoney',
+        'framesWithPollen',
+        'problems',
+        'note',
+        'includeWeather',
+        'conditions',
+        'temperature',
+        'humidity',
+        'pressure',
+        'wind',
+    ],
 };
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/scss/colors";
+@import '../assets/scss/colors';
 
 .inspectionsview {
     position: absolute;

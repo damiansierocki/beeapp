@@ -424,58 +424,58 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
-import axios from "axios";
+import { mapState } from 'vuex';
+import axios from 'axios';
 
-const API = "http://api.openweathermap.org/data/2.5/weather?units=metric";
-const KEY = "&APPID=bff05973f18c6a1a19bc66976347f831";
+const API = 'http://api.openweathermap.org/data/2.5/weather?units=metric';
+const KEY = '&APPID=bff05973f18c6a1a19bc66976347f831';
 
 export default {
     data() {
         return {
             inspection: {
                 // general
-                purpose: "",
-                apiary: "",
-                hive: "",
-                date: "",
+                purpose: '',
+                apiary: '',
+                hive: '',
+                date: '',
 
                 // bees
-                strength: "",
-                temperament: "",
-                frames: "",
+                strength: '',
+                temperament: '',
+                frames: '',
 
                 // queen
-                isQueen: "",
-                age: "",
-                installed: "",
-                race: "",
-                queenColor: "",
-                queenNote: "",
+                isQueen: '',
+                age: '',
+                installed: '',
+                race: '',
+                queenColor: '',
+                queenNote: '',
 
                 // frames with
-                framesWithBees: "",
-                framesWithBrood: "",
-                framesWithHoney: "",
-                framesWithPollen: "",
+                framesWithBees: '',
+                framesWithBrood: '',
+                framesWithHoney: '',
+                framesWithPollen: '',
 
                 // spotted problems
-                problems: "",
-                note: "",
+                problems: '',
+                note: '',
 
                 // weather
-                includeWeather: "",
-                conditions: "",
-                temperature: "",
-                humidity: "",
-                pressure: "",
-                wind: ""
-            }
+                includeWeather: '',
+                conditions: '',
+                temperature: '',
+                humidity: '',
+                pressure: '',
+                wind: '',
+            },
         };
     },
 
     computed: {
-        ...mapState(["apiaries", "hives"])
+        ...mapState(['apiaries', 'hives']),
     },
 
     beforeMount() {
@@ -489,15 +489,15 @@ export default {
 
     methods: {
         getApiaries() {
-            this.$store.dispatch("getApiaries");
+            this.$store.dispatch('getApiaries');
         },
 
         getHives() {
-            this.$store.dispatch("getHives");
+            this.$store.dispatch('getHives');
         },
 
         addInspections() {
-            this.$store.dispatch("addInspections", {
+            this.$store.dispatch('addInspections', {
                 // general
                 purpose: this.inspection.purpose,
                 apiary: this.inspection.apiary,
@@ -533,39 +533,39 @@ export default {
                 temperature: this.inspection.temperature,
                 humidity: this.inspection.humidity,
                 pressure: this.inspection.pressure,
-                wind: this.inspection.wind
+                wind: this.inspection.wind,
             });
 
             // general
-            this.inspection.purpose = "";
-            this.inspection.apiary = "";
-            this.inspection.hive = "";
-            this.inspection.date = "";
+            this.inspection.purpose = '';
+            this.inspection.apiary = '';
+            this.inspection.hive = '';
+            this.inspection.date = '';
 
             // bees
-            this.inspection.strength = "";
-            this.inspection.temperament = "";
-            this.inspection.frames = "";
+            this.inspection.strength = '';
+            this.inspection.temperament = '';
+            this.inspection.frames = '';
 
             // queen
-            this.inspection.isQueen = "";
-            this.inspection.age = "";
-            this.inspection.installed = "";
-            this.inspection.race = "";
-            this.inspection.queenColor = "";
-            this.inspection.queenNote = "";
+            this.inspection.isQueen = '';
+            this.inspection.age = '';
+            this.inspection.installed = '';
+            this.inspection.race = '';
+            this.inspection.queenColor = '';
+            this.inspection.queenNote = '';
 
             // spotted problems
-            this.inspection.problems = "";
-            this.inspection.note = "";
+            this.inspection.problems = '';
+            this.inspection.note = '';
 
             // weather
-            this.inspection.includeWeather = "";
-            this.inspection.conditions = "";
-            this.inspection.temperature = "";
-            this.inspection.humidity = "";
-            this.inspection.pressure = "";
-            this.inspection.wind = "";
+            this.inspection.includeWeather = '';
+            this.inspection.conditions = '';
+            this.inspection.temperature = '';
+            this.inspection.humidity = '';
+            this.inspection.pressure = '';
+            this.inspection.wind = '';
         },
 
         getCurrentWeather(url) {
@@ -573,14 +573,14 @@ export default {
                 .get(url)
                 .then(response => {
                     this.inspection.temperature = Math.round(
-                        response.data.main.temp
+                        response.data.main.temp,
                     );
                     this.inspection.humidity =
-                        response.data.main.humidity + " %";
+                        response.data.main.humidity + ' %';
                     this.inspection.pressure =
-                        response.data.main.pressure + " hPa";
+                        response.data.main.pressure + ' hPa';
                     this.inspection.wind =
-                        Math.round(response.data.wind.speed) + " m/s";
+                        Math.round(response.data.wind.speed) + ' m/s';
                     this.inspection.conditions =
                         response.data.weather[0].description
                             .charAt(0)
@@ -595,7 +595,7 @@ export default {
         geolocation() {
             navigator.geolocation.getCurrentPosition(
                 this.buildUrl,
-                this.geoError
+                this.geoError,
             );
         },
 
@@ -604,19 +604,19 @@ export default {
             const lon = position.coords.longitude;
 
             this.getCurrentWeather(
-                API + "&lat=" + lat + "&lon=" + lon + "&lang=pl" + KEY
+                API + '&lat=' + lat + '&lon=' + lon + '&lang=pl' + KEY,
             );
         },
 
         geoError() {
-            this.getCurrentWeather(API + "&lat=0&lon=0" + KEY);
-        }
-    }
+            this.getCurrentWeather(API + '&lat=0&lon=0' + KEY);
+        },
+    },
 };
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/scss/colors";
+@import '../assets/scss/colors';
 
 .addinspections {
     position: absolute;
@@ -737,7 +737,6 @@ export default {
 
         &__btn {
             margin-top: 2rem;
-            padding: 0.7rem;
             box-shadow: inset 0px 1px 0px 0px #fff6af;
             background: linear-gradient(to bottom, #ffec64 5%, #ffab23 100%);
             background-color: #ffec64;
@@ -746,7 +745,6 @@ export default {
             display: inline-block;
             cursor: pointer;
             color: #333333;
-            font-family: Arial;
             font-size: 15px;
             font-weight: bold;
             padding: 6px 24px;

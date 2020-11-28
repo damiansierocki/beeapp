@@ -37,24 +37,24 @@ export default {
     data() {
         return {
             note: {
-                content: ""
-            }
+                content: '',
+            },
         };
     },
 
     methods: {
         addNote() {
-            this.$store.dispatch("addNote", {
-                content: this.note.content
+            this.$store.dispatch('addNote', {
+                content: this.note.content,
             });
-            this.note.content = "";
-        }
-    }
+            this.note.content = '';
+        },
+    },
 };
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/scss/colors";
+@import '../assets/scss/colors';
 
 .addnotes {
     position: absolute;

@@ -110,7 +110,7 @@
                                 hive.installed,
                                 hive.race,
                                 hive.queenColor,
-                                hive.queenNote
+                                hive.queenNote,
                             )
                         "
                     >
@@ -138,7 +138,7 @@
                                 hive.installed,
                                 hive.race,
                                 hive.queenColor,
-                                hive.queenNote
+                                hive.queenNote,
                             )
                         "
                     >
@@ -157,11 +157,11 @@
 </template>
 
 <script>
-import Nav from "@/components/Nav";
-import { mapState } from "vuex";
-import AddHives from "@/components/AddHives";
-import HivesView from "@/components/HivesView";
-import EditHives from "@/components/EditHives";
+import Nav from '@/components/Nav';
+import { mapState } from 'vuex';
+import AddHives from '@/components/AddHives';
+import HivesView from '@/components/HivesView';
+import EditHives from '@/components/EditHives';
 
 export default {
     data() {
@@ -174,37 +174,37 @@ export default {
 
             hive: {
                 // general
-                number: "",
-                apiary: "",
-                status: "",
-                purpose: "",
-                created: "",
-                generalNote: "",
+                number: '',
+                apiary: '',
+                status: '',
+                purpose: '',
+                created: '',
+                generalNote: '',
 
                 // bees
-                strength: "",
-                temperament: "",
-                frames: "",
+                strength: '',
+                temperament: '',
+                frames: '',
 
                 // queen
-                isQueen: "",
-                age: "",
-                installed: "",
-                race: "",
-                queenColor: "",
-                queenNote: ""
-            }
+                isQueen: '',
+                age: '',
+                installed: '',
+                race: '',
+                queenColor: '',
+                queenNote: '',
+            },
         };
     },
 
     components: { Nav, AddHives, HivesView, EditHives },
 
     computed: {
-        ...mapState(["userProfile", "hives"]),
+        ...mapState(['userProfile', 'hives']),
 
         showIfUserLogged() {
             return Object.keys(this.userProfile).length > 1;
-        }
+        },
     },
 
     created() {
@@ -213,11 +213,11 @@ export default {
 
     methods: {
         deleteHives(docId) {
-            this.$store.dispatch("deleteHives", docId);
+            this.$store.dispatch('deleteHives', docId);
         },
 
         getHives() {
-            this.$store.dispatch("getHives");
+            this.$store.dispatch('getHives');
         },
 
         toggleAddHives() {
@@ -240,7 +240,7 @@ export default {
             installed,
             race,
             queenColor,
-            queenNote
+            queenNote,
         ) {
             this.showEditHives = !this.showEditHives;
 
@@ -309,7 +309,7 @@ export default {
             installed,
             race,
             queenColor,
-            queenNote
+            queenNote,
         ) {
             this.showHivesView = !this.showHivesView;
 
@@ -360,13 +360,13 @@ export default {
                 this.hive.queenColor = {};
                 this.hive.queenNote = {};
             }
-        }
-    }
+        },
+    },
 };
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/scss/colors";
+@import '../assets/scss/colors';
 
 .content {
     display: flex;

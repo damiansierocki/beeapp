@@ -281,38 +281,38 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState } from 'vuex';
 
 export default {
     data() {
         return {
             hives: {
                 // general
-                number: "",
-                apiary: "",
-                status: "",
-                purpose: "",
-                created: "",
-                generalNote: "",
+                number: '',
+                apiary: '',
+                status: '',
+                purpose: '',
+                created: '',
+                generalNote: '',
 
                 // bees
-                strength: "",
-                temperament: "",
-                frames: "",
+                strength: '',
+                temperament: '',
+                frames: '',
 
                 // queen
-                isQueen: "",
-                age: "",
-                installed: "",
-                race: "",
-                queenColor: "",
-                queenNote: ""
-            }
+                isQueen: '',
+                age: '',
+                installed: '',
+                race: '',
+                queenColor: '',
+                queenNote: '',
+            },
         };
     },
 
     computed: {
-        ...mapState(["userProfile", "apiaries"])
+        ...mapState(['userProfile', 'apiaries']),
     },
 
     created() {
@@ -321,17 +321,17 @@ export default {
 
     methods: {
         getApiaries() {
-            this.$store.dispatch("getApiaries");
+            this.$store.dispatch('getApiaries');
         },
 
         addHives() {
             if (
-                this.hives.number !== "" &&
-                this.hives.status !== "" &&
-                this.hives.apiary !== "" &&
-                this.hives.isQueen !== ""
+                this.hives.number !== '' &&
+                this.hives.status !== '' &&
+                this.hives.apiary !== '' &&
+                this.hives.isQueen !== ''
             ) {
-                this.$store.dispatch("addHives", {
+                this.$store.dispatch('addHives', {
                     // general
                     number: this.hives.number,
                     apiary: this.hives.apiary,
@@ -351,41 +351,41 @@ export default {
                     installed: this.hives.installed,
                     race: this.hives.race,
                     queenColor: this.hives.queenColor,
-                    queenNote: this.hives.queenNote
+                    queenNote: this.hives.queenNote,
                 });
             } else {
                 alert(
-                    'Pola ["numer ula", "stan ula", "pasieka", "czy jest królowa"] muszą być wypełnione!'
+                    'Pola ["numer ula", "stan ula", "pasieka", "czy jest królowa"] muszą być wypełnione!',
                 );
             }
 
             // general
-            this.hives.number = "";
-            this.hives.apiary = "";
-            this.hives.status = "";
-            this.hives.purpose = "";
-            this.hives.created = "";
-            this.hives.generalNote = "";
+            this.hives.number = '';
+            this.hives.apiary = '';
+            this.hives.status = '';
+            this.hives.purpose = '';
+            this.hives.created = '';
+            this.hives.generalNote = '';
 
             // bees
-            this.hives.strength = "";
-            this.hives.temperament = "";
-            this.hives.frames = "";
+            this.hives.strength = '';
+            this.hives.temperament = '';
+            this.hives.frames = '';
 
             // queen
-            this.hives.isQueen = "";
-            this.hives.age = "";
-            this.hives.installed = "";
-            this.hives.race = "";
-            this.hives.queenColor = "";
-            this.hives.queenNote = "";
-        }
-    }
+            this.hives.isQueen = '';
+            this.hives.age = '';
+            this.hives.installed = '';
+            this.hives.race = '';
+            this.hives.queenColor = '';
+            this.hives.queenNote = '';
+        },
+    },
 };
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/scss/colors";
+@import '../assets/scss/colors';
 
 .addhives {
     position: absolute;
@@ -476,7 +476,6 @@ export default {
 
         &__btn {
             margin-top: 2rem;
-            padding: 0.7rem;
             box-shadow: inset 0px 1px 0px 0px #fff6af;
             background: linear-gradient(to bottom, #ffec64 5%, #ffab23 100%);
             background-color: #ffec64;
@@ -485,7 +484,6 @@ export default {
             display: inline-block;
             cursor: pointer;
             color: #333333;
-            font-family: Arial;
             font-size: 15px;
             font-weight: bold;
             padding: 6px 24px;
