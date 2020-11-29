@@ -11,68 +11,184 @@
                 @close="togglePasswordReset()"
             ></PasswordReset>
         </transition>
-        <div class="content">
+
+        <div class="container">
+            <div class="container__logo">
+                <h1 class="container__header">🐝app</h1>
+            </div>
             <form class="form" @submit.prevent>
-                <h2 class="form__header">Logowanie 🐝</h2>
+                <h2 class="form__header">Zaloguj się</h2>
+
+                <!-- email -->
                 <label class="form__label" for="email">Email</label>
                 <input
                     class="form__input"
                     type="text"
-                    placeholder="jan@kowalski.pl"
                     id="email"
+                    name="email"
+                    placeholder="Wpisz swój email..."
                     v-model.trim="email"
                 />
-                <label class="form__label" for="password">Hasło </label>
 
+                <transition
+                    enter-active-class="animate__animated animate__shakeX"
+                    mode="out-in"
+                    appear
+                >
+                    <p
+                        class="error"
+                        v-if="!$v.email.required && $v.email.$dirty"
+                    >
+                        Email jest wymagany!
+                    </p>
+
+                    <p class="error" v-if="!$v.email.email && $v.email.$dirty">
+                        Email ma zły format! (jankowalski@email.com)
+                    </p>
+                </transition>
+
+                <!-- password -->
+                <label class="form__label" for="password">Hasło</label>
                 <input
                     class="form__input"
                     type="password"
                     id="password"
-                    placeholder="******"
+                    name="password"
+                    placeholder="Wpisz swoje hasło..."
                     v-model.trim="password"
                 />
-                <div class="form__extras">
-                    <ul class="form__list">
-                        <li class="form__item">
-                            <a class="form__link" @click="togglePasswordReset()"
-                                >Zapomniałeś hasła ?</a
-                            >
-                        </li>
-                        <li class="form__item">
-                            <router-link class="form__link" to="/register"
-                                >Stwórz konto</router-link
-                            >
-                        </li>
-                    </ul>
-                </div>
-                <button class="btn" @click="login()">
-                    Zaloguj
+
+                <transition
+                    enter-active-class="animate__animated animate__shakeX"
+                    mode="out-in"
+                    appear
+                >
+                    <p
+                        class="error"
+                        v-if="!$v.password.required && $v.password.$dirty"
+                    >
+                        Hasło jest wymagane!
+                    </p>
+                </transition>
+
+                <button
+                    class="form__button "
+                    type="submit"
+                    @click="login()"
+                    v-if="!isPending"
+                >
+                    Zaloguj się
                 </button>
+
+                <transition
+                    enter-active-class="animate__animated animate__shakeX"
+                    mode="out-in"
+                    appear
+                >
+                    <p class="info" v-if="loginStatus === 'ERROR'">
+                        Prosimy wypełnić prawidłowo formularz logowania.
+                    </p>
+
+                    <p class="info" v-if="authStatus === 'USER-NOT-FOUND'">
+                        Nie znaleziono użytkownika.
+                    </p>
+
+                    <p class="info" v-if="authStatus === 'WRONG-PASSWORD'">
+                        Złe hasło.
+                    </p>
+
+                    <p class="info" v-if="authStatus === 'TOO-MANY-REQUESTS'">
+                        Zbyt dużo logowań. Spróbuj później.
+                    </p>
+                </transition>
+
+                <div class="sk-chase" v-if="loginStatus === 'PENDING'">
+                    <div class="sk-chase-dot"></div>
+                    <div class="sk-chase-dot"></div>
+                    <div class="sk-chase-dot"></div>
+                    <div class="sk-chase-dot"></div>
+                    <div class="sk-chase-dot"></div>
+                    <div class="sk-chase-dot"></div>
+                </div>
             </form>
+
+            <div class="container__extras">
+                <a class="forgot-password" @click="togglePasswordReset()"
+                    >Zapomniałaś/eś hasła?</a
+                >
+                <router-link class="create-account" to="/register"
+                    >Stwórz konto</router-link
+                >
+            </div>
         </div>
     </div>
 </template>
 
 <script>
 import PasswordReset from '@/components/PasswordReset';
+import { required, email } from 'vuelidate/lib/validators';
 
 export default {
-    components: {
-        PasswordReset,
-    },
     data() {
         return {
             email: '',
             password: '',
             showPasswordReset: false,
+            loginStatus: null,
+            isPending: false,
+            authStatus: '',
         };
     },
+
+    validations: {
+        email: {
+            required,
+            email,
+        },
+
+        password: {
+            required,
+        },
+    },
+
+    components: {
+        PasswordReset,
+    },
+
     methods: {
         login() {
-            this.$store.dispatch('login', {
-                email: this.email,
-                password: this.password,
-            });
+            this.$v.$touch();
+
+            if (this.$v.$invalid) {
+                this.loginStatus = 'ERROR';
+            } else {
+                this.$store
+                    .dispatch('login', {
+                        email: this.email,
+                        password: this.password,
+                    })
+                    .catch(err => {
+                        const errCode = err.code;
+                        console.log(errCode);
+
+                        if (errCode === 'auth/user-not-found') {
+                            this.authStatus = 'USER-NOT-FOUND';
+                        } else if (errCode === 'auth/wrong-password') {
+                            this.authStatus = 'WRONG-PASSWORD';
+                        } else if (errCode === 'auth/too-many-requests') {
+                            this.authStatus = 'TOO-MANY-REQUESTS';
+                        }
+                    });
+
+                // FIXME: naprawić to
+                this.loginStatus = 'PENDING';
+                this.isPending = true;
+
+                setTimeout(() => {
+                    this.loginStatus = 'OK';
+                    this.isPending = false;
+                }, 2000);
+            }
         },
 
         togglePasswordReset() {
@@ -85,243 +201,226 @@ export default {
 <style lang="scss" scoped>
 @import '../assets/scss/colors';
 
-.login {
-    height: 100vh;
-    width: 100vw;
+.container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
 
-    .content {
+    &__logo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #dddddda1;
+        width: 100%;
+        height: 100%;
+        user-select: none;
+    }
+
+    &__header {
+        font-family: 'Fredericka the Great', cursive;
+        font-size: 6rem;
+    }
+
+    .form {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border-radius: 0.2rem;
+        padding: 3rem;
+
+        &__header {
+            font-size: 2rem;
+            position: relative;
+            padding: 2rem 0rem;
+
+            &::after {
+                content: '';
+                position: absolute;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                width: 100%;
+                height: 1px;
+                background: #000000;
+            }
+        }
+
+        &__label {
+            padding: 1.5rem 0rem;
+            font-size: 1.5rem;
+        }
+
+        &__input {
+            border: 1px solid #ccc;
+            padding: 1rem;
+            border-radius: 0.2rem;
+            transition: all 0.1s;
+
+            &:focus {
+                outline: 2px solid orange;
+            }
+        }
+
+        &__button {
+            margin-top: 4rem;
+            padding: 1rem 0;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            border-radius: 0.2rem;
+            background-color: #f5f5f5;
+
+            &:hover {
+                background-color: #e7e7e7c7;
+            }
+        }
+
+        .error {
+            color: tomato;
+            margin-top: 0.5rem;
+        }
+
+        .info {
+            margin-top: 0.5rem;
+        }
+
+        // sk-chase
+        .sk-chase {
+            width: 40px;
+            height: 40px;
+            position: relative;
+            animation: sk-chase 2.5s infinite linear both;
+            margin: 0 auto;
+            margin-top: 2rem;
+        }
+
+        .sk-chase-dot {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            animation: sk-chase-dot 2s infinite ease-in-out both;
+        }
+
+        .sk-chase-dot:before {
+            content: '';
+            display: block;
+            width: 25%;
+            height: 25%;
+            background-color: black;
+            border-radius: 100%;
+            animation: sk-chase-dot-before 2s infinite ease-in-out both;
+        }
+
+        .sk-chase-dot:nth-child(1) {
+            animation-delay: -1.1s;
+        }
+        .sk-chase-dot:nth-child(2) {
+            animation-delay: -1s;
+        }
+        .sk-chase-dot:nth-child(3) {
+            animation-delay: -0.9s;
+        }
+        .sk-chase-dot:nth-child(4) {
+            animation-delay: -0.8s;
+        }
+        .sk-chase-dot:nth-child(5) {
+            animation-delay: -0.7s;
+        }
+        .sk-chase-dot:nth-child(6) {
+            animation-delay: -0.6s;
+        }
+        .sk-chase-dot:nth-child(1):before {
+            animation-delay: -1.1s;
+        }
+        .sk-chase-dot:nth-child(2):before {
+            animation-delay: -1s;
+        }
+        .sk-chase-dot:nth-child(3):before {
+            animation-delay: -0.9s;
+        }
+        .sk-chase-dot:nth-child(4):before {
+            animation-delay: -0.8s;
+        }
+        .sk-chase-dot:nth-child(5):before {
+            animation-delay: -0.7s;
+        }
+        .sk-chase-dot:nth-child(6):before {
+            animation-delay: -0.6s;
+        }
+
+        @keyframes sk-chase {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes sk-chase-dot {
+            80%,
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes sk-chase-dot-before {
+            50% {
+                transform: scale(0.4);
+            }
+            100%,
+            0% {
+                transform: scale(1);
+            }
+        }
+    }
+
+    &__extras {
+        margin-top: 2rem;
+        font-size: 1.4rem;
+        display: flex;
+        flex-direction: column;
+        text-decoration: underline;
+
+        .forgot-password {
+            cursor: pointer;
+
+            &:hover {
+                font-weight: bold;
+            }
+        }
+
+        .create-account {
+            cursor: pointer;
+            margin-top: 1.5rem;
+            color: black;
+
+            &:hover {
+                font-weight: bold;
+            }
+        }
+    }
+}
+
+@media (min-width: 480px) {
+    .container {
+        background-color: #dddddda1;
+        height: 100vh;
+        justify-content: space-evenly;
+
+        &__logo {
+            background-color: transparent;
+            height: 0;
+        }
+
         .form {
-            background-color: $white;
-            padding: 3rem;
-            display: flex;
-            flex-direction: column;
-            border-radius: 1rem;
-            box-shadow: 10px 10px 64px 22px rgba(0, 0, 0, 0.5);
-            width: 90vw;
-
-            &__header {
-                font-size: 1.8rem;
-                margin-bottom: 1rem;
-            }
-
-            &__label {
-                margin: 0.7rem 0 0.7rem 0;
-                font-size: 1.4rem;
-            }
-
-            &__input {
-                padding: 1rem;
-                border: 0.5px solid $black;
-                font-size: 1rem;
-
-                transition: 0.2s;
-
-                &:focus {
-                    outline: 0;
-                    -webkit-box-shadow: 0px 10px 13px -7px #000000,
-                        5px 5px 15px 5px rgba(0, 0, 0, 0);
-                    box-shadow: 0px 10px 13px -7px #000000,
-                        5px 5px 15px 5px rgba(0, 0, 0, 0);
-                }
-
-                &::placeholder {
-                    color: $base-placeholder;
-                }
-            }
-
-            &__extras {
-                margin-top: 10px;
-                font-size: 1.1rem;
-            }
-
-            &__list {
-                list-style: none;
-                display: flex;
-                flex-direction: column;
-            }
-
-            &__item {
-                line-height: 2rem;
-            }
-
-            &__link {
-                text-decoration: none;
-                color: black;
-                padding: 0.4rem;
-            }
-
-            .btn {
-                margin: 0 auto;
-                margin-top: 1rem;
-                width: 70%;
-                box-shadow: 0px 1px 0px 0px #fff6af;
-                background: linear-gradient(
-                    to bottom,
-                    #ffec64 5%,
-                    #ff9d00 100%
-                );
-                background-color: #ffec64;
-                border-radius: 6px;
-                border: 1px solid #ffaa22;
-                display: block;
-                color: $greyer;
-                font-size: 1rem;
-                padding: 0.5rem;
-
-                &:active {
-                    position: relative;
-                    top: 0.2rem;
-                }
-            }
+            border: 1px solid #ccc;
+            background: white;
+            max-width: 480px;
         }
-    }
-}
 
-@media (max-width: 319px) {
-    .login {
-        .content {
-            .form {
-                padding: 2rem;
-
-                &__header {
-                    font-size: 1.8rem;
-                }
-
-                &__label {
-                    font-size: 1.3rem;
-                }
-
-                &__input {
-                    padding: 0.7rem;
-                }
-
-                .btn {
-                    width: 70%;
-                }
-            }
-        }
-    }
-}
-
-@media (min-width: 320px) {
-    .login {
-        .content {
-            .form {
-                .btn {
-                    width: 80%;
-                }
-            }
-        }
-    }
-}
-
-@media (min-width: 360px) {
-    .login {
-        .content {
-            .form {
-                .btn {
-                    width: 70%;
-                }
-            }
-        }
-    }
-}
-
-@media (min-width: 414px) {
-    .login {
-        .content {
-            .form {
-                width: 85vw;
-
-                .btn {
-                    width: 70%;
-                }
-            }
-        }
-    }
-}
-
-@media (min-width: 540px) {
-    .login {
-        .content {
-            .form {
-                width: 70vw;
-
-                .btn {
-                    width: 60%;
-                }
-            }
-        }
-    }
-}
-
-@media (min-width: 768px) {
-    .login {
-        .content {
-            .form {
-                width: 55vw;
-                padding: 3rem;
-
-                &__item {
-                    line-height: 1.5rem;
-                }
-
-                &__link {
-                    cursor: pointer;
-                    transition: 0.2s;
-                    display: block;
-                    width: 50%;
-
-                    &:hover {
-                        transform: scale(1.2);
-                        font-weight: bold;
-                    }
-                }
-
-                .btn {
-                    cursor: pointer;
-                    transition: 0.2s;
-
-                    &:hover {
-                        transform: scale(1.1);
-                        font-weight: bold;
-                    }
-                }
-            }
-        }
-    }
-}
-
-@media (min-width: 1024px) {
-    .login {
-        .content {
-            .form {
-                width: 45vw;
-            }
-        }
-    }
-}
-
-@media (min-width: 1280px) {
-    .login {
-        .content {
-            .form {
-                width: 35vw;
-            }
-        }
-    }
-}
-
-@media (min-width: 1440px) {
-    .login {
-        .content {
-            .form {
-                width: 30vw;
-            }
+        &__extras {
+            margin: 0;
         }
     }
 }
