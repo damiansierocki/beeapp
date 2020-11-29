@@ -18,9 +18,37 @@
                     placeholder="Wpisz nazwę zadania..."
                     v-model.trim="todo.title"
                 />
+
+                <p
+                    class="error"
+                    style="color: red"
+                    v-if="!$v.todo.title.required && $v.todo.title.$dirty"
+                >
+                    Pole jest wymagane!
+                </p>
+
+                <p
+                    class="error"
+                    style="color: red"
+                    v-if="!$v.todo.title.minLength && $v.todo.title.$dirty"
+                >
+                    Pole musi mieć przynajmniej
+                    {{ $v.todo.title.$params.minLength.min }} znaki.
+                </p>
+
                 <button class="container__button" @click="addTodo">
                     Dodaj
                 </button>
+
+                <p class="typo__p" v-if="todo.addStatus === 'OK'">
+                    Thanks for your submission!
+                </p>
+                <p class="typo__p" v-if="todo.addStatus === 'ERROR'">
+                    Please fill the form correctly.
+                </p>
+                <p class="typo__p" v-if="todo.addStatus === 'PENDING'">
+                    Sending...
+                </p>
 
                 <table class="container__table" v-if="todos.length">
                     <tr
@@ -29,7 +57,6 @@
                         :key="todo.id"
                         :class="{ fade: todo.isCompleted }"
                     >
-                        <th>{{ todos.length }}</th>
                         <th class="container__th">
                             <span
                                 class="container__icon"
@@ -59,6 +86,7 @@
 <script>
 import Nav from '@/components/Nav';
 import { mapState } from 'vuex';
+import { required, minLength } from 'vuelidate/lib/validators';
 import * as firebase from '../firebase';
 
 export default {
@@ -67,8 +95,18 @@ export default {
             todos: [],
             todo: {
                 title: '',
+                addStatus: null,
             },
         };
+    },
+
+    validations: {
+        todo: {
+            title: {
+                required,
+                minLength: minLength(4),
+            },
+        },
     },
 
     components: {
@@ -89,14 +127,26 @@ export default {
 
     methods: {
         addTodo() {
-            firebase.usersCollection
-                .doc(firebase.auth.currentUser.uid)
-                .collection('todos')
-                .add({
-                    title: this.todo.title,
-                    createdAt: new Date(),
-                    isCompleted: false,
-                });
+            this.$v.$touch();
+
+            if (this.$v.$invalid) {
+                this.todo.addStatus = 'ERROR';
+            } else {
+                firebase.usersCollection
+                    .doc(firebase.auth.currentUser.uid)
+                    .collection('todos')
+                    .add({
+                        title: this.todo.title,
+                        createdAt: new Date(),
+                        isCompleted: false,
+                    });
+
+                this.todo.addStatus = 'PENDING';
+
+                setTimeout(() => {
+                    this.todo.addStatus = 'OK';
+                }, 500);
+            }
 
             this.todo.title = '';
         },
