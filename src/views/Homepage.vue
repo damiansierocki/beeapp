@@ -6,7 +6,7 @@
             </template>
         </Nav>
 
-        <div class="content">
+        <!-- <div class="content">
             <transition
                 enter-active-class="animate__animated animate__backInUp animate__faster"
                 leave-active-class="animate__animated animate__backOutDown animate__faster"
@@ -142,14 +142,14 @@
                     </ul>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </template>
 
 <script>
-import AddNotes from '@/components/AddNotes';
-import EditNote from '@/components/EditNote';
-import Weather from '@/components/Weather';
+// import AddNotes from '@/components/AddNotes';
+// import EditNote from '@/components/EditNote';
+// import Weather from '@/components/Weather';
 import Nav from '@/components/Nav';
 import { mapState } from 'vuex';
 import moment from 'moment';
@@ -166,9 +166,9 @@ export default {
 
     components: {
         Nav,
-        AddNotes,
-        EditNote,
-        Weather,
+        // AddNotes,
+        // EditNote,
+        // Weather,
     },
 
     computed: {
