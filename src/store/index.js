@@ -332,7 +332,7 @@ const store = new Vuex.Store({
 
             // create user profile object in userCollection
             await fb.usersCollection.doc(user.uid).set({
-                username: form.username,
+                fullName: form.fullName,
                 email: form.email,
                 password: form.password,
             });

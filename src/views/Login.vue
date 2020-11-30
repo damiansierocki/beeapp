@@ -186,8 +186,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../assets/scss/colors';
-
 .container {
     display: flex;
     flex-direction: column;
