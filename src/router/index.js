@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 import Homepage from '@/views/Homepage';
 import Register from '@/views/Register.vue';
 import Login from '@/views/Login.vue';
+import PasswordReset from '@/views/PasswordReset';
 import MyAccount from '@/views/MyAccount.vue';
 import Apiaries from '@/views/Apiaries';
 import Hives from '@/views/Hives';
@@ -28,6 +29,12 @@ const routes = [
         path: '/login',
         name: 'Login',
         component: Login,
+    },
+
+    {
+        path: '/passwordreset',
+        name: 'PasswordReset',
+        component: PasswordReset,
     },
 
     {

@@ -1,15 +1,19 @@
 <template>
-    <div class="login">
+    <div class="passwordreset">
         <div class="container">
             <div class="container__logo">
                 <h1 class="container__header">🐝app</h1>
             </div>
 
-            <form class="form" @submit.prevent>
-                <h2 class="form__header">Zaloguj się</h2>
+            <form class="form" @submit.prevent v-if="!showSuccess">
+                <h2 class="form__header">Odzyskaj hasło</h2>
+
+                <p class="form__text">
+                    Nie martw się, zdarza się najlepszym z nas.
+                </p>
 
                 <!-- email -->
-                <label class="form__label" for="email">Email</label>
+                <label for="email" class="form__label">Email</label>
                 <input
                     class="form__input"
                     type="text"
@@ -36,37 +40,13 @@
                     </p>
                 </transition>
 
-                <!-- password -->
-                <label class="form__label" for="password">Hasło</label>
-                <input
-                    class="form__input"
-                    type="password"
-                    id="password"
-                    name="password"
-                    placeholder="Wpisz swoje hasło..."
-                    v-model.trim="password"
-                />
-
-                <transition
-                    enter-active-class="animate__animated animate__shakeX"
-                    mode="out-in"
-                    appear
-                >
-                    <p
-                        class="error"
-                        v-if="!$v.password.required && $v.password.$dirty"
-                    >
-                        Hasło jest wymagane!
-                    </p>
-                </transition>
-
                 <button
-                    class="form__button "
+                    class="form__button"
                     type="submit"
-                    @click="login()"
+                    @click="resetPassword()"
                     v-if="!isPending"
                 >
-                    Zaloguj się
+                    Przywróć hasło
                 </button>
 
                 <transition
@@ -79,27 +59,7 @@
                     </p>
                 </transition>
 
-                <transition
-                    enter-active-class="animate__animated animate__shakeX"
-                    mode="out-in"
-                    appear
-                >
-                    <p class="info" v-if="authStatus === 'WRONG-PASSWORD'">
-                        Złe hasło.
-                    </p>
-                </transition>
-
-                <transition
-                    enter-active-class="animate__animated animate__shakeX"
-                    mode="out-in"
-                    appear
-                >
-                    <p class="info" v-if="authStatus === 'TOO-MANY-REQUESTS'">
-                        Zbyt dużo logowań. Spróbuj później.
-                    </p>
-                </transition>
-
-                <div class="sk-chase" v-if="loginStatus === 'PENDING'">
+                <div class="sk-chase" v-if="resetStatus === 'PENDING'">
                     <div class="sk-chase-dot"></div>
                     <div class="sk-chase-dot"></div>
                     <div class="sk-chase-dot"></div>
@@ -109,27 +69,42 @@
                 </div>
             </form>
 
+            <transition
+                v-if="showSuccess"
+                enter-active-class="animate__animated animate__bounceIn animate__fast"
+                mode="out-in"
+                appear
+            >
+                <div class="container__success">
+                    <p class="container__text--big ">
+                        Sukces 👍
+                    </p>
+                    <p class="container__text--small">
+                        Sprawdź email w celu odnalezienia linku do resetowania
+                        hasła.
+                    </p>
+                </div>
+            </transition>
+
             <div class="container__extras">
-                <router-link class="forgot-password" to="/passwordreset"
-                    >Zapomniałaś/eś hasła?</router-link
-                >
-                <router-link class="create-account" to="/register"
-                    >Stwórz konto</router-link
-                >
+                <router-link class="back-to-login" to="/login">
+                    Cofnij do logowania
+                </router-link>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import { auth } from '@/firebase';
 import { required, email } from 'vuelidate/lib/validators';
 
 export default {
     data() {
         return {
             email: '',
-            password: '',
-            loginStatus: null,
+            showSuccess: false,
+            resetStatus: null,
             isPending: false,
             authStatus: '',
         };
@@ -140,31 +115,25 @@ export default {
             required,
             email,
         },
-
-        password: {
-            required,
-        },
     },
 
     methods: {
-        login() {
+        async resetPassword() {
             this.$v.$touch();
 
             if (this.$v.$invalid) {
-                this.loginStatus = 'ERROR';
+                this.resetStatus = 'ERROR';
             } else {
-                this.$store
-                    .dispatch('login', {
-                        email: this.email,
-                        password: this.password,
-                    })
+                await auth
+                    .sendPasswordResetEmail(this.email)
                     .then(() => {
-                        this.loginStatus = 'PENDING';
+                        this.resetStatus = 'PENDING';
                         this.isPending = true;
                         this.authStatus = '';
 
                         setTimeout(() => {
-                            this.loginStatus = 'OK';
+                            this.showSuccess = true;
+                            this.resetStatus = 'OK';
                             this.isPending = false;
                         }, 2000);
                     })
@@ -173,8 +142,6 @@ export default {
 
                         if (errCode === 'auth/user-not-found') {
                             this.authStatus = 'USER-NOT-FOUND';
-                        } else if (errCode === 'auth/wrong-password') {
-                            this.authStatus = 'WRONG-PASSWORD';
                         } else if (errCode === 'auth/too-many-requests') {
                             this.authStatus = 'TOO-MANY-REQUESTS';
                         }
@@ -232,6 +199,10 @@ export default {
                 height: 0.5px;
                 background: #000000;
             }
+        }
+
+        &__text {
+            margin-top: 1rem;
         }
 
         &__label {
@@ -362,6 +333,27 @@ export default {
         }
     }
 
+    &__success {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 3rem;
+    }
+
+    &__text {
+        &--big {
+            font-size: 2.5rem;
+            color: green;
+        }
+
+        &--small {
+            font-size: 1.8rem;
+            margin-top: 2rem;
+            text-align: center;
+        }
+    }
+
     &__extras {
         margin-top: 2rem;
         font-size: 1.4rem;
@@ -369,18 +361,8 @@ export default {
         flex-direction: column;
         text-decoration: underline;
 
-        .forgot-password {
+        .back-to-login {
             cursor: pointer;
-            color: black;
-
-            &:hover {
-                font-weight: bold;
-            }
-        }
-
-        .create-account {
-            cursor: pointer;
-            margin-top: 1.5rem;
             color: black;
 
             &:hover {
