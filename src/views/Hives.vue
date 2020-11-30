@@ -1,8 +1,8 @@
 <template>
     <div class="hives">
         <Nav v-if="showIfUserLogged">
-            <template v-slot:nav-center__slot>
-                <h1 class="nav-center__slot">Ule</h1>
+            <template v-slot:actual-page__slot>
+                <p class="actual-page__slot">Ule</p>
             </template>
         </Nav>
 

@@ -1,21 +1,16 @@
 <template>
     <div class="homepage">
         <Nav v-if="showIfUserLogged">
-            <template v-slot:nav-center__slot>
-                <h1 class="nav-center__slot">Strona główna</h1>
+            <template v-slot:actual-page__slot>
+                <p class="actual-page__slot">Strona główna</p>
             </template>
         </Nav>
 
-        <!-- <div class="content">
-            <transition
-                enter-active-class="animate__animated animate__backInUp animate__faster"
-                leave-active-class="animate__animated animate__backOutDown animate__faster"
-                mode="out-in"
-                appear
-            >
-                <Weather></Weather>
-            </transition>
+        <!-- <div class="content"> -->
 
+        <Weather></Weather>
+
+        <!--
             <div class="info">
                 <h3 class="info__title">Informacje</h3>
                 <div class="info__all">
@@ -149,7 +144,7 @@
 <script>
 // import AddNotes from '@/components/AddNotes';
 // import EditNote from '@/components/EditNote';
-// import Weather from '@/components/Weather';
+import Weather from '@/components/Weather';
 import Nav from '@/components/Nav';
 import { mapState } from 'vuex';
 import moment from 'moment';
@@ -168,7 +163,7 @@ export default {
         Nav,
         // AddNotes,
         // EditNote,
-        // Weather,
+        Weather,
     },
 
     computed: {

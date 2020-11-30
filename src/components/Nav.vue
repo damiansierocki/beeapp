@@ -1,6 +1,7 @@
 <template>
     <div class="nav">
         <About @close="toggleAbout" v-if="showAbout"></About>
+
         <div class="container">
             <!-- hamburger -->
             <div class="hamburger-menu">
@@ -40,7 +41,7 @@
 
             <!-- actual page -->
             <div class="actual-page">
-                <slot class="actual-page__slot">Homepage</slot>
+                <slot class="actual-page__slot" name="actual-page__slot"></slot>
             </div>
 
             <!-- elipse menu -->
@@ -50,7 +51,9 @@
                 </div>
 
                 <div class="right-menu" v-if="showRightMenu">
-                    <p class="right-menu__fullName">Damian Sierocki</p>
+                    <p class="right-menu__fullName">
+                        {{ userProfile.fullName }}
+                    </p>
 
                     <router-link class="right-menu__link" to="/myaccount"
                         >Moje konto</router-link
@@ -58,7 +61,7 @@
                     <a class="right-menu__link" @click="toggleAbout"
                         >O aplikacji</a
                     >
-                    <a class="right-menu__link">Wyloguj się</a>
+                    <a class="right-menu__link" @click="logout">Wyloguj się</a>
                 </div>
             </div>
         </div>
@@ -89,23 +92,43 @@ export default {
     methods: {
         toggleLeftMenu() {
             this.showLeftMenu = !this.showLeftMenu;
+
+            const elipseIcon = document.querySelector('.elipse-menu__icon');
+
+            elipseIcon.classList.toggle('disabled');
         },
 
         toggleRightMenu() {
             this.showRightMenu = !this.showRightMenu;
+
+            const hamburgerIcon = document.querySelector(
+                '.hamburger-menu__icon',
+            );
+
+            hamburgerIcon.classList.toggle('disabled');
         },
 
         toggleAbout() {
             this.showAbout = !this.showAbout;
 
+            const hamburgerIcon = document.querySelector(
+                '.hamburger-menu__icon',
+            );
+            const elipseIcon = document.querySelector('.elipse-menu__icon');
+
             if (this.showAbout) {
                 this.showRightMenu = false;
+                elipseIcon.classList.add('disabled');
+                hamburgerIcon.classList.add('disabled');
+            } else {
+                elipseIcon.classList.remove('disabled');
+                hamburgerIcon.classList.remove('disabled');
             }
         },
 
-        /* logout() {
+        logout() {
             this.$store.dispatch('logout');
-        }, */
+        },
     },
 };
 </script>
@@ -215,6 +238,11 @@ export default {
             }
         }
     }
+}
+
+.disabled {
+    opacity: 0.2;
+    pointer-events: none;
 }
 
 @media (min-width: 768px) {

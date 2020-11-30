@@ -1,8 +1,8 @@
 <template>
     <div class="apiaries">
         <Nav v-if="showIfUserLogged">
-            <template v-slot:nav-center__slot>
-                <h1 class="nav-center__slot">Pasieki</h1>
+            <template v-slot:actual-page__slot>
+                <p class="actual-page__slot">Pasieki</p>
             </template>
         </Nav>
 
