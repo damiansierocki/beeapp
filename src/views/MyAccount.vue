@@ -1,61 +1,41 @@
 <template>
     <div class="myaccount">
         <Nav v-if="showIfUserLogged">
-            <template v-slot:nav-center__slot>
-                <h1 class="nav-center__slot">Moje konto</h1>
+            <template v-slot:actual-page__slot>
+                <p class="actual-page__slot">Moje konto</p>
             </template>
         </Nav>
 
-        <div class="content">
-            <h1 class="content__title">Edytuj profil 🐝</h1>
+        <div class="container">
+            <div class="container__inside">
+                <h2 class="container__header">Twoje konto</h2>
 
-            <form class="content__form" @submit.prevent>
-                <label for="username" class="content__label"
-                    >Nazwa użytkownika</label
+                <!-- Imię i nazwisko -->
+                <p class="container__label">Imię i nazwisko</p>
+                <p class="container__text">
+                    Janusz Kowalski
+                    <i class="fas fa-user-edit container__edit"></i>
+                </p>
+
+                <!-- adres email -->
+                <p class="container__label">Adres Email</p>
+                <p class="container__text">
+                    jankowalski@email.com
+                    <i class="fas fa-user-edit container__edit"></i>
+                </p>
+
+                <!-- haslo -->
+                <p class="container__label">Hasło</p>
+                <p class="container__text">
+                    123456 <i class="fas fa-user-edit container__edit"></i>
+                </p>
+            </div>
+
+            <div class="container__extras">
+                <router-link class="homepage" to="/"
+                    >Wróć do strony głównej</router-link
                 >
-                <input
-                    class="content__input"
-                    type="text"
-                    v-model.trim="user.username"
-                    id="username"
-                    :placeholder="userProfile.username"
-                />
-
-                <label for="email" class="content__label">Email</label>
-                <input
-                    class="content__input"
-                    type="text"
-                    v-model.trim="user.email"
-                    id="email"
-                    :placeholder="userProfile.email"
-                />
-
-                <label for="password" class="content__label">Hasło</label>
-                <input
-                    class="content__input"
-                    type="text"
-                    v-model.trim="user.password"
-                    id="password"
-                    :placeholder="userProfile.password"
-                />
-
-                <div class="content__buttons">
-                    <button
-                        class="content__button content__button--cancel"
-                        @click="cancel()"
-                    >
-                        Wyczyść
-                        <i class="fas fa-window-close"></i>
-                    </button>
-                    <button
-                        class="content__button content__button--save"
-                        @click="updateProfile()"
-                    >
-                        Zapisz
-                        <i class="fas fa-save"></i>
-                    </button>
-                </div>
-            </form>
+            </div>
         </div>
     </div>
 </template>
@@ -65,16 +45,6 @@ import Nav from '@/components/Nav';
 import { mapState } from 'vuex';
 
 export default {
-    data() {
-        return {
-            user: {
-                username: '',
-                email: '',
-                password: '',
-            },
-        };
-    },
-
     components: {
         Nav,
     },
@@ -88,205 +58,128 @@ export default {
     },
 
     methods: {
-        cancel() {
-            this.user.username = '';
-            this.user.email = '';
-            this.user.password = '';
-        },
+        /* editAccount() {
+            this.$v.$touch();
 
-        updateProfile() {
-            this.$store.dispatch('updateProfile', {
-                username:
-                    this.user.username !== ''
-                        ? this.user.username
-                        : this.userProfile.username,
-                email:
-                    this.user.email !== ''
-                        ? this.user.email
-                        : this.userProfile.email,
-                password:
-                    this.user.password !== ''
-                        ? this.user.password
-                        : this.userProfile.password,
-            });
+            if (this.$v.$invalid) {
+                this.editAccountStatus = 'ERROR';
+            } else {
+                this.$store
+                    .dispatch('updateProfile', {
+                        fullName: this.fullName,
+                        email: this.email,
+                        password: this.password,
+                    })
+                    .then(() => {
+                        this.editAccountStatus = 'PENDING';
+                        this.isPending = true;
+                        this.authStatus = '';
 
-            this.user.username = '';
-            this.user.email = '';
-            this.user.password = '';
-        },
+                        setTimeout(() => {
+                            this.editAccountStatus = 'OK';
+                            this.isPending = false;
+                        }, 2000);
+                    });
+
+                setTimeout(() => {
+                    this.editAccountStatus = '';
+                    this.fullName = '';
+                    this.email = '';
+                    this.password = '';
+                }, 2000);
+            }
+        }, */
     },
 };
 </script>
 
 <style lang="scss" scoped>
-@import '../assets/scss/colors';
-
-.content {
+.container {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-    height: calc(100vh - 5.5rem);
-    background: #eee;
 
-    &__title {
-        font-size: 1.8rem;
-        margin-top: 4rem;
-    }
-
-    &__form {
+    &__inside {
+        width: 100%;
         display: flex;
         flex-direction: column;
-        width: 100%;
-        padding: 2.5rem;
+        justify-content: center;
+        border-radius: 0.2rem;
+        padding: 3rem;
+    }
+
+    &__header {
+        font-size: 2rem;
+        position: relative;
+        padding: 2rem 0rem;
+
+        &::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            height: 0.5px;
+            background: #000000;
+        }
     }
 
     &__label {
-        font-size: 1.3rem;
-        margin-top: 0.3rem;
+        margin: 2rem 0;
+        font-size: 1.5rem;
     }
 
-    &__input {
-        margin-top: 0.3rem;
-        padding: 0.7rem;
-        transition: 0.2s;
-
-        &:focus {
-            outline: 0;
-            -webkit-box-shadow: 0px 10px 13px -7px #000000,
-                5px 5px 15px 5px rgba(0, 0, 0, 0);
-            box-shadow: 0px 10px 13px -7px #000000,
-                5px 5px 15px 5px rgba(0, 0, 0, 0);
-        }
+    &__text {
+        border: 1px solid #ccc;
+        padding: 1rem;
+        border-radius: 0.2rem;
+        font-size: 1.2rem;
+        position: relative;
     }
 
-    &__buttons {
-        display: flex;
-        justify-content: space-around;
+    &__edit {
+        position: absolute;
+        top: 0.8rem;
+        right: 1rem;
+        font-size: 2rem;
+        cursor: pointer;
     }
 
-    &__button {
-        padding: 0.6rem;
-        font-size: 1rem;
+    &__extras {
         margin-top: 2rem;
-        background-color: $white;
-        outline: 0;
-        border: 0;
-        -webkit-box-shadow: 0px 10px 13px -7px #000000,
-            5px 5px 15px 5px rgba(0, 0, 0, 0);
-        box-shadow: 0px 10px 13px -7px #000000,
-            5px 5px 15px 5px rgba(0, 0, 0, 0);
-        transition: all 0.2s;
+        font-size: 1.4rem;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        text-decoration: underline;
 
-        &--cancel {
-            color: red;
-        }
-
-        &--save {
-            color: green;
-        }
-
-        &:active {
-            transform: scale(1.3);
-        }
-    }
-}
-
-@media (min-width: 320px) {
-    .content {
-        height: calc(100vh - 5.48rem);
-    }
-}
-
-@media (min-width: 360px) {
-    .content {
-        &__form {
-            padding: 2.5rem 3.5rem;
-        }
-    }
-}
-
-@media (min-width: 375px) {
-    .content {
-        &__form {
-            padding: 2.5rem 5rem;
-        }
-    }
-}
-
-@media (min-width: 540px) {
-    .content {
-        justify-content: center;
-        height: calc(100vh - 5.2rem);
-
-        &__title {
-            margin: 0;
-        }
-
-        &__form {
-            padding: 2.5rem 9rem;
-        }
-
-        &__button {
-            font-size: 1.2rem;
-        }
-    }
-}
-
-@media (min-width: 768px) {
-    .content {
-        &__title {
-            font-size: 2.5rem;
-        }
-
-        &__label {
-            font-size: 1.5rem;
-        }
-
-        &__input {
-            padding: 1rem;
-        }
-
-        &__form {
-            padding: 2.5rem 17rem;
-        }
-
-        &__button {
+        .homepage {
             cursor: pointer;
-            font-size: 1.3rem;
-            transition: 0.2s;
+            color: black;
 
             &:hover {
-                transform: scale(1.3);
-            }
-
-            &:active {
-                position: relative;
-                top: 0.5rem;
+                font-weight: bold;
             }
         }
     }
 }
 
-@media (min-width: 1024px) {
-    .content {
-        &__form {
-            padding: 2.5rem 24rem;
-        }
-    }
-}
+@media (min-width: 480px) {
+    .container {
+        background-color: white;
+        height: 100vh;
+        justify-content: space-evenly;
 
-@media (min-width: 1280px) {
-    .content {
-        &__form {
-            padding: 2.5rem 33rem;
+        &__inside {
+            border: 1px solid #ccc;
+            background: #dddddda1;
+            max-width: 480px;
         }
-    }
-}
 
-@media (min-width: 1440px) {
-    .content {
-        &__form {
-            padding: 2.5rem 40rem;
+        &__extras {
+            margin: 0;
         }
     }
 }

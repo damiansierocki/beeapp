@@ -32,18 +32,6 @@ const store = new Vuex.Store({
     },
 
     actions: {
-        // async editNote({}, { docId, note }) {
-        //     if (window.confirm('Jesteś pewny/a, że chcesz edytować notatkę?')) {
-        //         await fb.usersCollection
-        //             .doc(fb.auth.currentUser.uid)
-        //             .collection('notes')
-        //             .doc(docId)
-        //             .update({
-        //                 content: note.content,
-        //             });
-        //     }
-        // },
-
         async getApiaries() {
             fb.usersCollection
                 .doc(fb.auth.currentUser.uid)
@@ -318,23 +306,13 @@ const store = new Vuex.Store({
         async updateProfile({ dispatch }, user) {
             const userId = fb.auth.currentUser.uid;
 
-            const currentEmail = await fb.usersCollection
-                .where('email', '==', user.email)
-                .get();
+            await fb.usersCollection.doc(userId).update({
+                fullName: user.fullName,
+                email: user.email,
+                password: user.password,
+            });
 
-            if (currentEmail.empty === true) {
-                await fb.usersCollection.doc(userId).update({
-                    username: user.username,
-                    email: user.email,
-                    password: user.password,
-                });
-
-                alert('Pomyślnie zmieniono email!');
-            } else {
-                alert('Email jest zajęty, wpisz inny.');
-            }
-
-            dispatch('fetchUserProfile', { uid: userId });
+            dispatch('fetchUserProfile', { uid: fb.auth.currentUser.uid });
         },
 
         async fetchUserProfile({ commit }, user) {

@@ -1,48 +1,5 @@
 <template>
     <div class="register">
-        <!-- <div class="content">
-            <form class="form" @submit.prevent>
-                <h2 class="form__header">Rejestracja 🐝</h2>
-                <label class="form__label" for="username"
-                    >Nazwa użytkownika</label
-                >
-                <input
-                    class="form__input"
-                    type="text"
-                    placeholder="janek123"
-                    id="username"
-                    v-model.trim="username"
-                />
-                <label class="form__label" for="email">Email</label>
-                <input
-                    class="form__input"
-                    type="text"
-                    placeholder="jan@kowalski.pl"
-                    id="email"
-                    v-model.trim="email"
-                />
-                <label class="form__label" for="password">Hasło</label>
-                <input
-                    class="form__input"
-                    type="password"
-                    id="password"
-                    placeholder="******"
-                    v-model.trim="password"
-                />
-                <div class="form__extras">
-                    <ul class="form__list">
-                        <li class="form__item">
-                            <router-link class="form__link" to="/login"
-                                >Cofnij do logowania</router-link
-                            >
-                        </li>
-                    </ul>
-                </div>
-                <button class="btn" @click="signup()">
-                    Zarejestruj się
-                </button>
-            </form>
-        </div> -->
         <div class="container">
             <div class="container__logo">
                 <h1 class="container__header">🐝app</h1>
@@ -244,8 +201,6 @@ export default {
                     })
                     .catch(err => {
                         const errCode = err.code;
-
-                        console.log(errCode);
 
                         if (errCode === 'auth/email-already-in-use') {
                             this.authStatus = 'EMAIL-ALREADY-IN-USE';

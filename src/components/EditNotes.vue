@@ -86,6 +86,8 @@ export default {
 
     methods: {
         editNotes() {
+            const { docId } = this;
+
             this.$v.$touch();
 
             if (this.$v.$invalid) {

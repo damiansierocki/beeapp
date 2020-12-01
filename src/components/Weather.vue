@@ -59,54 +59,49 @@ export default {
         },
 
         getCurrentWeather(url) {
-            axios
-                .get(url)
-                .then(response => {
-                    this.weather.temp = Math.round(response.data.main.temp);
-                    this.weather.location = response.data.name;
-                    this.weather.country = response.data.sys.country;
-                    this.weather.description =
-                        response.data.weather[0].description
-                            .charAt(0)
-                            .toUpperCase() +
-                        response.data.weather[0].description.slice(1);
-                    this.weather.main = response.data.weather[0].main;
+            axios.get(url).then(response => {
+                this.weather.temp = Math.round(response.data.main.temp);
+                this.weather.location = response.data.name;
+                this.weather.country = response.data.sys.country;
+                this.weather.description =
+                    response.data.weather[0].description
+                        .charAt(0)
+                        .toUpperCase() +
+                    response.data.weather[0].description.slice(1);
+                this.weather.main = response.data.weather[0].main;
 
-                    const weather = document.querySelector('.weather');
+                const weather = document.querySelector('.weather');
 
-                    const weatherMain = this.weather.main;
+                const weatherMain = this.weather.main;
 
-                    if (weatherMain === 'Clouds') {
-                        weather.style.backgroundImage =
-                            'url("https://images.pexels.com/photos/2114014/pexels-photo-2114014.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")';
-                    } else if (weatherMain === 'Clear') {
-                        weather.style.backgroundImage =
-                            'url("https://images.pexels.com/photos/281260/pexels-photo-281260.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")';
-                    } else if (weatherMain === 'Thunderstorm') {
-                        weather.style.backgroundImage =
-                            'url("https://images.pexels.com/photos/167755/pexels-photo-167755.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")';
-                    } else if (weatherMain === 'Drizzle') {
-                        weather.style.backgroundImage =
-                            'url("https://images.pexels.com/photos/5683567/pexels-photo-5683567.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")';
-                    } else if (weatherMain === 'Rain') {
-                        weather.style.backgroundImage =
-                            'url("https://images.pexels.com/photos/166360/pexels-photo-166360.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")';
-                    } else if (weatherMain === 'Snow') {
-                        weather.style.backgroundImage =
-                            'url("https://images.pexels.com/photos/60561/winter-snow-nature-60561.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")';
-                        weather.style.color = 'black';
-                    } else if (weatherMain === 'Mist') {
-                        weather.style.backgroundImage =
-                            "url('https://images.pexels.com/photos/1367192/pexels-photo-1367192.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940')";
-                    } else if (weatherMain === 'Fog') {
-                        weather.style.backgroundImage =
-                            "url('https://images.pexels.com/photos/978844/pexels-photo-978844.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260')";
-                        weather.style.color = 'black';
-                    }
-                })
-                .catch(error => {
-                    console.log(error);
-                });
+                if (weatherMain === 'Clouds') {
+                    weather.style.backgroundImage =
+                        'url("https://images.pexels.com/photos/2114014/pexels-photo-2114014.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")';
+                } else if (weatherMain === 'Clear') {
+                    weather.style.backgroundImage =
+                        'url("https://images.pexels.com/photos/281260/pexels-photo-281260.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")';
+                } else if (weatherMain === 'Thunderstorm') {
+                    weather.style.backgroundImage =
+                        'url("https://images.pexels.com/photos/167755/pexels-photo-167755.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")';
+                } else if (weatherMain === 'Drizzle') {
+                    weather.style.backgroundImage =
+                        'url("https://images.pexels.com/photos/5683567/pexels-photo-5683567.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")';
+                } else if (weatherMain === 'Rain') {
+                    weather.style.backgroundImage =
+                        'url("https://images.pexels.com/photos/166360/pexels-photo-166360.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")';
+                } else if (weatherMain === 'Snow') {
+                    weather.style.backgroundImage =
+                        'url("https://images.pexels.com/photos/60561/winter-snow-nature-60561.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")';
+                    weather.style.color = 'black';
+                } else if (weatherMain === 'Mist') {
+                    weather.style.backgroundImage =
+                        "url('https://images.pexels.com/photos/1367192/pexels-photo-1367192.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940')";
+                } else if (weatherMain === 'Fog') {
+                    weather.style.backgroundImage =
+                        "url('https://images.pexels.com/photos/978844/pexels-photo-978844.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260')";
+                    weather.style.color = 'black';
+                }
+            });
         },
 
         geolocation() {
