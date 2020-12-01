@@ -1,167 +1,286 @@
 <template>
     <div class="addnotes">
-        <div class="content">
-            <div class="content__header">
-                <h2 class="content__title">
+        <div class="container">
+            <div class="container__logo">
+                <h2 class="container__header">
                     Dodaj notatkę 🐝
                 </h2>
-                <span class="content__close" @click="$emit('close')">
+
+                <div class="container__close" @click="$emit('close')">
                     <i class="fas fa-times"></i>
-                </span>
+                </div>
             </div>
 
-            <div class="content__inside">
-                <form @submit.prevent>
-                    <textarea
-                        class="content__textarea"
-                        v-model.trim="note.content"
-                        rows="6"
-                        cols="20"
-                        placeholder="Przykładowa notatka.."
-                    ></textarea>
+            <form class="form" @submit.prevent>
+                <textarea
+                    class="form__textarea"
+                    v-model.trim="note.content"
+                    placeholder="Wpisz swoją notatkę..."
+                ></textarea>
 
-                    <span
-                        class="content__plus-icon"
-                        @click="addNote"
-                        :disabled="note.content === ''"
-                        ><i class="fas fa-plus-circle"></i
-                    ></span>
-                </form>
-            </div>
+                <transition
+                    enter-active-class="animate__animated animate__shakeX"
+                    mode="out-in"
+                    appear
+                >
+                    <p
+                        class="error"
+                        v-if="
+                            !$v.note.content.required && $v.note.content.$dirty
+                        "
+                    >
+                        Notatka nie może być pusta!
+                    </p>
+                </transition>
+
+                <button
+                    class="form__button"
+                    type="submit"
+                    @click="addNote"
+                    v-if="!note.isPending"
+                >
+                    Dodaj notatkę
+                </button>
+
+                <div class="sk-chase" v-if="note.addStatus === 'PENDING'">
+                    <div class="sk-chase-dot"></div>
+                    <div class="sk-chase-dot"></div>
+                    <div class="sk-chase-dot"></div>
+                    <div class="sk-chase-dot"></div>
+                    <div class="sk-chase-dot"></div>
+                    <div class="sk-chase-dot"></div>
+                </div>
+
+                <p class="success" v-if="note.addStatus === 'OK'">
+                    Pomyślnie dodano notatkę 👍
+                </p>
+            </form>
         </div>
     </div>
 </template>
 
 <script>
+import { required } from 'vuelidate/lib/validators';
+import * as firebase from '../firebase';
+
 export default {
     data() {
         return {
+            notes: [],
             note: {
                 content: '',
+                addStatus: null,
+                isPending: false,
             },
         };
     },
 
+    validations: {
+        note: {
+            content: {
+                required,
+            },
+        },
+    },
+
     methods: {
         addNote() {
-            this.$store.dispatch('addNote', {
-                content: this.note.content,
-            });
-            this.note.content = '';
+            this.$v.$touch();
+
+            if (this.$v.$invalid) {
+                this.note.addStatus = 'ERROR';
+            } else {
+                firebase.usersCollection
+                    .doc(firebase.auth.currentUser.uid)
+                    .collection('notes')
+                    .add({
+                        content: this.note.content,
+                        createdAt: new Date(),
+                    })
+                    .then(() => {
+                        this.note.addStatus = 'PENDING';
+                        this.note.isPending = true;
+
+                        setTimeout(() => {
+                            this.note.addStatus = 'OK';
+                            this.note.isPending = false;
+                        }, 2000);
+                    });
+
+                setTimeout(() => {
+                    this.note.content = '';
+                    this.note.addStatus = '';
+                }, 3000);
+            }
         },
     },
 };
 </script>
 
 <style lang="scss" scoped>
-@import '../assets/scss/colors';
-
-.addnotes {
-    position: absolute;
+.container {
     display: flex;
-    top: 60%;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    z-index: 999;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #eee;
+    width: 100%;
+    z-index: 1;
+    padding: 2rem;
 
-    .content {
-        position: relative;
-        margin: auto;
-        background-color: $white;
-        color: $black;
-        width: 80%;
-        z-index: 999;
-        border-radius: 5px;
-        box-shadow: 0 0 5px 0 rgba($greyer, 0.5);
-        padding: 2rem;
-        text-align: center;
-        user-select: text;
+    &__header {
+        font-family: 'Fredericka the Great', cursive;
+        font-size: 2.6rem;
+        margin-top: 3rem;
+    }
 
-        &__close {
-            position: absolute;
-            top: 0.8rem;
-            right: 1rem;
-            padding: 0.4rem;
+    &__close {
+        position: absolute;
+        padding: 1rem 2rem;
+        font-size: 2rem;
+        top: 0;
+        right: 0;
+        cursor: pointer;
+    }
 
-            transition: all 0.2s;
-            &:active {
-                transform: scale(1.3);
-            }
-        }
-
-        &__title {
-            font-size: 1.5rem;
-        }
-
-        &__inside {
-            margin-top: 1rem;
-        }
-
-        &__plus-icon {
-            position: absolute;
-            bottom: 0.8rem;
-            right: 0.6rem;
-            padding: 0.4rem;
-            font-size: 1.5rem;
-
-            transition: all 0.2s;
-            &:active {
-                transform: scale(1.3);
-            }
-        }
+    .form {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin-top: 2rem;
 
         &__textarea {
-            padding: 0.3rem;
+            padding: 1rem;
+        }
+
+        &__button {
+            margin-top: 2rem;
+            padding: 1rem 0;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            border-radius: 0.2rem;
+            background-color: #f5f5f5;
+
+            &:hover {
+                background-color: #e7e7e7c7;
+            }
+        }
+
+        .error {
+            color: tomato;
+            margin-top: 0.5rem;
+        }
+
+        .success {
+            color: green;
+            margin: 0 auto;
+            margin-top: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        // sk-chase
+        .sk-chase {
+            width: 40px;
+            height: 40px;
+            position: relative;
+            animation: sk-chase 2.5s infinite linear both;
+            margin: 0 auto;
+            margin-top: 2rem;
+        }
+
+        .sk-chase-dot {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            animation: sk-chase-dot 2s infinite ease-in-out both;
+        }
+
+        .sk-chase-dot:before {
+            content: '';
+            display: block;
+            width: 25%;
+            height: 25%;
+            background-color: black;
+            border-radius: 100%;
+            animation: sk-chase-dot-before 2s infinite ease-in-out both;
+        }
+
+        .sk-chase-dot:nth-child(1) {
+            animation-delay: -1.1s;
+        }
+        .sk-chase-dot:nth-child(2) {
+            animation-delay: -1s;
+        }
+        .sk-chase-dot:nth-child(3) {
+            animation-delay: -0.9s;
+        }
+        .sk-chase-dot:nth-child(4) {
+            animation-delay: -0.8s;
+        }
+        .sk-chase-dot:nth-child(5) {
+            animation-delay: -0.7s;
+        }
+        .sk-chase-dot:nth-child(6) {
+            animation-delay: -0.6s;
+        }
+        .sk-chase-dot:nth-child(1):before {
+            animation-delay: -1.1s;
+        }
+        .sk-chase-dot:nth-child(2):before {
+            animation-delay: -1s;
+        }
+        .sk-chase-dot:nth-child(3):before {
+            animation-delay: -0.9s;
+        }
+        .sk-chase-dot:nth-child(4):before {
+            animation-delay: -0.8s;
+        }
+        .sk-chase-dot:nth-child(5):before {
+            animation-delay: -0.7s;
+        }
+        .sk-chase-dot:nth-child(6):before {
+            animation-delay: -0.6s;
+        }
+
+        @keyframes sk-chase {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes sk-chase-dot {
+            80%,
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes sk-chase-dot-before {
+            50% {
+                transform: scale(0.4);
+            }
+            100%,
+            0% {
+                transform: scale(1);
+            }
         }
     }
 }
 
 @media (min-width: 480px) {
-    .addnotes {
-        top: 50%;
+    .container {
+        max-width: 480px;
+        border-radius: 0.2rem;
+        border: 0.5px solid black;
 
-        .content {
-            width: 55%;
-        }
-    }
-}
-
-@media (min-width: 768px) {
-    .addnotes {
-        top: 0;
-        .content {
-            width: 40%;
-        }
-    }
-}
-
-@media (min-width: 1024px) {
-    .addnotes {
-        .content {
-            width: 30%;
-
-            &__close {
-                &:hover {
-                    cursor: pointer;
-
-                    transition: all 0.2s;
-                    &:hover {
-                        transform: scale(1.3);
-                    }
-                }
-            }
-
-            &__plus-icon {
-                &:hover {
-                    cursor: pointer;
-
-                    transition: all 0.2s;
-                    &:hover {
-                        transform: scale(1.3);
-                    }
-                }
-            }
+        &__header {
+            font-size: 3rem;
         }
     }
 }

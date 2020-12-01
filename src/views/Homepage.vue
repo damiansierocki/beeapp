@@ -10,6 +10,9 @@
 
         <Weather></Weather>
 
+        <Info></Info>
+
+        <Notes></Notes>
         <!--
             <div class="info">
                 <h3 class="info__title">Informacje</h3>
@@ -142,10 +145,10 @@
 </template>
 
 <script>
-// import AddNotes from '@/components/AddNotes';
-// import EditNote from '@/components/EditNote';
-import Weather from '@/components/Weather';
 import Nav from '@/components/Nav';
+import Weather from '@/components/Weather';
+import Info from '@/components/Info';
+import Notes from '@/components/Notes';
 import { mapState } from 'vuex';
 import moment from 'moment';
 
@@ -161,19 +164,13 @@ export default {
 
     components: {
         Nav,
-        // AddNotes,
-        // EditNote,
         Weather,
+        Info,
+        Notes,
     },
 
     computed: {
-        ...mapState([
-            'userProfile',
-            'notes',
-            'apiaries',
-            'hives',
-            'inspections',
-        ]),
+        ...mapState(['userProfile', 'apiaries', 'hives', 'inspections']),
 
         showIfUserLogged() {
             return Object.keys(this.userProfile).length > 1;
@@ -181,7 +178,6 @@ export default {
     },
 
     created() {
-        this.getNotes();
         this.getApiaries();
         this.getHives();
         this.getInspections();
@@ -219,10 +215,6 @@ export default {
 
         getInspections() {
             this.$store.dispatch('getInspections');
-        },
-
-        getNotes() {
-            this.$store.dispatch('getNotes');
         },
 
         getHives() {

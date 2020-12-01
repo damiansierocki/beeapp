@@ -142,7 +142,7 @@ export default {
     width: 100%;
     padding: 2rem;
     color: white;
-    animation: weather 10s linear infinite;
+    animation: weather 30s infinite;
 
     .container {
         width: 100%;
@@ -183,6 +183,7 @@ export default {
         border: 0.5px solid black;
         border-radius: 1rem;
         margin-top: 2rem;
+        animation: weather 10s infinite;
     }
 }
 </style>

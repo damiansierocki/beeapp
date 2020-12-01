@@ -50,6 +50,7 @@ export default {};
     &__header {
         font-family: 'Fredericka the Great', cursive;
         font-size: 3rem;
+        margin-top: 3rem;
     }
 
     &__close {

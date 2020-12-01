@@ -37,37 +37,15 @@ const store = new Vuex.Store({
     },
 
     actions: {
-        async getNotes() {
-            fb.usersCollection
-                .doc(fb.auth.currentUser.uid)
-                .collection('notes')
-                .orderBy('createdOn', 'desc')
-                .onSnapshot(snapshot => {
-                    const notesArray = [];
-
-                    snapshot.forEach(doc => {
-                        const note = doc.data();
-                        note.id = doc.id;
-
-                        notesArray.push(note);
-                    });
-
-                    store.commit('setNotes', notesArray);
-                });
-        },
-
-        async addNote({}, note) {
-            if (window.confirm('Jesteś pewny/a, że chcesz dodać notatkę?')) {
-                await fb.usersCollection
-                    .doc(fb.auth.currentUser.uid)
-                    .collection('notes')
-                    .add({
-                        createdOn: new Date(),
-                        content: note.content,
-                        userId: fb.auth.currentUser.uid,
-                    });
-            }
-        },
+        // async addNote({}, note) {
+        //     await fb.usersCollection
+        //         .doc(fb.auth.currentUser.uid)
+        //         .collection('notes')
+        //         .add({
+        //             content: note.content,
+        //             createdAt: new Date(),
+        //         });
+        // },
 
         async editNote({}, { docId, note }) {
             if (window.confirm('Jesteś pewny/a, że chcesz edytować notatkę?')) {
