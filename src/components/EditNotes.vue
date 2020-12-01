@@ -1,9 +1,9 @@
 <template>
-    <div class="addnotes">
+    <div class="editnotes">
         <div class="container">
             <div class="container__logo">
                 <h2 class="container__header">
-                    Dodaj notatkę 🐝
+                    Edytuj notatkę 🐝
                 </h2>
 
                 <div class="container__close" @click="$emit('close')">
@@ -15,7 +15,7 @@
                 <textarea
                     class="form__textarea"
                     v-model.trim="note.content"
-                    placeholder="Wpisz swoją notatkę..."
+                    :placeholder="noteContent"
                 ></textarea>
 
                 <transition
@@ -29,20 +29,20 @@
                             !$v.note.content.required && $v.note.content.$dirty
                         "
                     >
-                        Notatka nie może być pusta!
+                        Edytowana notatka nie może być pusta!
                     </p>
                 </transition>
 
                 <button
                     class="form__button"
                     type="submit"
-                    @click="addNote"
+                    @click="editNotes"
                     v-if="!note.isPending"
                 >
-                    Dodaj notatkę
+                    Edytuj notatkę
                 </button>
 
-                <div class="sk-chase" v-if="note.addStatus === 'PENDING'">
+                <div class="sk-chase" v-if="note.editStatus === 'PENDING'">
                     <div class="sk-chase-dot"></div>
                     <div class="sk-chase-dot"></div>
                     <div class="sk-chase-dot"></div>
@@ -51,8 +51,8 @@
                     <div class="sk-chase-dot"></div>
                 </div>
 
-                <p class="success" v-if="note.addStatus === 'OK'">
-                    Pomyślnie dodano notatkę 👍
+                <p class="success" v-if="note.editStatus === 'OK'">
+                    Pomyślnie edytowano notatkę 👍
                 </p>
             </form>
         </div>
@@ -64,11 +64,13 @@ import { required } from 'vuelidate/lib/validators';
 import * as firebase from '../firebase';
 
 export default {
+    props: ['docId', 'noteContent'],
+
     data() {
         return {
             note: {
                 content: '',
-                addStatus: null,
+                editStatus: '',
                 isPending: false,
             },
         };
@@ -83,32 +85,32 @@ export default {
     },
 
     methods: {
-        addNote() {
+        editNotes() {
             this.$v.$touch();
 
             if (this.$v.$invalid) {
-                this.note.addStatus = 'ERROR';
+                this.note.editStatus = 'ERROR';
             } else {
                 firebase.usersCollection
                     .doc(firebase.auth.currentUser.uid)
                     .collection('notes')
-                    .add({
+                    .doc(docId)
+                    .update({
                         content: this.note.content,
-                        createdAt: new Date(),
                     })
                     .then(() => {
-                        this.note.addStatus = 'PENDING';
+                        this.note.editStatus = 'PENDING';
                         this.note.isPending = true;
 
                         setTimeout(() => {
-                            this.note.addStatus = 'OK';
+                            this.note.editStatus = 'OK';
                             this.note.isPending = false;
                         }, 1000);
                     });
 
                 setTimeout(() => {
                     this.note.content = '';
-                    this.note.addStatus = '';
+                    this.note.editStatus = '';
                 }, 2000);
             }
         },

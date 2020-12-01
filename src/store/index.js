@@ -8,7 +8,6 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
     state: {
         userProfile: {},
-        notes: [],
         apiaries: [],
         hives: [],
         inspections: [],
@@ -17,10 +16,6 @@ const store = new Vuex.Store({
     mutations: {
         setUserProfile(state, val) {
             state.userProfile = val;
-        },
-
-        setNotes(state, val) {
-            state.notes = val;
         },
 
         setApiaries(state, val) {
@@ -37,37 +32,17 @@ const store = new Vuex.Store({
     },
 
     actions: {
-        // async addNote({}, note) {
-        //     await fb.usersCollection
-        //         .doc(fb.auth.currentUser.uid)
-        //         .collection('notes')
-        //         .add({
-        //             content: note.content,
-        //             createdAt: new Date(),
-        //         });
+        // async editNote({}, { docId, note }) {
+        //     if (window.confirm('Jesteś pewny/a, że chcesz edytować notatkę?')) {
+        //         await fb.usersCollection
+        //             .doc(fb.auth.currentUser.uid)
+        //             .collection('notes')
+        //             .doc(docId)
+        //             .update({
+        //                 content: note.content,
+        //             });
+        //     }
         // },
-
-        async editNote({}, { docId, note }) {
-            if (window.confirm('Jesteś pewny/a, że chcesz edytować notatkę?')) {
-                await fb.usersCollection
-                    .doc(fb.auth.currentUser.uid)
-                    .collection('notes')
-                    .doc(docId)
-                    .update({
-                        content: note.content,
-                    });
-            }
-        },
-
-        async deleteNote({}, docId) {
-            if (window.confirm('Jesteś pewny/a, że chcesz usunąć notatkę?')) {
-                await fb.usersCollection
-                    .doc(fb.auth.currentUser.uid)
-                    .collection('notes')
-                    .doc(docId)
-                    .delete();
-            }
-        },
 
         async getApiaries() {
             fb.usersCollection

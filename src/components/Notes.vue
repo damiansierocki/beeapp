@@ -8,6 +8,13 @@
 
             <AddNotes v-if="showAddNotes" @close="toggleAddNotes"></AddNotes>
 
+            <EditNotes
+                v-if="showEditNotes"
+                @close="toggleEditNotes"
+                :docId="selectedNotesDocId"
+                :noteContent="selectedNotesContent"
+            ></EditNotes>
+
             <div class="grid" v-if="notes.length">
                 <!-- notatki -->
                 <ul class="grid__list" v-for="note in notes" :key="note.id">
@@ -19,11 +26,17 @@
                         </p>
 
                         <div class="grid__extras">
-                            <div class="grid__edit">
+                            <div
+                                class="grid__edit"
+                                @click="toggleEditNotes(note.id, note.content)"
+                            >
                                 <i class="far fa-edit"></i>
                             </div>
 
-                            <div class="grid__trash">
+                            <div
+                                class="grid__trash"
+                                @click="deleteNote(note.id)"
+                            >
                                 <i class="far fa-trash-alt"></i>
                             </div>
                         </div>
@@ -38,6 +51,7 @@
 
 <script>
 import AddNotes from '@/components/AddNotes';
+import EditNotes from '@/components/EditNotes';
 import moment from 'moment';
 import * as firebase from '../firebase';
 
@@ -49,12 +63,17 @@ export default {
                 content: '',
             },
 
+            selectedNotesDocId: '',
+            selectedNotesContent: '',
+
             showAddNotes: '',
+            showEditNotes: '',
         };
     },
 
     components: {
         AddNotes,
+        EditNotes,
     },
 
     filters: {
@@ -91,8 +110,30 @@ export default {
             });
         },
 
+        deleteNote(docId) {
+            setTimeout(() => {
+                firebase.usersCollection
+                    .doc(firebase.auth.currentUser.uid)
+                    .collection('notes')
+                    .doc(docId)
+                    .delete();
+            }, 100);
+        },
+
         toggleAddNotes() {
             this.showAddNotes = !this.showAddNotes;
+        },
+
+        toggleEditNotes(docId, noteContent) {
+            this.showEditNotes = !this.showEditNotes;
+
+            if (this.showEditNotes) {
+                this.selectedNotesDocId = docId;
+                this.selectedNotesContent = noteContent;
+            } else {
+                this.selectedNotesDocId = {};
+                this.selectedNotesContent = {};
+            }
         },
     },
 };
