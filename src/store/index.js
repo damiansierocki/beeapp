@@ -114,68 +114,64 @@ const store = new Vuex.Store({
         },
 
         async addHives({}, hives) {
-            if (window.confirm('Jesteś pewny/a, że chcesz dodać ul?')) {
-                await fb.usersCollection
-                    .doc(fb.auth.currentUser.uid)
-                    .collection('hives')
-                    .add({
-                        // general
-                        number: hives.number,
-                        apiary: hives.apiary,
-                        status: hives.status,
-                        purpose: hives.purpose,
-                        created: hives.created,
-                        generalNote: hives.generalNote,
+            await fb.usersCollection
+                .doc(fb.auth.currentUser.uid)
+                .collection('hives')
+                .add({
+                    // general
+                    number: hives.number,
+                    apiary: hives.apiary,
+                    status: hives.status,
+                    purpose: hives.purpose,
+                    created: hives.created,
+                    generalNote: hives.generalNote,
 
-                        // bees
-                        strength: hives.strength,
-                        temperament: hives.temperament,
-                        frames: hives.frames,
+                    // bees
+                    strength: hives.strength,
+                    temperament: hives.temperament,
+                    frames: hives.frames,
 
-                        // queen
-                        isQueen: hives.isQueen,
-                        age: hives.age,
-                        installed: hives.installed,
-                        race: hives.race,
-                        queenColor: hives.queenColor,
-                        queenNote: hives.queenNote,
-                    });
-            }
+                    // queen
+                    isQueen: hives.isQueen,
+                    age: hives.age,
+                    installed: hives.installed,
+                    race: hives.race,
+                    queenColor: hives.queenColor,
+                    queenNote: hives.queenNote,
+                });
         },
 
         async editHives({}, { docId, hives }) {
-            if (window.confirm('Jesteś pewny/a, że chcesz edytować ul?')) {
-                await fb.usersCollection
-                    .doc(fb.auth.currentUser.uid)
-                    .collection('hives')
-                    .doc(docId)
-                    .update({
-                        // general
-                        number: hives.number,
-                        apiary: hives.apiary,
-                        status: hives.status,
-                        purpose: hives.purpose,
-                        created: hives.created,
-                        generalNote: hives.generalNote,
+            await fb.usersCollection
+                .doc(fb.auth.currentUser.uid)
+                .collection('hives')
+                .doc(docId)
+                .update({
+                    // general
+                    number: hives.number,
+                    apiary: hives.apiary,
+                    status: hives.status,
+                    purpose: hives.purpose,
+                    created: hives.created,
+                    generalNote: hives.generalNote,
 
-                        // bees
-                        strength: hives.strength,
-                        temperament: hives.temperament,
-                        frames: hives.frames,
+                    // bees
+                    strength: hives.strength,
+                    temperament: hives.temperament,
+                    frames: hives.frames,
 
-                        // queen
-                        isQueen: hives.isQueen,
-                        age: hives.age,
-                        installed: hives.installed,
-                        race: hives.race,
-                        queenColor: hives.queenColor,
-                        queenNote: hives.queenNote,
-                    });
-            }
+                    // queen
+                    isQueen: hives.isQueen,
+                    age: hives.age,
+                    installed: hives.installed,
+                    race: hives.race,
+                    queenColor: hives.queenColor,
+                    queenNote: hives.queenNote,
+                });
         },
 
         async deleteHives({}, docId) {
-            if (window.confirm('Jesteś pewny/a, że chcesz usunąć ul?')) {
+            if (window.confirm('Czy na pewno chcesz usunąć ul?')) {
                 await fb.usersCollection
                     .doc(fb.auth.currentUser.uid)
                     .collection('hives')

@@ -21,9 +21,9 @@
             mode="out-in"
             appear
         >
-            <HivesView
-                v-if="showHivesView"
-                @close="toggleHivesView()"
+            <ViewHives
+                v-if="showViewHives"
+                @close="toggleViewHives()"
                 :id="hive.id"
                 :number="hive.number"
                 :apiary="hive.apiary"
@@ -40,7 +40,7 @@
                 :race="hive.race"
                 :queenColor="hive.queenColor"
                 :queenNote="hive.queenNote"
-            ></HivesView>
+            ></ViewHives>
         </transition>
 
         <transition
@@ -71,30 +71,29 @@
             ></EditHives>
         </transition>
 
-        <div class="content">
-            <div class="content__add" @click="toggleAddHives()">
-                Kliknij aby dodać ul
-                <span class="content__plus-icon"
-                    ><i class="fas fa-plus-square"></i
-                ></span>
+        <div class="container">
+            <div class="container__add" @click="toggleAddHives()">
+                <p class="container__add-text">
+                    Kliknij aby dodać nowy ul
+                </p>
+                <div class="container__add-icon">
+                    <i class="far fa-plus-square"></i>
+                </div>
             </div>
 
-            <table class="content__table" v-if="hives.length">
-                <tr class="content__table-row">
-                    <th class="content__table-column">Numer Ula</th>
-                    <th class="content__table-column">Nazwa Pasieki</th>
-                    <th class="content__table-column">Edytuj</th>
-                    <th class="content__table-column">Usuń</th>
+            <table class="table" v-if="hives.length">
+                <tr class="table__tr">
+                    <th class="table__th">Numer Ula</th>
+                    <th class="table__th">Nazwa pasieki</th>
+                    <th class="table__th">Edytuj</th>
+                    <th class="table__th">Usuń</th>
                 </tr>
-                <tr
-                    class="content__table-row"
-                    v-for="hive in hives"
-                    :key="hive.id"
-                >
+
+                <tr class="table__tr" v-for="hive in hives" :key="hive.id">
                     <td
-                        class="content__table-column"
+                        class="table__td"
                         @click="
-                            toggleHivesView(
+                            toggleViewHives(
                                 hive.id,
                                 hive.number,
                                 hive.apiary,
@@ -116,11 +115,11 @@
                     >
                         {{ hive.number }}
                     </td>
-                    <td class="content__table-column">
+                    <td class="table__td">
                         {{ hive.apiary }}
                     </td>
                     <td
-                        class="content__table-column"
+                        class="table__td"
                         @click="
                             toggleEditHives(
                                 hive.id,
@@ -142,14 +141,17 @@
                             )
                         "
                     >
-                        <i class="fas fa-edit"></i>
+                        <i class="far fa-edit"></i>
                     </td>
-                    <td
-                        class="content__table-column"
-                        @click="deleteHives(hive.id)"
-                    >
+                    <td class="table__td" @click="deleteHives(hive.id)">
                         <i class="far fa-trash-alt"></i>
                     </td>
+                </tr>
+            </table>
+
+            <table class="table" v-if="!hives.length">
+                <tr class="table__tr">
+                    <th class="table__th">Brak uli 😭😭😭</th>
                 </tr>
             </table>
         </div>
@@ -158,17 +160,17 @@
 
 <script>
 import Nav from '@/components/Nav';
-import { mapState } from 'vuex';
 import AddHives from '@/components/AddHives';
-import HivesView from '@/components/HivesView';
+import ViewHives from '@/components/ViewHives';
 import EditHives from '@/components/EditHives';
+import { mapState } from 'vuex';
 
 export default {
     data() {
         return {
             showAddHives: false,
 
-            showHivesView: false,
+            showViewHives: false,
 
             showEditHives: false,
 
@@ -197,7 +199,7 @@ export default {
         };
     },
 
-    components: { Nav, AddHives, HivesView, EditHives },
+    components: { Nav, AddHives, ViewHives, EditHives },
 
     computed: {
         ...mapState(['userProfile', 'hives']),
@@ -293,7 +295,7 @@ export default {
             }
         },
 
-        toggleHivesView(
+        toggleViewHives(
             id,
             number,
             apiary,
@@ -311,9 +313,9 @@ export default {
             queenColor,
             queenNote,
         ) {
-            this.showHivesView = !this.showHivesView;
+            this.showViewHives = !this.showViewHives;
 
-            if (this.showHivesView) {
+            if (this.showViewHives) {
                 this.hive.id = id;
 
                 // general
@@ -366,73 +368,60 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../assets/scss/colors';
-
-.content {
+.container {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-    height: calc(100vh - 3.2rem);
 
     &__add {
+        font-size: 1.8rem;
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: 1rem;
+        padding: 2rem;
+        cursor: pointer;
         width: 100%;
+        border-bottom: 0.5px solid black;
     }
 
-    &__table {
+    &__add-icon {
+        margin-left: 2rem;
+    }
+
+    .table {
+        margin-top: 2rem;
         width: 100%;
         text-align: center;
-    }
+        font-size: 1.5rem;
 
-    &__table-row {
-        &:nth-child(even) {
-            background-color: #eee;
+        &__tr {
+            &:nth-child(even) {
+                background: #eee;
+            }
         }
-    }
 
-    &__table-column {
-        padding: 1rem;
-        cursor: pointer;
-    }
-
-    &__inspections-name {
-        font-size: 0.9rem;
-        color: $orange;
-        font-weight: bold;
-    }
-
-    &__inspections-hives {
-        font-size: 0.9rem;
-    }
-
-    &__plus-icon {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 2rem;
-        margin-left: 1rem;
-    }
-}
-
-@media (min-width: 320px) {
-    .content {
-        height: calc(100vh - 3.3rem);
-    }
-}
-
-@media (min-width: 414px) {
-    .content {
-        height: calc(100vh - 3.45rem);
+        &__td {
+            padding: 1rem;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
     }
 }
 
 @media (min-width: 768px) {
-    .content {
-        height: calc(100vh - 3.65rem);
-        overflow-y: auto;
+    .hives {
+        background-color: white;
+        height: 100vh;
+
+        .container {
+            max-width: 768px;
+            border: 0.5px solid #ccc;
+            z-index: 1;
+            margin: 0 auto;
+            margin-top: 3rem;
+            padding: 2rem 3rem;
+        }
     }
 }
 </style>

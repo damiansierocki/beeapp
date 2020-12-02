@@ -22,19 +22,6 @@
                     v-model.trim="apiary.name"
                 />
 
-                <transition
-                    enter-active-class="animate__animated animate__shakeX"
-                    mode="out-in"
-                    appear
-                >
-                    <p
-                        class="error"
-                        v-if="!$v.apiary.name.required && $v.apiary.name.$dirty"
-                    >
-                        Nazwa pasieki nie może być pusta!
-                    </p>
-                </transition>
-
                 <!-- typ pożywienia -->
                 <label class="form__label" for="forages">Typ pożywienia</label>
                 <select
@@ -53,22 +40,6 @@
                     <option value="Facylia">Facylia</option>
                 </select>
 
-                <transition
-                    enter-active-class="animate__animated animate__shakeX"
-                    mode="out-in"
-                    appear
-                >
-                    <p
-                        class="error"
-                        v-if="
-                            !$v.apiary.forages.required &&
-                                $v.apiary.forages.$dirty
-                        "
-                    >
-                        Musi być wybrany typ pożywienia!
-                    </p>
-                </transition>
-
                 <!-- typ pasieki -->
                 <label class="form__label" for="type">Typ pasieki</label>
                 <select
@@ -82,19 +53,6 @@
                     <option value="Wędrowna">Wędrowna</option>
                     <option value="Inna">Inna</option>
                 </select>
-
-                <transition
-                    enter-active-class="animate__animated animate__shakeX"
-                    mode="out-in"
-                    appear
-                >
-                    <p
-                        class="error"
-                        v-if="!$v.apiary.type.required && $v.apiary.type.$dirty"
-                    >
-                        Musi być wybrany typ pasieki!
-                    </p>
-                </transition>
 
                 <!-- opis -->
                 <label class="form__label" for="description">Opis</label>
@@ -206,8 +164,6 @@
 </template>
 
 <script>
-import { required } from 'vuelidate/lib/validators';
-
 export default {
     props: [
         'id',
@@ -242,72 +198,60 @@ export default {
         };
     },
 
-    validations: {
-        apiary: {
-            name: {
-                required,
-            },
-
-            forages: {
-                required,
-            },
-
-            type: {
-                required,
-            },
-        },
-    },
-
     methods: {
         editApiary() {
             const docId = this.id;
             const apiary = {
                 // general
-                name: this.apiary.name,
-                forages: this.apiary.forages,
-                type: this.apiary.type,
-                description: this.apiary.description,
+                name: this.apiary.name !== '' ? this.apiary.name : this.name,
+                forages:
+                    this.apiary.forages.length !== 0
+                        ? this.apiary.forages
+                        : this.forages,
+                type: this.apiary.type !== '' ? this.apiary.type : this.type,
+                description:
+                    this.apiary.description !== ''
+                        ? this.apiary.description
+                        : this.description,
 
                 // address
-                address: this.apiary.address,
-                city: this.apiary.city,
-                zip: this.apiary.zip,
-                province: this.apiary.province,
+                address:
+                    this.apiary.address !== ''
+                        ? this.apiary.address
+                        : this.address,
+                city: this.apiary.city !== '' ? this.apiary.city : this.city,
+                zip: this.apiary.zip !== '' ? this.apiary.zip : this.zip,
+                province:
+                    this.apiary.province !== ''
+                        ? this.apiary.province
+                        : this.province,
             };
 
-            this.$v.$touch();
-
-            if (this.$v.$invalid) {
-                this.editApiaryStatus = 'ERROR';
-            } else {
-                this.$store
-                    .dispatch('editApiary', { docId, apiary })
-                    .then(() => {
-                        this.editApiaryStatus = 'PENDING';
-                        this.isPending = true;
-
-                        setTimeout(() => {
-                            this.editApiaryStatus = 'OK';
-                            this.isPending = false;
-                        }, 1000);
-                    });
+            this.$store.dispatch('editApiary', { docId, apiary }).then(() => {
+                this.editApiaryStatus = 'PENDING';
+                this.isPending = true;
 
                 setTimeout(() => {
-                    this.editApiaryStatus = '';
+                    this.editApiaryStatus = 'OK';
+                    this.isPending = false;
+                }, 1000);
+            });
 
-                    // general
-                    this.apiary.name = '';
-                    this.apiary.forages = [];
-                    this.apiary.type = '';
-                    this.apiary.description = '';
+            setTimeout(() => {
+                this.editApiaryStatus = '';
 
-                    // address
-                    this.apiary.address = '';
-                    this.apiary.city = '';
-                    this.apiary.zip = '';
-                    this.apiary.province = '';
-                }, 2000);
-            }
+                // general
+                this.apiary.name = '';
+                this.apiary.forages = [];
+                this.apiary.type = '';
+                this.apiary.description = '';
+
+                // address
+                this.apiary.address = '';
+                this.apiary.city = '';
+                this.apiary.zip = '';
+                this.apiary.province = '';
+            }, 2000);
         },
     },
 };

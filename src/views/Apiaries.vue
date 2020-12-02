@@ -311,6 +311,7 @@ export default {
             z-index: 1;
             margin: 0 auto;
             margin-top: 3rem;
+            padding: 2rem 3rem;
         }
     }
 }
