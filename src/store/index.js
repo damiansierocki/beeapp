@@ -303,13 +303,9 @@ const store = new Vuex.Store({
             router.push('/login');
         },
 
-        async updateProfile({ dispatch }, user) {
-            const userId = fb.auth.currentUser.uid;
-
-            await fb.usersCollection.doc(userId).update({
+        async editFullName({ dispatch }, user) {
+            await fb.usersCollection.doc(fb.auth.currentUser.uid).update({
                 fullName: user.fullName,
-                email: user.email,
-                password: user.password,
             });
 
             dispatch('fetchUserProfile', { uid: fb.auth.currentUser.uid });

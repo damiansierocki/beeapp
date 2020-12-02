@@ -1,17 +1,17 @@
 <template>
     <div class="nav">
-        <About @close="toggleAbout" v-if="showAbout"></About>
+        <About @close="toggleAbout()" v-if="showAbout"></About>
 
         <div class="container">
             <!-- hamburger -->
             <div class="hamburger-menu">
-                <div class="hamburger-menu__icon" @click="toggleLeftMenu">
+                <div class="hamburger-menu__icon" @click="toggleLeftMenu()">
                     <i class="fas fa-bars"></i>
                 </div>
 
                 <!-- left-menu -->
                 <div class="left-menu" v-if="showLeftMenu">
-                    <div class="left-menu__close" @click="toggleLeftMenu">
+                    <div class="left-menu__close" @click="toggleLeftMenu()">
                         <i class="fas fa-times"></i>
                     </div>
 
@@ -46,7 +46,7 @@
 
             <!-- elipse menu -->
             <div class="elipse-menu">
-                <div class="elipse-menu__icon" @click="toggleRightMenu">
+                <div class="elipse-menu__icon" @click="toggleRightMenu()">
                     <i class="fas fa-ellipsis-v"></i>
                 </div>
 
@@ -58,7 +58,7 @@
                     <router-link class="right-menu__link" to="/myaccount"
                         >Moje konto</router-link
                     >
-                    <a class="right-menu__link" @click="toggleAbout"
+                    <a class="right-menu__link" @click="toggleAbout()"
                         >O aplikacji</a
                     >
                     <a class="right-menu__link" @click="logout">Wyloguj się</a>

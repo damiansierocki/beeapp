@@ -6,6 +6,11 @@
             </template>
         </Nav>
 
+        <EditFullName
+            v-if="showEditFullName"
+            @close="toggleEditFullName()"
+        ></EditFullName>
+
         <div class="container">
             <div class="container__inside">
                 <h2 class="container__header">Twoje konto</h2>
@@ -13,21 +18,28 @@
                 <!-- Imię i nazwisko -->
                 <p class="container__label">Imię i nazwisko</p>
                 <p class="container__text">
-                    Janusz Kowalski
-                    <i class="fas fa-user-edit container__edit"></i>
+                    {{ userProfile.fullName }}
+                    <span class="container__edit" @click="toggleEditFullName()"
+                        ><i class="fas fa-user-edit "></i
+                    ></span>
                 </p>
 
                 <!-- adres email -->
                 <p class="container__label">Adres Email</p>
                 <p class="container__text">
-                    jankowalski@email.com
-                    <i class="fas fa-user-edit container__edit"></i>
+                    {{ userProfile.email }}
+                    <span class="container__edit"
+                        ><i class="fas fa-user-edit"></i
+                    ></span>
                 </p>
 
                 <!-- haslo -->
                 <p class="container__label">Hasło</p>
                 <p class="container__text">
-                    123456 <i class="fas fa-user-edit container__edit"></i>
+                    {{ userProfile.password }}
+                    <span class="container__edit"
+                        ><i class="fas fa-user-edit "></i
+                    ></span>
                 </p>
             </div>
 
@@ -42,11 +54,20 @@
 
 <script>
 import Nav from '@/components/Nav';
+import EditFullName from '@/components/EditFullName';
+import { auth } from '@/firebase';
 import { mapState } from 'vuex';
 
 export default {
+    data() {
+        return {
+            showEditFullName: false,
+        };
+    },
+
     components: {
         Nav,
+        EditFullName,
     },
 
     computed: {
@@ -58,37 +79,9 @@ export default {
     },
 
     methods: {
-        /* editAccount() {
-            this.$v.$touch();
-
-            if (this.$v.$invalid) {
-                this.editAccountStatus = 'ERROR';
-            } else {
-                this.$store
-                    .dispatch('updateProfile', {
-                        fullName: this.fullName,
-                        email: this.email,
-                        password: this.password,
-                    })
-                    .then(() => {
-                        this.editAccountStatus = 'PENDING';
-                        this.isPending = true;
-                        this.authStatus = '';
-
-                        setTimeout(() => {
-                            this.editAccountStatus = 'OK';
-                            this.isPending = false;
-                        }, 2000);
-                    });
-
-                setTimeout(() => {
-                    this.editAccountStatus = '';
-                    this.fullName = '';
-                    this.email = '';
-                    this.password = '';
-                }, 2000);
-            }
-        }, */
+        toggleEditFullName() {
+            this.showEditFullName = !this.showEditFullName;
+        },
     },
 };
 </script>
