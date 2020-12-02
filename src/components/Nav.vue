@@ -142,6 +142,7 @@ export default {
     font-size: 2rem;
     width: 100%;
     user-select: none;
+    z-index: 999;
 
     .hamburger-menu {
         position: relative;

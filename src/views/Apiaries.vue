@@ -6,84 +6,63 @@
             </template>
         </Nav>
 
-        <transition
-            enter-active-class="animate__animated animate__backInDown animate__faster"
-            leave-active-class="animate__animated animate__backOutUp animate__faster"
-            mode="out-in"
-            appear
-        >
-            <AddApiary
-                v-if="showAddApiary"
-                @close="toggleAddApiary()"
-            ></AddApiary>
-        </transition>
+        <AddApiary v-if="showAddApiary" @close="toggleAddApiary()"></AddApiary>
 
-        <transition
-            enter-active-class="animate__animated animate__backInDown animate__faster"
-            leave-active-class="animate__animated animate__backOutUp animate__faster"
-            mode="out-in"
-            appear
-        >
-            <ApiaryView
-                v-if="showApiaryView"
-                @close="toggleApiaryView()"
-                :id="apiary.id"
-                :name="apiary.name"
-                :forages="apiary.forages"
-                :type="apiary.type"
-                :description="apiary.description"
-                :address="apiary.address"
-                :city="apiary.city"
-                :zip="apiary.zip"
-                :province="apiary.province"
-            ></ApiaryView>
-        </transition>
+        <ViewApiary
+            v-if="showViewApiary"
+            @close="toggleViewApiary()"
+            :id="apiary.id"
+            :name="apiary.name"
+            :forages="apiary.forages"
+            :type="apiary.type"
+            :description="apiary.description"
+            :address="apiary.address"
+            :city="apiary.city"
+            :zip="apiary.zip"
+            :province="apiary.province"
+        ></ViewApiary>
 
-        <transition
-            enter-active-class="animate__animated animate__backInDown animate__faster"
-            leave-active-class="animate__animated animate__backOutUp animate__faster"
-            mode="out-in"
-            appear
+        <EditApiary
+            v-if="showEditApiary"
+            @close="toggleEditApiary()"
+            :id="apiary.id"
+            :name="apiary.name"
+            :forages="apiary.forages"
+            :type="apiary.type"
+            :description="apiary.description"
+            :address="apiary.address"
+            :city="apiary.city"
+            :zip="apiary.zip"
+            :province="apiary.province"
         >
-            <EditApiary
-                v-if="showEditApiary"
-                @close="toggleEditApiary()"
-                :id="apiary.id"
-                :name="apiary.name"
-                :forages="apiary.forages"
-                :type="apiary.type"
-                :description="apiary.description"
-                :address="apiary.address"
-                :city="apiary.city"
-                :zip="apiary.zip"
-                :province="apiary.province"
-            >
-            </EditApiary>
-        </transition>
+        </EditApiary>
 
-        <div class="content">
-            <div class="content__add" @click="toggleAddApiary()">
-                Kliknij aby dodać pasiekę
-                <span class="content__plus-icon"
-                    ><i class="fas fa-plus-square"></i
-                ></span>
+        <div class="container">
+            <div class="container__add" @click="toggleAddApiary()">
+                <p class="container__add-text">
+                    Kliknij aby dodać nową pasiekę
+                </p>
+                <div class="container__add-icon">
+                    <i class="far fa-plus-square"></i>
+                </div>
             </div>
 
-            <table class="content__table" v-if="apiaries.length">
-                <tr class="content__table-row">
-                    <th class="content__table-column">Nazwa pasieki</th>
-                    <th class="content__table-column">Edytuj</th>
-                    <th class="content__table-column">Usuń</th>
+            <table class="table" v-if="apiaries.length">
+                <tr class="table__tr">
+                    <th class="table__th">Pasieka</th>
+                    <th class="table__th">Edytuj</th>
+                    <th class="table__th">Usuń</th>
                 </tr>
+
                 <tr
-                    class="content__table-row"
+                    class="table__tr"
                     v-for="apiary in apiaries"
                     :key="apiary.id"
                 >
                     <td
-                        class="content__table-column"
+                        class="table__td"
                         @click="
-                            toggleApiaryView(
+                            toggleViewApiary(
                                 apiary.id,
                                 apiary.name,
                                 apiary.forages,
@@ -99,7 +78,7 @@
                         {{ apiary.name }}
                     </td>
                     <td
-                        class="content__table-column"
+                        class="table__td"
                         @click="
                             toggleEditApiary(
                                 apiary.id,
@@ -114,14 +93,17 @@
                             )
                         "
                     >
-                        <i class="fas fa-edit"></i>
+                        <i class="far fa-edit"></i>
                     </td>
-                    <td
-                        class="content__table-column"
-                        @click="deleteApiary(apiary.id)"
-                    >
+                    <td class="table__td" @click="deleteApiary(apiary.id)">
                         <i class="far fa-trash-alt"></i>
                     </td>
+                </tr>
+            </table>
+
+            <table class="table" v-if="!apiaries.length">
+                <tr class="table__tr">
+                    <th class="table__th">Brak pasiek 😭😭😭</th>
                 </tr>
             </table>
         </div>
@@ -129,24 +111,20 @@
 </template>
 
 <script>
-import AddApiary from '@/components/AddApiary';
-import ApiaryView from '@/components/ApiaryView';
-import EditApiary from '@/components/EditApiary';
 import Nav from '@/components/Nav';
+import AddApiary from '@/components/AddApiary';
+import ViewApiary from '@/components/ViewApiary';
+import EditApiary from '@/components/EditApiary';
 import { mapState } from 'vuex';
 
 export default {
     data() {
         return {
             showAddApiary: false,
-
-            showApiaryView: false,
-
             showEditApiary: false,
+            showViewApiary: false,
 
             apiary: {
-                // id: "",
-
                 // general
                 name: '',
                 forages: '',
@@ -165,12 +143,12 @@ export default {
     components: {
         Nav,
         AddApiary,
-        ApiaryView,
+        ViewApiary,
         EditApiary,
     },
 
     computed: {
-        ...mapState(['userProfile', 'apiaries', 'hives']),
+        ...mapState(['userProfile', 'apiaries']),
 
         showIfUserLogged() {
             return Object.keys(this.userProfile).length > 1;
@@ -183,10 +161,6 @@ export default {
     },
 
     methods: {
-        deleteApiary(docId) {
-            this.$store.dispatch('deleteApiary', docId);
-        },
-
         getApiaries() {
             this.$store.dispatch('getApiaries');
         },
@@ -199,7 +173,7 @@ export default {
             this.showAddApiary = !this.showAddApiary;
         },
 
-        toggleApiaryView(
+        toggleViewApiary(
             id,
             name,
             forages,
@@ -210,16 +184,14 @@ export default {
             zip,
             province,
         ) {
-            this.showApiaryView = !this.showApiaryView;
-
-            if (this.showApiaryView) {
+            this.showViewApiary = !this.showViewApiary;
+            if (this.showViewApiary) {
                 // general
                 this.apiary.id = id;
                 this.apiary.forages = forages;
                 this.apiary.name = name;
                 this.apiary.type = type;
                 this.apiary.description = description;
-
                 // address
                 this.apiary.address = address;
                 this.apiary.city = city;
@@ -232,7 +204,6 @@ export default {
                 this.apiary.name = {};
                 this.apiary.type = {};
                 this.apiary.description = {};
-
                 // address
                 this.apiary.address = {};
                 this.apiary.city = {};
@@ -253,7 +224,6 @@ export default {
             province,
         ) {
             this.showEditApiary = !this.showEditApiary;
-
             if (this.showEditApiary) {
                 // general
                 this.apiary.id = id;
@@ -261,7 +231,6 @@ export default {
                 this.apiary.name = name;
                 this.apiary.type = type;
                 this.apiary.description = description;
-
                 // address
                 this.apiary.address = address;
                 this.apiary.city = city;
@@ -274,7 +243,6 @@ export default {
                 this.apiary.name = {};
                 this.apiary.type = {};
                 this.apiary.description = {};
-
                 // address
                 this.apiary.address = {};
                 this.apiary.city = {};
@@ -282,84 +250,68 @@ export default {
                 this.apiary.province = {};
             }
         },
+
+        deleteApiary(docId) {
+            this.$store.dispatch('deleteApiary', docId);
+        },
     },
 };
 </script>
 
 <style lang="scss" scoped>
-@import '../assets/scss/colors';
-
-.content {
+.container {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-    height: calc(100vh - 3.2rem);
 
     &__add {
+        font-size: 1.8rem;
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: 1rem;
-        width: 100%;
-    }
-
-    &__apiary-name {
-        font-size: 0.9rem;
-        color: $orange;
-        font-weight: bold;
-    }
-
-    &__apiary-hives {
-        font-size: 0.9rem;
-    }
-
-    &__plus-icon {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 2rem;
-        margin-left: 1rem;
-    }
-
-    &__icon {
-        padding: 5px;
-        display: flex;
+        padding: 2rem;
         cursor: pointer;
+        width: 100%;
+        border-bottom: 0.5px solid black;
     }
 
-    &__table {
+    &__add-icon {
+        margin-left: 2rem;
+    }
+
+    .table {
+        margin-top: 2rem;
         width: 100%;
         text-align: center;
-    }
+        font-size: 1.5rem;
 
-    &__table-row {
-        &:nth-child(even) {
-            background-color: #eee;
+        &__tr {
+            &:nth-child(even) {
+                background: #eee;
+            }
         }
-    }
 
-    &__table-column {
-        padding: 1rem;
-        cursor: pointer;
-    }
-}
-
-@media (min-width: 320px) {
-    .content {
-        height: calc(100vh - 3.3rem);
-    }
-}
-
-@media (min-width: 414px) {
-    .content {
-        height: calc(100vh - 3.45rem);
+        &__td {
+            padding: 1rem;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
     }
 }
 
 @media (min-width: 768px) {
-    .content {
-        height: calc(100vh - 3.65rem);
-        overflow-y: auto;
+    .apiaries {
+        background-color: white;
+        height: 100vh;
+
+        .container {
+            max-width: 768px;
+            border: 0.5px solid #ccc;
+            z-index: 1;
+            margin: 0 auto;
+            margin-top: 3rem;
+        }
     }
 }
 </style>

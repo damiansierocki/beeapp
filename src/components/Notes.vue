@@ -111,13 +111,15 @@ export default {
         },
 
         deleteNote(docId) {
-            setTimeout(() => {
-                firebase.usersCollection
-                    .doc(firebase.auth.currentUser.uid)
-                    .collection('notes')
-                    .doc(docId)
-                    .delete();
-            }, 100);
+            if (window.confirm('Czy na pewno chcesz usunąć notatkę?')) {
+                setTimeout(() => {
+                    firebase.usersCollection
+                        .doc(firebase.auth.currentUser.uid)
+                        .collection('notes')
+                        .doc(docId)
+                        .delete();
+                }, 100);
+            }
         },
 
         toggleAddNotes() {

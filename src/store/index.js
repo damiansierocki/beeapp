@@ -51,42 +51,45 @@ const store = new Vuex.Store({
         },
 
         async addApiary({}, apiary) {
-            if (window.confirm('Jesteś pewny/a, że chcesz dodać pasiekę?')) {
-                await fb.usersCollection
-                    .doc(fb.auth.currentUser.uid)
-                    .collection('apiaries')
-                    .add({
-                        // general
-                        name: apiary.name,
-                        type: apiary.type,
-                        forages: apiary.forages,
-                        description: apiary.description,
+            await fb.usersCollection
+                .doc(fb.auth.currentUser.uid)
+                .collection('apiaries')
+                .add({
+                    // general
+                    name: apiary.name,
+                    type: apiary.type,
+                    forages: apiary.forages,
+                    description: apiary.description,
 
-                        // address
-                        address: apiary.address,
-                        city: apiary.city,
-                        zip: apiary.zip,
-                        province: apiary.province,
-                    });
-            }
+                    // address
+                    address: apiary.address,
+                    city: apiary.city,
+                    zip: apiary.zip,
+                    province: apiary.province,
+                });
         },
 
         async editApiary({}, { docId, apiary }) {
-            if (window.confirm('Jesteś pewny/a, że chcesz edytować notatkę?')) {
-                await fb.usersCollection
-                    .doc(fb.auth.currentUser.uid)
-                    .collection('apiaries')
-                    .doc(docId)
-                    .update({
-                        name: apiary.name,
-                        type: apiary.type,
-                        description: apiary.description,
-                    });
-            }
+            await fb.usersCollection
+                .doc(fb.auth.currentUser.uid)
+                .collection('apiaries')
+                .doc(docId)
+                .update({
+                    name: apiary.name,
+                    type: apiary.type,
+                    forages: apiary.forages,
+                    description: apiary.description,
+
+                    // address
+                    address: apiary.address,
+                    city: apiary.city,
+                    zip: apiary.zip,
+                    province: apiary.province,
+                });
         },
 
         async deleteApiary({}, docId) {
-            if (window.confirm('Jesteś pewny/a, że chcesz usunąć pasiekę?')) {
+            if (window.confirm('Czy na pewno chcesz usunąć pasiekę?')) {
                 await fb.usersCollection
                     .doc(fb.auth.currentUser.uid)
                     .collection('apiaries')

@@ -188,7 +188,6 @@ export default {
 
         &__inside {
             border: 1px solid #ccc;
-            background: #dddddda1;
             max-width: 480px;
         }
 
