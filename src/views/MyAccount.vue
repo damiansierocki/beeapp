@@ -11,6 +11,13 @@
             @close="toggleEditFullName()"
         ></EditFullName>
 
+        <EditEmail v-if="showEditEmail" @close="toggleEditEmail()"></EditEmail>
+
+        <EditPassword
+            v-if="showEditPassword"
+            @close="toggleEditPassword()"
+        ></EditPassword>
+
         <div class="container">
             <div class="container__inside">
                 <h2 class="container__header">Twoje konto</h2>
@@ -28,7 +35,7 @@
                 <p class="container__label">Adres Email</p>
                 <p class="container__text">
                     {{ userProfile.email }}
-                    <span class="container__edit"
+                    <span class="container__edit" @click="toggleEditEmail()"
                         ><i class="fas fa-user-edit"></i
                     ></span>
                 </p>
@@ -37,7 +44,7 @@
                 <p class="container__label">Hasło</p>
                 <p class="container__text">
                     {{ userProfile.password }}
-                    <span class="container__edit"
+                    <span class="container__edit" @click="toggleEditPassword()"
                         ><i class="fas fa-user-edit "></i
                     ></span>
                 </p>
@@ -55,6 +62,8 @@
 <script>
 import Nav from '@/components/Nav';
 import EditFullName from '@/components/EditFullName';
+import EditEmail from '@/components/EditEmail';
+import EditPassword from '@/components/EditPassword';
 import { auth } from '@/firebase';
 import { mapState } from 'vuex';
 
@@ -62,12 +71,16 @@ export default {
     data() {
         return {
             showEditFullName: false,
+            showEditEmail: false,
+            showEditPassword: false,
         };
     },
 
     components: {
         Nav,
         EditFullName,
+        EditEmail,
+        EditPassword,
     },
 
     computed: {
@@ -81,6 +94,14 @@ export default {
     methods: {
         toggleEditFullName() {
             this.showEditFullName = !this.showEditFullName;
+        },
+
+        toggleEditEmail() {
+            this.showEditEmail = !this.showEditEmail;
+        },
+
+        toggleEditPassword() {
+            this.showEditPassword = !this.showEditPassword;
         },
     },
 };
