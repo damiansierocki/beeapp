@@ -5,7 +5,7 @@
 
             <div class="grid">
                 <!-- pasieki -->
-                <div class="grid__apiaries">
+                <router-link to="/apiaries" class="grid__apiaries">
                     <img
                         class="grid__icon "
                         src="./../assets/images/svgs/apiary.svg"
@@ -17,10 +17,10 @@
                     <p class="grid__description grid__description--green">
                         Pasieki
                     </p>
-                </div>
+                </router-link>
 
                 <!-- ule -->
-                <div class="grid__hives">
+                <router-link to="/hives" class="grid__hives">
                     <img
                         class="grid__icon "
                         src="./../assets/images/svgs/hives.svg"
@@ -32,10 +32,10 @@
                     <p class="grid__description grid__description--orange">
                         Ule
                     </p>
-                </div>
+                </router-link>
 
                 <!-- inspekcje -->
-                <div class="grid__inspections">
+                <router-link to="/inspections" class="grid__inspections">
                     <img
                         class="grid__icon "
                         src="./../assets/images/svgs/inspections.svg"
@@ -47,7 +47,7 @@
                     <p class="grid__description grid__description--blue">
                         Inspekcje
                     </p>
-                </div>
+                </router-link>
 
                 <!-- notatki -->
                 <div class="grid__notes">
@@ -128,6 +128,7 @@ export default {
                 align-items: center;
                 border-bottom: 0.5px solid black;
                 padding: 1rem;
+                text-decoration: none;
             }
 
             &__hives {
@@ -137,6 +138,7 @@ export default {
                 align-items: center;
                 border-bottom: 0.5px solid black;
                 padding: 1rem;
+                text-decoration: none;
             }
 
             &__inspections {
@@ -146,6 +148,7 @@ export default {
                 align-items: center;
                 border-bottom: 0.5px solid black;
                 padding: 1rem;
+                text-decoration: none;
             }
 
             &__notes {

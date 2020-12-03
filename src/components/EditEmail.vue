@@ -15,7 +15,7 @@
                     type="text"
                     id="email"
                     name="email"
-                    :placeholder="userProfile.email"
+                    :placeholder="oldEmail"
                     v-model.trim="email"
                 />
 
@@ -73,6 +73,7 @@ export default {
             email: '',
             editEmailStatus: null,
             isPending: false,
+            oldEmail: '',
         };
     },
 
@@ -87,6 +88,10 @@ export default {
         ...mapState(['userProfile']),
     },
 
+    created() {
+        this.oldEmail = firebase.auth.currentUser.email;
+    },
+
     methods: {
         editEmail() {
             this.$v.$touch();
@@ -94,20 +99,15 @@ export default {
             if (this.$v.$invalid) {
                 this.editEmailStatus = 'ERROR';
             } else {
-                firebase.usersCollection
-                    .doc(firebase.auth.currentUser.uid)
-                    .upate({
-                        email: this.email,
-                    })
-                    .then(() => {
-                        this.editEmailStatus = 'PENDING';
-                        this.isPending = true;
+                firebase.auth.currentUser.updateEmail(this.email).then(() => {
+                    this.editEmailStatus = 'PENDING';
+                    this.isPending = true;
 
-                        setTimeout(() => {
-                            this.editEmailStatus = 'OK';
-                            this.isPending = false;
-                        });
+                    setTimeout(() => {
+                        this.editEmailStatus = 'OK';
+                        this.isPending = false;
                     });
+                });
 
                 setTimeout(() => {
                     this.email = '';

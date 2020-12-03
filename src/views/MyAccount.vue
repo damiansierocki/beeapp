@@ -34,7 +34,7 @@
                 <!-- adres email -->
                 <p class="container__label">Adres Email</p>
                 <p class="container__text">
-                    {{ userProfile.email }}
+                    {{ this.email }}
                     <span class="container__edit" @click="toggleEditEmail()"
                         ><i class="fas fa-user-edit"></i
                     ></span>
@@ -43,7 +43,7 @@
                 <!-- haslo -->
                 <p class="container__label">Hasło</p>
                 <p class="container__text">
-                    {{ userProfile.password }}
+                    ******
                     <span class="container__edit" @click="toggleEditPassword()"
                         ><i class="fas fa-user-edit "></i
                     ></span>
@@ -66,6 +66,7 @@ import EditEmail from '@/components/EditEmail';
 import EditPassword from '@/components/EditPassword';
 import { auth } from '@/firebase';
 import { mapState } from 'vuex';
+import * as firebase from '../firebase';
 
 export default {
     data() {
@@ -73,6 +74,7 @@ export default {
             showEditFullName: false,
             showEditEmail: false,
             showEditPassword: false,
+            email: '',
         };
     },
 
@@ -89,6 +91,10 @@ export default {
         showIfUserLogged() {
             return Object.keys(this.userProfile).length > 1;
         },
+    },
+
+    created() {
+        this.email = firebase.auth.currentUser.email;
     },
 
     methods: {

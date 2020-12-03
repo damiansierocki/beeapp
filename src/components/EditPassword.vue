@@ -15,7 +15,7 @@
                     type="text"
                     id="password"
                     name="password"
-                    :placeholder="userProfile.password"
+                    placeholder="Wpisz nowe hasło..."
                     v-model.trim="password"
                 />
 
@@ -90,11 +90,8 @@ export default {
             if (this.$v.$invalid) {
                 this.editPasswordStatus = 'ERROR';
             } else {
-                firebase.usersCollection
-                    .doc(firebase.auth.currentUser.uid)
-                    .update({
-                        password: this.password,
-                    })
+                firebase.auth.currentUser
+                    .updatePassword(this.password)
                     .then(() => {
                         this.editPasswordStatus = 'PENDING';
                         this.isPending = true;

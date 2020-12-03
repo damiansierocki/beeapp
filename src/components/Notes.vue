@@ -209,6 +209,10 @@ export default {
             max-width: 768px;
             margin: 0 auto;
             margin-top: 3rem;
+
+            .grid {
+                grid-template-columns: auto auto;
+            }
         }
     }
 }
