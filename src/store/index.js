@@ -196,65 +196,74 @@ const store = new Vuex.Store({
         },
 
         async addInspections({}, inspections) {
-            if (window.confirm('Jesteś pewny/a, że chcesz dodać inspekcję?')) {
-                await fb.usersCollection
-                    .doc(fb.auth.currentUser.uid)
-                    .collection('inspections')
-                    .add({
-                        purpose: inspections.purpose,
-                        apiary: inspections.apiary,
-                        hive: inspections.hive,
-                        date: inspections.date,
-                        strength: inspections.strength,
-                        temperament: inspections.temperament,
-                        frames: inspections.frames,
-                        isQueen: inspections.isQueen,
-                        age: inspections.age,
-                        installed: inspections.installed,
-                        race: inspections.race,
-                        queenColor: inspections.queenColor,
-                        queenNote: inspections.queenNote,
-                        framesWithBees: inspections.framesWithBees,
-                        framesWithBrood: inspections.framesWithBrood,
-                        framesWithHoney: inspections.framesWithHoney,
-                        framesWithPollen: inspections.framesWithPollen,
-                        problems: inspections.problems,
-                        note: inspections.note,
-                        includeWeather: inspections.includeWeather,
-                        conditions: inspections.conditions,
-                        temperature: inspections.temperature,
-                        humidity: inspections.humidity,
-                        pressure: inspections.pressure,
-                        wind: inspections.wind,
-                    });
-            }
+            await fb.usersCollection
+                .doc(fb.auth.currentUser.uid)
+                .collection('inspections')
+                .add({
+                    purpose: inspections.purpose,
+                    apiary: inspections.apiary,
+                    hive: inspections.hive,
+                    date: inspections.date,
+                    strength: inspections.strength,
+                    temperament: inspections.temperament,
+                    frames: inspections.frames,
+                    isQueen: inspections.isQueen,
+                    age: inspections.age,
+                    installed: inspections.installed,
+                    race: inspections.race,
+                    queenColor: inspections.queenColor,
+                    queenNote: inspections.queenNote,
+                    framesWithBees: inspections.framesWithBees,
+                    framesWithBrood: inspections.framesWithBrood,
+                    framesWithHoney: inspections.framesWithHoney,
+                    framesWithPollen: inspections.framesWithPollen,
+                    problems: inspections.problems,
+                    note: inspections.note,
+                    includeWeather: inspections.includeWeather,
+                    conditions: inspections.conditions,
+                    temperature: inspections.temperature,
+                    humidity: inspections.humidity,
+                    pressure: inspections.pressure,
+                    wind: inspections.wind,
+                });
         },
 
         async editInspections({}, { docId, inspections }) {
-            if (
-                window.confirm('Jesteś pewny/a, że chcesz edytować inspekcję?')
-            ) {
-                await fb.usersCollection
-                    .doc(fb.auth.currentUser.uid)
-                    .collection('inspections')
-                    .doc(docId)
-                    .update({
-                        name: inspections.name,
-                        apiary: inspections.apiary,
-                        hive: inspections.hive,
-                        date: inspections.date,
-                        equipment: inspections.equipment,
-                        odor: inspections.odor,
-                        deadBees: inspections.deadBees,
-                        moisture: inspections.moisture,
-                        mold: inspections.mold,
-                        otherObservation: inspections.otherObservation,
-                    });
-            }
+            await fb.usersCollection
+                .doc(fb.auth.currentUser.uid)
+                .collection('inspections')
+                .doc(docId)
+                .update({
+                    purpose: inspections.purpose,
+                    apiary: inspections.apiary,
+                    hive: inspections.hive,
+                    date: inspections.date,
+                    strength: inspections.strength,
+                    temperament: inspections.temperament,
+                    frames: inspections.frames,
+                    isQueen: inspections.isQueen,
+                    age: inspections.age,
+                    installed: inspections.installed,
+                    race: inspections.race,
+                    queenColor: inspections.queenColor,
+                    queenNote: inspections.queenNote,
+                    framesWithBees: inspections.framesWithBees,
+                    framesWithBrood: inspections.framesWithBrood,
+                    framesWithHoney: inspections.framesWithHoney,
+                    framesWithPollen: inspections.framesWithPollen,
+                    problems: inspections.problems,
+                    note: inspections.note,
+                    includeWeather: inspections.includeWeather,
+                    conditions: inspections.conditions,
+                    temperature: inspections.temperature,
+                    humidity: inspections.humidity,
+                    pressure: inspections.pressure,
+                    wind: inspections.wind,
+                });
         },
 
         async deleteInspections({}, docId) {
-            if (window.confirm('Jesteś pewny/a, że chcesz usunąć inspekcję?')) {
+            if (window.confirm('Czy na pewno chcesz usunąć inspekcję?')) {
                 await fb.usersCollection
                     .doc(fb.auth.currentUser.uid)
                     .collection('inspections')

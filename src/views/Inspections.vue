@@ -24,9 +24,9 @@
             mode="out-in"
             appear
         >
-            <InspectionsView
-                v-if="showInspectionsView"
-                @close="toggleInspectionsView()"
+            <ViewInspections
+                v-if="showViewInspections"
+                @close="toggleViewInspections()"
                 :id="inspection.id"
                 :purpose="inspection.purpose"
                 :apiary="inspection.apiary"
@@ -53,7 +53,7 @@
                 :humidity="inspection.humidity"
                 :pressure="inspection.pressure"
                 :wind="inspection.wind"
-            ></InspectionsView>
+            ></ViewInspections>
         </transition>
 
         <transition
@@ -94,32 +94,33 @@
             ></EditInspections>
         </transition>
 
-        <div class="content">
-            <div class="content__add" @click="toggleAddInspections()">
-                Kliknij aby inspekcję
-                <span class="content__plus-icon"
-                    ><i class="fas fa-plus-square"></i
-                ></span>
+        <div class="container">
+            <div class="container__add" @click="toggleAddInspections()">
+                <p class="container__add-text">
+                    Kliknij aby dodać nową inspekcję
+                </p>
+                <div class="container__add-icon">
+                    <i class="far fa-plus-square"></i>
+                </div>
             </div>
 
-            <table class="content__table" v-if="inspections.length">
-                <tr class="content__table-row">
-                    <th class="content__table-column">Cel inspekcji</th>
-                    <th class="content__table-column">Data</th>
-                    <th class="content__table-column">Pasieka</th>
-                    <th class="content__table-column">Ul</th>
-                    <th class="content__table-column">Edytuj</th>
-                    <th class="content__table-column">Usuń</th>
+            <table class="table" v-if="inspections.length">
+                <tr class="table__tr">
+                    <th class="table__th">Cel inspekcji</th>
+                    <th class="table__th">Data</th>
+                    <th class="table__th">Edytuj</th>
+                    <th class="table__th">Usuń</th>
                 </tr>
+
                 <tr
-                    class="content__table-row"
+                    class="table__tr"
                     v-for="inspection in inspections"
                     :key="inspection.id"
                 >
                     <td
-                        class="content__table-column"
+                        class="table__td"
                         @click="
-                            toggleInspectionsView(
+                            toggleViewInspections(
                                 inspection.id,
                                 inspection.purpose,
                                 inspection.apiary,
@@ -151,18 +152,11 @@
                     >
                         {{ inspection.purpose }}
                     </td>
-
-                    <td class="content__table-column">
+                    <td class="table__td">
                         {{ inspection.date }}
                     </td>
-                    <td class="content__table-column">
-                        {{ inspection.apiary }}
-                    </td>
-                    <td class="content__table-column">
-                        {{ inspection.hive }}
-                    </td>
                     <td
-                        class="content__table-column"
+                        class="table__td"
                         @click="
                             toggleEditInspections(
                                 inspection.id,
@@ -194,14 +188,20 @@
                             )
                         "
                     >
-                        <i class="fas fa-edit"></i>
+                        <i class="far fa-edit"></i>
                     </td>
                     <td
-                        class="content__table-column"
+                        class="table__td"
                         @click="deleteInspections(inspection.id)"
                     >
                         <i class="far fa-trash-alt"></i>
                     </td>
+                </tr>
+            </table>
+
+            <table class="table" v-if="!inspections.length">
+                <tr class="table__tr">
+                    <th class="table__th">Brak inspekcji 😭😭😭</th>
                 </tr>
             </table>
         </div>
@@ -211,7 +211,7 @@
 <script>
 import Nav from '@/components/Nav';
 import AddInspections from '@/components/AddInspections';
-import InspectionsView from '@/components/InspectionsView';
+import ViewInspections from '@/components/ViewInspections';
 import EditInspections from '@/components/EditInspections';
 import { mapState } from 'vuex';
 
@@ -219,7 +219,7 @@ export default {
     data() {
         return {
             showAddInspections: false,
-            showInspectionsView: false,
+            showViewInspections: false,
             showEditInspections: false,
 
             inspection: {
@@ -266,7 +266,7 @@ export default {
     components: {
         Nav,
         AddInspections,
-        InspectionsView,
+        ViewInspections,
         EditInspections,
     },
 
@@ -305,7 +305,7 @@ export default {
             this.showAddInspections = !this.showAddInspections;
         },
 
-        toggleInspectionsView(
+        toggleViewInspections(
             id,
             purpose,
             apiary,
@@ -333,9 +333,9 @@ export default {
             pressure,
             wind,
         ) {
-            this.showInspectionsView = !this.showInspectionsView;
+            this.showViewInspections = !this.showViewInspections;
 
-            if (this.showInspectionsView) {
+            if (this.showViewInspections) {
                 this.inspection.id = id;
                 this.inspection.purpose = purpose;
                 this.inspection.apiary = apiary;
@@ -483,73 +483,60 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../assets/scss/colors';
-
-.content {
+.container {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-    height: calc(100vh - 3.2rem);
 
     &__add {
+        font-size: 1.8rem;
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: 1rem;
+        padding: 2rem;
+        cursor: pointer;
         width: 100%;
+        border-bottom: 0.5px solid black;
     }
 
-    &__table {
+    &__add-icon {
+        margin-left: 2rem;
+    }
+
+    .table {
+        margin-top: 2rem;
         width: 100%;
         text-align: center;
-    }
+        font-size: 1.5rem;
 
-    &__table-row {
-        &:nth-child(even) {
-            background-color: #eee;
+        &__tr {
+            &:nth-child(even) {
+                background: #eee;
+            }
         }
-    }
 
-    &__table-column {
-        padding: 1rem;
-        cursor: pointer;
-    }
-
-    &__apiary-name {
-        font-size: 0.9rem;
-        color: $orange;
-        font-weight: bold;
-    }
-
-    &__apiary-hives {
-        font-size: 0.9rem;
-    }
-
-    &__plus-icon {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 2rem;
-        margin-left: 1rem;
-    }
-}
-
-@media (min-width: 320px) {
-    .content {
-        height: calc(100vh - 3.3rem);
-    }
-}
-
-@media (min-width: 414px) {
-    .content {
-        height: calc(100vh - 3.45rem);
+        &__td {
+            padding: 1rem;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
     }
 }
 
 @media (min-width: 768px) {
-    .content {
-        height: calc(100vh - 3.65rem);
-        overflow-y: auto;
+    .inspections {
+        background-color: white;
+        height: 100vh;
+
+        .container {
+            max-width: 768px;
+            border: 0.5px solid #ccc;
+            z-index: 1;
+            margin: 0 auto;
+            margin-top: 3rem;
+            padding: 2rem 3rem;
+        }
     }
 }
 </style>
