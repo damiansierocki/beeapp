@@ -156,7 +156,7 @@ export default {
         &__header {
             font-size: 2rem;
             position: relative;
-            padding: 2rem 0rem;
+            padding: 2rem 0;
 
             &--desc {
                 font-size: 1.5rem;
@@ -174,7 +174,7 @@ export default {
                 bottom: 0;
                 width: 100%;
                 height: 0.5px;
-                background: #000000;
+                background: #000;
             }
         }
 

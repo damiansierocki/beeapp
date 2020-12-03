@@ -223,12 +223,12 @@ export default {
                     left: 0;
                     bottom: 0;
                     height: 0.5px;
-                    background: #000000;
+                    background: #000;
                 }
             }
 
             &__link {
-                margin: 2rem 0rem;
+                margin: 2rem 0;
                 text-decoration: none;
                 color: black;
                 cursor: pointer;

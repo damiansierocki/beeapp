@@ -147,7 +147,7 @@ export default {
         &__header {
             font-size: 2rem;
             position: relative;
-            padding: 2rem 0rem;
+            padding: 2rem 0;
 
             &::after {
                 content: '';
@@ -157,12 +157,12 @@ export default {
                 bottom: 0;
                 width: 100%;
                 height: 0.5px;
-                background: #000000;
+                background: #000;
             }
         }
 
         &__label {
-            padding: 1.5rem 0rem;
+            padding: 1.5rem 0;
             font-size: 1.5rem;
         }
 
@@ -221,7 +221,7 @@ export default {
             animation: sk-chase-dot 2s infinite ease-in-out both;
         }
 
-        .sk-chase-dot:before {
+        .sk-chase-dot::before {
             content: '';
             display: block;
             width: 25%;
@@ -234,37 +234,48 @@ export default {
         .sk-chase-dot:nth-child(1) {
             animation-delay: -1.1s;
         }
+
         .sk-chase-dot:nth-child(2) {
             animation-delay: -1s;
         }
+
         .sk-chase-dot:nth-child(3) {
             animation-delay: -0.9s;
         }
+
         .sk-chase-dot:nth-child(4) {
             animation-delay: -0.8s;
         }
+
         .sk-chase-dot:nth-child(5) {
             animation-delay: -0.7s;
         }
+
         .sk-chase-dot:nth-child(6) {
             animation-delay: -0.6s;
         }
-        .sk-chase-dot:nth-child(1):before {
+
+        .sk-chase-dot:nth-child(1)::before {
             animation-delay: -1.1s;
         }
-        .sk-chase-dot:nth-child(2):before {
+
+        .sk-chase-dot:nth-child(2)::before {
             animation-delay: -1s;
         }
-        .sk-chase-dot:nth-child(3):before {
+
+        .sk-chase-dot:nth-child(3)::before {
             animation-delay: -0.9s;
         }
-        .sk-chase-dot:nth-child(4):before {
+
+        .sk-chase-dot:nth-child(4)::before {
             animation-delay: -0.8s;
         }
-        .sk-chase-dot:nth-child(5):before {
+
+        .sk-chase-dot:nth-child(5)::before {
             animation-delay: -0.7s;
         }
-        .sk-chase-dot:nth-child(6):before {
+
+        .sk-chase-dot:nth-child(6)::before {
             animation-delay: -0.6s;
         }
 
@@ -285,7 +296,7 @@ export default {
             50% {
                 transform: scale(0.4);
             }
-            100%,
+
             0% {
                 transform: scale(1);
             }

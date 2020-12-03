@@ -1,11 +1,6 @@
 module.exports = {
-    extends: 'stylelint-config-recommended-scss',
+    extends: 'stylelint-config-standard',
     rules: {
-        'selector-pseudo-element-no-unknown': [
-            true,
-            {
-                ignorePseudoElements: ['v-deep'],
-            },
-        ],
+        indentation: 4,
     },
 };

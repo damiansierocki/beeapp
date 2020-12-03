@@ -87,81 +87,6 @@
                 </div>
             </form>
         </div>
-
-        <!-- <div class="content">
-            <h1 class="content__title">Zadania</h1>
-
-            <div class="container">
-                <input
-                    class="container__input"
-                    type="text"
-                    id="todo"
-                    name="todo"
-                    placeholder="Wpisz nazwę zadania..."
-                    v-model.trim="todo.title"
-                />
-
-                <p
-                    class="error"
-                    style="color: red"
-                    v-if="!$v.todo.title.required && $v.todo.title.$dirty"
-                >
-                    Pole jest wymagane!
-                </p>
-
-                <p
-                    class="error"
-                    style="color: red"
-                    v-if="!$v.todo.title.minLength && $v.todo.title.$dirty"
-                >
-                    Pole musi mieć przynajmniej
-                    {{ $v.todo.title.$params.minLength.min }} znaki.
-                </p>
-
-                <button class="container__button" @click="addTodo">
-                    Dodaj
-                </button>
-
-                <p class="typo__p" v-if="todo.addStatus === 'OK'">
-                    Thanks for your submission!
-                </p>
-                <p class="typo__p" v-if="todo.addStatus === 'ERROR'">
-                    Please fill the form correctly.
-                </p>
-                <p class="typo__p" v-if="todo.addStatus === 'PENDING'">
-                    Sending...
-                </p>
-
-                <table class="container__table" v-if="todos.length">
-                    <tr
-                        class="container__tr"
-                        v-for="todo in todos"
-                        :key="todo.id"
-                        :class="{ fade: todo.isCompleted }"
-                    >
-                        <th class="container__th">
-                            <span
-                                class="container__icon"
-                                @click="deleteToDo(todo.id)"
-                                ><i class="fas fa-trash"></i
-                            ></span>
-                        </th>
-                        <th class="container__th">
-                            {{ todo.title }}
-                        </th>
-                        <th class="container__th container__th--checkbox">
-                            <input
-                                class="container__checkbox"
-                                type="checkbox"
-                                id="isCompleted"
-                                :checked="todo.isCompleted"
-                                @change="updateTodoItem(todo.id, $event)"
-                            />
-                        </th>
-                    </tr>
-                </table>
-            </div>
-        </div> -->
     </div>
 </template>
 
@@ -290,7 +215,7 @@ export default {
         &__header {
             font-size: 2rem;
             position: relative;
-            padding: 2rem 0rem;
+            padding: 2rem 0;
 
             &::after {
                 content: '';
@@ -300,7 +225,7 @@ export default {
                 bottom: 0;
                 width: 100%;
                 height: 0.5px;
-                background: #000000;
+                background: #000;
             }
         }
 
@@ -353,7 +278,7 @@ export default {
             animation: sk-chase-dot 2s infinite ease-in-out both;
         }
 
-        .sk-chase-dot:before {
+        .sk-chase-dot::before {
             content: '';
             display: block;
             width: 25%;
@@ -366,37 +291,48 @@ export default {
         .sk-chase-dot:nth-child(1) {
             animation-delay: -1.1s;
         }
+
         .sk-chase-dot:nth-child(2) {
             animation-delay: -1s;
         }
+
         .sk-chase-dot:nth-child(3) {
             animation-delay: -0.9s;
         }
+
         .sk-chase-dot:nth-child(4) {
             animation-delay: -0.8s;
         }
+
         .sk-chase-dot:nth-child(5) {
             animation-delay: -0.7s;
         }
+
         .sk-chase-dot:nth-child(6) {
             animation-delay: -0.6s;
         }
-        .sk-chase-dot:nth-child(1):before {
+
+        .sk-chase-dot:nth-child(1)::before {
             animation-delay: -1.1s;
         }
-        .sk-chase-dot:nth-child(2):before {
+
+        .sk-chase-dot:nth-child(2)::before {
             animation-delay: -1s;
         }
-        .sk-chase-dot:nth-child(3):before {
+
+        .sk-chase-dot:nth-child(3)::before {
             animation-delay: -0.9s;
         }
-        .sk-chase-dot:nth-child(4):before {
+
+        .sk-chase-dot:nth-child(4)::before {
             animation-delay: -0.8s;
         }
-        .sk-chase-dot:nth-child(5):before {
+
+        .sk-chase-dot:nth-child(5)::before {
             animation-delay: -0.7s;
         }
-        .sk-chase-dot:nth-child(6):before {
+
+        .sk-chase-dot:nth-child(6)::before {
             animation-delay: -0.6s;
         }
 
@@ -417,7 +353,7 @@ export default {
             50% {
                 transform: scale(0.4);
             }
-            100%,
+
             0% {
                 transform: scale(1);
             }
@@ -482,84 +418,4 @@ export default {
         }
     }
 }
-/* .content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: 100%;
-    margin: auto;
-
-    &__title {
-        font-size: 3rem;
-        margin-top: 2rem;
-    }
-
-    .container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 90%;
-
-        &__input {
-            margin-top: 2rem;
-            padding: 1rem;
-            border-bottom: 1px solid black;
-            width: 100%;
-        }
-
-        &__button {
-            margin-top: 1rem;
-            box-shadow: inset 0px 1px 0px 0px #fff6af;
-            background: linear-gradient(to bottom, #ffec64 5%, #ffab23 100%);
-            background-color: #ffec64;
-            border-radius: 6px;
-            border: 1px solid #ffaa22;
-            cursor: pointer;
-            color: #333333;
-            font-weight: bold;
-            padding: 6px 24px;
-            text-shadow: 0px 1px 0px #ffee66;
-
-            &:focus {
-                outline: 0;
-            }
-        }
-
-        &__table {
-            width: 100%;
-            padding: 2rem 0rem;
-            user-select: none;
-            border: 3px solid black;
-            margin-top: 1rem;
-        }
-
-        &__th {
-            font-size: 1.5rem;
-            border: 1px solid black;
-
-            &--checkbox {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                width: 100%;
-                height: 100%;
-                padding: 0.3rem;
-            }
-        }
-
-        &__icon {
-            cursor: pointer;
-        }
-
-        &__checkbox {
-            cursor: pointer;
-            width: 20px;
-            height: 20px;
-        }
-
-        .fade {
-            opacity: 0.4 !important;
-        }
-    }
-} */
 </style>

@@ -26,7 +26,7 @@
 import axios from 'axios';
 import moment from 'moment';
 
-const API = 'http://api.openweathermap.org/data/2.5/weather?units=metric';
+const API = 'https://api.openweathermap.org/data/2.5/weather?units=metric';
 const KEY = '&APPID=bff05973f18c6a1a19bc66976347f831';
 
 export default {
@@ -141,6 +141,7 @@ export default {
 
     .container {
         width: 100%;
+
         &__top {
             display: flex;
             justify-content: space-between;
