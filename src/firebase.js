@@ -4,13 +4,12 @@ import 'firebase/firestore';
 
 // firebase init - add your own config here
 const firebaseConfig = {
-    apiKey: 'AIzaSyCfvH0eSExaT62HwQ9KblFh-xxlrOzNs5o',
-    authDomain: 'beeapp-e6515.firebaseapp.com',
-    databaseURL: 'https://beeapp-e6515.firebaseio.com',
-    projectId: 'beeapp-e6515',
-    storageBucket: 'beeapp-e6515.appspot.com',
-    messagingSenderId: '196441194159',
-    appId: '1:196441194159:web:cfe53ce1f4f40dcf399e5a',
+    apiKey: 'AIzaSyAsGTRShu3VWiBtM8aSR7quCqff3Y3ay9E',
+    authDomain: 'beeapp-62f71.firebaseapp.com',
+    projectId: 'beeapp-62f71',
+    storageBucket: 'beeapp-62f71.appspot.com',
+    messagingSenderId: '956205510168',
+    appId: '1:956205510168:web:ecfa09d1fa4ced6d27dd6d',
 };
 firebase.initializeApp(firebaseConfig);
 

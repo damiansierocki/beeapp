@@ -45,6 +45,29 @@
                     Zmień email
                 </button>
 
+                <transition
+                    enter-active-class="animate__animated animate__shakeX"
+                    mode="out-in"
+                    appear
+                >
+                    <p
+                        class="info"
+                        v-if="authStatus === 'EMAIL-ALREADY-IN-USE'"
+                    >
+                        Email jest zajęty. Spróbuj inny.
+                    </p>
+                </transition>
+
+                <transition
+                    enter-active-class="animate__animated animate__shakeX"
+                    mode="out-in"
+                    appear
+                >
+                    <p class="info" v-if="authStatus === 'TOO-MANY-REQUESTS'">
+                        Zbyt dużo zapytań. Spróbuj później.
+                    </p>
+                </transition>
+
                 <div class="sk-chase" v-if="editEmailStatus === 'PENDING'">
                     <div class="sk-chase-dot"></div>
                     <div class="sk-chase-dot"></div>
@@ -74,6 +97,7 @@ export default {
             editEmailStatus: null,
             isPending: false,
             oldEmail: '',
+            authStatus: '',
         };
     },
 
@@ -99,15 +123,26 @@ export default {
             if (this.$v.$invalid) {
                 this.editEmailStatus = 'ERROR';
             } else {
-                firebase.auth.currentUser.updateEmail(this.email).then(() => {
-                    this.editEmailStatus = 'PENDING';
-                    this.isPending = true;
+                firebase.auth.currentUser
+                    .updateEmail(this.email)
+                    .then(() => {
+                        this.editEmailStatus = 'PENDING';
+                        this.isPending = true;
 
-                    setTimeout(() => {
-                        this.editEmailStatus = 'OK';
-                        this.isPending = false;
+                        setTimeout(() => {
+                            this.editEmailStatus = 'OK';
+                            this.isPending = false;
+                        });
+                    })
+                    .catch(err => {
+                        const errCode = err.code;
+
+                        if (errCode === 'auth/email-already-in-use') {
+                            this.authStatus = 'EMAIL-ALREADY-IN-USE';
+                        } else if (errCode === 'auth/too-many-requests') {
+                            this.authStatus = 'TOO-MANY-REQUESTS';
+                        }
                     });
-                });
 
                 setTimeout(() => {
                     this.email = '';
@@ -209,6 +244,10 @@ export default {
             margin: 0 auto;
             margin-top: 1.5rem;
             font-size: 1.5rem;
+        }
+
+        .info {
+            margin-top: 0.5rem;
         }
 
         // sk-chase
