@@ -11,16 +11,6 @@
                 <h2 class="form__header form__header--desc">
                     Informacje Generalne
                 </h2>
-                <!-- nazwa -->
-                <label class="form__label" for="number">Numer ula</label>
-                <input
-                    class="form__input"
-                    type="number"
-                    id="number"
-                    name="number"
-                    :placeholder="number"
-                    v-model.trim="hives.number"
-                />
 
                 <label class="form__label" for="apiary">Pasieka</label>
                 <select
@@ -37,6 +27,16 @@
                         >{{ apiary.name }}</option
                     >
                 </select>
+
+                <label class="form__label" for="number">Numer ula</label>
+                <input
+                    class="form__input"
+                    type="number"
+                    id="number"
+                    name="number"
+                    :placeholder="number"
+                    v-model.trim="hives.number"
+                />
 
                 <label class="form__label" for="status">Stan ula</label>
                 <select
@@ -162,8 +162,9 @@
                     class="form__label"
                     for="installed"
                     v-if="hives.isQueen !== 'Nie'"
-                    >Kiedy matka została wrzucona do ula</label
+                    >Data podania matki do ula</label
                 >
+
                 <input
                     id="installed"
                     name="installed"
@@ -200,6 +201,210 @@
                     <option value="Heterozja (mieszane)"
                         >Heterozja (mieszane)</option
                     >
+                </select>
+
+                <label
+                    class="form__label"
+                    for="line"
+                    v-if="
+                        hives.isQueen !== 'Nie' &&
+                            hives.race === 'Pszczoła Środkowoeuropejska'
+                    "
+                    >Linia matki Środkowoeuropejskiej</label
+                >
+                <select
+                    class="form__input"
+                    name="line"
+                    id="line"
+                    v-model="hives.line"
+                    v-if="
+                        hives.isQueen !== 'Nie' &&
+                            hives.race === 'Pszczoła Środkowoeuropejska'
+                    "
+                >
+                    <option disabled value="">Wybierz linie matki</option>
+                    <option value="M Asta">M Asta</option>
+                    <option value="M Północna">M Północna (Pn)</option>
+                    <option value="M Augustowska">M Augustowska (Ma)</option>
+                    <option value="M Kampinowska">M Kampinowska (Mk)</option>
+                    <option value="M Norweska">M Norweska</option>
+                </select>
+
+                <label
+                    class="form__label"
+                    for="line"
+                    v-if="
+                        hives.isQueen !== 'Nie' &&
+                            hives.race === 'Pszczoła Kraińska'
+                    "
+                    >Linia matki Kraińskiej</label
+                >
+                <select
+                    class="form__input"
+                    name="line"
+                    id="line"
+                    v-model="hives.line"
+                    v-if="
+                        hives.isQueen !== 'Nie' &&
+                            hives.race === 'Pszczoła Kraińska'
+                    "
+                >
+                    <option disabled value="">Wybierz linie matki</option>
+                    <option value="Alpejka">Alpejka</option>
+                    <option value="Alfa">Alfa</option>
+                    <option value="Alsin">Alsin</option>
+                    <option value="Aga">Aga</option>
+                    <option value="Aga-3">Aga-3</option>
+                    <option value="Erika">Erika</option>
+                    <option value="Anna">Anna</option>
+                    <option value="Alwa">Alwa</option>
+                    <option value="Am">Am</option>
+                    <option value="Cecropia">Cecropia</option>
+                    <option value="Primorska">Primorska</option>
+                    <option value="Hetmanka">Hetmanka</option>
+                    <option value="Łado">Łado</option>
+                    <option value="Niemka">Niemka</option>
+                    <option value="Apipol 2">Apipol 2</option>
+                    <option value="Bielka">Bielka</option>
+                    <option value="Sklenar">Sklenar</option>
+                    <option value="Kortówka">Kortówka</option>
+                    <option value="Pa">Pa</option>
+                    <option value="N">N</option>
+                    <option value="S">S</option>
+                    <option value="R">R</option>
+                    <option value="T">T</option>
+                    <option value="J">J</option>
+                    <option value="Sk">Sk</option>
+                    <option value="Tb">Tb</option>
+                    <option value="Ab">Ab</option>
+                    <option value="Ca">Ca</option>
+                    <option value="Cr">Cr</option>
+                    <option value="Niw">Niw</option>
+                    <option value="Róża">Róża</option>
+                    <option value="Majówka">Majówka</option>
+                    <option value="Marynka Car Mr">Marynka Car Mr</option>
+                    <option value="Gr1">Gr1</option>
+                    <option value="Kujawskiej">Kujawskiej</option>
+                    <option value="Singer">Singer</option>
+                    <option value="Wanda">Wanda</option>
+                    <option value="Iwonka">Iwonka</option>
+                    <option value="Podgórska (Cb)">Podgórska (Cb)</option>
+                    <option value="Ct 46">Ct 46</option>
+                    <option value="Beskidka">Beskidka</option>
+                    <option value="Dobra (D)">Dobra (D)</option>
+                    <option value="Pwjot">Pwjot</option>
+                    <option value="Kujawska (Kd)">Kujawska (Kd)</option>
+                    <option value="Nieska">Nieska</option>
+                    <option value="Jugo">Jugo</option>
+                    <option value="Cnt">Cnt</option>
+                    <option value="Cj 10">Cj 10</option>
+                    <option value="Bałtycka">Bałtycka</option>
+                    <option value="Kamianka">Kamianka</option>
+                    <option value="Zosia (Zo)">Zosia (Zo)</option>
+                    <option value="Wielka">Wielka</option>
+                    <option value="Gema">Gema</option>
+                    <option value="Prima">Prima</option>
+                    <option value="Karpatka">Karpatka</option>
+                    <option value="Viking">Viking</option>
+                    <option value="Victoria">Victoria</option>
+                    <option value="Brzezinka">Brzezinka</option>
+                    <option value="Karolinka">Karolinka</option>
+                    <option value="Brnianka">Brnianka</option>
+                    <option value="Dąbrówka">Dąbrówka</option>
+                    <option value="Troiseck">Troiseck</option>
+                    <option value="Rumunka">Rumunka</option>
+                    <option value="Willy">Willy</option>
+                    <option value="Cpł">Cpł</option>
+                    <option value="Warmianka">Warmianka</option>
+                    <option value="Wrzosówka">Wrzosówka</option>
+                    <option value="Żuławska">Żuławska</option>
+                </select>
+
+                <label
+                    class="form__label"
+                    for="line"
+                    v-if="
+                        hives.isQueen !== 'Nie' &&
+                            hives.race === 'Pszczoła Kaukaska'
+                    "
+                    >Linia matki Kaukaskiej</label
+                >
+                <select
+                    class="form__input"
+                    name="line"
+                    id="line"
+                    v-model="hives.line"
+                    v-if="
+                        hives.isQueen !== 'Nie' &&
+                            hives.race === 'Pszczoła Kaukaska'
+                    "
+                >
+                    <option disabled value="">Wybierz linie matki</option>
+                    <option value="Cau">Cau</option>
+                    <option value="Puławska Cau P">Puławska Cau P</option>
+                    <option value="Kp">Kp</option>
+                    <option value="M">M</option>
+                    <option value="Wóźnica">Wóźnica</option>
+                    <option value="Kpw">Kpw</option>
+                    <option value="Pb">Pb</option>
+                    <option value="W">W</option>
+                    <option value="Kp">Kp</option>
+                    <option value="P">P</option>
+                    <option value="WG">WG</option>
+                </select>
+
+                <label
+                    class="form__label"
+                    for="line"
+                    v-if="
+                        hives.isQueen !== 'Nie' &&
+                            hives.race === 'Pszczoła Buckfast'
+                    "
+                    >Linia matki Buckfast</label
+                >
+                <select
+                    class="form__input"
+                    name="line"
+                    id="line"
+                    v-model="hives.line"
+                    v-if="
+                        hives.isQueen !== 'Nie' &&
+                            hives.race === 'Pszczoła Buckfast'
+                    "
+                >
+                    <option disabled value="">Wybierz linie matki</option>
+                    <option value="Buckfast E 407">Buckfast E 407</option>
+                    <option value="Buckfast E 117">Buckfast E 117</option>
+                    <option value="Buckfast LH 0409">Buckfast LH 0409</option>
+                    <option value="Buckfast KB 226">Buckfast KB 226</option>
+                </select>
+
+                <label
+                    class="form__label"
+                    for="line"
+                    v-if="
+                        hives.isQueen !== 'Nie' &&
+                            hives.race === 'Pszczoła Włoska'
+                    "
+                    >Linia matki Włoskiej</label
+                >
+                <select
+                    class="form__input"
+                    name="line"
+                    id="line"
+                    v-model="hives.line"
+                    v-if="
+                        hives.isQueen !== 'Nie' &&
+                            hives.race === 'Pszczoła Włoska'
+                    "
+                >
+                    <option disabled value="">Wybierz linie matki</option>
+                    <option value="Minesota">Minesota</option>
+                    <option value="Cordovan">Cordovan</option>
+                    <option value="Złota amerykańska - Starline"
+                        >Złota amerykańska - Starline</option
+                    >
+                    <option value="Ligustica">Ligustica</option>
                 </select>
 
                 <label
@@ -271,8 +476,8 @@ import { mapState } from 'vuex';
 export default {
     props: [
         'id',
-        'number',
         'apiary',
+        'number',
         'status',
         'purpose',
         'created',
@@ -284,6 +489,7 @@ export default {
         'age',
         'installed',
         'race',
+        'line',
         'queenColor',
         'queenNote',
     ],
@@ -292,8 +498,8 @@ export default {
         return {
             hives: {
                 // general
-                number: '',
                 apiary: '',
+                number: '',
                 status: '',
                 purpose: '',
                 created: '',
@@ -309,6 +515,7 @@ export default {
                 age: '',
                 installed: '',
                 race: '',
+                line: '',
                 queenColor: '',
                 queenNote: '',
             },
@@ -335,10 +542,10 @@ export default {
             const docId = this.id;
 
             const hives = {
-                number:
-                    this.hives.number !== '' ? this.hives.number : this.number,
                 apiary:
                     this.hives.apiary !== '' ? this.hives.apiary : this.apiary,
+                number:
+                    this.hives.number !== '' ? this.hives.number : this.number,
                 status:
                     this.hives.status !== '' ? this.hives.status : this.status,
                 purpose:
@@ -372,6 +579,7 @@ export default {
                         ? this.hives.isQueen
                         : this.isQueen,
                 age: this.hives.age !== '' ? this.hives.age : this.age,
+                line: this.hives.line !== '' ? this.hives.line : this.line,
                 installed:
                     this.hives.installed !== ''
                         ? this.hives.installed
@@ -400,8 +608,8 @@ export default {
             setTimeout(() => {
                 this.editHivesStatus = '';
                 // general
-                this.hives.number = '';
                 this.hives.apiary = '';
+                this.hives.number = '';
                 this.hives.status = '';
                 this.hives.purpose = '';
                 this.hives.created = '';
@@ -417,6 +625,7 @@ export default {
                 this.hives.age = '';
                 this.hives.installed = '';
                 this.hives.race = '';
+                this.hives.line = '';
                 this.hives.queenColor = '';
                 this.hives.queenNote = '';
             });
@@ -457,6 +666,11 @@ export default {
                 top: 0;
                 right: 0;
                 cursor: pointer;
+                transition: 0.1s;
+
+                &:hover {
+                    transform: scale(1.1);
+                }
             }
 
             &__header {
@@ -507,6 +721,7 @@ export default {
                 border: 1px solid #ccc;
                 border-radius: 0.2rem;
                 background-color: #f5f5f5;
+                transition: 0.1s;
 
                 &:hover {
                     background-color: #e7e7e7c7;

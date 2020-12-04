@@ -165,6 +165,11 @@ export default {
         right: 1rem;
         font-size: 2rem;
         cursor: pointer;
+        transform: 0.1s;
+
+        &:hover {
+            transform: scale(1.1);
+        }
     }
 
     &__extras {
@@ -189,8 +194,7 @@ export default {
 @media (min-width: 480px) {
     .container {
         background-color: white;
-        height: 100vh;
-        justify-content: space-evenly;
+        margin-top: 10rem;
 
         &__inside {
             border: 1px solid #ccc;
@@ -198,7 +202,7 @@ export default {
         }
 
         &__extras {
-            margin: 0;
+            margin-top: 5rem;
         }
     }
 }

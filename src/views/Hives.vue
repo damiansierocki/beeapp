@@ -25,8 +25,8 @@
                 v-if="showViewHives"
                 @close="toggleViewHives()"
                 :id="hive.id"
-                :number="hive.number"
                 :apiary="hive.apiary"
+                :number="hive.number"
                 :status="hive.status"
                 :purpose="hive.purpose"
                 :created="hive.created"
@@ -38,6 +38,7 @@
                 :age="hive.age"
                 :installed="hive.installed"
                 :race="hive.race"
+                :line="hive.line"
                 :queenColor="hive.queenColor"
                 :queenNote="hive.queenNote"
             ></ViewHives>
@@ -53,8 +54,8 @@
                 v-if="showEditHives"
                 @close="toggleEditHives()"
                 :id="hive.id"
-                :number="hive.number"
                 :apiary="hive.apiary"
+                :number="hive.number"
                 :status="hive.status"
                 :purpose="hive.purpose"
                 :created="hive.created"
@@ -66,6 +67,7 @@
                 :age="hive.age"
                 :installed="hive.installed"
                 :race="hive.race"
+                :line="hive.line"
                 :queenColor="hive.queenColor"
                 :queenNote="hive.queenNote"
             ></EditHives>
@@ -95,8 +97,8 @@
                         @click="
                             toggleViewHives(
                                 hive.id,
-                                hive.number,
                                 hive.apiary,
+                                hive.number,
                                 hive.status,
                                 hive.purpose,
                                 hive.created,
@@ -108,6 +110,7 @@
                                 hive.age,
                                 hive.installed,
                                 hive.race,
+                                hive.line,
                                 hive.queenColor,
                                 hive.queenNote,
                             )
@@ -115,7 +118,7 @@
                     >
                         {{ hive.number }}
                     </td>
-                    <td class="table__td">
+                    <td class="table__td table__td--no-pointer">
                         {{ hive.apiary }}
                     </td>
                     <td
@@ -123,8 +126,8 @@
                         @click="
                             toggleEditHives(
                                 hive.id,
-                                hive.number,
                                 hive.apiary,
+                                hive.number,
                                 hive.status,
                                 hive.purpose,
                                 hive.created,
@@ -136,6 +139,7 @@
                                 hive.age,
                                 hive.installed,
                                 hive.race,
+                                hive.line,
                                 hive.queenColor,
                                 hive.queenNote,
                             )
@@ -176,8 +180,8 @@ export default {
 
             hive: {
                 // general
-                number: '',
                 apiary: '',
+                number: '',
                 status: '',
                 purpose: '',
                 created: '',
@@ -193,6 +197,7 @@ export default {
                 age: '',
                 installed: '',
                 race: '',
+                line: '',
                 queenColor: '',
                 queenNote: '',
             },
@@ -228,8 +233,8 @@ export default {
 
         toggleEditHives(
             id,
-            number,
             apiary,
+            number,
             status,
             purpose,
             created,
@@ -241,6 +246,7 @@ export default {
             age,
             installed,
             race,
+            line,
             queenColor,
             queenNote,
         ) {
@@ -250,8 +256,8 @@ export default {
                 this.hive.id = id;
 
                 // general
-                this.hive.number = number;
                 this.hive.apiary = apiary;
+                this.hive.number = number;
                 this.hive.status = status;
                 this.hive.purpose = purpose;
                 this.hive.created = created;
@@ -267,14 +273,15 @@ export default {
                 this.hive.age = age;
                 this.hive.installed = installed;
                 this.hive.race = race;
+                this.hive.line = line;
                 this.hive.queenColor = queenColor;
                 this.hive.queenNote = queenNote;
             } else {
                 this.hive.id = id;
 
                 // general
-                this.hive.number = {};
                 this.hive.apiary = {};
+                this.hive.number = {};
                 this.hive.status = {};
                 this.hive.purpose = {};
                 this.hive.created = {};
@@ -290,6 +297,7 @@ export default {
                 this.hive.age = {};
                 this.hive.installed = {};
                 this.hive.race = {};
+                this.hive.line = {};
                 this.hive.queenColor = {};
                 this.hive.queenNote = {};
             }
@@ -297,8 +305,8 @@ export default {
 
         toggleViewHives(
             id,
-            number,
             apiary,
+            number,
             status,
             purpose,
             created,
@@ -310,6 +318,7 @@ export default {
             age,
             installed,
             race,
+            line,
             queenColor,
             queenNote,
         ) {
@@ -319,8 +328,8 @@ export default {
                 this.hive.id = id;
 
                 // general
-                this.hive.number = number;
                 this.hive.apiary = apiary;
+                this.hive.number = number;
                 this.hive.status = status;
                 this.hive.purpose = purpose;
                 this.hive.created = created;
@@ -336,6 +345,7 @@ export default {
                 this.hive.age = age;
                 this.hive.installed = installed;
                 this.hive.race = race;
+                this.hive.line = line;
                 this.hive.queenColor = queenColor;
                 this.hive.queenNote = queenNote;
             } else {
@@ -359,6 +369,7 @@ export default {
                 this.hive.age = {};
                 this.hive.installed = {};
                 this.hive.race = {};
+                this.hive.line = {};
                 this.hive.queenColor = {};
                 this.hive.queenNote = {};
             }
@@ -383,6 +394,11 @@ export default {
         cursor: pointer;
         width: 100%;
         border-bottom: 0.5px solid black;
+        transition: 0.1s;
+
+        &:hover {
+            font-weight: bold;
+        }
     }
 
     &__add-icon {
@@ -405,6 +421,21 @@ export default {
             padding: 1rem;
             cursor: pointer;
             font-size: 1.2rem;
+            transition: 0.1s;
+
+            &:hover {
+                transform: scale(1.1);
+                font-weight: bold;
+            }
+
+            &--no-pointer {
+                cursor: auto;
+
+                &:hover {
+                    transform: scale(1);
+                    font-weight: 400;
+                }
+            }
         }
     }
 }

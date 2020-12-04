@@ -727,6 +727,11 @@ export default {
                 top: 0;
                 right: 0;
                 cursor: pointer;
+                transition: 0.1s;
+
+                &:hover {
+                    transform: scale(1.1);
+                }
             }
 
             &__header {
@@ -777,6 +782,7 @@ export default {
                 border: 1px solid #ccc;
                 border-radius: 0.2rem;
                 background-color: #f5f5f5;
+                transition: 0.1s;
 
                 &:hover {
                     background-color: #e7e7e7c7;

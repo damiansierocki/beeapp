@@ -35,8 +35,8 @@
                     </p>
                 </transition>
 
-                <!-- typ pożywienia -->
-                <label class="form__label" for="forages">Typ pożywienia</label>
+                <!-- Rodzaj pożytku -->
+                <label class="form__label" for="forages">Rodzaj pożytku</label>
                 <select
                     class="form__input"
                     name="forages"
@@ -49,7 +49,9 @@
                     <option value="Lipa">Lipa</option>
                     <option value="Rzepak">Rzepak</option>
                     <option value="Wrzos">Wrzos</option>
-                    <option value="Facylia">Facylia</option>
+                    <option value="Facylia">Facelia</option>
+                    <option value="Spadź">Spadź</option>
+                    <option value="Wielokwiat">Wielokwiat</option>
                 </select>
 
                 <transition
@@ -64,7 +66,7 @@
                                 $v.apiary.forages.$dirty
                         "
                     >
-                        Musi być wybrany typ pożywienia!
+                        Musi być wybrany Rodzaj pożytku!
                     </p>
                 </transition>
 
@@ -329,6 +331,11 @@ export default {
                 top: 0;
                 right: 0;
                 cursor: pointer;
+                transition: 0.1s;
+
+                &:hover {
+                    transform: scale(1.1);
+                }
             }
 
             &__header {
@@ -379,6 +386,7 @@ export default {
                 border: 1px solid #ccc;
                 border-radius: 0.2rem;
                 background-color: #f5f5f5;
+                transition: 0.1s;
 
                 &:hover {
                     background-color: #e7e7e7c7;

@@ -129,6 +129,11 @@ export default {
                 border-bottom: 0.5px solid black;
                 padding: 1rem;
                 text-decoration: none;
+
+                &:hover {
+                    font-weight: bold;
+                    text-decoration: underline;
+                }
             }
 
             &__hives {
@@ -139,6 +144,11 @@ export default {
                 border-bottom: 0.5px solid black;
                 padding: 1rem;
                 text-decoration: none;
+
+                &:hover {
+                    font-weight: bold;
+                    text-decoration: underline;
+                }
             }
 
             &__inspections {
@@ -149,6 +159,11 @@ export default {
                 border-bottom: 0.5px solid black;
                 padding: 1rem;
                 text-decoration: none;
+
+                &:hover {
+                    font-weight: bold;
+                    text-decoration: underline;
+                }
             }
 
             &__notes {

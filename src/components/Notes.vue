@@ -2,15 +2,15 @@
     <div class="notes">
         <div class="container">
             <h3 class="container__title">Notatki</h3>
-            <p class="container__add-note" @click="toggleAddNotes">
+            <p class="container__add-note" @click="toggleAddNotes()">
                 Dodaj notatkę <i class="fas fa-plus"></i>
             </p>
 
-            <AddNotes v-if="showAddNotes" @close="toggleAddNotes"></AddNotes>
+            <AddNotes v-if="showAddNotes" @close="toggleAddNotes()"></AddNotes>
 
             <EditNotes
                 v-if="showEditNotes"
-                @close="toggleEditNotes"
+                @close="toggleEditNotes()"
                 :docId="selectedNotesDocId"
                 :noteContent="selectedNotesContent"
             ></EditNotes>
@@ -158,6 +158,12 @@ export default {
             margin-top: 1rem;
             font-size: 1.5rem;
             cursor: pointer;
+            transition: 0.2s;
+
+            &:hover {
+                font-weight: bold;
+                transform: scale(1.1);
+            }
         }
 
         .grid {
@@ -165,34 +171,56 @@ export default {
             grid-template-columns: auto;
             width: 100%;
             height: 100%;
+            text-align: center;
 
             &__list {
-                padding: 2rem;
+                padding: 1rem 2rem;
                 list-style-type: none;
+                margin-top: 2rem;
             }
 
             &__item {
                 font-size: 1.5rem;
+                border: 0.5px dotted black;
+                word-wrap: break-word;
+                word-break: break-all;
+                max-width: 100%;
+                padding: 2rem;
             }
 
             &__createdAt {
                 opacity: 0.4;
                 margin-top: 1rem;
+                font-size: 1rem;
             }
 
             &__extras {
                 display: flex;
+                justify-content: center;
+                align-items: center;
             }
 
             &__edit {
-                padding: 1rem 1rem 1rem 0;
+                padding: 1rem;
                 cursor: pointer;
+                font-size: 2rem;
+                transition: 0.2s;
+
+                &:hover {
+                    transform: scale(1.1);
+                }
             }
 
             &__trash {
-                padding: 1rem 1rem 1rem 0;
+                padding: 1rem;
                 margin-left: 1rem;
                 cursor: pointer;
+                font-size: 2rem;
+                transition: 0.2s;
+
+                &:hover {
+                    transform: scale(1.1);
+                }
             }
         }
 

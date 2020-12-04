@@ -136,6 +136,7 @@ const store = new Vuex.Store({
                     age: hives.age,
                     installed: hives.installed,
                     race: hives.race,
+                    line: hives.line,
                     queenColor: hives.queenColor,
                     queenNote: hives.queenNote,
                 });
@@ -165,6 +166,7 @@ const store = new Vuex.Store({
                     age: hives.age,
                     installed: hives.installed,
                     race: hives.race,
+                    line: hives.line,
                     queenColor: hives.queenColor,
                     queenNote: hives.queenNote,
                 });

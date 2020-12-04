@@ -6,36 +6,60 @@
             </template>
         </Nav>
 
-        <AddApiary v-if="showAddApiary" @close="toggleAddApiary()"></AddApiary>
-
-        <ViewApiary
-            v-if="showViewApiary"
-            @close="toggleViewApiary()"
-            :id="apiary.id"
-            :name="apiary.name"
-            :forages="apiary.forages"
-            :type="apiary.type"
-            :description="apiary.description"
-            :address="apiary.address"
-            :city="apiary.city"
-            :zip="apiary.zip"
-            :province="apiary.province"
-        ></ViewApiary>
-
-        <EditApiary
-            v-if="showEditApiary"
-            @close="toggleEditApiary()"
-            :id="apiary.id"
-            :name="apiary.name"
-            :forages="apiary.forages"
-            :type="apiary.type"
-            :description="apiary.description"
-            :address="apiary.address"
-            :city="apiary.city"
-            :zip="apiary.zip"
-            :province="apiary.province"
+        <transition
+            enter-active-class="animate__animated animate__backInDown animate__faster"
+            leave-active-class="animate__animated animate__backOutUp animate__faster"
+            mode="out-in"
+            appear
         >
-        </EditApiary>
+            <AddApiary
+                v-if="showAddApiary"
+                @close="toggleAddApiary()"
+            ></AddApiary>
+        </transition>
+
+        <transition
+            enter-active-class="animate__animated animate__backInDown animate__faster"
+            leave-active-class="animate__animated animate__backOutUp animate__faster"
+            mode="out-in"
+            appear
+        >
+            <ViewApiary
+                v-if="showViewApiary"
+                @close="toggleViewApiary()"
+                :id="apiary.id"
+                :name="apiary.name"
+                :forages="apiary.forages"
+                :type="apiary.type"
+                :description="apiary.description"
+                :address="apiary.address"
+                :city="apiary.city"
+                :zip="apiary.zip"
+                :province="apiary.province"
+            ></ViewApiary>
+        </transition>
+
+        <transition
+            enter-active-class="animate__animated animate__backInDown animate__faster"
+            leave-active-class="animate__animated animate__backOutUp animate__faster"
+            mode="out-in"
+            appear
+        >
+            <EditApiary
+                v-if="showEditApiary"
+                @close="toggleEditApiary()"
+                :id="apiary.id"
+                :name="apiary.name"
+                :forages="apiary.forages"
+                :type="apiary.type"
+                :description="apiary.description"
+                :address="apiary.address"
+                :city="apiary.city"
+                :zip="apiary.zip"
+                :province="apiary.province"
+            >
+            </EditApiary>
+        </transition>
 
         <div class="container">
             <div class="container__add" @click="toggleAddApiary()">
@@ -274,6 +298,11 @@ export default {
         cursor: pointer;
         width: 100%;
         border-bottom: 0.5px solid black;
+        transition: 0.1s;
+
+        &:hover {
+            font-weight: bold;
+        }
     }
 
     &__add-icon {
@@ -296,6 +325,12 @@ export default {
             padding: 1rem;
             cursor: pointer;
             font-size: 1.2rem;
+            transition: 0.1s;
+
+            &:hover {
+                font-weight: bold;
+                transform: scale(1.1);
+            }
         }
     }
 }

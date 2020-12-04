@@ -11,14 +11,15 @@
                 <h2 class="container__header container__header--desc">
                     Informacje generalne
                 </h2>
-                <p class="container__label">Numer ula</p>
-                <p class="container__text">
-                    {{ number }}
-                </p>
 
                 <p class="container__label">Pasieka</p>
                 <p class="container__text">
                     {{ apiary }}
+                </p>
+
+                <p class="container__label">Numer ula</p>
+                <p class="container__text">
+                    {{ number }}
                 </p>
 
                 <p class="container__label">Stan ula</p>
@@ -70,7 +71,7 @@
                 </p>
 
                 <p class="container__label">
-                    Kiedy matka została wrzucona do ula
+                    Data podania matki do ula
                 </p>
                 <p class="container__text">
                     {{ installed }}
@@ -79,6 +80,11 @@
                 <p class="container__label">Rasa matki</p>
                 <p class="container__text">
                     {{ race }}
+                </p>
+
+                <p class="container__label">Linia matki</p>
+                <p class="container__text">
+                    {{ line }}
                 </p>
 
                 <p class="container__label">Kolor matki</p>
@@ -99,8 +105,8 @@
 export default {
     props: [
         'id',
-        'number',
         'apiary',
+        'number',
         'status',
         'purpose',
         'created',
@@ -112,6 +118,7 @@ export default {
         'age',
         'installed',
         'race',
+        'line',
         'queenColor',
         'queenNote',
     ],
@@ -151,6 +158,11 @@ export default {
             top: 0;
             right: 0;
             cursor: pointer;
+            transition: 0.1s;
+
+            &:hover {
+                transform: scale(1.1);
+            }
         }
 
         &__header {
@@ -198,7 +210,6 @@ export default {
         background-color: white;
 
         &__inside {
-            margin-top: 3rem;
             border: 1px solid #ccc;
             max-width: 768px;
         }

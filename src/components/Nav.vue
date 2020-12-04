@@ -61,7 +61,9 @@
                     <a class="right-menu__link" @click="toggleAbout()"
                         >O aplikacji</a
                     >
-                    <a class="right-menu__link" @click="logout">Wyloguj się</a>
+                    <a class="right-menu__link" @click="logout()"
+                        >Wyloguj się</a
+                    >
                 </div>
             </div>
         </div>

@@ -152,7 +152,7 @@
                     >
                         {{ inspection.purpose }}
                     </td>
-                    <td class="table__td">
+                    <td class="table__td table__td--no-pointer">
                         {{ inspection.date }}
                     </td>
                     <td
@@ -498,6 +498,11 @@ export default {
         cursor: pointer;
         width: 100%;
         border-bottom: 0.5px solid black;
+        transition: 0.1s;
+
+        &:hover {
+            font-weight: bold;
+        }
     }
 
     &__add-icon {
@@ -520,6 +525,21 @@ export default {
             padding: 1rem;
             cursor: pointer;
             font-size: 1.2rem;
+            transition: 0.1s;
+
+            &:hover {
+                transform: scale(1.1);
+                font-weight: bold;
+            }
+
+            &--no-pointer {
+                cursor: auto;
+
+                &:hover {
+                    transform: scale(1);
+                    font-weight: 400;
+                }
+            }
         }
     }
 }

@@ -65,7 +65,9 @@
                                 <i class="fas fa-trash"></i>
                             </div>
                         </td>
-                        <td class="container__td">{{ todo.title }}</td>
+                        <td class="container__td container__td--no-pointer">
+                            {{ todo.title }}
+                        </td>
                         <td class="container__td container__th--checkbox">
                             <input
                                 class="container__checkbox"
@@ -248,6 +250,7 @@ export default {
             border: 1px solid #ccc;
             border-radius: 0.2rem;
             background-color: #f5f5f5;
+            transition: 0.1s;
 
             &:hover {
                 background-color: #e7e7e7c7;
@@ -389,6 +392,19 @@ export default {
     &__td {
         padding: 1rem;
         font-size: 1.2rem;
+        transition: 0.1s;
+
+        &:hover {
+            transform: scale(1.1);
+        }
+
+        &--no-pointer {
+            cursor: auto;
+
+            &:hover {
+                transform: scale(1);
+            }
+        }
     }
 
     &__td-no-todos {
@@ -403,6 +419,7 @@ export default {
 
     .fade {
         opacity: 0.4 !important;
+        transition: 0.2s;
     }
 }
 

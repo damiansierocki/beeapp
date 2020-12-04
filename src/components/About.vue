@@ -44,7 +44,7 @@ export default {};
     transform: translate(-50%, -50%);
     background: #eee;
     width: 100%;
-    z-index: 1;
+    z-index: 999;
     padding: 2rem;
 
     &__header {
@@ -60,6 +60,11 @@ export default {};
         top: 0;
         right: 0;
         cursor: pointer;
+        transition: 0.1s;
+
+        &:hover {
+            transform: scale(1.1);
+        }
     }
 
     &__inside {

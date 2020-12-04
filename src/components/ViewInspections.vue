@@ -237,6 +237,11 @@ export default {
             top: 0;
             right: 0;
             cursor: pointer;
+            transition: 0.1s;
+
+            &:hover {
+                transform: scale(1.1);
+            }
         }
 
         &__header {
@@ -284,7 +289,6 @@ export default {
         background-color: white;
 
         &__inside {
-            margin-top: 3rem;
             border: 1px solid #ccc;
             max-width: 768px;
         }

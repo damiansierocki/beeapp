@@ -165,7 +165,7 @@ export default {
     justify-content: center;
     align-items: center;
     position: fixed;
-    top: 50%;
+    top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
     background: #eee;
@@ -180,6 +180,11 @@ export default {
         top: 0;
         right: 0;
         cursor: pointer;
+        transition: 0.1s;
+
+        &:hover {
+            transform: scale(1.1);
+        }
     }
 
     .form {
@@ -228,6 +233,7 @@ export default {
             border: 1px solid #ccc;
             border-radius: 0.2rem;
             background-color: #f5f5f5;
+            transition: 0.1s;
 
             &:hover {
                 background-color: #e7e7e7c7;
@@ -358,6 +364,7 @@ export default {
         border-radius: 0.2rem;
         border: 0.5px solid black;
         background: white;
+        top: 50%;
     }
 }
 </style>
