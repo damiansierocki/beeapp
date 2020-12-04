@@ -13,14 +13,39 @@
                 </h2>
 
                 <label class="form__label" for="purpose">Cel inspekcji</label>
-                <input
-                    id="purpose"
-                    name="purpose"
+                <select
                     class="form__input"
-                    type="text"
-                    placeholder="Wpisz cel inspekcji..."
-                    v-model.trim="inspection.purpose"
-                />
+                    name="purpose"
+                    id="purpose"
+                    v-model="inspection.purpose"
+                >
+                    <option disabled value="">Wybierz cel inspekcji</option>
+                    <option value="Przegląd wczesno wiosenny"
+                        >Przegląd wczesno wiosenny</option
+                    >
+                    <option value="Przegląd wiosenny">Przegląd wiosenny</option>
+                    <option value="Powiększenie gniazd"
+                        >Powiększenie gniazd</option
+                    >
+                    <option value="Dołożenie korpusu miodu"
+                        >Dołożenie korpusu miodu</option
+                    >
+                    <option value="Miodobranie I">Miodobranie I</option>
+                    <option value="Miodobranie II">Miodobranie II</option>
+                    <option value="Zabranie korpusu miodu"
+                        >Zabranie korpusu miodu</option
+                    >
+                    <option value="Przegląd przed podkarmianiem"
+                        >Przegląd przed podkarmianiem</option
+                    >
+                    <option value="Przegląd po podkarmieniu"
+                        >Przegląd po podkarmieniu</option
+                    >
+                    <option value="Przegląd przed zimą"
+                        >Przeglą przed zimą</option
+                    >
+                    <option value="Inny">Inny</option>
+                </select>
 
                 <transition
                     enter-active-class="animate__animated animate__shakeX"
@@ -37,6 +62,21 @@
                         Cel inspekcji musi być wpisany!
                     </p>
                 </transition>
+
+                <label
+                    for="other"
+                    class="form__label"
+                    v-if="inspection.purpose === 'Inny'"
+                    >Jaki?</label
+                >
+                <input
+                    type="text"
+                    id="other"
+                    name="other"
+                    class="form__input"
+                    v-model="inspection.other"
+                    v-if="inspection.purpose === 'Inny'"
+                />
 
                 <label class="form__label" for="apiary">Pasieka</label>
                 <select
@@ -498,6 +538,7 @@ export default {
             inspection: {
                 // general
                 purpose: '',
+                other: '',
                 apiary: '',
                 hive: '',
                 date: '',
@@ -591,6 +632,7 @@ export default {
                     .dispatch('addInspections', {
                         // general
                         purpose: this.inspection.purpose,
+                        other: this.inspection.other,
                         apiary: this.inspection.apiary,
                         hive: this.inspection.hive,
                         date: this.inspection.date,
@@ -640,6 +682,7 @@ export default {
                     this.addInspectionsStatus = '';
                     // general
                     this.inspection.purpose = '';
+                    this.inspection.other = '';
                     this.inspection.apiary = '';
                     this.inspection.hive = '';
                     this.inspection.date = '';
@@ -676,9 +719,9 @@ export default {
             axios
                 .get(url)
                 .then(response => {
-                    this.inspection.temperature = Math.round(
-                        response.data.main.temp,
-                    );
+                    this.inspection.temperature =
+                        // eslint-disable-next-line prefer-template
+                        Math.round(response.data.main.temp) + '℃';
                     this.inspection.humidity = `${response.data.main.humidity} %`;
                     this.inspection.pressure = `${response.data.main.pressure} hPa`;
                     this.inspection.wind = `${Math.round(

@@ -203,6 +203,7 @@ const store = new Vuex.Store({
                 .collection('inspections')
                 .add({
                     purpose: inspections.purpose,
+                    other: inspections.other,
                     apiary: inspections.apiary,
                     hive: inspections.hive,
                     date: inspections.date,
@@ -237,6 +238,7 @@ const store = new Vuex.Store({
                 .doc(docId)
                 .update({
                     purpose: inspections.purpose,
+                    other: inspections.other,
                     apiary: inspections.apiary,
                     hive: inspections.hive,
                     date: inspections.date,

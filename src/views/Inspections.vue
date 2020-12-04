@@ -29,6 +29,7 @@
                 @close="toggleViewInspections()"
                 :id="inspection.id"
                 :purpose="inspection.purpose"
+                :other="inspection.other"
                 :apiary="inspection.apiary"
                 :hive="inspection.hive"
                 :date="inspection.date"
@@ -67,6 +68,7 @@
                 @close="toggleEditInspections()"
                 :id="inspection.id"
                 :purpose="inspection.purpose"
+                :other="inspection.other"
                 :apiary="inspection.apiary"
                 :hive="inspection.hive"
                 :date="inspection.date"
@@ -123,6 +125,7 @@
                             toggleViewInspections(
                                 inspection.id,
                                 inspection.purpose,
+                                inspection.other,
                                 inspection.apiary,
                                 inspection.hive,
                                 inspection.date,
@@ -161,6 +164,7 @@
                             toggleEditInspections(
                                 inspection.id,
                                 inspection.purpose,
+                                inspection.other,
                                 inspection.apiary,
                                 inspection.hive,
                                 inspection.date,
@@ -225,6 +229,7 @@ export default {
             inspection: {
                 // general
                 purpose: '',
+                other: '',
                 apiary: '',
                 hive: '',
                 date: '',
@@ -308,6 +313,7 @@ export default {
         toggleViewInspections(
             id,
             purpose,
+            other,
             apiary,
             hive,
             date,
@@ -338,6 +344,7 @@ export default {
             if (this.showViewInspections) {
                 this.inspection.id = id;
                 this.inspection.purpose = purpose;
+                this.inspection.other = other;
                 this.inspection.apiary = apiary;
                 this.inspection.hive = hive;
                 this.inspection.date = date;
@@ -365,6 +372,7 @@ export default {
             } else {
                 this.inspection.id = {};
                 this.inspection.purpose = {};
+                this.inspection.other = {};
                 this.inspection.apiary = {};
                 this.inspection.hive = {};
                 this.inspection.date = {};
@@ -395,6 +403,7 @@ export default {
         toggleEditInspections(
             id,
             purpose,
+            other,
             apiary,
             hive,
             date,
@@ -425,6 +434,7 @@ export default {
             if (this.showEditInspections) {
                 this.inspection.id = id;
                 this.inspection.purpose = purpose;
+                this.inspection.other = other;
                 this.inspection.apiary = apiary;
                 this.inspection.hive = hive;
                 this.inspection.date = date;
@@ -452,6 +462,7 @@ export default {
             } else {
                 this.inspection.id = {};
                 this.inspection.purpose = {};
+                this.inspection.other = {};
                 this.inspection.apiary = {};
                 this.inspection.hive = {};
                 this.inspection.date = {};

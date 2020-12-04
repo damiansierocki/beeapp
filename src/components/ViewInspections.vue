@@ -16,6 +16,11 @@
                     {{ purpose }}
                 </p>
 
+                <p class="container__label">Cel inspekcji (inny)</p>
+                <p class="container__text">
+                    {{ other }}
+                </p>
+
                 <p class="container__label">Pasieka</p>
                 <p class="container__text">
                     {{ apiary }}
@@ -177,6 +182,7 @@ export default {
     props: [
         'id',
         'purpose',
+        'other',
         'apiary',
         'hive',
         'date',

@@ -13,13 +13,54 @@
                 </h2>
 
                 <label class="form__label" for="purpose">Cel inspekcji</label>
-                <input
-                    id="purpose"
-                    name="purpose"
+                <select
                     class="form__input"
+                    name="purpose"
+                    id="purpose"
+                    v-model="inspection.purpose"
+                >
+                    <option disabled value="">{{ purpose }}</option>
+                    <option value="Przegląd wczesno wiosenny"
+                        >Przegląd wczesno wiosenny</option
+                    >
+                    <option value="Przegląd wiosenny">Przegląd wiosenny</option>
+                    <option value="Powiększenie gniazd"
+                        >Powiększenie gniazd</option
+                    >
+                    <option value="Dołożenie korpusu miodu"
+                        >Dołożenie korpusu miodu</option
+                    >
+                    <option value="Miodobranie I">Miodobranie I</option>
+                    <option value="Miodobranie II">Miodobranie II</option>
+                    <option value="Zabranie korpusu miodu"
+                        >Zabranie korpusu miodu</option
+                    >
+                    <option value="Przegląd przed podkarmianiem"
+                        >Przegląd przed podkarmianiem</option
+                    >
+                    <option value="Przegląd po podkarmieniu"
+                        >Przegląd po podkarmieniu</option
+                    >
+                    <option value="Przeglą przed zimą"
+                        >Przegląd przed zimą</option
+                    >
+                    <option value="Inny">Inny</option>
+                </select>
+
+                <label
+                    for="other"
+                    class="form__label"
+                    v-if="inspection.purpose === 'Inny'"
+                    >Jaki?</label
+                >
+                <input
                     type="text"
-                    :placeholder="purpose"
-                    v-model.trim="inspection.purpose"
+                    id="other"
+                    name="other"
+                    class="form__input"
+                    :placeholder="other"
+                    v-model="inspection.other"
+                    v-if="inspection.purpose === 'Inny'"
                 />
 
                 <label class="form__label" for="apiary">Pasieka</label>
@@ -435,6 +476,7 @@ export default {
     props: [
         'id',
         'purpose',
+        'other',
         'apiary',
         'hive',
         'date',
@@ -466,6 +508,7 @@ export default {
             inspection: {
                 // general
                 purpose: '',
+                other: '',
                 apiary: '',
                 hive: '',
                 date: '',
@@ -538,6 +581,10 @@ export default {
                     this.inspection.purpose !== ''
                         ? this.inspection.purpose
                         : this.purpose,
+                other:
+                    this.inspection.other !== ''
+                        ? this.inspection.other
+                        : this.other,
                 apiary:
                     this.inspection.apiary !== ''
                         ? this.inspection.apiary
@@ -661,6 +708,7 @@ export default {
 
                 // general
                 this.inspection.purpose = '';
+                this.inspection.other = '';
                 this.inspection.apiary = '';
                 this.inspection.hive = '';
                 this.inspection.date = '';

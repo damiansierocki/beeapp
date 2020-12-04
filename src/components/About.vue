@@ -21,7 +21,7 @@
                 </p>
 
                 <p class="container__footer">
-                    © 2020 beeapp, version 0.1.0 by Damian Sierocki
+                    © 2020 beeapp, version 0.0.1 by Damian Sierocki
                 </p>
             </div>
         </div>
