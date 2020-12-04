@@ -68,6 +68,19 @@
                     </p>
                 </transition>
 
+                <transition
+                    enter-active-class="animate__animated animate__shakeX"
+                    mode="out-in"
+                    appear
+                >
+                    <p
+                        class="info"
+                        v-if="authStatus === 'REQUIRES-RECENT-LOGIN'"
+                    >
+                        Wymagane ponowne zalogowanie.
+                    </p>
+                </transition>
+
                 <div class="sk-chase" v-if="editEmailStatus === 'PENDING'">
                     <div class="sk-chase-dot"></div>
                     <div class="sk-chase-dot"></div>
@@ -141,6 +154,8 @@ export default {
                             this.authStatus = 'EMAIL-ALREADY-IN-USE';
                         } else if (errCode === 'auth/too-many-requests') {
                             this.authStatus = 'TOO-MANY-REQUESTS';
+                        } else if (errCode === 'auth/requires-recent-login') {
+                            this.authStatus = 'REQUIRES-RECENT-LOGIN';
                         }
                     });
 

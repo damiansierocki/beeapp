@@ -29,12 +29,12 @@
 
                 <p class="container__label">Przeznaczenie</p>
                 <p class="container__text">
-                    {{ purpose }}
+                    {{ purpose.length !== 0 ? purpose : 'Brak' }}
                 </p>
 
                 <p class="container__label">Data dodania ula do pasieki</p>
                 <p class="container__text">
-                    {{ created }}
+                    {{ created.length !== 0 ? created : 'Brak' }}
                 </p>
 
                 <h2 class="container__header container__header--desc">
@@ -43,20 +43,20 @@
 
                 <p class="container__label">Siła pszczół</p>
                 <p class="container__text">
-                    {{ strength }}
+                    {{ strength.length !== 0 ? strength : 'Brak' }}
                 </p>
 
                 <p class="container__label">Temperament</p>
                 <p class="container__text">
-                    {{ temperament }}
+                    {{ temperament.length !== 0 ? temperament : 'Brak' }}
                 </p>
 
                 <p class="container__label">Ilość ramek w ulu</p>
                 <p class="container__text">
-                    {{ frames }}
+                    {{ frames.length !== 0 ? frames : 'Brak' }}
                 </p>
 
-                <h2 class="form__header form__header--desc">
+                <h2 class="container__header container__header--desc">
                     Informacje o matce
                 </h2>
 
@@ -67,34 +67,34 @@
 
                 <p class="container__label">Wiek Matki (w latach)</p>
                 <p class="container__text">
-                    {{ age }}
+                    {{ age.length !== 0 ? age : 'Brak' }}
                 </p>
 
                 <p class="container__label">
                     Data podania matki do ula
                 </p>
                 <p class="container__text">
-                    {{ installed }}
+                    {{ installed.length !== 0 ? installed : 'Brak' }}
                 </p>
 
                 <p class="container__label">Rasa matki</p>
                 <p class="container__text">
-                    {{ race }}
+                    {{ race.length !== 0 ? race : 'Brak' }}
                 </p>
 
                 <p class="container__label">Linia matki</p>
                 <p class="container__text">
-                    {{ line }}
+                    {{ line.length !== 0 ? line : 'Brak' }}
                 </p>
 
                 <p class="container__label">Kolor matki</p>
                 <p class="container__text">
-                    {{ queenColor }}
+                    {{ queenColor.length !== 0 ? queenColor : 'Brak' }}
                 </p>
 
                 <p class="container__label">Notatka dotycząca matki</p>
                 <p class="container__text">
-                    {{ queenNote }}
+                    {{ queenNote.length !== 0 ? queenNote : 'Brak' }}
                 </p>
             </div>
         </div>

@@ -32,7 +32,7 @@
                 <!-- opis -->
                 <p class="container__label">Opis</p>
                 <p class="container__text">
-                    {{ description }}
+                    {{ description.length !== 0 ? description : 'Brak' }}
                 </p>
 
                 <h2 class="container__header container__header--desc">
@@ -42,25 +42,25 @@
                 <!-- adres -->
                 <p class="container__label">Adres</p>
                 <p class="container__text">
-                    {{ address }}
+                    {{ address.length !== 0 ? address : 'Brak' }}
                 </p>
 
                 <!-- Miejscowość -->
                 <p class="container__label">Miejscowość</p>
                 <p class="container__text">
-                    {{ city }}
+                    {{ city.length !== 0 ? city : 'Brak' }}
                 </p>
 
                 <!-- Zip -->
                 <p class="container__label">Zip</p>
                 <p class="container__text">
-                    {{ zip }}
+                    {{ zip.length !== 0 ? zip : 'Brak' }}
                 </p>
 
                 <!-- województwo -->
                 <p class="container__label">Województwo</p>
                 <p class="container__text">
-                    {{ province }}
+                    {{ province.length !== 0 ? province : 'Brak' }}
                 </p>
             </div>
         </div>

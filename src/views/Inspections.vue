@@ -40,6 +40,7 @@
                 :age="inspection.age"
                 :installed="inspection.installed"
                 :race="inspection.race"
+                :line="inspection.line"
                 :queenColor="inspection.queenColor"
                 :queenNote="inspection.queenNote"
                 :framesWithBees="inspection.framesWithBees"
@@ -79,6 +80,7 @@
                 :age="inspection.age"
                 :installed="inspection.installed"
                 :race="inspection.race"
+                :line="inspection.line"
                 :queenColor="inspection.queenColor"
                 :queenNote="inspection.queenNote"
                 :framesWithBees="inspection.framesWithBees"
@@ -136,6 +138,7 @@
                                 inspection.age,
                                 inspection.installed,
                                 inspection.race,
+                                inspection.line,
                                 inspection.queenColor,
                                 inspection.queenNote,
                                 inspection.framesWithBees,
@@ -175,6 +178,7 @@
                                 inspection.age,
                                 inspection.installed,
                                 inspection.race,
+                                inspection.line,
                                 inspection.queenColor,
                                 inspection.queenNote,
                                 inspection.framesWithBees,
@@ -244,6 +248,7 @@ export default {
                 age: '',
                 installed: '',
                 race: '',
+                line: '',
                 queenColor: '',
                 queenNote: '',
 
@@ -324,6 +329,7 @@ export default {
             age,
             installed,
             race,
+            line,
             queenColor,
             queenNote,
             framesWithBees,
@@ -355,6 +361,7 @@ export default {
                 this.inspection.age = age;
                 this.inspection.installed = installed;
                 this.inspection.race = race;
+                this.inspection.line = line;
                 this.inspection.queenColor = queenColor;
                 this.inspection.queenNote = queenNote;
                 this.inspection.framesWithBees = framesWithBees;
@@ -383,6 +390,7 @@ export default {
                 this.inspection.age = {};
                 this.inspection.installed = {};
                 this.inspection.race = {};
+                this.inspection.line = {};
                 this.inspection.queenColor = {};
                 this.inspection.queenNote = {};
                 this.inspection.framesWithBees = {};
@@ -414,6 +422,7 @@ export default {
             age,
             installed,
             race,
+            line,
             queenColor,
             queenNote,
             framesWithBees,
@@ -445,6 +454,7 @@ export default {
                 this.inspection.age = age;
                 this.inspection.installed = installed;
                 this.inspection.race = race;
+                this.inspection.line = line;
                 this.inspection.queenColor = queenColor;
                 this.inspection.queenNote = queenNote;
                 this.inspection.framesWithBees = framesWithBees;
@@ -473,6 +483,7 @@ export default {
                 this.inspection.age = {};
                 this.inspection.installed = {};
                 this.inspection.race = {};
+                this.inspection.line = {};
                 this.inspection.queenColor = {};
                 this.inspection.queenNote = {};
                 this.inspection.framesWithBees = {};

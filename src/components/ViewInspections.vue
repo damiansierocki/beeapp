@@ -18,7 +18,7 @@
 
                 <p class="container__label">Cel inspekcji (inny)</p>
                 <p class="container__text">
-                    {{ other }}
+                    {{ other.length !== 0 ? other : 'Brak' }}
                 </p>
 
                 <p class="container__label">Pasieka</p>
@@ -42,17 +42,17 @@
 
                 <p class="container__label">Siła pszczół</p>
                 <p class="container__text">
-                    {{ strength }}
+                    {{ strength.length !== 0 ? strength : 'Brak' }}
                 </p>
 
                 <p class="container__label">Temperament</p>
                 <p class="container__text">
-                    {{ temperament }}
+                    {{ temperament.length !== 0 ? temperament : 'Brak' }}
                 </p>
 
                 <p class="container__label">Ilość ramek w ulu</p>
                 <p class="container__text">
-                    {{ frames }}
+                    {{ frames.length !== 0 ? frames : 'Brak' }}
                 </p>
 
                 <h2 class="container__header container__header--desc">
@@ -61,34 +61,39 @@
 
                 <p class="container__label">Matka</p>
                 <p class="container__text">
-                    {{ isQueen }}
+                    {{ isQueen.length !== 0 ? isQueen : 'Brak' }}
                 </p>
 
                 <p class="container__label">Wiek Matki (w latach)</p>
                 <p class="container__text">
-                    {{ age }}
+                    {{ age.length !== 0 ? age : 'Brak' }}
                 </p>
 
                 <p class="container__label">
-                    Kiedy matka została wrzucona do ula
+                    Data podania matki do ula
                 </p>
                 <p class="container__text">
-                    {{ installed }}
+                    {{ installed.length !== 0 ? installed : 'Brak' }}
                 </p>
 
                 <p class="container__label">Rasa matki</p>
                 <p class="container__text">
-                    {{ race }}
+                    {{ race.length !== 0 ? race : 'Brak' }}
+                </p>
+
+                <p class="container__label">Linia Matki</p>
+                <p class="container__text">
+                    {{ line.length !== 0 ? line : 'Brak' }}
                 </p>
 
                 <p class="container__label">Kolor matki</p>
                 <p class="container__text">
-                    {{ queenColor }}
+                    {{ queenColor.length !== 0 ? queenColor : 'Brak' }}
                 </p>
 
                 <p class="container__label">Notatka dotycząca matki</p>
                 <p class="container__text">
-                    {{ queenNote }}
+                    {{ queenNote.length !== 0 ? queenNote : 'Brak' }}
                 </p>
 
                 <h2 class="container__header container__header--desc">
@@ -97,22 +102,30 @@
 
                 <p class="container__label">Z pszczołami</p>
                 <p class="container__text">
-                    {{ framesWithBees }}
+                    {{ framesWithBees.length !== 0 ? framesWithBees : 'Brak' }}
                 </p>
 
                 <p class="container__label">Z czerwiem</p>
                 <p class="container__text">
-                    {{ framesWithBrood }}
+                    {{
+                        framesWithBrood.length !== 0 ? framesWithBrood : 'Brak'
+                    }}
                 </p>
 
                 <p class="container__label">Z miodem</p>
                 <p class="container__text">
-                    {{ framesWithHoney }}
+                    {{
+                        framesWithHoney.length !== 0 ? framesWithHoney : 'Brak'
+                    }}
                 </p>
 
                 <p class="container__label">Z pyłkiem</p>
                 <p class="container__text">
-                    {{ framesWithPollen }}
+                    {{
+                        framesWithPollen.length !== 0
+                            ? framesWithPollen
+                            : 'Brak'
+                    }}
                 </p>
 
                 <h2 class="container__header container__header--desc">
@@ -121,12 +134,12 @@
 
                 <p class="container__label">Napotkane problemy</p>
                 <p class="container__text">
-                    {{ problems }}
+                    {{ problems.length !== 0 ? problems : 'Brak' }}
                 </p>
 
                 <p class="container__label">Notatki</p>
                 <p class="container__text">
-                    {{ note }}
+                    {{ note.length !== 0 ? note : 'Brak' }}
                 </p>
 
                 <h2 class="container__header container__header--desc">
@@ -135,42 +148,42 @@
 
                 <p class="container__label">Czy uwzględnić warunki pogodowe?</p>
                 <p class="container__text">
-                    {{ includeWeather }}
+                    {{ includeWeather.length !== 0 ? includeWeather : 'Brak' }}
                 </p>
 
                 <p class="container__label" v-if="includeWeather === 'Tak'">
                     Warunki pogodowe
                 </p>
                 <p class="container__text" v-if="includeWeather === 'Tak'">
-                    {{ conditions }}
+                    {{ conditions.length !== 0 ? conditions : 'Brak' }}
                 </p>
 
                 <p class="container__label" v-if="includeWeather === 'Tak'">
                     Temperatura
                 </p>
                 <p class="container__text" v-if="includeWeather === 'Tak'">
-                    {{ temperature }}
+                    {{ temperature.length !== 0 ? temperature : 'Brak' }}
                 </p>
 
                 <p class="container__label" v-if="includeWeather === 'Tak'">
                     Wilgotność
                 </p>
                 <p class="container__text" v-if="includeWeather === 'Tak'">
-                    {{ humidity }}
+                    {{ humidity.length !== 0 ? humidity : 'Brak' }}
                 </p>
 
                 <p class="container__label" v-if="includeWeather === 'Tak'">
                     Ciśnienie
                 </p>
                 <p class="container__text" v-if="includeWeather === 'Tak'">
-                    {{ pressure }}
+                    {{ pressure.length !== 0 ? pressure : 'Brak' }}
                 </p>
 
                 <p class="container__label" v-if="includeWeather === 'Tak'">
                     Prędkość wiatru
                 </p>
                 <p class="container__text" v-if="includeWeather === 'Tak'">
-                    {{ wind }}
+                    {{ wind.length !== 0 ? wind : 'Brak' }}
                 </p>
             </div>
         </div>
@@ -193,6 +206,7 @@ export default {
         'age',
         'installed',
         'race',
+        'line',
         'queenColor',
         'queenNote',
         'framesWithBees',

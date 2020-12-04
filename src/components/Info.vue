@@ -12,7 +12,7 @@
                         alt="apiary icon"
                     />
 
-                    <p class="grid__number">0</p>
+                    <p class="grid__number">{{ apiaries.length }}</p>
 
                     <p class="grid__description grid__description--green">
                         Pasieki
@@ -27,7 +27,7 @@
                         alt="hives icon"
                     />
 
-                    <p class="grid__number">0</p>
+                    <p class="grid__number">{{ hives.length }}</p>
 
                     <p class="grid__description grid__description--orange">
                         Ule
@@ -42,7 +42,7 @@
                         alt="inspections icon"
                     />
 
-                    <p class="grid__number">0</p>
+                    <p class="grid__number">{{ inspections.length }}</p>
 
                     <p class="grid__description grid__description--blue">
                         Inspekcje
@@ -69,6 +69,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import * as firebase from '../firebase';
 
 export default {
@@ -78,8 +79,8 @@ export default {
         };
     },
 
-    created() {
-        this.getNotes();
+    computed: {
+        ...mapState(['apiaries', 'hives', 'inspections']),
     },
 
     methods: {
@@ -129,6 +130,7 @@ export default {
                 border-bottom: 0.5px solid black;
                 padding: 1rem;
                 text-decoration: none;
+                color: black;
 
                 &:hover {
                     font-weight: bold;
@@ -144,6 +146,7 @@ export default {
                 border-bottom: 0.5px solid black;
                 padding: 1rem;
                 text-decoration: none;
+                color: black;
 
                 &:hover {
                     font-weight: bold;
@@ -159,6 +162,7 @@ export default {
                 border-bottom: 0.5px solid black;
                 padding: 1rem;
                 text-decoration: none;
+                color: black;
 
                 &:hover {
                     font-weight: bold;
