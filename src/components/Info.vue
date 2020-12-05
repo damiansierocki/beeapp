@@ -83,6 +83,10 @@ export default {
         ...mapState(['apiaries', 'hives', 'inspections']),
     },
 
+    created() {
+        this.getNotes();
+    },
+
     methods: {
         async getNotes() {
             const notesRef = await firebase.usersCollection
